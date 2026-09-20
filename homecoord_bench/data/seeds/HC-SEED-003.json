@@ -1,0 +1,29 @@
+{
+  "episode_id": "HC-SEED-003",
+  "task_family": "indirect_environment_conflict",
+  "source_type": "project_seed",
+  "generator_version": "0.2.0",
+  "review_status": "single_review",
+  "episode_release_at_ms": 0,
+  "home": {"resources": {"max_power_kw": 8.0}},
+  "initial_state": {"version": 300, "values": {"living_room": {"temperature_c": 17, "co2_ppm": 1600}, "devices": {"window": "closed", "heater": "off"}}},
+  "agents": [
+    {"agent_id": "AirQualityAgent", "role": "air_quality", "tools": ["set_window"], "observable_state": ["living_room.co2_ppm"], "writable_resources": ["devices.window"]},
+    {"agent_id": "ClimateAgent", "role": "climate", "tools": ["set_heater"], "observable_state": ["living_room.temperature_c"], "writable_resources": ["devices.heater"]}
+  ],
+  "task_stream": [
+    {"task_id": "air", "agent_id": "AirQualityAgent", "release_at_ms": 0, "goal": "CO2 below 1000 ppm", "required_action": {"target": "window", "operation": "open"}},
+    {"task_id": "heat", "agent_id": "ClimateAgent", "release_at_ms": 100, "goal": "living room 21 C", "required_action": {"target": "heater", "operation": "heat_high"}}
+  ],
+  "exogenous_events": [],
+  "latency_profile": {"unit": "ms"},
+  "goals": [
+    {"path": "living_room.co2_ppm", "op": "lt", "value": 1000},
+    {"path": "living_room.temperature_c", "op": "between", "value": [20, 22]}
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {"type": "C2", "a": {"target": "window", "operation": "open"}, "b": {"target": "heater", "operation": "heat_high"}, "min_overlap_ms": 1000},
+    {"type": "C3", "capacity": 8.0}
+  ]
+}

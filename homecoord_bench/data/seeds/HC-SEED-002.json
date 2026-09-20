@@ -1,0 +1,31 @@
+{
+  "episode_id": "HC-SEED-002",
+  "task_family": "direct_device_conflict",
+  "source_type": "project_seed",
+  "generator_version": "0.2.0",
+  "review_status": "single_review",
+  "episode_release_at_ms": 0,
+  "home": {"resources": {"max_power_kw": 8.0}},
+  "initial_state": {"version": 200, "values": {"living_room": {"temperature_c": 29, "occupied": true}, "devices": {"living_hvac": "off"}, "request": {"comfort_active": true}}},
+  "agents": [
+    {"agent_id": "ComfortAgent", "role": "comfort", "tools": ["set_hvac"], "observable_state": ["living_room.temperature_c", "request.comfort_active"], "writable_resources": ["devices.living_hvac"]},
+    {"agent_id": "EnergyAgent", "role": "energy", "tools": ["set_hvac"], "observable_state": ["request.comfort_active"], "writable_resources": ["devices.living_hvac"]}
+  ],
+  "task_stream": [
+    {"task_id": "comfort", "agent_id": "ComfortAgent", "release_at_ms": 0, "goal": "24 C for 30 minutes", "priority": 100, "required_action": {"target": "living_hvac", "operation": "cool"}},
+    {"task_id": "energy", "agent_id": "EnergyAgent", "release_at_ms": 300, "goal": "reduce peak usage", "priority": 20, "required_action": {"target": "living_hvac", "operation": "off"}}
+  ],
+  "exogenous_events": [],
+  "latency_profile": {"unit": "ms"},
+  "goals": [
+    {"path": "living_room.temperature_c", "op": "between", "value": [23, 25]},
+    {"path": "devices.living_hvac", "op": "eq", "value": "cool_24"}
+  ],
+  "constraints": [
+    {"when": [{"path": "request.comfort_active", "op": "eq", "value": true}], "must": [{"path": "devices.living_hvac", "op": "neq", "value": "forced_off"}]}
+  ],
+  "conflict_rules": [
+    {"type": "C1", "a": {"target": "living_hvac", "operation": "cool"}, "b": {"target": "living_hvac", "operation": "off"}, "min_overlap_ms": 1},
+    {"type": "C3", "capacity": 8.0}
+  ]
+}
