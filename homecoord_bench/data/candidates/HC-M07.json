@@ -1,0 +1,188 @@
+{
+  "episode_id": "HC-M07",
+  "task_family": "indirect_environment_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 170,
+    "values": {
+      "living_room": {
+        "temperature_c": 30,
+        "co2_ppm": 1600
+      },
+      "devices": {
+        "window": "closed",
+        "living_hvac": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "AirQualityAgent",
+      "role": "air_quality",
+      "tools": [
+        "set_window"
+      ],
+      "observable_state": [
+        "living_room.co2_ppm"
+      ],
+      "writable_resources": [
+        "devices.window"
+      ]
+    },
+    {
+      "agent_id": "CoolingAgent",
+      "role": "cooling",
+      "tools": [
+        "set_hvac"
+      ],
+      "observable_state": [
+        "living_room.temperature_c"
+      ],
+      "writable_resources": [
+        "devices.living_hvac"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "air_exchange",
+      "agent_id": "AirQualityAgent",
+      "release_at_ms": 0,
+      "goal": "CO2 below 1000 ppm",
+      "priority": 60,
+      "required_action": {
+        "target": "window",
+        "operation": "open"
+      },
+      "action_template": {
+        "target": "window",
+        "operation": "open",
+        "parameters": {},
+        "duration_ms": 2000,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "cool_room",
+      "agent_id": "CoolingAgent",
+      "release_at_ms": 100,
+      "goal": "reach 24 C before deadline",
+      "priority": 80,
+      "required_action": {
+        "target": "living_hvac",
+        "operation": "cool"
+      },
+      "action_template": {
+        "target": "living_hvac",
+        "operation": "cool",
+        "parameters": {
+          "temperature_c": 24
+        },
+        "duration_ms": 10000,
+        "power_kw": 1.4,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "living_room.co2_ppm",
+      "op": "lt",
+      "value": 1000
+    },
+    {
+      "path": "living_room.temperature_c",
+      "op": "between",
+      "value": [
+        23,
+        25
+      ]
+    },
+    {
+      "path": "devices.living_hvac",
+      "op": "eq",
+      "value": "cool_24"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C2",
+      "a": {
+        "target": "window",
+        "operation": "open"
+      },
+      "b": {
+        "target": "living_hvac",
+        "operation": "cool"
+      },
+      "min_overlap_ms": 1000
+    },
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "AirQualityAgent",
+      "task_id": "air_exchange",
+      "operation": "open",
+      "target": "window",
+      "grounded_operation": "open",
+      "effects": {
+        "devices.window": "open",
+        "living_room.co2_ppm": 900
+      },
+      "environment_effects": {
+        "living_room.temperature_c": 1,
+        "living_room.co2_ppm": -1
+      },
+      "duration_ms": 2000,
+      "power_kw": 0.0
+    },
+    {
+      "agent_id": "CoolingAgent",
+      "task_id": "cool_room",
+      "operation": "cool",
+      "target": "living_hvac",
+      "grounded_operation": "cool",
+      "effects": {
+        "devices.living_hvac": "cool_24",
+        "living_room.temperature_c": 24
+      },
+      "environment_effects": {
+        "living_room.temperature_c": -1
+      },
+      "duration_ms": 10000,
+      "power_kw": 1.4
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

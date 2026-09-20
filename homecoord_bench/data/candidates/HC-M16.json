@@ -1,0 +1,198 @@
+{
+  "episode_id": "HC-M16",
+  "task_family": "stale_state_action",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 116,
+    "values": {
+      "bedroom": {
+        "occupied": false,
+        "clean": false
+      },
+      "devices": {
+        "bedroom_robot": "idle",
+        "occupancy_sensor": "idle"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "BedroomCleaningAgent",
+      "role": "cleaning",
+      "tools": [
+        "start_robot"
+      ],
+      "observable_state": [
+        "bedroom.occupied"
+      ],
+      "writable_resources": [
+        "devices.bedroom_robot"
+      ]
+    },
+    {
+      "agent_id": "BedroomCareAgent",
+      "role": "care",
+      "tools": [
+        "observe_occupancy"
+      ],
+      "observable_state": [
+        "bedroom.occupied"
+      ],
+      "writable_resources": [
+        "devices.occupancy_sensor"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "bedroom_clean",
+      "agent_id": "BedroomCleaningAgent",
+      "release_at_ms": 0,
+      "goal": "clean the bedroom",
+      "priority": 70,
+      "required_action": {
+        "target": "bedroom_robot",
+        "operation": "clean"
+      },
+      "recovery": {
+        "wake_condition": {
+          "path": "bedroom.occupied",
+          "op": "eq",
+          "value": false
+        }
+      },
+      "action_template": {
+        "target": "bedroom_robot",
+        "operation": "clean",
+        "parameters": {},
+        "duration_ms": 3000,
+        "power_kw": 0.2,
+        "requires": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "bedroom_occupancy",
+      "agent_id": "BedroomCareAgent",
+      "release_at_ms": 300,
+      "goal": "observe bedroom occupancy",
+      "priority": 90,
+      "required_action": {
+        "target": "occupancy_sensor",
+        "operation": "observe"
+      },
+      "action_template": {
+        "target": "occupancy_sensor",
+        "operation": "observe",
+        "parameters": {},
+        "duration_ms": 100,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [
+    {
+      "at_ms": 500,
+      "event": "resident_enters_bedroom",
+      "new_state_version": 117,
+      "patch": {
+        "bedroom.occupied": true
+      }
+    },
+    {
+      "at_ms": 5000,
+      "event": "resident_leaves_bedroom",
+      "new_state_version": 118,
+      "patch": {
+        "bedroom.occupied": false
+      }
+    }
+  ],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "bedroom.clean",
+      "op": "eq",
+      "value": true
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "bedroom.occupied",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.bedroom_robot",
+          "op": "neq",
+          "value": "running"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "BedroomCleaningAgent",
+      "task_id": "bedroom_clean",
+      "operation": "clean",
+      "target": "bedroom_robot",
+      "grounded_operation": "clean",
+      "effects": {
+        "devices.bedroom_robot": "running",
+        "bedroom.clean": true
+      },
+      "duration_ms": 3000,
+      "power_kw": 0.2
+    },
+    {
+      "agent_id": "BedroomCareAgent",
+      "task_id": "bedroom_occupancy",
+      "operation": "observe",
+      "target": "occupancy_sensor",
+      "grounded_operation": "observe",
+      "effects": {},
+      "duration_ms": 100,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

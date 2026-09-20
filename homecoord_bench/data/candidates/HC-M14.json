@@ -1,0 +1,159 @@
+{
+  "episode_id": "HC-M14",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 3.0
+    }
+  },
+  "initial_state": {
+    "version": 114,
+    "values": {
+      "kitchen": {
+        "meal_ready": false,
+        "snack_ready": false
+      },
+      "devices": {
+        "oven": "off",
+        "microwave": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "OvenAgent",
+      "role": "cooking",
+      "tools": [
+        "set_oven"
+      ],
+      "observable_state": [
+        "kitchen.meal_ready"
+      ],
+      "writable_resources": [
+        "devices.oven"
+      ]
+    },
+    {
+      "agent_id": "MicrowaveAgent",
+      "role": "quick_heating",
+      "tools": [
+        "set_microwave"
+      ],
+      "observable_state": [
+        "kitchen.snack_ready"
+      ],
+      "writable_resources": [
+        "devices.microwave"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "bake_meal",
+      "agent_id": "OvenAgent",
+      "release_at_ms": 0,
+      "goal": "finish the main meal",
+      "priority": 100,
+      "required_action": {
+        "target": "oven",
+        "operation": "bake"
+      },
+      "action_template": {
+        "target": "oven",
+        "operation": "bake",
+        "parameters": {},
+        "duration_ms": 3000,
+        "power_kw": 2.0,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "heat_snack",
+      "agent_id": "MicrowaveAgent",
+      "release_at_ms": 100,
+      "goal": "heat a snack",
+      "priority": 40,
+      "required_action": {
+        "target": "microwave",
+        "operation": "reheat"
+      },
+      "action_template": {
+        "target": "microwave",
+        "operation": "reheat",
+        "parameters": {},
+        "duration_ms": 1000,
+        "power_kw": 1.5,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "kitchen.meal_ready",
+      "op": "eq",
+      "value": true
+    },
+    {
+      "path": "kitchen.snack_ready",
+      "op": "eq",
+      "value": true
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 3.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "OvenAgent",
+      "task_id": "bake_meal",
+      "operation": "bake",
+      "target": "oven",
+      "grounded_operation": "bake",
+      "effects": {
+        "devices.oven": "complete",
+        "kitchen.meal_ready": true
+      },
+      "duration_ms": 3000,
+      "power_kw": 2.0
+    },
+    {
+      "agent_id": "MicrowaveAgent",
+      "task_id": "heat_snack",
+      "operation": "reheat",
+      "target": "microwave",
+      "grounded_operation": "reheat",
+      "effects": {
+        "devices.microwave": "complete",
+        "kitchen.snack_ready": true
+      },
+      "duration_ms": 1000,
+      "power_kw": 1.5
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

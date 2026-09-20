@@ -1,0 +1,189 @@
+{
+  "episode_id": "HC-M05",
+  "task_family": "direct_device_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 105,
+    "values": {
+      "water": {
+        "temperature_c": 35
+      },
+      "request": {
+        "shower_active": true
+      },
+      "devices": {
+        "water_heater": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "ShowerAgent",
+      "role": "hot_water",
+      "tools": [
+        "set_water_heater"
+      ],
+      "observable_state": [
+        "water.temperature_c",
+        "request.shower_active"
+      ],
+      "writable_resources": [
+        "devices.water_heater"
+      ]
+    },
+    {
+      "agent_id": "PeakAgent",
+      "role": "peak_reduction",
+      "tools": [
+        "set_water_heater"
+      ],
+      "observable_state": [],
+      "writable_resources": [
+        "devices.water_heater"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "heat_water",
+      "agent_id": "ShowerAgent",
+      "release_at_ms": 0,
+      "goal": "heat water for a shower",
+      "priority": 100,
+      "required_action": {
+        "target": "water_heater",
+        "operation": "heat"
+      },
+      "action_template": {
+        "target": "water_heater",
+        "operation": "heat",
+        "parameters": {
+          "temperature_c": 50
+        },
+        "duration_ms": 5000,
+        "power_kw": 2.5,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "peak_water_off",
+      "agent_id": "PeakAgent",
+      "release_at_ms": 200,
+      "goal": "reduce peak water-heating usage",
+      "priority": 20,
+      "required_action": {
+        "target": "water_heater",
+        "operation": "off"
+      },
+      "action_template": {
+        "target": "water_heater",
+        "operation": "off",
+        "parameters": {},
+        "duration_ms": 500,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "water.temperature_c",
+      "op": "gte",
+      "value": 50
+    },
+    {
+      "path": "devices.water_heater",
+      "op": "eq",
+      "value": "heating"
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "request.shower_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.water_heater",
+          "op": "neq",
+          "value": "forced_off"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C1",
+      "a": {
+        "target": "water_heater",
+        "operation": "heat"
+      },
+      "b": {
+        "target": "water_heater",
+        "operation": "off"
+      },
+      "min_overlap_ms": 1
+    },
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "ShowerAgent",
+      "task_id": "heat_water",
+      "operation": "heat",
+      "target": "water_heater",
+      "grounded_operation": "heat",
+      "effects": {
+        "devices.water_heater": "heating",
+        "water.temperature_c": 50
+      },
+      "duration_ms": 5000,
+      "power_kw": 2.5
+    },
+    {
+      "agent_id": "PeakAgent",
+      "task_id": "peak_water_off",
+      "operation": "off",
+      "target": "water_heater",
+      "grounded_operation": "off",
+      "effects": {
+        "devices.water_heater": "forced_off"
+      },
+      "duration_ms": 500,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

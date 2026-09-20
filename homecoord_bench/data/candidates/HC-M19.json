@@ -1,0 +1,181 @@
+{
+  "episode_id": "HC-M19",
+  "task_family": "stale_state_action",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 119,
+    "values": {
+      "bedroom": {
+        "active": false
+      },
+      "devices": {
+        "bedroom_blinds": "open",
+        "activity_sensor": "idle"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "SleepAgent",
+      "role": "sleep_environment",
+      "tools": [
+        "set_blinds"
+      ],
+      "observable_state": [
+        "bedroom.active"
+      ],
+      "writable_resources": [
+        "devices.bedroom_blinds"
+      ]
+    },
+    {
+      "agent_id": "ActivityAgent",
+      "role": "activity_detection",
+      "tools": [
+        "observe_activity"
+      ],
+      "observable_state": [
+        "bedroom.active"
+      ],
+      "writable_resources": [
+        "devices.activity_sensor"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "close_sleep_blinds",
+      "agent_id": "SleepAgent",
+      "release_at_ms": 0,
+      "goal": "close blinds for sleep",
+      "priority": 60,
+      "required_action": {
+        "target": "bedroom_blinds",
+        "operation": "close"
+      },
+      "action_template": {
+        "target": "bedroom_blinds",
+        "operation": "close",
+        "parameters": {},
+        "duration_ms": 1200,
+        "power_kw": 0.01,
+        "requires": [
+          {
+            "path": "bedroom.active",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "observe_activity",
+      "agent_id": "ActivityAgent",
+      "release_at_ms": 300,
+      "goal": "observe bedroom activity",
+      "priority": 90,
+      "required_action": {
+        "target": "activity_sensor",
+        "operation": "observe"
+      },
+      "action_template": {
+        "target": "activity_sensor",
+        "operation": "observe",
+        "parameters": {},
+        "duration_ms": 100,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [
+    {
+      "at_ms": 500,
+      "event": "resident_activity_detected",
+      "new_state_version": 120,
+      "patch": {
+        "bedroom.active": true
+      }
+    }
+  ],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "bedroom.active",
+      "op": "eq",
+      "value": true
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "bedroom.active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.bedroom_blinds",
+          "op": "neq",
+          "value": "closed"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "SleepAgent",
+      "task_id": "close_sleep_blinds",
+      "operation": "close",
+      "target": "bedroom_blinds",
+      "grounded_operation": "close",
+      "effects": {
+        "devices.bedroom_blinds": "closed"
+      },
+      "duration_ms": 1200,
+      "power_kw": 0.01
+    },
+    {
+      "agent_id": "ActivityAgent",
+      "task_id": "observe_activity",
+      "operation": "observe",
+      "target": "activity_sensor",
+      "grounded_operation": "observe",
+      "effects": {},
+      "duration_ms": 100,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

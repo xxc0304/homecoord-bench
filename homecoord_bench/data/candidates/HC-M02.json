@@ -1,0 +1,197 @@
+{
+  "episode_id": "HC-M02",
+  "task_family": "direct_device_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 120,
+    "values": {
+      "study": {
+        "occupied": true,
+        "reading_active": true,
+        "lux": 120
+      },
+      "devices": {
+        "study_light": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "ReadingAgent",
+      "role": "reading",
+      "tools": [
+        "set_light"
+      ],
+      "observable_state": [
+        "study.reading_active",
+        "study.lux"
+      ],
+      "writable_resources": [
+        "devices.study_light"
+      ]
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "role": "energy",
+      "tools": [
+        "set_light"
+      ],
+      "observable_state": [
+        "study.occupied"
+      ],
+      "writable_resources": [
+        "devices.study_light"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "reading_light",
+      "agent_id": "ReadingAgent",
+      "release_at_ms": 0,
+      "goal": "reading light on",
+      "priority": 100,
+      "required_action": {
+        "target": "study_light",
+        "operation": "set_reading"
+      },
+      "action_template": {
+        "target": "study_light",
+        "operation": "set_reading",
+        "parameters": {
+          "lux": 500
+        },
+        "duration_ms": 800,
+        "power_kw": 0.02,
+        "requires": [
+          {
+            "path": "study.reading_active",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "energy_light",
+      "agent_id": "EnergyAgent",
+      "release_at_ms": 200,
+      "goal": "turn off unused light",
+      "priority": 20,
+      "required_action": {
+        "target": "study_light",
+        "operation": "off"
+      },
+      "action_template": {
+        "target": "study_light",
+        "operation": "off",
+        "parameters": {},
+        "duration_ms": 500,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "devices.study_light",
+      "op": "eq",
+      "value": "reading"
+    },
+    {
+      "path": "study.lux",
+      "op": "gte",
+      "value": 300
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "study.reading_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.study_light",
+          "op": "neq",
+          "value": "off"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C1",
+      "a": {
+        "target": "study_light",
+        "operation": "set_reading"
+      },
+      "b": {
+        "target": "study_light",
+        "operation": "off"
+      },
+      "min_overlap_ms": 1
+    },
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "ReadingAgent",
+      "task_id": "reading_light",
+      "operation": "set_reading",
+      "target": "study_light",
+      "grounded_operation": "set_reading",
+      "effects": {
+        "devices.study_light": "reading",
+        "study.lux": 500
+      },
+      "duration_ms": 800,
+      "power_kw": 0.02
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "task_id": "energy_light",
+      "operation": "off",
+      "target": "study_light",
+      "grounded_operation": "off",
+      "effects": {
+        "devices.study_light": "off",
+        "study.lux": 100
+      },
+      "duration_ms": 500,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

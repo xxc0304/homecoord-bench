@@ -1,0 +1,167 @@
+{
+  "episode_id": "HC-M13",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 6.0
+    }
+  },
+  "initial_state": {
+    "version": 113,
+    "values": {
+      "vehicle": {
+        "battery_pct": 20,
+        "departure_deadline_ms": 12000
+      },
+      "water": {
+        "temperature_c": 35
+      },
+      "devices": {
+        "ev_charger": "off",
+        "water_heater": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "EVChargingAgent",
+      "role": "ev_charging",
+      "tools": [
+        "charge_ev"
+      ],
+      "observable_state": [
+        "vehicle.battery_pct",
+        "vehicle.departure_deadline_ms"
+      ],
+      "writable_resources": [
+        "devices.ev_charger"
+      ]
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "role": "water_heating",
+      "tools": [
+        "heat_water"
+      ],
+      "observable_state": [
+        "water.temperature_c"
+      ],
+      "writable_resources": [
+        "devices.water_heater"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "charge_ev",
+      "agent_id": "EVChargingAgent",
+      "release_at_ms": 0,
+      "goal": "charge the vehicle before departure",
+      "priority": 100,
+      "required_action": {
+        "target": "ev_charger",
+        "operation": "charge"
+      },
+      "action_template": {
+        "target": "ev_charger",
+        "operation": "charge",
+        "parameters": {
+          "target_battery_pct": 50
+        },
+        "duration_ms": 6000,
+        "power_kw": 4.0,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "heat_water",
+      "agent_id": "WaterHeatingAgent",
+      "release_at_ms": 100,
+      "goal": "heat water for the next shower",
+      "priority": 80,
+      "required_action": {
+        "target": "water_heater",
+        "operation": "heat"
+      },
+      "action_template": {
+        "target": "water_heater",
+        "operation": "heat",
+        "parameters": {
+          "target_temperature_c": 50
+        },
+        "duration_ms": 3000,
+        "power_kw": 3.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "vehicle.battery_pct",
+      "op": "gte",
+      "value": 50
+    },
+    {
+      "path": "water.temperature_c",
+      "op": "gte",
+      "value": 50
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 6.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "EVChargingAgent",
+      "task_id": "charge_ev",
+      "operation": "charge",
+      "target": "ev_charger",
+      "grounded_operation": "charge",
+      "effects": {
+        "devices.ev_charger": "charging",
+        "vehicle.battery_pct": 50
+      },
+      "duration_ms": 6000,
+      "power_kw": 4.0
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "task_id": "heat_water",
+      "operation": "heat",
+      "target": "water_heater",
+      "grounded_operation": "heat",
+      "effects": {
+        "devices.water_heater": "heating",
+        "water.temperature_c": 50
+      },
+      "duration_ms": 3000,
+      "power_kw": 3.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

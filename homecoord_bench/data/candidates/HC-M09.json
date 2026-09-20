@@ -1,0 +1,180 @@
+{
+  "episode_id": "HC-M09",
+  "task_family": "indirect_environment_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 109,
+    "values": {
+      "living_room": {
+        "temperature_c": 18,
+        "occupied": true
+      },
+      "devices": {
+        "floor_heating": "off",
+        "balcony_door": "closed"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "FloorHeatingAgent",
+      "role": "floor_heating",
+      "tools": [
+        "set_floor_heating"
+      ],
+      "observable_state": [
+        "living_room.temperature_c"
+      ],
+      "writable_resources": [
+        "devices.floor_heating"
+      ]
+    },
+    {
+      "agent_id": "VentilationAgent",
+      "role": "ventilation",
+      "tools": [
+        "set_balcony_door"
+      ],
+      "observable_state": [
+        "living_room.occupied"
+      ],
+      "writable_resources": [
+        "devices.balcony_door"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "warm_floor",
+      "agent_id": "FloorHeatingAgent",
+      "release_at_ms": 0,
+      "goal": "warm the occupied room",
+      "priority": 80,
+      "required_action": {
+        "target": "floor_heating",
+        "operation": "heat"
+      },
+      "action_template": {
+        "target": "floor_heating",
+        "operation": "heat",
+        "parameters": {},
+        "duration_ms": 4000,
+        "power_kw": 1.8,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "ventilate_balcony",
+      "agent_id": "VentilationAgent",
+      "release_at_ms": 100,
+      "goal": "open the balcony door briefly",
+      "priority": 40,
+      "required_action": {
+        "target": "balcony_door",
+        "operation": "open"
+      },
+      "action_template": {
+        "target": "balcony_door",
+        "operation": "open",
+        "parameters": {},
+        "duration_ms": 1500,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "living_room.temperature_c",
+      "op": "between",
+      "value": [
+        20,
+        22
+      ]
+    },
+    {
+      "path": "devices.balcony_door",
+      "op": "eq",
+      "value": "open"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C2",
+      "a": {
+        "target": "floor_heating",
+        "operation": "heat"
+      },
+      "b": {
+        "target": "balcony_door",
+        "operation": "open"
+      },
+      "min_overlap_ms": 1000
+    },
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "FloorHeatingAgent",
+      "task_id": "warm_floor",
+      "operation": "heat",
+      "target": "floor_heating",
+      "grounded_operation": "heat",
+      "effects": {
+        "devices.floor_heating": "on",
+        "living_room.temperature_c": 21
+      },
+      "environment_effects": {
+        "living_room.temperature_c": 1
+      },
+      "duration_ms": 4000,
+      "power_kw": 1.8
+    },
+    {
+      "agent_id": "VentilationAgent",
+      "task_id": "ventilate_balcony",
+      "operation": "open",
+      "target": "balcony_door",
+      "grounded_operation": "open",
+      "effects": {
+        "devices.balcony_door": "open",
+        "living_room.outdoor_exchange": true
+      },
+      "environment_effects": {
+        "living_room.temperature_c": -1
+      },
+      "duration_ms": 1500,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "episode_id": "HC-M10",
+  "task_family": "indirect_environment_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 110,
+    "values": {
+      "laundry": {
+        "dry": false
+      },
+      "utility": {
+        "indoor_humidity_pct": 65
+      },
+      "policy": {
+        "energy_mode": "normal"
+      },
+      "devices": {
+        "dryer": "off",
+        "energy_meter": "normal"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "DryerAgent",
+      "role": "laundry_drying",
+      "tools": [
+        "start_dryer"
+      ],
+      "observable_state": [
+        "laundry.dry",
+        "utility.indoor_humidity_pct"
+      ],
+      "writable_resources": [
+        "devices.dryer"
+      ]
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "role": "energy_policy",
+      "tools": [
+        "set_energy_mode"
+      ],
+      "observable_state": [
+        "policy.energy_mode"
+      ],
+      "writable_resources": [
+        "devices.energy_meter"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "dry_laundry",
+      "agent_id": "DryerAgent",
+      "release_at_ms": 0,
+      "goal": "dry laundry before the evening deadline",
+      "priority": 80,
+      "required_action": {
+        "target": "dryer",
+        "operation": "dry"
+      },
+      "action_template": {
+        "target": "dryer",
+        "operation": "dry",
+        "parameters": {},
+        "duration_ms": 5000,
+        "power_kw": 2.0,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "peak_limit",
+      "agent_id": "EnergyAgent",
+      "release_at_ms": 100,
+      "goal": "enter peak-saving mode",
+      "priority": 60,
+      "required_action": {
+        "target": "energy_meter",
+        "operation": "limit"
+      },
+      "action_template": {
+        "target": "energy_meter",
+        "operation": "limit",
+        "parameters": {},
+        "duration_ms": 2000,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "laundry.dry",
+      "op": "eq",
+      "value": true
+    },
+    {
+      "path": "policy.energy_mode",
+      "op": "eq",
+      "value": "peak_limited"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C2",
+      "a": {
+        "target": "dryer",
+        "operation": "dry"
+      },
+      "b": {
+        "target": "energy_meter",
+        "operation": "limit"
+      },
+      "min_overlap_ms": 1000
+    },
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "DryerAgent",
+      "task_id": "dry_laundry",
+      "operation": "dry",
+      "target": "dryer",
+      "grounded_operation": "dry",
+      "effects": {
+        "devices.dryer": "complete",
+        "laundry.dry": true,
+        "utility.indoor_humidity_pct": 45
+      },
+      "environment_effects": {
+        "utility.indoor_humidity_pct": -1
+      },
+      "duration_ms": 5000,
+      "power_kw": 2.0
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "task_id": "peak_limit",
+      "operation": "limit",
+      "target": "energy_meter",
+      "grounded_operation": "limit",
+      "effects": {
+        "devices.energy_meter": "limited",
+        "policy.energy_mode": "peak_limited"
+      },
+      "environment_effects": {
+        "utility.indoor_humidity_pct": 1
+      },
+      "duration_ms": 2000,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}
