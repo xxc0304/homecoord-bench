@@ -1,0 +1,1442 @@
+{
+  "status": "single-repetition parameter sweep; calibration evidence, not a paper result",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "reasoning_effort": "none",
+  "data_scope": {
+    "variant_episodes": 11,
+    "architecture_runs": 33,
+    "repetitions_per_configuration": 1
+  },
+  "model_calls": {
+    "logical_calls": 71,
+    "api_attempts": 73,
+    "successful_logical_calls": 71,
+    "invalid_attempts": 2,
+    "retry_successes": 2,
+    "failure_types": [
+      "JSONDecodeError",
+      "ValueError"
+    ]
+  },
+  "model_latency_ms": {
+    "successful_attempt_only": {
+      "min": 684.855,
+      "p50": 1258.007,
+      "p95": 1633.2655,
+      "max": 6213.663,
+      "mean": 1326.3648732394365
+    },
+    "logical_call_including_invalid_retry": {
+      "min": 684.855,
+      "p50": 1260.022,
+      "p95": 1969.5955,
+      "max": 6213.663,
+      "mean": 1372.1518591549295
+    }
+  },
+  "tokens_including_invalid_attempts": {
+    "input": 65251,
+    "output": 9703,
+    "reasoning": 0,
+    "total": 74954
+  },
+  "estimated_cost_usd": {
+    "off_peak_all_input_cache_miss": 0.01560945,
+    "peak_all_input_cache_miss": 0.0312189
+  },
+  "architectures": {
+    "CentralSingleAgent": {
+      "runs": 11,
+      "process_valid_successes": 11,
+      "process_valid_success_rate": 1.0,
+      "conflicts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_effective_action_latency_ms": {
+        "min": 1176,
+        "p50": 1383,
+        "p95": 6065.0,
+        "max": 6231,
+        "mean": 2204.6363636363635
+      },
+      "task_completion_time_ms": {
+        "min": 1176,
+        "p50": 1383,
+        "p95": 6065.0,
+        "max": 6231,
+        "mean": 2204.6363636363635
+      },
+      "mean_task_service_rate": 0.7272727272727273
+    },
+    "IndependentMultiAgent": {
+      "runs": 11,
+      "process_valid_successes": 8,
+      "process_valid_success_rate": 0.7272727272727273,
+      "conflicts": {
+        "C1": 2,
+        "C2": 0,
+        "C3": 0,
+        "C4": 1
+      },
+      "first_effective_action_latency_ms": {
+        "min": 1082,
+        "p50": 1299,
+        "p95": 3870.5,
+        "max": 6314,
+        "mean": 1735
+      },
+      "task_completion_time_ms": {
+        "min": 1082,
+        "p50": 1299,
+        "p95": 3870.5,
+        "max": 6314,
+        "mean": 1735
+      },
+      "mean_task_service_rate": 0.8181818181818182
+    },
+    "RuleCoordinator": {
+      "runs": 11,
+      "process_valid_successes": 10,
+      "process_valid_success_rate": 0.9090909090909091,
+      "conflicts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_effective_action_latency_ms": {
+        "min": 1170,
+        "p50": 1443.0,
+        "p95": 5842.3499999999985,
+        "max": 6201,
+        "mean": 2269.1
+      },
+      "task_completion_time_ms": {
+        "min": 1170,
+        "p50": 1443.0,
+        "p95": 5842.3499999999985,
+        "max": 6201,
+        "mean": 2269.1
+      },
+      "mean_task_service_rate": 0.5909090909090909
+    }
+  },
+  "direct_conflict_by_visibility": {
+    "CentralSingleAgent.local_only": {
+      "runs": 3,
+      "process_valid_successes": 3,
+      "process_valid_success_rate": 1.0,
+      "conflicts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_effective_action_latency_ms": {
+        "min": 1253,
+        "p50": 1262,
+        "p95": 1370.8999999999999,
+        "max": 1383,
+        "mean": 1299.3333333333333
+      },
+      "task_completion_time_ms": {
+        "min": 1253,
+        "p50": 1262,
+        "p95": 1370.8999999999999,
+        "max": 1383,
+        "mean": 1299.3333333333333
+      },
+      "mean_task_service_rate": 0.5
+    },
+    "CentralSingleAgent.policy_visible": {
+      "runs": 3,
+      "process_valid_successes": 3,
+      "process_valid_success_rate": 1.0,
+      "conflicts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_effective_action_latency_ms": {
+        "min": 1176,
+        "p50": 1345,
+        "p95": 1380.1,
+        "max": 1384,
+        "mean": 1301.6666666666667
+      },
+      "task_completion_time_ms": {
+        "min": 1176,
+        "p50": 1345,
+        "p95": 1380.1,
+        "max": 1384,
+        "mean": 1301.6666666666667
+      },
+      "mean_task_service_rate": 0.5
+    },
+    "IndependentMultiAgent.local_only": {
+      "runs": 3,
+      "process_valid_successes": 1,
+      "process_valid_success_rate": 0.3333333333333333,
+      "conflicts": {
+        "C1": 2,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_effective_action_latency_ms": {
+        "min": 1082,
+        "p50": 1183,
+        "p95": 1402.6000000000001,
+        "max": 1427,
+        "mean": 1230.6666666666667
+      },
+      "task_completion_time_ms": {
+        "min": 1082,
+        "p50": 1183,
+        "p95": 1402.6000000000001,
+        "max": 1427,
+        "mean": 1230.6666666666667
+      },
+      "mean_task_service_rate": 0.8333333333333334
+    },
+    "IndependentMultiAgent.policy_visible": {
+      "runs": 3,
+      "process_valid_successes": 3,
+      "process_valid_success_rate": 1.0,
+      "conflicts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_effective_action_latency_ms": {
+        "min": 1240,
+        "p50": 1359,
+        "p95": 5818.5,
+        "max": 6314,
+        "mean": 2971
+      },
+      "task_completion_time_ms": {
+        "min": 1240,
+        "p50": 1359,
+        "p95": 5818.5,
+        "max": 6314,
+        "mean": 2971
+      },
+      "mean_task_service_rate": 0.5
+    },
+    "RuleCoordinator.local_only": {
+      "runs": 3,
+      "process_valid_successes": 3,
+      "process_valid_success_rate": 1.0,
+      "conflicts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_effective_action_latency_ms": {
+        "min": 1231,
+        "p50": 1356,
+        "p95": 1394.7,
+        "max": 1399,
+        "mean": 1328.6666666666667
+      },
+      "task_completion_time_ms": {
+        "min": 1231,
+        "p50": 1356,
+        "p95": 1394.7,
+        "max": 1399,
+        "mean": 1328.6666666666667
+      },
+      "mean_task_service_rate": 0.5
+    },
+    "RuleCoordinator.policy_visible": {
+      "runs": 3,
+      "process_valid_successes": 3,
+      "process_valid_success_rate": 1.0,
+      "conflicts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_effective_action_latency_ms": {
+        "min": 1170,
+        "p50": 1382,
+        "p95": 1538.6,
+        "max": 1556,
+        "mean": 1369.3333333333333
+      },
+      "task_completion_time_ms": {
+        "min": 1170,
+        "p50": 1382,
+        "p95": 1538.6,
+        "max": 1556,
+        "mean": 1369.3333333333333
+      },
+      "mean_task_service_rate": 0.3333333333333333
+    }
+  },
+  "stale_action_by_event_time": {
+    "CentralSingleAgent": [
+      {
+        "resident_enter_at_ms": 800,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 5899,
+        "task_completion_time_ms": 5899,
+        "rejected_action_count": 1
+      },
+      {
+        "resident_enter_at_ms": 1200,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 6231,
+        "task_completion_time_ms": 6231,
+        "rejected_action_count": 1
+      },
+      {
+        "resident_enter_at_ms": 1500,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 1437,
+        "task_completion_time_ms": 1437,
+        "rejected_action_count": 0
+      },
+      {
+        "resident_enter_at_ms": 1800,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 1354,
+        "task_completion_time_ms": 1354,
+        "rejected_action_count": 0
+      },
+      {
+        "resident_enter_at_ms": 2200,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 1527,
+        "task_completion_time_ms": 1527,
+        "rejected_action_count": 0
+      }
+    ],
+    "IndependentMultiAgent": [
+      {
+        "resident_enter_at_ms": 800,
+        "process_valid_success": false,
+        "C4": 1,
+        "first_effective_action_latency_ms": 1252,
+        "task_completion_time_ms": 1252,
+        "rejected_action_count": 0
+      },
+      {
+        "resident_enter_at_ms": 1200,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 1144,
+        "task_completion_time_ms": 1144,
+        "rejected_action_count": 0
+      },
+      {
+        "resident_enter_at_ms": 1500,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 1299,
+        "task_completion_time_ms": 1299,
+        "rejected_action_count": 0
+      },
+      {
+        "resident_enter_at_ms": 1800,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 1360,
+        "task_completion_time_ms": 1360,
+        "rejected_action_count": 0
+      },
+      {
+        "resident_enter_at_ms": 2200,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 1425,
+        "task_completion_time_ms": 1425,
+        "rejected_action_count": 0
+      }
+    ],
+    "RuleCoordinator": [
+      {
+        "resident_enter_at_ms": 800,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 5404,
+        "task_completion_time_ms": 5404,
+        "rejected_action_count": 1
+      },
+      {
+        "resident_enter_at_ms": 1200,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 6201,
+        "task_completion_time_ms": 6201,
+        "rejected_action_count": 1
+      },
+      {
+        "resident_enter_at_ms": 1500,
+        "process_valid_success": false,
+        "C4": 0,
+        "first_effective_action_latency_ms": null,
+        "task_completion_time_ms": null,
+        "rejected_action_count": 1
+      },
+      {
+        "resident_enter_at_ms": 1800,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 1505,
+        "task_completion_time_ms": 1505,
+        "rejected_action_count": 0
+      },
+      {
+        "resident_enter_at_ms": 2200,
+        "process_valid_success": true,
+        "C4": 0,
+        "first_effective_action_latency_ms": 1487,
+        "task_completion_time_ms": 1487,
+        "rejected_action_count": 0
+      }
+    ]
+  },
+  "episodes": [
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "policy_visible",
+      "second_task_gap_ms": 0,
+      "episode_id": "HC-VAR-002-policy_visible-0",
+      "trace_id": "HC-VAR-002-policy_visible-0.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1176,
+      "task_completion_time_ms": 1176,
+      "coordination_decision_latency_ms": 1076,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "policy_visible",
+      "second_task_gap_ms": 0,
+      "episode_id": "HC-VAR-002-policy_visible-0",
+      "trace_id": "HC-VAR-002-policy_visible-0.IndependentMultiAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1240,
+      "task_completion_time_ms": 1240,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "policy_visible",
+      "second_task_gap_ms": 0,
+      "episode_id": "HC-VAR-002-policy_visible-0",
+      "trace_id": "HC-VAR-002-policy_visible-0.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1382,
+      "task_completion_time_ms": 1382,
+      "coordination_decision_latency_ms": 1282,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": false,
+        "energy": false
+      },
+      "served_task_count": 0,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.0
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "policy_visible",
+      "second_task_gap_ms": 300,
+      "episode_id": "HC-VAR-002-policy_visible-300",
+      "trace_id": "HC-VAR-002-policy_visible-300.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1384,
+      "task_completion_time_ms": 1384,
+      "coordination_decision_latency_ms": 1284,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "policy_visible",
+      "second_task_gap_ms": 300,
+      "episode_id": "HC-VAR-002-policy_visible-300",
+      "trace_id": "HC-VAR-002-policy_visible-300.IndependentMultiAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1359,
+      "task_completion_time_ms": 1359,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "policy_visible",
+      "second_task_gap_ms": 300,
+      "episode_id": "HC-VAR-002-policy_visible-300",
+      "trace_id": "HC-VAR-002-policy_visible-300.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1556,
+      "task_completion_time_ms": 1556,
+      "coordination_decision_latency_ms": 1456,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 2,
+      "accepted_action_count": 1,
+      "rejected_action_count": 1,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "policy_visible",
+      "second_task_gap_ms": 1000,
+      "episode_id": "HC-VAR-002-policy_visible-1000",
+      "trace_id": "HC-VAR-002-policy_visible-1000.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1345,
+      "task_completion_time_ms": 1345,
+      "coordination_decision_latency_ms": 1245,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "policy_visible",
+      "second_task_gap_ms": 1000,
+      "episode_id": "HC-VAR-002-policy_visible-1000",
+      "trace_id": "HC-VAR-002-policy_visible-1000.IndependentMultiAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 6314,
+      "task_completion_time_ms": 6314,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "policy_visible",
+      "second_task_gap_ms": 1000,
+      "episode_id": "HC-VAR-002-policy_visible-1000",
+      "trace_id": "HC-VAR-002-policy_visible-1000.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1170,
+      "task_completion_time_ms": 1170,
+      "coordination_decision_latency_ms": 1070,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "local_only",
+      "second_task_gap_ms": 0,
+      "episode_id": "HC-VAR-002-local_only-0",
+      "trace_id": "HC-VAR-002-local_only-0.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1262,
+      "task_completion_time_ms": 1262,
+      "coordination_decision_latency_ms": 1162,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "local_only",
+      "second_task_gap_ms": 0,
+      "episode_id": "HC-VAR-002-local_only-0",
+      "trace_id": "HC-VAR-002-local_only-0.IndependentMultiAgent.closed_loop",
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "constraint_violation_count": 1,
+      "conflict_counts": {
+        "C1": 1,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1082,
+      "task_completion_time_ms": 1082,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": true
+      },
+      "served_task_count": 2,
+      "serviceable_task_count": 2,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "local_only",
+      "second_task_gap_ms": 0,
+      "episode_id": "HC-VAR-002-local_only-0",
+      "trace_id": "HC-VAR-002-local_only-0.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1231,
+      "task_completion_time_ms": 1231,
+      "coordination_decision_latency_ms": 1131,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 2,
+      "accepted_action_count": 1,
+      "rejected_action_count": 1,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "local_only",
+      "second_task_gap_ms": 300,
+      "episode_id": "HC-VAR-002-local_only-300",
+      "trace_id": "HC-VAR-002-local_only-300.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1383,
+      "task_completion_time_ms": 1383,
+      "coordination_decision_latency_ms": 1283,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "local_only",
+      "second_task_gap_ms": 300,
+      "episode_id": "HC-VAR-002-local_only-300",
+      "trace_id": "HC-VAR-002-local_only-300.IndependentMultiAgent.closed_loop",
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "constraint_violation_count": 1,
+      "conflict_counts": {
+        "C1": 1,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1427,
+      "task_completion_time_ms": 1427,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": true
+      },
+      "served_task_count": 2,
+      "serviceable_task_count": 2,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "local_only",
+      "second_task_gap_ms": 300,
+      "episode_id": "HC-VAR-002-local_only-300",
+      "trace_id": "HC-VAR-002-local_only-300.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1356,
+      "task_completion_time_ms": 1356,
+      "coordination_decision_latency_ms": 1256,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "local_only",
+      "second_task_gap_ms": 1000,
+      "episode_id": "HC-VAR-002-local_only-1000",
+      "trace_id": "HC-VAR-002-local_only-1000.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1253,
+      "task_completion_time_ms": 1253,
+      "coordination_decision_latency_ms": 1153,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "local_only",
+      "second_task_gap_ms": 1000,
+      "episode_id": "HC-VAR-002-local_only-1000",
+      "trace_id": "HC-VAR-002-local_only-1000.IndependentMultiAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1183,
+      "task_completion_time_ms": 1183,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "direct_device_conflict",
+      "energy_visibility": "local_only",
+      "second_task_gap_ms": 1000,
+      "episode_id": "HC-VAR-002-local_only-1000",
+      "trace_id": "HC-VAR-002-local_only-1000.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1399,
+      "task_completion_time_ms": 1399,
+      "coordination_decision_latency_ms": 1299,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "comfort": true,
+        "energy": false
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 2,
+      "task_service_rate": 0.5
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 800,
+      "episode_id": "HC-VAR-004-enter-800",
+      "trace_id": "HC-VAR-004-enter-800.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 5899,
+      "task_completion_time_ms": 5899,
+      "coordination_decision_latency_ms": 1345,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 1,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 800,
+      "episode_id": "HC-VAR-004-enter-800",
+      "trace_id": "HC-VAR-004-enter-800.IndependentMultiAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 1
+      },
+      "stale_action_count": 1,
+      "first_effective_action_latency_ms": 1252,
+      "task_completion_time_ms": 1252,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 800,
+      "episode_id": "HC-VAR-004-enter-800",
+      "trace_id": "HC-VAR-004-enter-800.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 5404,
+      "task_completion_time_ms": 5404,
+      "coordination_decision_latency_ms": 1182,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 1,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 1200,
+      "episode_id": "HC-VAR-004-enter-1200",
+      "trace_id": "HC-VAR-004-enter-1200.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 6231,
+      "task_completion_time_ms": 6231,
+      "coordination_decision_latency_ms": 1318,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 1,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 1200,
+      "episode_id": "HC-VAR-004-enter-1200",
+      "trace_id": "HC-VAR-004-enter-1200.IndependentMultiAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1144,
+      "task_completion_time_ms": 1144,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 1200,
+      "episode_id": "HC-VAR-004-enter-1200",
+      "trace_id": "HC-VAR-004-enter-1200.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 6201,
+      "task_completion_time_ms": 6201,
+      "coordination_decision_latency_ms": 1250,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 1,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 1500,
+      "episode_id": "HC-VAR-004-enter-1500",
+      "trace_id": "HC-VAR-004-enter-1500.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1437,
+      "task_completion_time_ms": 1437,
+      "coordination_decision_latency_ms": 1337,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 1500,
+      "episode_id": "HC-VAR-004-enter-1500",
+      "trace_id": "HC-VAR-004-enter-1500.IndependentMultiAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1299,
+      "task_completion_time_ms": 1299,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 1500,
+      "episode_id": "HC-VAR-004-enter-1500",
+      "trace_id": "HC-VAR-004-enter-1500.RuleCoordinator.closed_loop",
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": null,
+      "task_completion_time_ms": null,
+      "coordination_decision_latency_ms": 1474,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 1,
+      "accepted_action_count": 0,
+      "rejected_action_count": 1,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": false
+      },
+      "served_task_count": 0,
+      "serviceable_task_count": 1,
+      "task_service_rate": 0.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 1800,
+      "episode_id": "HC-VAR-004-enter-1800",
+      "trace_id": "HC-VAR-004-enter-1800.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1354,
+      "task_completion_time_ms": 1354,
+      "coordination_decision_latency_ms": 1254,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 1800,
+      "episode_id": "HC-VAR-004-enter-1800",
+      "trace_id": "HC-VAR-004-enter-1800.IndependentMultiAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1360,
+      "task_completion_time_ms": 1360,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 1800,
+      "episode_id": "HC-VAR-004-enter-1800",
+      "trace_id": "HC-VAR-004-enter-1800.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1505,
+      "task_completion_time_ms": 1505,
+      "coordination_decision_latency_ms": 1405,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 2200,
+      "episode_id": "HC-VAR-004-enter-2200",
+      "trace_id": "HC-VAR-004-enter-2200.CentralSingleAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1527,
+      "task_completion_time_ms": 1527,
+      "coordination_decision_latency_ms": 1427,
+      "architecture": "CentralSingleAgent",
+      "proposal_count": 1,
+      "accepted_action_count": 1,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 2200,
+      "episode_id": "HC-VAR-004-enter-2200",
+      "trace_id": "HC-VAR-004-enter-2200.IndependentMultiAgent.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1425,
+      "task_completion_time_ms": 1425,
+      "coordination_decision_latency_ms": null,
+      "architecture": "IndependentMultiAgent",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    },
+    {
+      "family": "stale_state_action",
+      "resident_enter_at_ms": 2200,
+      "episode_id": "HC-VAR-004-enter-2200",
+      "trace_id": "HC-VAR-004-enter-2200.RuleCoordinator.closed_loop",
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "constraint_violation_count": 0,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "stale_action_count": 0,
+      "first_effective_action_latency_ms": 1487,
+      "task_completion_time_ms": 1487,
+      "coordination_decision_latency_ms": 1387,
+      "architecture": "RuleCoordinator",
+      "proposal_count": 2,
+      "accepted_action_count": 2,
+      "rejected_action_count": 0,
+      "synthetic_latency": false,
+      "task_service": {
+        "clean": true
+      },
+      "served_task_count": 1,
+      "serviceable_task_count": 1,
+      "task_service_rate": 1.0
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "status": "smoke_test_only",
+  "date": "2026-09-19",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "reasoning_effort": "none",
+  "architecture": "IndependentMultiAgent protocol pilot",
+  "completed_calls": 8,
+  "schema_valid_calls": 8,
+  "failed_calls": 0,
+  "latency_ms": {
+    "min": 1208.185,
+    "p50": 1410.099,
+    "p95": 1630.1161,
+    "max": 1665.093,
+    "mean": 1417.814
+  },
+  "tokens": {
+    "input": 6763,
+    "output": 1029,
+    "reasoning": 0,
+    "total": 7792
+  },
+  "estimated_cost_usd": {
+    "off_peak_all_input_cache_miss": 0.00163185,
+    "peak_all_input_cache_miss": 0.0032637
+  },
+  "limitations": [
+    "Only eight calls were measured; percentile estimates are descriptive, not stable tail-latency estimates.",
+    "Latency is API end-to-end proposal generation latency, not first effective physical action latency.",
+    "The pilot did not execute a coordinator, simulator, device action, state feedback, or task completion loop.",
+    "All calls used non-thinking mode; model-quality comparisons have not yet been run.",
+    "The CareAgent received the initial state rather than the scheduled exogenous occupancy update, so its noop response tests protocol behavior rather than the final HC-SEED-004 scenario."
+  ],
+  "audit_note": "An earlier run appeared to pass 8/8 under a shallow validator, but manual review found one nested field named value instead of value_json. After adding recursive field validation, this fresh run passed 8/8. The earlier run is excluded from these aggregate metrics."
+}
