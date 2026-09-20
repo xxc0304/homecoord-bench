@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homecoord-bench.local/schema/episode.schema.json",
+  "title": "HomeCoord-Bench Episode",
+  "type": "object",
+  "required": [
+    "episode_id", "task_family", "episode_release_at_ms", "home",
+    "initial_state", "agents", "task_stream", "goals", "constraints",
+    "conflict_rules"
+  ],
+  "properties": {
+    "episode_id": {"type": "string", "pattern": "^HC-(SEED-[0-9]{3}|M[0-9]{2})$"},
+    "task_family": {"type": "string"},
+    "source_type": {"type": "string"},
+    "generator_version": {"type": "string"},
+    "review_status": {"type": "string"},
+    "episode_release_at_ms": {"type": "integer", "minimum": 0},
+    "home": {
+      "type": "object",
+      "required": ["resources"],
+      "properties": {"resources": {"type": "object"}}
+    },
+    "initial_state": {
+      "type": "object",
+      "required": ["version", "values"],
+      "properties": {
+        "version": {"type": "integer", "minimum": 0},
+        "values": {"type": "object"}
+      }
+    },
+    "agents": {
+      "type": "array", "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["agent_id", "role", "tools", "observable_state", "writable_resources"]
+      }
+    },
+    "task_stream": {
+      "type": "array", "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["task_id", "agent_id", "release_at_ms", "goal"],
+        "properties": {
+          "task_id": {"type": "string"},
+          "agent_id": {"type": "string"},
+          "release_at_ms": {"type": "integer", "minimum": 0},
+          "goal": {"type": "string"},
+          "required_action": {
+            "type": "object",
+            "required": ["target", "operation"],
+            "properties": {
+              "target": {"type": "string"},
+              "operation": {"type": "string"}
+            },
+            "additionalProperties": true
+          },
+          "action_template": {
+            "type": "object",
+            "required": ["target", "operation", "duration_ms", "power_kw"],
+            "properties": {
+              "target": {"type": "string"},
+              "operation": {"type": "string"},
+              "parameters": {"type": "object"},
+              "duration_ms": {"type": "integer", "minimum": 0},
+              "power_kw": {"type": "number", "minimum": 0},
+              "requires": {"type": "array"}
+            },
+            "additionalProperties": true
+          },
+          "recovery": {
+            "type": "object",
+            "properties": {
+              "wake_condition": {"type": "object"}
+            },
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "exogenous_events": {"type": "array"},
+    "goals": {"type": "array", "minItems": 1},
+    "constraints": {"type": "array"},
+    "conflict_rules": {"type": "array"},
+    "latency_profile": {"type": "object"},
+    "action_grounding": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agent_id": {"type": "string"},
+          "task_id": {"type": "string"},
+          "operation": {"type": "string"},
+          "target": {"type": "string"},
+          "grounded_operation": {"type": "string"},
+          "effects": {"type": "object"},
+          "environment_effects": {"type": "object"},
+          "duration_ms": {"type": "integer", "minimum": 0},
+          "power_kw": {"type": "number", "minimum": 0}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
