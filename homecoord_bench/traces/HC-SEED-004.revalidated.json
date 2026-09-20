@@ -1,0 +1,11 @@
+{
+  "trace_id": "HC-SEED-004.revalidated",
+  "episode_id": "HC-SEED-004",
+  "label": "valid_revalidation",
+  "events": [
+    {"type": "state_update", "timestamp_ms": 1500, "new_state_version": 401, "patch": {"living_room.occupied": true, "living_room.mobility_limited_person_present": true}},
+    {"type": "coordination_decision", "timestamp_ms": 1700, "decision": "defer_cleaning"},
+    {"type": "state_update", "timestamp_ms": 5000, "new_state_version": 402, "patch": {"living_room.occupied": false, "living_room.mobility_limited_person_present": false}},
+    {"type": "action_effective", "timestamp_ms": 5400, "agent_id": "CleaningAgent", "target": "robot", "operation": "clean", "duration_ms": 3000, "power_kw": 0.2, "based_on_state_version": 402, "requires": [{"path": "living_room.occupied", "op": "eq", "value": false}], "effects": {"devices.robot": "complete", "living_room.clean": true}}
+  ]
+}
