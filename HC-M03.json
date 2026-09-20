@@ -1,0 +1,197 @@
+{
+  "episode_id": "HC-M03",
+  "task_family": "direct_device_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 130,
+    "values": {
+      "bedroom": {
+        "occupied": true,
+        "privacy_required": true,
+        "daylight_requested": true
+      },
+      "devices": {
+        "bedroom_blinds": "open"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "PrivacyAgent",
+      "role": "privacy",
+      "tools": [
+        "set_blinds"
+      ],
+      "observable_state": [
+        "bedroom.occupied",
+        "bedroom.privacy_required"
+      ],
+      "writable_resources": [
+        "devices.bedroom_blinds"
+      ]
+    },
+    {
+      "agent_id": "DaylightAgent",
+      "role": "daylight",
+      "tools": [
+        "set_blinds"
+      ],
+      "observable_state": [
+        "bedroom.daylight_requested"
+      ],
+      "writable_resources": [
+        "devices.bedroom_blinds"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "privacy_close",
+      "agent_id": "PrivacyAgent",
+      "release_at_ms": 0,
+      "goal": "protect bedroom privacy",
+      "priority": 100,
+      "required_action": {
+        "target": "bedroom_blinds",
+        "operation": "close"
+      },
+      "action_template": {
+        "target": "bedroom_blinds",
+        "operation": "close",
+        "parameters": {},
+        "duration_ms": 700,
+        "power_kw": 0.01,
+        "requires": [
+          {
+            "path": "bedroom.privacy_required",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "daylight_open",
+      "agent_id": "DaylightAgent",
+      "release_at_ms": 200,
+      "goal": "admit daylight",
+      "priority": 30,
+      "required_action": {
+        "target": "bedroom_blinds",
+        "operation": "open"
+      },
+      "action_template": {
+        "target": "bedroom_blinds",
+        "operation": "open",
+        "parameters": {},
+        "duration_ms": 700,
+        "power_kw": 0.01,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [
+    {
+      "at_ms": 100,
+      "event": "resident_privacy_confirmed",
+      "new_state_version": 131,
+      "patch": {
+        "bedroom.privacy_required": true
+      }
+    }
+  ],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "devices.bedroom_blinds",
+      "op": "eq",
+      "value": "closed"
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "bedroom.privacy_required",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.bedroom_blinds",
+          "op": "neq",
+          "value": "open"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C1",
+      "a": {
+        "target": "bedroom_blinds",
+        "operation": "close"
+      },
+      "b": {
+        "target": "bedroom_blinds",
+        "operation": "open"
+      },
+      "min_overlap_ms": 1
+    },
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "PrivacyAgent",
+      "task_id": "privacy_close",
+      "operation": "close",
+      "target": "bedroom_blinds",
+      "grounded_operation": "close",
+      "effects": {
+        "devices.bedroom_blinds": "closed"
+      },
+      "duration_ms": 700,
+      "power_kw": 0.01
+    },
+    {
+      "agent_id": "DaylightAgent",
+      "task_id": "daylight_open",
+      "operation": "open",
+      "target": "bedroom_blinds",
+      "grounded_operation": "open",
+      "effects": {
+        "devices.bedroom_blinds": "open"
+      },
+      "duration_ms": 700,
+      "power_kw": 0.01
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

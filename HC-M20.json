@@ -1,0 +1,181 @@
+{
+  "episode_id": "HC-M20",
+  "task_family": "stale_state_action",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 120,
+    "values": {
+      "home": {
+        "occupied": false
+      },
+      "devices": {
+        "alarm": "off",
+        "entry_sensor": "idle"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "SecurityAgent",
+      "role": "security",
+      "tools": [
+        "arm_alarm"
+      ],
+      "observable_state": [
+        "home.occupied"
+      ],
+      "writable_resources": [
+        "devices.alarm"
+      ]
+    },
+    {
+      "agent_id": "ReturnAgent",
+      "role": "arrival_detection",
+      "tools": [
+        "observe_entry"
+      ],
+      "observable_state": [
+        "home.occupied"
+      ],
+      "writable_resources": [
+        "devices.entry_sensor"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "arm_home",
+      "agent_id": "SecurityAgent",
+      "release_at_ms": 0,
+      "goal": "arm the empty home",
+      "priority": 80,
+      "required_action": {
+        "target": "alarm",
+        "operation": "arm"
+      },
+      "action_template": {
+        "target": "alarm",
+        "operation": "arm",
+        "parameters": {},
+        "duration_ms": 1800,
+        "power_kw": 0.02,
+        "requires": [
+          {
+            "path": "home.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "observe_return",
+      "agent_id": "ReturnAgent",
+      "release_at_ms": 300,
+      "goal": "observe entry occupancy",
+      "priority": 90,
+      "required_action": {
+        "target": "entry_sensor",
+        "operation": "observe"
+      },
+      "action_template": {
+        "target": "entry_sensor",
+        "operation": "observe",
+        "parameters": {},
+        "duration_ms": 100,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [
+    {
+      "at_ms": 500,
+      "event": "resident_returned",
+      "new_state_version": 121,
+      "patch": {
+        "home.occupied": true
+      }
+    }
+  ],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "home.occupied",
+      "op": "eq",
+      "value": true
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "home.occupied",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.alarm",
+          "op": "neq",
+          "value": "armed"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "SecurityAgent",
+      "task_id": "arm_home",
+      "operation": "arm",
+      "target": "alarm",
+      "grounded_operation": "arm",
+      "effects": {
+        "devices.alarm": "armed"
+      },
+      "duration_ms": 1800,
+      "power_kw": 0.02
+    },
+    {
+      "agent_id": "ReturnAgent",
+      "task_id": "observe_return",
+      "operation": "observe",
+      "target": "entry_sensor",
+      "grounded_operation": "observe",
+      "effects": {},
+      "duration_ms": 100,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

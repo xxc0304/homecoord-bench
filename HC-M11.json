@@ -1,0 +1,168 @@
+{
+  "episode_id": "HC-M11",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 1.2
+    }
+  },
+  "initial_state": {
+    "version": 111,
+    "values": {
+      "study": {
+        "lux": 100
+      },
+      "bedroom": {
+        "temperature_c": 29
+      },
+      "devices": {
+        "study_light": "off",
+        "bedroom_hvac": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "StudyLightAgent",
+      "role": "study_lighting",
+      "tools": [
+        "set_light"
+      ],
+      "observable_state": [
+        "study.lux"
+      ],
+      "writable_resources": [
+        "devices.study_light"
+      ]
+    },
+    {
+      "agent_id": "BedroomClimateAgent",
+      "role": "bedroom_climate",
+      "tools": [
+        "set_hvac"
+      ],
+      "observable_state": [
+        "bedroom.temperature_c"
+      ],
+      "writable_resources": [
+        "devices.bedroom_hvac"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "study_light",
+      "agent_id": "StudyLightAgent",
+      "release_at_ms": 0,
+      "goal": "light the study",
+      "priority": 50,
+      "required_action": {
+        "target": "study_light",
+        "operation": "set_reading"
+      },
+      "action_template": {
+        "target": "study_light",
+        "operation": "set_reading",
+        "parameters": {
+          "lux": 500
+        },
+        "duration_ms": 1000,
+        "power_kw": 0.5,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "bedroom_cool",
+      "agent_id": "BedroomClimateAgent",
+      "release_at_ms": 100,
+      "goal": "cool the bedroom",
+      "priority": 60,
+      "required_action": {
+        "target": "bedroom_hvac",
+        "operation": "cool"
+      },
+      "action_template": {
+        "target": "bedroom_hvac",
+        "operation": "cool",
+        "parameters": {
+          "temperature_c": 25
+        },
+        "duration_ms": 3000,
+        "power_kw": 1.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "study.lux",
+      "op": "gte",
+      "value": 300
+    },
+    {
+      "path": "bedroom.temperature_c",
+      "op": "between",
+      "value": [
+        24,
+        26
+      ]
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 1.2
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "StudyLightAgent",
+      "task_id": "study_light",
+      "operation": "set_reading",
+      "target": "study_light",
+      "grounded_operation": "set_reading",
+      "effects": {
+        "devices.study_light": "reading",
+        "study.lux": 500
+      },
+      "duration_ms": 1000,
+      "power_kw": 0.5
+    },
+    {
+      "agent_id": "BedroomClimateAgent",
+      "task_id": "bedroom_cool",
+      "operation": "cool",
+      "target": "bedroom_hvac",
+      "grounded_operation": "cool",
+      "effects": {
+        "devices.bedroom_hvac": "cool_25",
+        "bedroom.temperature_c": 25
+      },
+      "duration_ms": 3000,
+      "power_kw": 1.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

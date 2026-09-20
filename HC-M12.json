@@ -1,0 +1,159 @@
+{
+  "episode_id": "HC-M12",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 3.0
+    }
+  },
+  "initial_state": {
+    "version": 112,
+    "values": {
+      "laundry": {
+        "washed": false,
+        "dry": false
+      },
+      "devices": {
+        "washer": "off",
+        "dryer": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "WasherAgent",
+      "role": "washing",
+      "tools": [
+        "start_washer"
+      ],
+      "observable_state": [
+        "laundry.washed"
+      ],
+      "writable_resources": [
+        "devices.washer"
+      ]
+    },
+    {
+      "agent_id": "DryerAgent",
+      "role": "drying",
+      "tools": [
+        "start_dryer"
+      ],
+      "observable_state": [
+        "laundry.dry"
+      ],
+      "writable_resources": [
+        "devices.dryer"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "wash",
+      "agent_id": "WasherAgent",
+      "release_at_ms": 0,
+      "goal": "wash the laundry",
+      "priority": 80,
+      "required_action": {
+        "target": "washer",
+        "operation": "wash"
+      },
+      "action_template": {
+        "target": "washer",
+        "operation": "wash",
+        "parameters": {},
+        "duration_ms": 4000,
+        "power_kw": 1.5,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "dry",
+      "agent_id": "DryerAgent",
+      "release_at_ms": 100,
+      "goal": "dry the laundry",
+      "priority": 70,
+      "required_action": {
+        "target": "dryer",
+        "operation": "dry"
+      },
+      "action_template": {
+        "target": "dryer",
+        "operation": "dry",
+        "parameters": {},
+        "duration_ms": 4000,
+        "power_kw": 2.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "laundry.washed",
+      "op": "eq",
+      "value": true
+    },
+    {
+      "path": "laundry.dry",
+      "op": "eq",
+      "value": true
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 3.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "WasherAgent",
+      "task_id": "wash",
+      "operation": "wash",
+      "target": "washer",
+      "grounded_operation": "wash",
+      "effects": {
+        "devices.washer": "complete",
+        "laundry.washed": true
+      },
+      "duration_ms": 4000,
+      "power_kw": 1.5
+    },
+    {
+      "agent_id": "DryerAgent",
+      "task_id": "dry",
+      "operation": "dry",
+      "target": "dryer",
+      "grounded_operation": "dry",
+      "effects": {
+        "devices.dryer": "complete",
+        "laundry.dry": true
+      },
+      "duration_ms": 4000,
+      "power_kw": 2.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

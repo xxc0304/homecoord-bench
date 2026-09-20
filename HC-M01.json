@@ -1,0 +1,194 @@
+{
+  "episode_id": "HC-M01",
+  "task_family": "direct_device_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "candidate_dry_run",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 101,
+    "values": {
+      "living_room": {
+        "temperature_c": 29
+      },
+      "request": {
+        "comfort_active": true
+      },
+      "devices": {
+        "living_hvac": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "ComfortAgent",
+      "role": "comfort",
+      "tools": [
+        "set_hvac"
+      ],
+      "observable_state": [
+        "living_room.temperature_c",
+        "request.comfort_active"
+      ],
+      "writable_resources": [
+        "devices.living_hvac"
+      ]
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "role": "energy",
+      "tools": [
+        "set_hvac"
+      ],
+      "observable_state": [
+        "request.comfort_active"
+      ],
+      "writable_resources": [
+        "devices.living_hvac"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "comfort_cool",
+      "agent_id": "ComfortAgent",
+      "release_at_ms": 0,
+      "goal": "cool living room to 24 C",
+      "priority": 100,
+      "required_action": {
+        "target": "living_hvac",
+        "operation": "cool"
+      },
+      "action_template": {
+        "target": "living_hvac",
+        "operation": "cool",
+        "parameters": {
+          "temperature_c": 24
+        },
+        "duration_ms": 6000,
+        "power_kw": 1.4,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "peak_off",
+      "agent_id": "EnergyAgent",
+      "release_at_ms": 200,
+      "goal": "reduce peak usage",
+      "priority": 20,
+      "required_action": {
+        "target": "living_hvac",
+        "operation": "off"
+      },
+      "action_template": {
+        "target": "living_hvac",
+        "operation": "off",
+        "parameters": {},
+        "duration_ms": 500,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "living_room.temperature_c",
+      "op": "between",
+      "value": [
+        23,
+        25
+      ]
+    },
+    {
+      "path": "devices.living_hvac",
+      "op": "eq",
+      "value": "cool_24"
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "request.comfort_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.living_hvac",
+          "op": "neq",
+          "value": "forced_off"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C1",
+      "a": {
+        "target": "living_hvac",
+        "operation": "cool"
+      },
+      "b": {
+        "target": "living_hvac",
+        "operation": "off"
+      },
+      "min_overlap_ms": 1
+    },
+    {
+      "type": "C3",
+      "capacity": 8.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "ComfortAgent",
+      "task_id": "comfort_cool",
+      "operation": "cool",
+      "target": "living_hvac",
+      "grounded_operation": "cool",
+      "effects": {
+        "devices.living_hvac": "cool_24",
+        "living_room.temperature_c": 24
+      },
+      "duration_ms": 6000,
+      "power_kw": 1.4
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "task_id": "peak_off",
+      "operation": "off",
+      "target": "living_hvac",
+      "grounded_operation": "off",
+      "effects": {
+        "devices.living_hvac": "forced_off"
+      },
+      "duration_ms": 500,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  }
+}

@@ -1,0 +1,4191 @@
+{
+  "status": "counterfactual replay on identical specialist decisions and logical call latencies",
+  "source_run": "homecoord_bench\\runs\\targeted-repetitions-20-deepseek-20260920",
+  "family": "direct_device_conflict",
+  "source_architecture": "IndependentMultiAgent",
+  "target_architecture": "RuleCoordinator",
+  "pairs": 40,
+  "source_process_valid_successes": 12,
+  "counterfactual_process_valid_successes": 40,
+  "source_conflict_episodes": {
+    "C1": 27,
+    "C2": 0,
+    "C3": 0,
+    "C4": 0
+  },
+  "counterfactual_conflict_episodes": {
+    "C1": 0,
+    "C2": 0,
+    "C3": 0,
+    "C4": 0
+  },
+  "source_mean_task_service_rate": 0.85,
+  "counterfactual_mean_task_service_rate": 0.5,
+  "delta_first_action_ms": {
+    "p50": 0.0,
+    "p95": 0.0
+  },
+  "delta_completion_ms": {
+    "p50": 0.0,
+    "p95": 0.0
+  },
+  "source_conflicted_pairs_delta_completion_ms": {
+    "pairs": 27,
+    "p50": 0,
+    "p95": 0.0
+  },
+  "source_safe_pairs_delta_completion_ms": {
+    "pairs": 13,
+    "p50": 0,
+    "p95": 0.0
+  },
+  "results": [
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-01",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 1,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-01",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-01.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 12315,
+        "task_completion_time_ms": 12315,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-01",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-01.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 12315,
+        "task_completion_time_ms": 12315,
+        "coordination_decision_latency_ms": 2868,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-01.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-01",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 2868,
+            "decision": "reject",
+            "proposal_id": "p1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 12215,
+            "decision": "accept",
+            "proposal_id": "ab713f04-prop-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 12315,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "ab713f04-prop-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.2,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "living_room.temperature_c",
+                "op": "gt",
+                "value": 24
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-02",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 2,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-02",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-02.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1744,
+        "task_completion_time_ms": 1744,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-02",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-02.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1744,
+        "task_completion_time_ms": 1744,
+        "coordination_decision_latency_ms": 1644,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-02.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-02",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1644,
+            "decision": "accept",
+            "proposal_id": "comfort-cool-24"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1744,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-cool-24",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-03",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 3,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-03",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-03.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1655,
+        "task_completion_time_ms": 1655,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-03",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-03.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1654,
+        "task_completion_time_ms": 1654,
+        "coordination_decision_latency_ms": 1554,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-03.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-03",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1554,
+            "decision": "accept",
+            "proposal_id": "72f6383c-be30-41b2-a686-9d36aa5dc6e6-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1654,
+            "agent_id": "EnergyAgent",
+            "task_id": "energy",
+            "proposal_id": "72f6383c-be30-41b2-a686-9d36aa5dc6e6-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.2,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 3257,
+            "decision": "accept",
+            "proposal_id": "f6589ae1-proposal-01"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 3357,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "f6589ae1-proposal-01",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "living_room.temperature_c",
+                "op": "gt",
+                "value": 25
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-04",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 4,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-04",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-04.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1691,
+        "task_completion_time_ms": 1691,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-04",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-04.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1690,
+        "task_completion_time_ms": 1690,
+        "coordination_decision_latency_ms": 1590,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-04.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-04",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1590,
+            "decision": "accept",
+            "proposal_id": "b3a04528-hvac-cool24"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1690,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "b3a04528-hvac-cool24",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-05",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 5,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-05",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-05.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1871,
+        "task_completion_time_ms": 1871,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-05",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-05.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1870,
+        "task_completion_time_ms": 1870,
+        "coordination_decision_latency_ms": 1770,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-05.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-05",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1770,
+            "decision": "accept",
+            "proposal_id": "HC-VAR-002-comfort-01"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1870,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "HC-VAR-002-comfort-01",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.2,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-06",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 6,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-06",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-06.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1475,
+        "task_completion_time_ms": 1475,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-06",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-06.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1475,
+        "task_completion_time_ms": 1475,
+        "coordination_decision_latency_ms": 1375,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-06.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-06",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1375,
+            "decision": "accept",
+            "proposal_id": "456a3e87-7322-4cd7-b1c4-e7a94144dbe1"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1381,
+            "decision": "reject",
+            "proposal_id": "energy-hvac-off-200",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1475,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "456a3e87-7322-4cd7-b1c4-e7a94144dbe1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.2,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-07",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 7,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-07",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-07.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1436,
+        "task_completion_time_ms": 1436,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-07",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-07.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1436,
+        "task_completion_time_ms": 1436,
+        "coordination_decision_latency_ms": 1336,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-07.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-07",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1336,
+            "decision": "accept",
+            "proposal_id": "0dfa1cf5-4a3b-4f94-aa37-deb0e738bb9a-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1436,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "0dfa1cf5-4a3b-4f94-aa37-deb0e738bb9a-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.2,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-08",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 8,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-08",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-08.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1422,
+        "task_completion_time_ms": 1422,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-08",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-08.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1422,
+        "task_completion_time_ms": 1422,
+        "coordination_decision_latency_ms": 1322,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-08.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-08",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1322,
+            "decision": "accept",
+            "proposal_id": "prop-comfort-001"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1422,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "prop-comfort-001",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-09",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 9,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-09",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-09.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1342,
+        "task_completion_time_ms": 1342,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-09",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-09.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1341,
+        "task_completion_time_ms": 1341,
+        "coordination_decision_latency_ms": 1241,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-09.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-09",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1241,
+            "decision": "accept",
+            "proposal_id": "comfort-cool-24-200"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1243,
+            "decision": "reject",
+            "proposal_id": "proposal-89f73fe1-energy-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1341,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-cool-24-200",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "living_room.temperature_c",
+                "op": "gt",
+                "value": 25
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-10",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 10,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-10",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-10.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1472,
+        "task_completion_time_ms": 1472,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-10",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-10.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1471,
+        "task_completion_time_ms": 1471,
+        "coordination_decision_latency_ms": 1210,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-10.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-10",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1210,
+            "decision": "reject",
+            "proposal_id": "prop-efd93e5b-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1371,
+            "decision": "accept",
+            "proposal_id": "comfort-cool-24-200"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1471,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-cool-24-200",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-11",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 11,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-11",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-11.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1251,
+        "task_completion_time_ms": 1251,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-11",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-11.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1250,
+        "task_completion_time_ms": 1250,
+        "coordination_decision_latency_ms": 1006,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-11.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-11",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1006,
+            "decision": "reject",
+            "proposal_id": "proposal-aed2a802-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1150,
+            "decision": "accept",
+            "proposal_id": "de80e929-67dc-42e5-8816-f4c2ead627a4-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1250,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "de80e929-67dc-42e5-8816-f4c2ead627a4-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-12",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 12,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-12",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-12.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1430,
+        "task_completion_time_ms": 1430,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-12",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-12.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1429,
+        "task_completion_time_ms": 1429,
+        "coordination_decision_latency_ms": 1329,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-12.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-12",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1329,
+            "decision": "accept",
+            "proposal_id": "a1f3c2d4-5e6b-4a7c-8d9e-0f1a2b3c4d5e"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1429,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "a1f3c2d4-5e6b-4a7c-8d9e-0f1a2b3c4d5e",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-13",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 13,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-13",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-13.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1329,
+        "task_completion_time_ms": 1329,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-13",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-13.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1328,
+        "task_completion_time_ms": 1328,
+        "coordination_decision_latency_ms": 1228,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-13.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-13",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1228,
+            "decision": "accept",
+            "proposal_id": "comfort-cool-24-200"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1328,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-cool-24-200",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-14",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 14,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-14",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-14.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1197,
+        "task_completion_time_ms": 1197,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-14",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-14.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1197,
+        "task_completion_time_ms": 1197,
+        "coordination_decision_latency_ms": 1097,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-14.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-14",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1097,
+            "decision": "accept",
+            "proposal_id": "prop-comfort-001"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1197,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "prop-comfort-001",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "devices.living_hvac",
+                "op": "neq",
+                "value": "forced_off"
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1244,
+            "decision": "reject",
+            "proposal_id": "energy-living_hvac-off-7985e071",
+            "reason": "priority_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-15",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 15,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-15",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-15.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1158,
+        "task_completion_time_ms": 1158,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-15",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-15.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1157,
+        "task_completion_time_ms": 1157,
+        "coordination_decision_latency_ms": 1057,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-15.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-15",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1057,
+            "decision": "accept",
+            "proposal_id": "prop-comfort-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1157,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "prop-comfort-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.2,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1159,
+            "decision": "reject",
+            "proposal_id": "7a1f0c2e-9b3d-4e6a-8f21-0c5d7e9a1b32",
+            "reason": "priority_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-16",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 16,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-16",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-16.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1635,
+        "task_completion_time_ms": 1635,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-16",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-16.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1635,
+        "task_completion_time_ms": 1635,
+        "coordination_decision_latency_ms": 1535,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-16.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-16",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1535,
+            "decision": "accept",
+            "proposal_id": "39a3fec4-6fec-49be-8ef2-fe7a00ae0474-prop"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1635,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "39a3fec4-6fec-49be-8ef2-fe7a00ae0474-prop",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-17",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 17,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-17",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-17.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1361,
+        "task_completion_time_ms": 1361,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-17",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-17.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1360,
+        "task_completion_time_ms": 1360,
+        "coordination_decision_latency_ms": 907,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-17.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-17",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 907,
+            "decision": "reject",
+            "proposal_id": "energy-turn-off-hvac-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1260,
+            "decision": "accept",
+            "proposal_id": "comfort-cool-24-001"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1360,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-cool-24-001",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-18",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 18,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-18",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-18.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1411,
+        "task_completion_time_ms": 1411,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-18",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-18.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1411,
+        "task_completion_time_ms": 1411,
+        "coordination_decision_latency_ms": 1195,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-18.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-18",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1195,
+            "decision": "reject",
+            "proposal_id": "energy-hvac-off-200",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1311,
+            "decision": "accept",
+            "proposal_id": "2d291287-f7d4-4c9a-9cad-f4286e38a377-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1411,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "2d291287-f7d4-4c9a-9cad-f4286e38a377-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-19",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 19,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-19",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-19.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1422,
+        "task_completion_time_ms": 1422,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-19",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-19.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1421,
+        "task_completion_time_ms": 1421,
+        "coordination_decision_latency_ms": 1321,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-19.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-19",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1321,
+            "decision": "accept",
+            "proposal_id": "db471831-1b42-4daa-988e-ad60e7d9b6d4-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1421,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "db471831-1b42-4daa-988e-ad60e7d9b6d4-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-policy_visible-0.rep-20",
+      "base_variant_id": "HC-VAR-002-policy_visible-0",
+      "repetition": 20,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-20",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-20.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1519,
+        "task_completion_time_ms": 1519,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-20",
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-20.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1519,
+        "task_completion_time_ms": 1519,
+        "coordination_decision_latency_ms": 1419,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-policy_visible-0.rep-20.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-policy_visible-0.rep-20",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1419,
+            "decision": "accept",
+            "proposal_id": "comfort-94fd7848"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1519,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-94fd7848",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-01",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 1,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-01",
+        "trace_id": "HC-VAR-002-local_only-0.rep-01.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1247,
+        "task_completion_time_ms": 1247,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-01",
+        "trace_id": "HC-VAR-002-local_only-0.rep-01.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1246,
+        "task_completion_time_ms": 1246,
+        "coordination_decision_latency_ms": 1146,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-01.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-01",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1146,
+            "decision": "accept",
+            "proposal_id": "comfort-1"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1149,
+            "decision": "reject",
+            "proposal_id": "f524ed76-4ef7-41ba-891c-dd3def6c73c2-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1246,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "living_room.temperature_c",
+                "op": "gt",
+                "value": 25
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-02",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 2,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-02",
+        "trace_id": "HC-VAR-002-local_only-0.rep-02.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1366,
+        "task_completion_time_ms": 1366,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-02",
+        "trace_id": "HC-VAR-002-local_only-0.rep-02.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1366,
+        "task_completion_time_ms": 1366,
+        "coordination_decision_latency_ms": 1118,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-02.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-02",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1118,
+            "decision": "reject",
+            "proposal_id": "84065a4e-hvac-off-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1266,
+            "decision": "accept",
+            "proposal_id": "0c9ab622-cool-24"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1366,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "0c9ab622-cool-24",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.2,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-03",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 3,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-03",
+        "trace_id": "HC-VAR-002-local_only-0.rep-03.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1133,
+        "task_completion_time_ms": 1133,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-03",
+        "trace_id": "HC-VAR-002-local_only-0.rep-03.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1133,
+        "task_completion_time_ms": 1133,
+        "coordination_decision_latency_ms": 992,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-03.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-03",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 992,
+            "decision": "reject",
+            "proposal_id": "p1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1033,
+            "decision": "accept",
+            "proposal_id": "p1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1133,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "p1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-04",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 4,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-04",
+        "trace_id": "HC-VAR-002-local_only-0.rep-04.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1593,
+        "task_completion_time_ms": 1593,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-04",
+        "trace_id": "HC-VAR-002-local_only-0.rep-04.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1592,
+        "task_completion_time_ms": 1592,
+        "coordination_decision_latency_ms": 798,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-04.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-04",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 798,
+            "decision": "reject",
+            "proposal_id": "energy-off-living-hvac-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1492,
+            "decision": "accept",
+            "proposal_id": "db6a3b42-7593-4cd6-817c-7508eb3359ba-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1592,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "db6a3b42-7593-4cd6-817c-7508eb3359ba-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-05",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 5,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-05",
+        "trace_id": "HC-VAR-002-local_only-0.rep-05.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1291,
+        "task_completion_time_ms": 1291,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-05",
+        "trace_id": "HC-VAR-002-local_only-0.rep-05.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1291,
+        "task_completion_time_ms": 1291,
+        "coordination_decision_latency_ms": 1191,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-05.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-05",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1191,
+            "decision": "accept",
+            "proposal_id": "comfort-411e16bb"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1291,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-411e16bb",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.2,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1391,
+            "decision": "reject",
+            "proposal_id": "36ca291a-65b5-45e1-9fd2-4dc6708a4bf5-p1",
+            "reason": "priority_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-06",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 6,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-06",
+        "trace_id": "HC-VAR-002-local_only-0.rep-06.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 3585,
+        "task_completion_time_ms": 3585,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-06",
+        "trace_id": "HC-VAR-002-local_only-0.rep-06.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 3584,
+        "task_completion_time_ms": 3584,
+        "coordination_decision_latency_ms": 2606,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-06.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-06",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 2606,
+            "decision": "reject",
+            "proposal_id": "a1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 3484,
+            "decision": "accept",
+            "proposal_id": "comfort-cool-24-001"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 3584,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-cool-24-001",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-07",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 7,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-07",
+        "trace_id": "HC-VAR-002-local_only-0.rep-07.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1463,
+        "task_completion_time_ms": 1463,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-07",
+        "trace_id": "HC-VAR-002-local_only-0.rep-07.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1462,
+        "task_completion_time_ms": 1462,
+        "coordination_decision_latency_ms": 1153,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-07.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-07",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1153,
+            "decision": "reject",
+            "proposal_id": "prop-ea186c93-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1362,
+            "decision": "accept",
+            "proposal_id": "d3849bb9-6742-49eb-a024-4e2b7c1b3ba1-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1462,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "d3849bb9-6742-49eb-a024-4e2b7c1b3ba1-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 900000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-08",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 8,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-08",
+        "trace_id": "HC-VAR-002-local_only-0.rep-08.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1469,
+        "task_completion_time_ms": 1469,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-08",
+        "trace_id": "HC-VAR-002-local_only-0.rep-08.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1469,
+        "task_completion_time_ms": 1469,
+        "coordination_decision_latency_ms": 933,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-08.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-08",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 933,
+            "decision": "reject",
+            "proposal_id": "p1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1369,
+            "decision": "accept",
+            "proposal_id": "fe5e59f7-cool-24"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1469,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "fe5e59f7-cool-24",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-09",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 9,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-09",
+        "trace_id": "HC-VAR-002-local_only-0.rep-09.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1057,
+        "task_completion_time_ms": 1057,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-09",
+        "trace_id": "HC-VAR-002-local_only-0.rep-09.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1057,
+        "task_completion_time_ms": 1057,
+        "coordination_decision_latency_ms": 957,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-09.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-09",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 957,
+            "decision": "accept",
+            "proposal_id": "comfort-40036349-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1057,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-40036349-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1116,
+            "decision": "reject",
+            "proposal_id": "501f2ca8-82e0-44de-842c-32025e6ab970-proposal",
+            "reason": "priority_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-10",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 10,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-10",
+        "trace_id": "HC-VAR-002-local_only-0.rep-10.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1091,
+        "task_completion_time_ms": 1091,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-10",
+        "trace_id": "HC-VAR-002-local_only-0.rep-10.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1090,
+        "task_completion_time_ms": 1090,
+        "coordination_decision_latency_ms": 990,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 1,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-10.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-10",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 990,
+            "decision": "accept",
+            "proposal_id": "proposal-comfort-001"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1090,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "proposal-comfort-001",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-11",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 11,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-11",
+        "trace_id": "HC-VAR-002-local_only-0.rep-11.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1280,
+        "task_completion_time_ms": 1280,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-11",
+        "trace_id": "HC-VAR-002-local_only-0.rep-11.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1279,
+        "task_completion_time_ms": 1279,
+        "coordination_decision_latency_ms": 1160,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-11.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-11",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1160,
+            "decision": "reject",
+            "proposal_id": "energy-hvac-off-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1179,
+            "decision": "accept",
+            "proposal_id": "71b7f78c-e8f2-4781-a3b1-f6a7199035c9-comfort-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1279,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "71b7f78c-e8f2-4781-a3b1-f6a7199035c9-comfort-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-12",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 12,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-12",
+        "trace_id": "HC-VAR-002-local_only-0.rep-12.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1237,
+        "task_completion_time_ms": 1237,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-12",
+        "trace_id": "HC-VAR-002-local_only-0.rep-12.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1236,
+        "task_completion_time_ms": 1236,
+        "coordination_decision_latency_ms": 1098,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-12.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-12",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1098,
+            "decision": "reject",
+            "proposal_id": "energy-hvac-off-1a86a66c",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1136,
+            "decision": "accept",
+            "proposal_id": "comfort-1d1f735b"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1236,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-1d1f735b",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-13",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 13,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-13",
+        "trace_id": "HC-VAR-002-local_only-0.rep-13.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1401,
+        "task_completion_time_ms": 1401,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-13",
+        "trace_id": "HC-VAR-002-local_only-0.rep-13.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1401,
+        "task_completion_time_ms": 1401,
+        "coordination_decision_latency_ms": 1280,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-13.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-13",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1280,
+            "decision": "reject",
+            "proposal_id": "2854c71a-331b-4417-9dee-d8184a36dfb6-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1301,
+            "decision": "accept",
+            "proposal_id": "a482768d-hvac-cool24"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1401,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "a482768d-hvac-cool24",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-14",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 14,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-14",
+        "trace_id": "HC-VAR-002-local_only-0.rep-14.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1383,
+        "task_completion_time_ms": 1383,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-14",
+        "trace_id": "HC-VAR-002-local_only-0.rep-14.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1383,
+        "task_completion_time_ms": 1383,
+        "coordination_decision_latency_ms": 1118,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-14.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-14",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1118,
+            "decision": "reject",
+            "proposal_id": "energy-hvac-off-001",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1283,
+            "decision": "accept",
+            "proposal_id": "comfort-set-cool24-200"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1383,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-set-cool24-200",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-15",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 15,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-15",
+        "trace_id": "HC-VAR-002-local_only-0.rep-15.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1535,
+        "task_completion_time_ms": 1535,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-15",
+        "trace_id": "HC-VAR-002-local_only-0.rep-15.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1535,
+        "task_completion_time_ms": 1535,
+        "coordination_decision_latency_ms": 1347,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-15.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-15",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1347,
+            "decision": "reject",
+            "proposal_id": "5ed0da6c-hvac-off-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1435,
+            "decision": "accept",
+            "proposal_id": "prop-hvac-cool24-001"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1535,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "prop-hvac-cool24-001",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-16",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 16,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-16",
+        "trace_id": "HC-VAR-002-local_only-0.rep-16.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1214,
+        "task_completion_time_ms": 1214,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-16",
+        "trace_id": "HC-VAR-002-local_only-0.rep-16.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1213,
+        "task_completion_time_ms": 1213,
+        "coordination_decision_latency_ms": 1113,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-16.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-16",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1113,
+            "decision": "accept",
+            "proposal_id": "HC-VAR-002-comfort-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1213,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "HC-VAR-002-comfort-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "devices.living_hvac",
+                "op": "neq",
+                "value": "forced_off"
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1329,
+            "decision": "reject",
+            "proposal_id": "energy-living_hvac-off-200",
+            "reason": "priority_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-17",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 17,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-17",
+        "trace_id": "HC-VAR-002-local_only-0.rep-17.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1128,
+        "task_completion_time_ms": 1128,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-17",
+        "trace_id": "HC-VAR-002-local_only-0.rep-17.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1127,
+        "task_completion_time_ms": 1127,
+        "coordination_decision_latency_ms": 1027,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-17.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-17",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1027,
+            "decision": "accept",
+            "proposal_id": "comfort-cool-24-8199b92f"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1127,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-cool-24-8199b92f",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1223,
+            "decision": "reject",
+            "proposal_id": "proposal-1aacf942",
+            "reason": "priority_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-18",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 18,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-18",
+        "trace_id": "HC-VAR-002-local_only-0.rep-18.IndependentMultiAgent.closed_loop",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1219,
+        "task_completion_time_ms": 1219,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-18",
+        "trace_id": "HC-VAR-002-local_only-0.rep-18.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1219,
+        "task_completion_time_ms": 1219,
+        "coordination_decision_latency_ms": 1119,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-18.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-18",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1119,
+            "decision": "accept",
+            "proposal_id": "comfort-860cbc88-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1219,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "comfort-860cbc88-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.2,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "living_room.temperature_c",
+                "op": "gt",
+                "value": 25
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1390,
+            "decision": "reject",
+            "proposal_id": "energy-living_hvac-off-001",
+            "reason": "priority_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-19",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 19,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-19",
+        "trace_id": "HC-VAR-002-local_only-0.rep-19.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1647,
+        "task_completion_time_ms": 1647,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-19",
+        "trace_id": "HC-VAR-002-local_only-0.rep-19.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1646,
+        "task_completion_time_ms": 1646,
+        "coordination_decision_latency_ms": 1300,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-19.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-19",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1300,
+            "decision": "reject",
+            "proposal_id": "66d170b4-6a16-4397-8f49-c83706ad025f-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1546,
+            "decision": "accept",
+            "proposal_id": "prop-comfort-001"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1646,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "prop-comfort-001",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-002-local_only-0.rep-20",
+      "base_variant_id": "HC-VAR-002-local_only-0",
+      "repetition": 20,
+      "source_independent": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-20",
+        "trace_id": "HC-VAR-002-local_only-0.rep-20.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 1,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1416,
+        "task_completion_time_ms": 1416,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "comfort": true,
+          "energy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-002-local_only-0.rep-20",
+        "trace_id": "HC-VAR-002-local_only-0.rep-20.RuleCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1416,
+        "task_completion_time_ms": 1416,
+        "coordination_decision_latency_ms": 1037,
+        "task_service": {
+          "comfort": true,
+          "energy": false
+        },
+        "served_task_count": 1,
+        "serviceable_task_count": 2,
+        "task_service_rate": 0.5,
+        "architecture": "RuleCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 1,
+        "rejected_action_count": 1,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-002-local_only-0.rep-20.RuleCoordinator.closed_loop",
+        "episode_id": "HC-VAR-002-local_only-0.rep-20",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1037,
+            "decision": "reject",
+            "proposal_id": "10ffb5d2-1884-4c19-87ce-cd45d2ba8d82-1",
+            "reason": "priority_resolution"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1316,
+            "decision": "accept",
+            "proposal_id": "prop-comfort-200-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1416,
+            "agent_id": "ComfortAgent",
+            "task_id": "comfort",
+            "proposal_id": "prop-comfort-200-1",
+            "target": "living_hvac",
+            "operation": "cool",
+            "duration_ms": 10000,
+            "power_kw": 1.4,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 200,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "living_room.temperature_c",
+                "op": "gt",
+                "value": 25
+              }
+            ],
+            "effects": {
+              "devices.living_hvac": "cool_24",
+              "living_room.temperature_c": 24
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

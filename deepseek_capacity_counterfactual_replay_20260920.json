@@ -1,0 +1,566 @@
+{
+  "status": "counterfactual replay on identical specialist decisions and logical call latencies",
+  "source_run": "homecoord_bench\\runs\\conflict-family-deepseek-20260920",
+  "family": "resource_capacity_conflict",
+  "source_architecture": "IndependentMultiAgent",
+  "target_architecture": "ConstraintCoordinator",
+  "pairs": 4,
+  "source_process_valid_successes": 3,
+  "counterfactual_process_valid_successes": 4,
+  "source_conflict_episodes": {
+    "C1": 0,
+    "C2": 0,
+    "C3": 1,
+    "C4": 0
+  },
+  "counterfactual_conflict_episodes": {
+    "C1": 0,
+    "C2": 0,
+    "C3": 0,
+    "C4": 0
+  },
+  "source_mean_task_service_rate": 1.0,
+  "counterfactual_mean_task_service_rate": 1.0,
+  "delta_first_action_ms": {
+    "p50": 0.0,
+    "p95": 0.0
+  },
+  "delta_completion_ms": {
+    "p50": 0.0,
+    "p95": 2546.599999999999
+  },
+  "source_conflicted_pairs_delta_completion_ms": {
+    "pairs": 1,
+    "p50": 2996,
+    "p95": 2996.0
+  },
+  "source_safe_pairs_delta_completion_ms": {
+    "pairs": 3,
+    "p50": 0,
+    "p95": 0.0
+  },
+  "results": [
+    {
+      "episode_id": "HC-VAR-001-cap-1p2",
+      "base_variant_id": "HC-VAR-001-cap-1p2",
+      "repetition": 1,
+      "source_independent": {
+        "episode_id": "HC-VAR-001-cap-1p2",
+        "trace_id": "HC-VAR-001-cap-1p2.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1190,
+        "task_completion_time_ms": 2267,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "light": true,
+          "climate": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-001-cap-1p2",
+        "trace_id": "HC-VAR-001-cap-1p2.ConstraintCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1190,
+        "task_completion_time_ms": 2266,
+        "coordination_decision_latency_ms": 1090,
+        "task_service": {
+          "light": true,
+          "climate": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "architecture": "ConstraintCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-001-cap-1p2.ConstraintCoordinator.closed_loop",
+        "episode_id": "HC-VAR-001-cap-1p2",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1090,
+            "decision": "accept",
+            "proposal_id": "p-light-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1190,
+            "agent_id": "LightingAgent",
+            "task_id": "light",
+            "proposal_id": "p-light-1",
+            "target": "study_light",
+            "operation": "set_reading",
+            "duration_ms": 1000,
+            "power_kw": 0.02,
+            "proposed_duration_ms": 2000,
+            "proposed_power_kw": 0.01,
+            "based_on_state_version": 100,
+            "requires": [
+              {
+                "path": "study.lux",
+                "op": "between",
+                "value": [
+                  0,
+                  400
+                ]
+              }
+            ],
+            "effects": {
+              "devices.study_light": "reading",
+              "study.lux": 500
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 2166,
+            "decision": "accept",
+            "proposal_id": "climate-cool-0508e082"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 2266,
+            "agent_id": "ClimateAgent",
+            "task_id": "climate",
+            "proposal_id": "climate-cool-0508e082",
+            "target": "bedroom_hvac",
+            "operation": "cool",
+            "duration_ms": 3000,
+            "power_kw": 1.2,
+            "proposed_duration_ms": 600000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 100,
+            "requires": [
+              {
+                "path": "bedroom.temperature_c",
+                "op": "gt",
+                "value": 25
+              }
+            ],
+            "effects": {
+              "devices.bedroom_hvac": "cool_25",
+              "bedroom.temperature_c": 25
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-001-cap-1p21",
+      "base_variant_id": "HC-VAR-001-cap-1p21",
+      "repetition": 1,
+      "source_independent": {
+        "episode_id": "HC-VAR-001-cap-1p21",
+        "trace_id": "HC-VAR-001-cap-1p21.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": false,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 1,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1097,
+        "task_completion_time_ms": 1100,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "light": true,
+          "climate": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-001-cap-1p21",
+        "trace_id": "HC-VAR-001-cap-1p21.ConstraintCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1096,
+        "task_completion_time_ms": 4096,
+        "coordination_decision_latency_ms": 996,
+        "task_service": {
+          "light": true,
+          "climate": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "architecture": "ConstraintCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 2996,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-001-cap-1p21.ConstraintCoordinator.closed_loop",
+        "episode_id": "HC-VAR-001-cap-1p21",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 996,
+            "decision": "accept",
+            "proposal_id": "climate-001"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1000,
+            "decision": "accept",
+            "proposal_id": "light-796c0b1b",
+            "reason": "resource_capacity_conflict",
+            "defer_until_ms": 4096
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1096,
+            "agent_id": "ClimateAgent",
+            "task_id": "climate",
+            "proposal_id": "climate-001",
+            "target": "bedroom_hvac",
+            "operation": "cool",
+            "duration_ms": 3000,
+            "power_kw": 1.2,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 100,
+            "requires": [
+              {
+                "path": "bedroom.temperature_c",
+                "op": "gt",
+                "value": 25
+              }
+            ],
+            "effects": {
+              "devices.bedroom_hvac": "cool_25",
+              "bedroom.temperature_c": 25
+            }
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 4096,
+            "agent_id": "LightingAgent",
+            "task_id": "light",
+            "proposal_id": "light-796c0b1b",
+            "target": "study_light",
+            "operation": "set_reading",
+            "duration_ms": 1000,
+            "power_kw": 0.02,
+            "proposed_duration_ms": 1000,
+            "proposed_power_kw": 0.01,
+            "based_on_state_version": 100,
+            "requires": [
+              {
+                "path": "study.lux",
+                "op": "lt",
+                "value": 400
+              }
+            ],
+            "effects": {
+              "devices.study_light": "reading",
+              "study.lux": 500
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-001-cap-1p23",
+      "base_variant_id": "HC-VAR-001-cap-1p23",
+      "repetition": 1,
+      "source_independent": {
+        "episode_id": "HC-VAR-001-cap-1p23",
+        "trace_id": "HC-VAR-001-cap-1p23.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1318,
+        "task_completion_time_ms": 1532,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "light": true,
+          "climate": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-001-cap-1p23",
+        "trace_id": "HC-VAR-001-cap-1p23.ConstraintCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1317,
+        "task_completion_time_ms": 1531,
+        "coordination_decision_latency_ms": 1217,
+        "task_service": {
+          "light": true,
+          "climate": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "architecture": "ConstraintCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-001-cap-1p23.ConstraintCoordinator.closed_loop",
+        "episode_id": "HC-VAR-001-cap-1p23",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1217,
+            "decision": "accept",
+            "proposal_id": "light-31d45e86-1"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1317,
+            "agent_id": "LightingAgent",
+            "task_id": "light",
+            "proposal_id": "light-31d45e86-1",
+            "target": "study_light",
+            "operation": "set_reading",
+            "duration_ms": 1000,
+            "power_kw": 0.02,
+            "proposed_duration_ms": 500,
+            "proposed_power_kw": 0.01,
+            "based_on_state_version": 100,
+            "requires": [
+              {
+                "path": "study.lux",
+                "op": "lt",
+                "value": 400
+              }
+            ],
+            "effects": {
+              "devices.study_light": "reading",
+              "study.lux": 500
+            }
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1431,
+            "decision": "accept",
+            "proposal_id": "6ff35885-ff17-4838-ac8d-4e0ba49dc9ad"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1531,
+            "agent_id": "ClimateAgent",
+            "task_id": "climate",
+            "proposal_id": "6ff35885-ff17-4838-ac8d-4e0ba49dc9ad",
+            "target": "bedroom_hvac",
+            "operation": "cool",
+            "duration_ms": 3000,
+            "power_kw": 1.2,
+            "proposed_duration_ms": null,
+            "proposed_power_kw": null,
+            "based_on_state_version": 100,
+            "requires": [
+              {
+                "path": "bedroom.temperature_c",
+                "op": "gt",
+                "value": 25
+              },
+              {
+                "path": "devices.bedroom_hvac",
+                "op": "eq",
+                "value": "off"
+              }
+            ],
+            "effects": {
+              "devices.bedroom_hvac": "cool_25",
+              "bedroom.temperature_c": 25
+            }
+          }
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-VAR-001-cap-8p0",
+      "base_variant_id": "HC-VAR-001-cap-8p0",
+      "repetition": 1,
+      "source_independent": {
+        "episode_id": "HC-VAR-001-cap-8p0",
+        "trace_id": "HC-VAR-001-cap-8p0.IndependentMultiAgent.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1251,
+        "task_completion_time_ms": 1334,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "light": true,
+          "climate": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0
+      },
+      "counterfactual": {
+        "episode_id": "HC-VAR-001-cap-8p0",
+        "trace_id": "HC-VAR-001-cap-8p0.ConstraintCoordinator.closed_loop",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 1251,
+        "task_completion_time_ms": 1333,
+        "coordination_decision_latency_ms": 1151,
+        "task_service": {
+          "light": true,
+          "climate": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "architecture": "ConstraintCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "synthetic_latency": false
+      },
+      "delta_first_action_ms": 0,
+      "delta_completion_ms": 0,
+      "counterfactual_trace": {
+        "trace_id": "HC-VAR-001-cap-8p0.ConstraintCoordinator.closed_loop",
+        "episode_id": "HC-VAR-001-cap-8p0",
+        "events": [
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1151,
+            "decision": "accept",
+            "proposal_id": "prop-2436544b-1"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1233,
+            "decision": "accept",
+            "proposal_id": "prop-climate-001"
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1251,
+            "agent_id": "LightingAgent",
+            "task_id": "light",
+            "proposal_id": "prop-2436544b-1",
+            "target": "study_light",
+            "operation": "set_reading",
+            "duration_ms": 1000,
+            "power_kw": 0.02,
+            "proposed_duration_ms": 1000,
+            "proposed_power_kw": 0.01,
+            "based_on_state_version": 100,
+            "requires": [
+              {
+                "path": "study.lux",
+                "op": "lt",
+                "value": 400
+              }
+            ],
+            "effects": {
+              "devices.study_light": "reading",
+              "study.lux": 500
+            }
+          },
+          {
+            "type": "action_effective",
+            "timestamp_ms": 1333,
+            "agent_id": "ClimateAgent",
+            "task_id": "climate",
+            "proposal_id": "prop-climate-001",
+            "target": "bedroom_hvac",
+            "operation": "cool",
+            "duration_ms": 3000,
+            "power_kw": 1.2,
+            "proposed_duration_ms": 1800000,
+            "proposed_power_kw": 1.5,
+            "based_on_state_version": 100,
+            "requires": [
+              {
+                "path": "bedroom.temperature_c",
+                "op": "gt",
+                "value": 25
+              }
+            ],
+            "effects": {
+              "devices.bedroom_hvac": "cool_25",
+              "bedroom.temperature_c": 25
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "episode_id": "HC-SEED-001",
+  "task_family": "parallel_safe",
+  "source_type": "project_seed",
+  "generator_version": "0.2.0",
+  "review_status": "single_review",
+  "episode_release_at_ms": 0,
+  "home": {"resources": {"max_power_kw": 8.0}},
+  "initial_state": {"version": 100, "values": {"study": {"lux": 80}, "bedroom": {"temperature_c": 28}, "devices": {"study_light": "off", "bedroom_hvac": "off"}}},
+  "agents": [
+    {"agent_id": "LightingAgent", "role": "lighting", "tools": ["set_light"], "observable_state": ["study.lux"], "writable_resources": ["devices.study_light"]},
+    {"agent_id": "ClimateAgent", "role": "climate", "tools": ["set_hvac"], "observable_state": ["bedroom.temperature_c"], "writable_resources": ["devices.bedroom_hvac"]}
+  ],
+  "task_stream": [
+    {"task_id": "light", "agent_id": "LightingAgent", "release_at_ms": 0, "goal": "study reading light", "required_action": {"target": "study_light", "operation": "set_reading"}},
+    {"task_id": "climate", "agent_id": "ClimateAgent", "release_at_ms": 200, "goal": "bedroom 25 C", "required_action": {"target": "bedroom_hvac", "operation": "cool"}}
+  ],
+  "exogenous_events": [],
+  "latency_profile": {"unit": "ms"},
+  "goals": [
+    {"path": "study.lux", "op": "between", "value": [400, 600]},
+    {"path": "bedroom.temperature_c", "op": "between", "value": [24, 26]}
+  ],
+  "constraints": [],
+  "conflict_rules": [{"type": "C3", "capacity": 8.0}]
+}
