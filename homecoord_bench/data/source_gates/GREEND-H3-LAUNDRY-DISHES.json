@@ -1,0 +1,47 @@
+{
+  "schema_version": "homecoord-candidate-source-gate-0.1",
+  "candidate_id": "GREEND-H3-LAUNDRY-DISHES",
+  "status": "source_gate_only_not_executable",
+  "source_house": "GREEND house #3",
+  "observed_device_types": ["washing_machine", "dryer", "dishwasher"],
+  "observed_device_types_source": "https://arxiv.org/html/1405.3100v2#S3.T2",
+  "raw_trace_verified": false,
+  "raw_trace_file": null,
+  "alternative_sources_checked": [
+    {
+      "source": "Kaggle GREEND ENergy Dataset",
+      "url": "https://www.kaggle.com/datasets/p111110/greend-energy-dataset",
+      "observed_listing": "one 6.09 MB CSV; license shown as Unknown; description says 8 households whereas the paper enumerates house #0 through #8",
+      "accepted_as_data_source": false,
+      "reason": "incomplete provenance and licensing; no verified mapping to house #3"
+    },
+    {
+      "source": "UK-DALE house 1",
+      "url": "https://github.com/JackKelly/UK-DALE_metadata/blob/master/building1.yaml",
+      "observed_listing": "CC BY 4.0 dataset; house 1 records a washer-dryer on one meter and a dishwasher on another",
+      "accepted_as_data_source": false,
+      "reason": "does not provide independent washer and dryer needed by this candidate"
+    }
+  ],
+  "device_power_profiles": null,
+  "device_start_distribution": null,
+  "agent_control_capability_verified": false,
+  "workload": {
+    "agents": ["laundry_agent", "drying_agent", "dishes_agent"],
+    "researcher_defined_dependency": ["washing_complete_before_drying_start"],
+    "task_release_times": null,
+    "service_durations": null,
+    "hard_deadlines": null,
+    "managed_capacity_budgets": null
+  },
+  "pair_contract": {
+    "planned_only_varying_factor": "managed_capacity_budget",
+    "must_hold_constant": [
+      "device_set", "task_content", "release_times", "deadlines",
+      "model_proposals", "proposal_return_order", "initial_state"
+    ],
+    "feasibility_audited": false,
+    "pre_release_information_audited": false
+  },
+  "evidence_limit": "E1 supports co-monitored device types only; no measured arrivals, deadlines, agent actions, control API or causal coordination effect."
+}

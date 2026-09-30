@@ -1,0 +1,1828 @@
+{
+  "schema_version": "homecoord-public-real-trace-pilot-0.1",
+  "purpose": "A small measured-state trace for provenance and simulator-context calibration; not a benchmark episode or Agent trajectory.",
+  "source": {
+    "paper_title": "Dataset on occupant behavior, indoor environment, and energy use before and after dormitory retrofit",
+    "paper_citation": "Pandey, P.R., Liu, Y., Wilson, N. et al. Scientific Data 12, 798 (2025).",
+    "paper_doi": "10.1038/s41597-025-05166-7",
+    "dataset_title": "A Two-Year Comprehensive Dataset on Occupant Behavior, Indoor Environmental Quality, and Energy Use Before and After Dormitory Retrofits",
+    "dataset_attribution": "Pratik Pandey, Nina Wilson, and Bing Dong; Figshare dataset posted 2024-10-07",
+    "dataset_doi": "10.6084/m9.figshare.27155988",
+    "figshare_url": "https://figshare.com/articles/dataset/A_Two-Year_Comprehensive_Dataset_on_Occupant_Behavior_Indoor_Environmental_Quality_and_Energy_Use_Before_and_After_Dormitory_Retrofits/27155988",
+    "download_url": "https://ndownloader.figshare.com/files/49643052",
+    "file_id": "49643052",
+    "file_name": "All_Files_Combined_341_1.csv",
+    "local_scan_file_name": "homecoord_figshare_49643052.csv",
+    "folder": "Before_Retro_Path_Folder",
+    "unit_scope": "one anonymized pre-retrofit dorm unit; the paper says each dorm has a separate file",
+    "license": "CC BY 4.0; attribution required",
+    "retrieved_on": "2026-09-28",
+    "raw_file_size_bytes": 148106757,
+    "raw_file_sha256": "99b3f9496e9f37582a8d244bca34de1f4748d83a9e144432313e10055f0d056e"
+  },
+  "measurement_semantics": {
+    "standardized_csv_resolution": "one minute",
+    "fenestration": "underlying contact sensors log state changes at second resolution; standardized CSV marks a minute open if it was open at any time during that minute",
+    "indoor_environment": "originally five-minute sensor samples, linearly interpolated to one minute",
+    "power": "originally recorded at one-minute intervals"
+  },
+  "representative_event_selection_rule": {
+    "state_change": "Window_1_1 transitions from 0 to 1 after all 15 preceding minute bins were closed",
+    "heating_context": "baseboard power exceeds 0.1 kW in at least 4 of the previous 5 observed bins and in the event bin; this threshold only excludes near-zero meter noise",
+    "weather_context": "outdoor temperature is below the preceding 5-minute mean indoor temperature",
+    "aperture_context": "Door_1_1 is closed and no other observed window/door state changes in the 30-minute trace; missing Door_2_2 readings remain an explicit limitation",
+    "tie_break": "among qualifying events, sort by highest pre-event 5-minute mean CO2, then absolute pre/post 5-minute mean CO2 difference"
+  },
+  "scan_summary": {
+    "rows_with_parseable_timestamp": 455397,
+    "first_timestamp": "2021-08-02T14:17",
+    "last_timestamp": "2022-06-14T21:13",
+    "interval_seconds_counts": {
+      "60": 455395,
+      "3660": 1
+    },
+    "state_transition_counts": {
+      "Door_1_1": 6752,
+      "Window_2_2": 16,
+      "Door_2_2": 531,
+      "Door_2_1": 2975,
+      "Door_2_3": 2469,
+      "Window_2_1": 20,
+      "Window_1_1": 264
+    },
+    "joint_state_minute_counts": {
+      "any_window_open": 77518,
+      "window_open_and_baseboard_power_over_0_1kw": 1127,
+      "open_window_heat_co2_temp_all_observed": 1127
+    },
+    "missing_value_counts_for_available_context_columns": {
+      "Liv_Rm_amp_Kitchen_Heat_KW": 33649,
+      "Door_2_2": 338872,
+      "Outdoor_Temp_C": 21499,
+      "Window_1_1": 64985,
+      "Window_2_1": 64985,
+      "Window_2_2": 64988,
+      "Door_1_1": 20353,
+      "Door_2_1": 20353,
+      "Door_2_3": 20409
+    },
+    "missing_value_percentages_over_csv_rows": {
+      "Liv_Rm_amp_Kitchen_Heat_KW": 7.389,
+      "Door_2_2": 74.412,
+      "Outdoor_Temp_C": 4.721,
+      "Window_1_1": 14.27,
+      "Window_2_1": 14.27,
+      "Window_2_2": 14.271,
+      "Door_1_1": 4.469,
+      "Door_2_1": 4.469,
+      "Door_2_3": 4.482
+    },
+    "state_columns": [
+      "Window_1_1",
+      "Window_2_1",
+      "Window_2_2",
+      "Door_1_1",
+      "Door_2_1",
+      "Door_2_2",
+      "Door_2_3"
+    ],
+    "baseboard_power_column": "Liv_Rm_amp_Kitchen_Heat_KW",
+    "window_events_with_15min_context_and_CO2": 300,
+    "relevant_window_open_with_heating_candidates": 4
+  },
+  "selected_event_windows": [
+    {
+      "event": {
+        "event_timestamp_minute_bin": "2022-02-14T06:32",
+        "state_field": "Window_1_1",
+        "state_transition": {
+          "from": 0,
+          "to": 1
+        },
+        "pre_event_5min_mean_co2_ppm": 1626.674,
+        "post_event_5min_mean_co2_ppm": 1614.174,
+        "pre_event_5min_mean_indoor_temp_c": 21.656,
+        "post_event_5min_mean_indoor_temp_c": 21.822,
+        "pre_event_5min_mean_baseboard_power_kw": 2.298,
+        "post_event_5min_mean_baseboard_power_kw": 2.31,
+        "pre_event_5min_active_heater_samples_over_0_1kw": 5,
+        "baseboard_power_kw_at_event_minute": 2.30475,
+        "outdoor_temp_c_at_event_minute": -12.49115079,
+        "state_at_event_minute": {
+          "Window_1_1": 1,
+          "Window_2_1": 0,
+          "Window_2_2": 0,
+          "Door_1_1": 0,
+          "Door_2_1": 0,
+          "Door_2_2": null,
+          "Door_2_3": 1
+        },
+        "other_window_door_transitions_in_30min_context": 0,
+        "target_window_closed_for_all_15_pre_event_minutes": true,
+        "context_rows_before": 15,
+        "context_rows_after_including_event_minute": 15
+      },
+      "samples": [
+        {
+          "minutes_from_transition": -15,
+          "timestamp": "2022-02-14T06:17",
+          "co2_ppm": 1662.07367,
+          "indoor_temp_c": 21.40555556,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.62180556,
+          "living_room_baseboard_power_kw": 2.295233333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -14,
+          "timestamp": "2022-02-14T06:18",
+          "co2_ppm": 1658.97367,
+          "indoor_temp_c": 21.42222222,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.61309524,
+          "living_room_baseboard_power_kw": 2.291983333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -13,
+          "timestamp": "2022-02-14T06:19",
+          "co2_ppm": 1655.87367,
+          "indoor_temp_c": 21.43888889,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.60438492,
+          "living_room_baseboard_power_kw": 2.291983333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -12,
+          "timestamp": "2022-02-14T06:20",
+          "co2_ppm": 1652.77367,
+          "indoor_temp_c": 21.45555556,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.5956746,
+          "living_room_baseboard_power_kw": 2.2882,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -11,
+          "timestamp": "2022-02-14T06:21",
+          "co2_ppm": 1649.67367,
+          "indoor_temp_c": 21.47222222,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.58696429,
+          "living_room_baseboard_power_kw": 2.282666667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -10,
+          "timestamp": "2022-02-14T06:22",
+          "co2_ppm": 1646.57367,
+          "indoor_temp_c": 21.48888889,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.57825397,
+          "living_room_baseboard_power_kw": 2.290166667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -9,
+          "timestamp": "2022-02-14T06:23",
+          "co2_ppm": 1643.47367,
+          "indoor_temp_c": 21.50555556,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.56954365,
+          "living_room_baseboard_power_kw": 2.288816667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -8,
+          "timestamp": "2022-02-14T06:24",
+          "co2_ppm": 1640.37367,
+          "indoor_temp_c": 21.52222222,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.56083333,
+          "living_room_baseboard_power_kw": 2.2868,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -7,
+          "timestamp": "2022-02-14T06:25",
+          "co2_ppm": 1637.27367,
+          "indoor_temp_c": 21.53888889,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.55212302,
+          "living_room_baseboard_power_kw": 2.284983333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -6,
+          "timestamp": "2022-02-14T06:26",
+          "co2_ppm": 1634.17367,
+          "indoor_temp_c": 21.55555556,
+          "rh_percent": 30.0,
+          "outdoor_temp_c": -12.5434127,
+          "living_room_baseboard_power_kw": 2.289266667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -5,
+          "timestamp": "2022-02-14T06:27",
+          "co2_ppm": 1631.67367,
+          "indoor_temp_c": 21.58888889,
+          "rh_percent": 29.9,
+          "outdoor_temp_c": -12.53470238,
+          "living_room_baseboard_power_kw": 2.290166667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -4,
+          "timestamp": "2022-02-14T06:28",
+          "co2_ppm": 1629.17367,
+          "indoor_temp_c": 21.62222222,
+          "rh_percent": 29.8,
+          "outdoor_temp_c": -12.52599206,
+          "living_room_baseboard_power_kw": 2.294716667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -3,
+          "timestamp": "2022-02-14T06:29",
+          "co2_ppm": 1626.67367,
+          "indoor_temp_c": 21.65555556,
+          "rh_percent": 29.7,
+          "outdoor_temp_c": -12.51728175,
+          "living_room_baseboard_power_kw": 2.29975,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -2,
+          "timestamp": "2022-02-14T06:30",
+          "co2_ppm": 1624.17367,
+          "indoor_temp_c": 21.68888889,
+          "rh_percent": 29.6,
+          "outdoor_temp_c": -12.50857143,
+          "living_room_baseboard_power_kw": 2.30505,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -1,
+          "timestamp": "2022-02-14T06:31",
+          "co2_ppm": 1621.67367,
+          "indoor_temp_c": 21.72222222,
+          "rh_percent": 29.5,
+          "outdoor_temp_c": -12.49986111,
+          "living_room_baseboard_power_kw": 2.300933333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 0,
+          "timestamp": "2022-02-14T06:32",
+          "co2_ppm": 1619.17367,
+          "indoor_temp_c": 21.75555556,
+          "rh_percent": 29.4,
+          "outdoor_temp_c": -12.49115079,
+          "living_room_baseboard_power_kw": 2.30475,
+          "window_door_states": {
+            "Window_1_1": 1,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 1,
+          "timestamp": "2022-02-14T06:33",
+          "co2_ppm": 1616.67367,
+          "indoor_temp_c": 21.78888889,
+          "rh_percent": 29.3,
+          "outdoor_temp_c": -12.48244048,
+          "living_room_baseboard_power_kw": 2.3067,
+          "window_door_states": {
+            "Window_1_1": 1,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 2,
+          "timestamp": "2022-02-14T06:34",
+          "co2_ppm": 1614.17367,
+          "indoor_temp_c": 21.82222222,
+          "rh_percent": 29.2,
+          "outdoor_temp_c": -12.47373016,
+          "living_room_baseboard_power_kw": 2.309583333,
+          "window_door_states": {
+            "Window_1_1": 1,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 3,
+          "timestamp": "2022-02-14T06:35",
+          "co2_ppm": 1611.67367,
+          "indoor_temp_c": 21.85555556,
+          "rh_percent": 29.1,
+          "outdoor_temp_c": -12.46501984,
+          "living_room_baseboard_power_kw": 2.31035,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 4,
+          "timestamp": "2022-02-14T06:36",
+          "co2_ppm": 1609.17367,
+          "indoor_temp_c": 21.88888889,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.45630952,
+          "living_room_baseboard_power_kw": 2.32055,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 5,
+          "timestamp": "2022-02-14T06:37",
+          "co2_ppm": 1605.17367,
+          "indoor_temp_c": 21.85555556,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.44759921,
+          "living_room_baseboard_power_kw": 2.321816667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 6,
+          "timestamp": "2022-02-14T06:38",
+          "co2_ppm": 1601.17367,
+          "indoor_temp_c": 21.82222222,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.43888889,
+          "living_room_baseboard_power_kw": 2.318316667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 7,
+          "timestamp": "2022-02-14T06:39",
+          "co2_ppm": 1597.17367,
+          "indoor_temp_c": 21.78888889,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.43017857,
+          "living_room_baseboard_power_kw": 2.317816667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 8,
+          "timestamp": "2022-02-14T06:40",
+          "co2_ppm": 1593.17367,
+          "indoor_temp_c": 21.75555556,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.42146825,
+          "living_room_baseboard_power_kw": 2.3159,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 9,
+          "timestamp": "2022-02-14T06:41",
+          "co2_ppm": 1589.17367,
+          "indoor_temp_c": 21.72222222,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.41275794,
+          "living_room_baseboard_power_kw": 2.3139,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 10,
+          "timestamp": "2022-02-14T06:42",
+          "co2_ppm": 1585.17367,
+          "indoor_temp_c": 21.68888889,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.40404762,
+          "living_room_baseboard_power_kw": 2.311483333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 11,
+          "timestamp": "2022-02-14T06:43",
+          "co2_ppm": 1581.17367,
+          "indoor_temp_c": 21.65555556,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.3953373,
+          "living_room_baseboard_power_kw": 2.30785,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 12,
+          "timestamp": "2022-02-14T06:44",
+          "co2_ppm": 1577.17367,
+          "indoor_temp_c": 21.62222222,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.38662698,
+          "living_room_baseboard_power_kw": 2.305533333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 13,
+          "timestamp": "2022-02-14T06:45",
+          "co2_ppm": 1573.17367,
+          "indoor_temp_c": 21.58888889,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.37791667,
+          "living_room_baseboard_power_kw": 2.29815,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 14,
+          "timestamp": "2022-02-14T06:46",
+          "co2_ppm": 1569.17367,
+          "indoor_temp_c": 21.55555556,
+          "rh_percent": 29.0,
+          "outdoor_temp_c": -12.36920635,
+          "living_room_baseboard_power_kw": 2.293716667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        }
+      ],
+      "interpretation": "Observed door/window-state and sensor co-trajectory only. The state change was not randomized, no Agent command was recorded, and this association is not a causal action effect."
+    },
+    {
+      "event": {
+        "event_timestamp_minute_bin": "2022-01-26T16:35",
+        "state_field": "Window_1_1",
+        "state_transition": {
+          "from": 0,
+          "to": 1
+        },
+        "pre_event_5min_mean_co2_ppm": 737.774,
+        "post_event_5min_mean_co2_ppm": 743.394,
+        "pre_event_5min_mean_indoor_temp_c": 22.144,
+        "post_event_5min_mean_indoor_temp_c": 21.954,
+        "pre_event_5min_mean_baseboard_power_kw": 2.333,
+        "post_event_5min_mean_baseboard_power_kw": 2.329,
+        "pre_event_5min_active_heater_samples_over_0_1kw": 5,
+        "baseboard_power_kw_at_event_minute": 2.326233333,
+        "outdoor_temp_c_at_event_minute": -8.880166667,
+        "state_at_event_minute": {
+          "Window_1_1": 1,
+          "Window_2_1": 0,
+          "Window_2_2": 0,
+          "Door_1_1": 0,
+          "Door_2_1": 0,
+          "Door_2_2": null,
+          "Door_2_3": 1
+        },
+        "other_window_door_transitions_in_30min_context": 0,
+        "target_window_closed_for_all_15_pre_event_minutes": true,
+        "context_rows_before": 15,
+        "context_rows_after_including_event_minute": 15
+      },
+      "samples": [
+        {
+          "minutes_from_transition": -15,
+          "timestamp": "2022-01-26T16:20",
+          "co2_ppm": 740.1736704,
+          "indoor_temp_c": 22.41111111,
+          "rh_percent": 18.4,
+          "outdoor_temp_c": -8.477666667,
+          "living_room_baseboard_power_kw": 2.337566667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -14,
+          "timestamp": "2022-01-26T16:21",
+          "co2_ppm": 738.6736704,
+          "indoor_temp_c": 22.41666667,
+          "rh_percent": 18.5,
+          "outdoor_temp_c": -8.5045,
+          "living_room_baseboard_power_kw": 2.334383333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -13,
+          "timestamp": "2022-01-26T16:22",
+          "co2_ppm": 737.1736704,
+          "indoor_temp_c": 22.42222222,
+          "rh_percent": 18.6,
+          "outdoor_temp_c": -8.531333333,
+          "living_room_baseboard_power_kw": 2.3257,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -12,
+          "timestamp": "2022-01-26T16:23",
+          "co2_ppm": 735.6736704,
+          "indoor_temp_c": 22.42777778,
+          "rh_percent": 18.7,
+          "outdoor_temp_c": -8.558166667,
+          "living_room_baseboard_power_kw": 2.321433333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -11,
+          "timestamp": "2022-01-26T16:24",
+          "co2_ppm": 734.1736704,
+          "indoor_temp_c": 22.43333333,
+          "rh_percent": 18.8,
+          "outdoor_temp_c": -8.585,
+          "living_room_baseboard_power_kw": 2.31985,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -10,
+          "timestamp": "2022-01-26T16:25",
+          "co2_ppm": 732.6736704,
+          "indoor_temp_c": 22.43888889,
+          "rh_percent": 18.9,
+          "outdoor_temp_c": -8.611833333,
+          "living_room_baseboard_power_kw": 2.3181,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -9,
+          "timestamp": "2022-01-26T16:26",
+          "co2_ppm": 731.1736704,
+          "indoor_temp_c": 22.44444444,
+          "rh_percent": 19.0,
+          "outdoor_temp_c": -8.638666667,
+          "living_room_baseboard_power_kw": 2.32135,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -8,
+          "timestamp": "2022-01-26T16:27",
+          "co2_ppm": 732.2736704,
+          "indoor_temp_c": 22.39444444,
+          "rh_percent": 19.05,
+          "outdoor_temp_c": -8.6655,
+          "living_room_baseboard_power_kw": 2.321733333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -7,
+          "timestamp": "2022-01-26T16:28",
+          "co2_ppm": 733.3736704,
+          "indoor_temp_c": 22.34444444,
+          "rh_percent": 19.1,
+          "outdoor_temp_c": -8.692333333,
+          "living_room_baseboard_power_kw": 1.352833333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -6,
+          "timestamp": "2022-01-26T16:29",
+          "co2_ppm": 734.4736704,
+          "indoor_temp_c": 22.29444444,
+          "rh_percent": 19.15,
+          "outdoor_temp_c": -8.719166667,
+          "living_room_baseboard_power_kw": 1.65475,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -5,
+          "timestamp": "2022-01-26T16:30",
+          "co2_ppm": 735.5736704,
+          "indoor_temp_c": 22.24444444,
+          "rh_percent": 19.2,
+          "outdoor_temp_c": -8.746,
+          "living_room_baseboard_power_kw": 2.338,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -4,
+          "timestamp": "2022-01-26T16:31",
+          "co2_ppm": 736.6736704,
+          "indoor_temp_c": 22.19444444,
+          "rh_percent": 19.25,
+          "outdoor_temp_c": -8.772833333,
+          "living_room_baseboard_power_kw": 2.33635,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -3,
+          "timestamp": "2022-01-26T16:32",
+          "co2_ppm": 737.7736704,
+          "indoor_temp_c": 22.14444444,
+          "rh_percent": 19.3,
+          "outdoor_temp_c": -8.799666667,
+          "living_room_baseboard_power_kw": 2.333733333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -2,
+          "timestamp": "2022-01-26T16:33",
+          "co2_ppm": 738.8736704,
+          "indoor_temp_c": 22.09444444,
+          "rh_percent": 19.35,
+          "outdoor_temp_c": -8.8265,
+          "living_room_baseboard_power_kw": 2.329566667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -1,
+          "timestamp": "2022-01-26T16:34",
+          "co2_ppm": 739.9736704,
+          "indoor_temp_c": 22.04444444,
+          "rh_percent": 19.4,
+          "outdoor_temp_c": -8.853333333,
+          "living_room_baseboard_power_kw": 2.327666667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 0,
+          "timestamp": "2022-01-26T16:35",
+          "co2_ppm": 741.0736704,
+          "indoor_temp_c": 21.99444444,
+          "rh_percent": 19.45,
+          "outdoor_temp_c": -8.880166667,
+          "living_room_baseboard_power_kw": 2.326233333,
+          "window_door_states": {
+            "Window_1_1": 1,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 1,
+          "timestamp": "2022-01-26T16:36",
+          "co2_ppm": 742.1736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.5,
+          "outdoor_temp_c": -8.907,
+          "living_room_baseboard_power_kw": 2.328333333,
+          "window_door_states": {
+            "Window_1_1": 1,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 2,
+          "timestamp": "2022-01-26T16:37",
+          "co2_ppm": 743.3736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.55,
+          "outdoor_temp_c": -8.933833333,
+          "living_room_baseboard_power_kw": 2.3286,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 3,
+          "timestamp": "2022-01-26T16:38",
+          "co2_ppm": 744.5736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.6,
+          "outdoor_temp_c": -8.960666667,
+          "living_room_baseboard_power_kw": 2.331583333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 4,
+          "timestamp": "2022-01-26T16:39",
+          "co2_ppm": 745.7736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.65,
+          "outdoor_temp_c": -8.9875,
+          "living_room_baseboard_power_kw": 2.3314,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 5,
+          "timestamp": "2022-01-26T16:40",
+          "co2_ppm": 746.9736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.7,
+          "outdoor_temp_c": -9.014333333,
+          "living_room_baseboard_power_kw": 2.33035,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 6,
+          "timestamp": "2022-01-26T16:41",
+          "co2_ppm": 748.1736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.75,
+          "outdoor_temp_c": -9.041166667,
+          "living_room_baseboard_power_kw": 2.3292,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 7,
+          "timestamp": "2022-01-26T16:42",
+          "co2_ppm": 749.3736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.8,
+          "outdoor_temp_c": -9.068,
+          "living_room_baseboard_power_kw": 2.32345,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 8,
+          "timestamp": "2022-01-26T16:43",
+          "co2_ppm": 750.5736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.85,
+          "outdoor_temp_c": -9.094833333,
+          "living_room_baseboard_power_kw": 2.31905,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 9,
+          "timestamp": "2022-01-26T16:44",
+          "co2_ppm": 751.7736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.9,
+          "outdoor_temp_c": -9.121666667,
+          "living_room_baseboard_power_kw": 2.116633333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 10,
+          "timestamp": "2022-01-26T16:45",
+          "co2_ppm": 752.9736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 19.95,
+          "outdoor_temp_c": -9.1485,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 11,
+          "timestamp": "2022-01-26T16:46",
+          "co2_ppm": 754.1736704,
+          "indoor_temp_c": 21.94444444,
+          "rh_percent": 20.0,
+          "outdoor_temp_c": -9.175333333,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 12,
+          "timestamp": "2022-01-26T16:47",
+          "co2_ppm": 754.8736704,
+          "indoor_temp_c": 21.97777778,
+          "rh_percent": 20.0,
+          "outdoor_temp_c": -9.202166667,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 13,
+          "timestamp": "2022-01-26T16:48",
+          "co2_ppm": 755.5736704,
+          "indoor_temp_c": 22.01111111,
+          "rh_percent": 20.0,
+          "outdoor_temp_c": -9.229,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 14,
+          "timestamp": "2022-01-26T16:49",
+          "co2_ppm": 756.2736704,
+          "indoor_temp_c": 22.04444444,
+          "rh_percent": 20.0,
+          "outdoor_temp_c": -9.255833333,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        }
+      ],
+      "interpretation": "Observed door/window-state and sensor co-trajectory only. The state change was not randomized, no Agent command was recorded, and this association is not a causal action effect."
+    },
+    {
+      "event": {
+        "event_timestamp_minute_bin": "2021-12-11T00:12",
+        "state_field": "Window_1_1",
+        "state_transition": {
+          "from": 0,
+          "to": 1
+        },
+        "pre_event_5min_mean_co2_ppm": 724.974,
+        "post_event_5min_mean_co2_ppm": 724.474,
+        "pre_event_5min_mean_indoor_temp_c": 22.022,
+        "post_event_5min_mean_indoor_temp_c": 22.078,
+        "pre_event_5min_mean_baseboard_power_kw": 2.442,
+        "post_event_5min_mean_baseboard_power_kw": 2.112,
+        "pre_event_5min_active_heater_samples_over_0_1kw": 5,
+        "baseboard_power_kw_at_event_minute": 2.422233333,
+        "outdoor_temp_c_at_event_minute": 2.93,
+        "state_at_event_minute": {
+          "Window_1_1": 1,
+          "Window_2_1": 0,
+          "Window_2_2": 0,
+          "Door_1_1": 0,
+          "Door_2_1": 0,
+          "Door_2_2": null,
+          "Door_2_3": 1
+        },
+        "other_window_door_transitions_in_30min_context": 0,
+        "target_window_closed_for_all_15_pre_event_minutes": true,
+        "context_rows_before": 15,
+        "context_rows_after_including_event_minute": 15
+      },
+      "samples": [
+        {
+          "minutes_from_transition": -15,
+          "timestamp": "2021-12-10T23:57",
+          "co2_ppm": 757.1736704,
+          "indoor_temp_c": 22.5,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.805,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -14,
+          "timestamp": "2021-12-10T23:58",
+          "co2_ppm": 753.9736704,
+          "indoor_temp_c": 22.45,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.813333333,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -13,
+          "timestamp": "2021-12-10T23:59",
+          "co2_ppm": 750.7736704,
+          "indoor_temp_c": 22.4,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.821666667,
+          "living_room_baseboard_power_kw": 5e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -12,
+          "timestamp": "2021-12-11T00:00",
+          "co2_ppm": 747.5736704,
+          "indoor_temp_c": 22.35,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.83,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -11,
+          "timestamp": "2021-12-11T00:01",
+          "co2_ppm": 744.3736704,
+          "indoor_temp_c": 22.3,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.838333333,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -10,
+          "timestamp": "2021-12-11T00:02",
+          "co2_ppm": 741.1736704,
+          "indoor_temp_c": 22.25,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.846666667,
+          "living_room_baseboard_power_kw": 3.33e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -9,
+          "timestamp": "2021-12-11T00:03",
+          "co2_ppm": 737.9736704,
+          "indoor_temp_c": 22.2,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.855,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -8,
+          "timestamp": "2021-12-11T00:04",
+          "co2_ppm": 734.7736704,
+          "indoor_temp_c": 22.15,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.863333333,
+          "living_room_baseboard_power_kw": 3.33e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -7,
+          "timestamp": "2021-12-11T00:05",
+          "co2_ppm": 731.5736704,
+          "indoor_temp_c": 22.1,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.871666667,
+          "living_room_baseboard_power_kw": 3.33e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -6,
+          "timestamp": "2021-12-11T00:06",
+          "co2_ppm": 728.3736704,
+          "indoor_temp_c": 22.05,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.88,
+          "living_room_baseboard_power_kw": 0.048866667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -5,
+          "timestamp": "2021-12-11T00:07",
+          "co2_ppm": 725.1736704,
+          "indoor_temp_c": 22.0,
+          "rh_percent": 32.0,
+          "outdoor_temp_c": 2.888333333,
+          "living_room_baseboard_power_kw": 2.47265,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -4,
+          "timestamp": "2021-12-11T00:08",
+          "co2_ppm": 725.0736704,
+          "indoor_temp_c": 22.01111111,
+          "rh_percent": 32.05,
+          "outdoor_temp_c": 2.896666667,
+          "living_room_baseboard_power_kw": 2.4463,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -3,
+          "timestamp": "2021-12-11T00:09",
+          "co2_ppm": 724.9736704,
+          "indoor_temp_c": 22.02222222,
+          "rh_percent": 32.1,
+          "outdoor_temp_c": 2.905,
+          "living_room_baseboard_power_kw": 2.4366,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -2,
+          "timestamp": "2021-12-11T00:10",
+          "co2_ppm": 724.8736704,
+          "indoor_temp_c": 22.03333333,
+          "rh_percent": 32.15,
+          "outdoor_temp_c": 2.913333333,
+          "living_room_baseboard_power_kw": 2.42925,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": -1,
+          "timestamp": "2021-12-11T00:11",
+          "co2_ppm": 724.7736704,
+          "indoor_temp_c": 22.04444444,
+          "rh_percent": 32.2,
+          "outdoor_temp_c": 2.921666667,
+          "living_room_baseboard_power_kw": 2.426533333,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 0,
+          "timestamp": "2021-12-11T00:12",
+          "co2_ppm": 724.6736704,
+          "indoor_temp_c": 22.05555556,
+          "rh_percent": 32.25,
+          "outdoor_temp_c": 2.93,
+          "living_room_baseboard_power_kw": 2.422233333,
+          "window_door_states": {
+            "Window_1_1": 1,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 1,
+          "timestamp": "2021-12-11T00:13",
+          "co2_ppm": 724.5736704,
+          "indoor_temp_c": 22.06666667,
+          "rh_percent": 32.3,
+          "outdoor_temp_c": 2.938333333,
+          "living_room_baseboard_power_kw": 2.420616667,
+          "window_door_states": {
+            "Window_1_1": 1,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 2,
+          "timestamp": "2021-12-11T00:14",
+          "co2_ppm": 724.4736704,
+          "indoor_temp_c": 22.07777778,
+          "rh_percent": 32.35,
+          "outdoor_temp_c": 2.946666667,
+          "living_room_baseboard_power_kw": 2.422216667,
+          "window_door_states": {
+            "Window_1_1": 1,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 3,
+          "timestamp": "2021-12-11T00:15",
+          "co2_ppm": 724.3736704,
+          "indoor_temp_c": 22.08888889,
+          "rh_percent": 32.4,
+          "outdoor_temp_c": 2.955,
+          "living_room_baseboard_power_kw": 2.0822,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 4,
+          "timestamp": "2021-12-11T00:16",
+          "co2_ppm": 724.2736704,
+          "indoor_temp_c": 22.1,
+          "rh_percent": 32.45,
+          "outdoor_temp_c": 2.963333333,
+          "living_room_baseboard_power_kw": 1.214866667,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 5,
+          "timestamp": "2021-12-11T00:17",
+          "co2_ppm": 724.1736704,
+          "indoor_temp_c": 22.11111111,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 2.971666667,
+          "living_room_baseboard_power_kw": 2.2336,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 6,
+          "timestamp": "2021-12-11T00:18",
+          "co2_ppm": 739.4736704,
+          "indoor_temp_c": 22.14444444,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 2.98,
+          "living_room_baseboard_power_kw": 2.42665,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 7,
+          "timestamp": "2021-12-11T00:19",
+          "co2_ppm": 754.7736704,
+          "indoor_temp_c": 22.17777778,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 2.988333333,
+          "living_room_baseboard_power_kw": 2.4201,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 8,
+          "timestamp": "2021-12-11T00:20",
+          "co2_ppm": 770.0736704,
+          "indoor_temp_c": 22.21111111,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 2.996666667,
+          "living_room_baseboard_power_kw": 0.9513,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 9,
+          "timestamp": "2021-12-11T00:21",
+          "co2_ppm": 785.3736704,
+          "indoor_temp_c": 22.24444444,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 3.005,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 10,
+          "timestamp": "2021-12-11T00:22",
+          "co2_ppm": 800.6736704,
+          "indoor_temp_c": 22.27777778,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 3.013333333,
+          "living_room_baseboard_power_kw": 0.0,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 11,
+          "timestamp": "2021-12-11T00:23",
+          "co2_ppm": 815.9736704,
+          "indoor_temp_c": 22.31111111,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 3.021666667,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 12,
+          "timestamp": "2021-12-11T00:24",
+          "co2_ppm": 831.2736704,
+          "indoor_temp_c": 22.34444444,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 3.03,
+          "living_room_baseboard_power_kw": 0.0,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 13,
+          "timestamp": "2021-12-11T00:25",
+          "co2_ppm": 846.5736704,
+          "indoor_temp_c": 22.37777778,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 3.038333333,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        },
+        {
+          "minutes_from_transition": 14,
+          "timestamp": "2021-12-11T00:26",
+          "co2_ppm": 861.8736704,
+          "indoor_temp_c": 22.41111111,
+          "rh_percent": 32.5,
+          "outdoor_temp_c": 3.046666667,
+          "living_room_baseboard_power_kw": 1.67e-05,
+          "window_door_states": {
+            "Window_1_1": 0,
+            "Window_2_1": 0,
+            "Window_2_2": 0,
+            "Door_1_1": 0,
+            "Door_2_1": 0,
+            "Door_2_2": null,
+            "Door_2_3": 1
+          }
+        }
+      ],
+      "interpretation": "Observed door/window-state and sensor co-trajectory only. The state change was not randomized, no Agent command was recorded, and this association is not a causal action effect."
+    }
+  ],
+  "limitations": [
+    "Observational dormitory measurements are not real household-agent tasks or command/acknowledgement logs.",
+    "A single anonymized unit is not an independent household sample or a population distribution.",
+    "The standardized minute data cannot validate sub-minute or one-second control latency.",
+    "Indoor environmental values were interpolated from five-minute measurements, so neighboring minute rows are not independent sensor readings.",
+    "Co-occurrence of a window-state change and CO2/temperature change does not establish that the window action caused the change; occupancy, door operation, weather, HVAC/heating, and other factors may contribute.",
+    "Use this trace as measured context or calibration evidence. Counterfactual policy outcomes require a validated simulator or physical experiment."
+  ]
+}

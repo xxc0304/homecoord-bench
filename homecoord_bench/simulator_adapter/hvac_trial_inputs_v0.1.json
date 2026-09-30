@@ -1,0 +1,127 @@
+{
+  "schema_version": "homecoord-simuhome-hvac-inputs-0.1",
+  "status": "authored_homecoord_adapter_input_v0.1",
+  "source_type": "homecoord_authored_configuration",
+  "backend": {
+    "name": "SimuHome",
+    "repository": "https://github.com/holi-lab/SimuHome",
+    "commit": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+    "license_declared_by_upstream_readme": "CC BY-NC-ND 4.0"
+  },
+  "notes": [
+    "This is a new minimal reset configuration, not a copied or modified SimuHome benchmark episode.",
+    "It contains no model prompts, ground-truth benchmark labels, or upstream episode data.",
+    "Room temperature and HVAC LocalTemperature are both initialized to 2900 so the reset snapshot is internally aligned. Temperature and setpoint values use the backend's apparent 0.01 degree Celsius integer representation; the scale is not physically calibrated.",
+    "The file is an input fixture only. It does not indicate that the upstream simulator has been installed or run."
+  ],
+  "reset_config": {
+    "tick_interval": 0.1,
+    "enable_aggregators": true,
+    "max_ticks": null,
+    "fast_forward": false,
+    "base_time": "2026-09-26 00:00:00",
+    "rooms": {
+      "living_room": {
+        "state": {
+          "temperature": 2900
+        },
+        "devices": [
+          {
+            "device_id": "homecoord_trial_hvac",
+            "device_type": "air_conditioner",
+            "attributes": {
+              "1.OnOff.OnOff": false,
+              "1.Thermostat.LocalTemperature": 2900,
+              "1.Thermostat.OccupiedCoolingSetpoint": 2600,
+              "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+              "1.Thermostat.SystemMode": 0,
+              "1.FanControl.FanMode": 0,
+              "1.FanControl.PercentSetting": 0
+            }
+          }
+        ]
+      }
+    }
+  },
+  "proposal_command_bundles": {
+    "cool": {
+      "description": "One high-level HomeCoord proposal; sequential device commands share one proposal_id and command_bundle_id.",
+      "steps": [
+        {
+          "tool": "execute_command",
+          "args": {
+            "device_id": "homecoord_trial_hvac",
+            "endpoint_id": 1,
+            "cluster_id": "OnOff",
+            "command_id": "On",
+            "args": {}
+          }
+        },
+        {
+          "tool": "write_attribute",
+          "args": {
+            "device_id": "homecoord_trial_hvac",
+            "endpoint_id": 1,
+            "cluster_id": "Thermostat",
+            "attribute_id": "SystemMode",
+            "value": 3
+          }
+        },
+        {
+          "tool": "write_attribute",
+          "args": {
+            "device_id": "homecoord_trial_hvac",
+            "endpoint_id": 1,
+            "cluster_id": "Thermostat",
+            "attribute_id": "OccupiedCoolingSetpoint",
+            "value": 2400
+          }
+        },
+        {
+          "tool": "write_attribute",
+          "args": {
+            "device_id": "homecoord_trial_hvac",
+            "endpoint_id": 1,
+            "cluster_id": "FanControl",
+            "attribute_id": "PercentSetting",
+            "value": 66
+          }
+        }
+      ]
+    },
+    "off": {
+      "description": "One high-level HomeCoord proposal mapping to one off command.",
+      "steps": [
+        {
+          "tool": "execute_command",
+          "args": {
+            "device_id": "homecoord_trial_hvac",
+            "endpoint_id": 1,
+            "cluster_id": "OnOff",
+            "command_id": "Off",
+            "args": {}
+          }
+        }
+      ]
+    }
+  },
+  "paired_schedules": [
+    {
+      "schedule_id": "cool_then_off",
+      "proposal_order": ["cool", "off"],
+      "proposal_start_offsets_seconds": [20, 21]
+    },
+    {
+      "schedule_id": "off_then_cool",
+      "proposal_order": ["off", "cool"],
+      "proposal_start_offsets_seconds": [20, 21]
+    }
+  ],
+  "acceptance_checks_before_use": [
+    "Reset response reports one living_room, one HVAC device, and the authored initial attributes.",
+    "Temperature readback and thermostat LocalTemperature agree on the backend's scale; do not assume 2900 means 29 Celsius until verified.",
+    "The cool bundle succeeds in order and leaves OnOff=true, SystemMode=3, OccupiedCoolingSetpoint=2400, PercentSetting=66.",
+    "The off command succeeds and leaves OnOff=false; device temperature evolution is evaluated separately.",
+    "Readback and reset repeat exactly three times before scheduling paired runs."
+  ]
+}

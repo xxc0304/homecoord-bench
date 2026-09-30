@@ -1,0 +1,3686 @@
+{
+  "manifest_sha256": "4612DAF76D45B7DB32F02E0019C53ADCE0B79FCDB3F1CA32ED72B46E4296348D",
+  "model": "deepseek-flash",
+  "requests_planned": 12,
+  "repetitions_per_profile": 1,
+  "status": "controlled_semantic_choice_pilot",
+  "batches": [
+    {
+      "profile": "P1A",
+      "sample": {
+        "records": {
+          "task03": {
+            "request": {
+              "request_id": "HC-PUBLIC-X17:1:task03",
+              "episode_id": "HC-PUBLIC-X17",
+              "base_episode_id": "HC-PUBLIC-X17",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "water_heater": "idle"
+                },
+                "services": {
+                  "water_heater": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "WaterHeatingAgent",
+                "role": "Operate the water_heater service interface.",
+                "tools": [
+                  "water_heater_preset_1",
+                  "water_heater_preset_2",
+                  "water_heater_off"
+                ],
+                "observable_state": [
+                  "devices.water_heater",
+                  "services.water_heater"
+                ],
+                "writable_resources": [
+                  "devices.water_heater"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task03",
+                "agent_id": "WaterHeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Prepare the water service for a 40-degree shower request. Complete the requested service within 105 minutes.",
+                "priority": 95,
+                "completion_deadline_ms": 6300000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "water_heater_preset_1",
+                "water_heater_preset_2",
+                "water_heater_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_preset_1",
+                  "target": "water_heater",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide a 40-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_off",
+                  "target": "water_heater",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_preset_2",
+                  "target": "water_heater",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide a 60-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-PUBLIC-X17:1:task03:proposal:1",
+                  "target": "water_heater",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1245,
+            "logical_latency_ms": 1246
+          },
+          "task01": {
+            "request": {
+              "request_id": "HC-PUBLIC-X17:1:task01",
+              "episode_id": "HC-PUBLIC-X17",
+              "base_episode_id": "HC-PUBLIC-X17",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "heat_pump": "idle"
+                },
+                "services": {
+                  "heat_pump": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "HeatingAgent",
+                "role": "Operate the heat_pump service interface.",
+                "tools": [
+                  "heat_pump_preset_1",
+                  "heat_pump_preset_2",
+                  "heat_pump_off"
+                ],
+                "observable_state": [
+                  "devices.heat_pump",
+                  "services.heat_pump"
+                ],
+                "writable_resources": [
+                  "devices.heat_pump"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task01",
+                "agent_id": "HeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Deliver a warming service for this room. Complete the requested service within 180 minutes.",
+                "priority": 70,
+                "completion_deadline_ms": 10800000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "heat_pump_preset_1",
+                "heat_pump_preset_2",
+                "heat_pump_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "HeatingAgent",
+                  "tool_name": "heat_pump_preset_2",
+                  "target": "heat_pump",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide cooling-service. Controlled cycle: 3600000 ms, 2.5 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "HeatingAgent",
+                  "tool_name": "heat_pump_off",
+                  "target": "heat_pump",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "HeatingAgent",
+                  "tool_name": "heat_pump_preset_1",
+                  "target": "heat_pump",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide warming-service. Controlled cycle: 3600000 ms, 2.5 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-PUBLIC-X17:1:task01:preset_1",
+                  "target": "heat_pump",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3600000,
+                  "estimated_power_kw": 2.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1501,
+            "logical_latency_ms": 1502
+          },
+          "task02": {
+            "request": {
+              "request_id": "HC-PUBLIC-X17:1:task02",
+              "episode_id": "HC-PUBLIC-X17",
+              "base_episode_id": "HC-PUBLIC-X17",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dishwasher": "idle"
+                },
+                "services": {
+                  "dishwasher": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "DishwashingAgent",
+                "role": "Operate the dishwasher service interface.",
+                "tools": [
+                  "dishwasher_preset_1",
+                  "dishwasher_preset_2",
+                  "dishwasher_off"
+                ],
+                "observable_state": [
+                  "devices.dishwasher",
+                  "services.dishwasher"
+                ],
+                "writable_resources": [
+                  "devices.dishwasher"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task02",
+                "agent_id": "DishwashingAgent",
+                "release_at_ms": 0,
+                "goal": "Wash the ordinary dinner dishes; no hygiene treatment is requested. Complete the requested service within 190 minutes.",
+                "priority": 50,
+                "completion_deadline_ms": 11400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "dishwasher_preset_1",
+                "dishwasher_preset_2",
+                "dishwasher_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_preset_2",
+                  "target": "dishwasher",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide dish cleaning with hygiene treatment. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_preset_1",
+                  "target": "dishwasher",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide ordinary dish cleaning. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_off",
+                  "target": "dishwasher",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-PUBLIC-X17:1:task02:proposal:1",
+                  "target": "dishwasher",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 2.4
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1503,
+            "logical_latency_ms": 1504
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1504,
+        "completion_order": [
+          "task03",
+          "task01",
+          "task02"
+        ]
+      },
+      "proposal_scores": [
+        {
+          "task_id": "task01",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_1"
+        },
+        {
+          "task_id": "task02",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_1"
+        },
+        {
+          "task_id": "task03",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_1"
+        }
+      ]
+    },
+    {
+      "profile": "P1B",
+      "sample": {
+        "records": {
+          "task01": {
+            "request": {
+              "request_id": "HC-PUBLIC-Q42:1:task01",
+              "episode_id": "HC-PUBLIC-Q42",
+              "base_episode_id": "HC-PUBLIC-Q42",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "heat_pump": "idle"
+                },
+                "services": {
+                  "heat_pump": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "HeatingAgent",
+                "role": "Operate the heat_pump service interface.",
+                "tools": [
+                  "heat_pump_preset_1",
+                  "heat_pump_preset_2",
+                  "heat_pump_off"
+                ],
+                "observable_state": [
+                  "devices.heat_pump",
+                  "services.heat_pump"
+                ],
+                "writable_resources": [
+                  "devices.heat_pump"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task01",
+                "agent_id": "HeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Deliver a cooling service for this room. Complete the requested service within 180 minutes.",
+                "priority": 70,
+                "completion_deadline_ms": 10800000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "heat_pump_preset_1",
+                "heat_pump_preset_2",
+                "heat_pump_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "HeatingAgent",
+                  "tool_name": "heat_pump_preset_2",
+                  "target": "heat_pump",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide cooling-service. Controlled cycle: 3600000 ms, 2.5 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "HeatingAgent",
+                  "tool_name": "heat_pump_off",
+                  "target": "heat_pump",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "HeatingAgent",
+                  "tool_name": "heat_pump_preset_1",
+                  "target": "heat_pump",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide warming-service. Controlled cycle: 3600000 ms, 2.5 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-PUBLIC-Q42:1:task01:heat_pump_preset_2",
+                  "target": "heat_pump",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3600000,
+                  "estimated_power_kw": 2.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1149,
+            "logical_latency_ms": 1149
+          },
+          "task02": {
+            "request": {
+              "request_id": "HC-PUBLIC-Q42:1:task02",
+              "episode_id": "HC-PUBLIC-Q42",
+              "base_episode_id": "HC-PUBLIC-Q42",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dishwasher": "idle"
+                },
+                "services": {
+                  "dishwasher": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "DishwashingAgent",
+                "role": "Operate the dishwasher service interface.",
+                "tools": [
+                  "dishwasher_preset_1",
+                  "dishwasher_preset_2",
+                  "dishwasher_off"
+                ],
+                "observable_state": [
+                  "devices.dishwasher",
+                  "services.dishwasher"
+                ],
+                "writable_resources": [
+                  "devices.dishwasher"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task02",
+                "agent_id": "DishwashingAgent",
+                "release_at_ms": 0,
+                "goal": "The baby feeding items need a hygiene treatment, not only ordinary cleaning. Complete the requested service within 190 minutes.",
+                "priority": 50,
+                "completion_deadline_ms": 11400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "dishwasher_preset_1",
+                "dishwasher_preset_2",
+                "dishwasher_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_preset_2",
+                  "target": "dishwasher",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide dish cleaning with hygiene treatment. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_preset_1",
+                  "target": "dishwasher",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide ordinary dish cleaning. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_off",
+                  "target": "dishwasher",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-PUBLIC-Q42:1:task02:proposal:1",
+                  "target": "dishwasher",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 2.4
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1361,
+            "logical_latency_ms": 1361
+          },
+          "task03": {
+            "request": {
+              "request_id": "HC-PUBLIC-Q42:1:task03",
+              "episode_id": "HC-PUBLIC-Q42",
+              "base_episode_id": "HC-PUBLIC-Q42",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "water_heater": "idle"
+                },
+                "services": {
+                  "water_heater": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "WaterHeatingAgent",
+                "role": "Operate the water_heater service interface.",
+                "tools": [
+                  "water_heater_preset_1",
+                  "water_heater_preset_2",
+                  "water_heater_off"
+                ],
+                "observable_state": [
+                  "devices.water_heater",
+                  "services.water_heater"
+                ],
+                "writable_resources": [
+                  "devices.water_heater"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task03",
+                "agent_id": "WaterHeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Prepare the water service for a 60-degree cleaning request. Complete the requested service within 105 minutes.",
+                "priority": 95,
+                "completion_deadline_ms": 6300000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "water_heater_preset_1",
+                "water_heater_preset_2",
+                "water_heater_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_preset_1",
+                  "target": "water_heater",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide a 40-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_off",
+                  "target": "water_heater",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_preset_2",
+                  "target": "water_heater",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide a 60-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-PUBLIC-Q42:task03:preset_2",
+                  "target": "water_heater",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1398,
+            "logical_latency_ms": 1399
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1399,
+        "completion_order": [
+          "task01",
+          "task02",
+          "task03"
+        ]
+      },
+      "proposal_scores": [
+        {
+          "task_id": "task01",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_2"
+        },
+        {
+          "task_id": "task02",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_2"
+        },
+        {
+          "task_id": "task03",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_2"
+        }
+      ]
+    },
+    {
+      "profile": "P2A",
+      "sample": {
+        "records": {
+          "task03": {
+            "request": {
+              "request_id": "HC-PUBLIC-M83:1:task03",
+              "episode_id": "HC-PUBLIC-M83",
+              "base_episode_id": "HC-PUBLIC-M83",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "oven": "idle"
+                },
+                "services": {
+                  "oven": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "BakingAgent",
+                "role": "Operate the oven service interface.",
+                "tools": [
+                  "oven_preset_1",
+                  "oven_preset_2",
+                  "oven_off"
+                ],
+                "observable_state": [
+                  "devices.oven",
+                  "services.oven"
+                ],
+                "writable_resources": [
+                  "devices.oven"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task03",
+                "agent_id": "BakingAgent",
+                "release_at_ms": 0,
+                "goal": "Bake the cake using the enclosed convection programme. Complete the requested service within 85 minutes.",
+                "priority": 90,
+                "completion_deadline_ms": 5100000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "oven_preset_1",
+                "oven_preset_2",
+                "oven_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "BakingAgent",
+                  "tool_name": "oven_preset_1",
+                  "target": "oven",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide convection baking. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "BakingAgent",
+                  "tool_name": "oven_off",
+                  "target": "oven",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "BakingAgent",
+                  "tool_name": "oven_preset_2",
+                  "target": "oven",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide upper radiant grilling. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "prop-oven-preset-1-1",
+                  "target": "oven",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1098,
+            "logical_latency_ms": 1098
+          },
+          "task01": {
+            "request": {
+              "request_id": "HC-PUBLIC-M83:1:task01",
+              "episode_id": "HC-PUBLIC-M83",
+              "base_episode_id": "HC-PUBLIC-M83",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dishwasher": "idle"
+                },
+                "services": {
+                  "dishwasher": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "DishwashingAgent",
+                "role": "Operate the dishwasher service interface.",
+                "tools": [
+                  "dishwasher_preset_1",
+                  "dishwasher_preset_2",
+                  "dishwasher_off"
+                ],
+                "observable_state": [
+                  "devices.dishwasher",
+                  "services.dishwasher"
+                ],
+                "writable_resources": [
+                  "devices.dishwasher"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task01",
+                "agent_id": "DishwashingAgent",
+                "release_at_ms": 0,
+                "goal": "Wash the ordinary dinner dishes; no hygiene treatment is requested. Complete the requested service within 190 minutes.",
+                "priority": 50,
+                "completion_deadline_ms": 11400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "dishwasher_preset_1",
+                "dishwasher_preset_2",
+                "dishwasher_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_off",
+                  "target": "dishwasher",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_preset_2",
+                  "target": "dishwasher",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide dish cleaning with hygiene treatment. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_preset_1",
+                  "target": "dishwasher",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide ordinary dish cleaning. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "p1",
+                  "target": "dishwasher",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 2.4
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1197,
+            "logical_latency_ms": 1197
+          },
+          "task02": {
+            "request": {
+              "request_id": "HC-PUBLIC-M83:1:task02",
+              "episode_id": "HC-PUBLIC-M83",
+              "base_episode_id": "HC-PUBLIC-M83",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "water_heater": "idle"
+                },
+                "services": {
+                  "water_heater": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "WaterHeatingAgent",
+                "role": "Operate the water_heater service interface.",
+                "tools": [
+                  "water_heater_preset_1",
+                  "water_heater_preset_2",
+                  "water_heater_off"
+                ],
+                "observable_state": [
+                  "devices.water_heater",
+                  "services.water_heater"
+                ],
+                "writable_resources": [
+                  "devices.water_heater"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task02",
+                "agent_id": "WaterHeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Prepare the water service for a 40-degree shower request. Complete the requested service within 105 minutes.",
+                "priority": 95,
+                "completion_deadline_ms": 6300000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "water_heater_preset_1",
+                "water_heater_preset_2",
+                "water_heater_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_preset_1",
+                  "target": "water_heater",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide a 40-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_off",
+                  "target": "water_heater",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_preset_2",
+                  "target": "water_heater",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide a 60-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-PUBLIC-M83:task02:proposal:1",
+                  "target": "water_heater",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1413,
+            "logical_latency_ms": 1414
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1414,
+        "completion_order": [
+          "task03",
+          "task01",
+          "task02"
+        ]
+      },
+      "proposal_scores": [
+        {
+          "task_id": "task01",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_1"
+        },
+        {
+          "task_id": "task02",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_1"
+        },
+        {
+          "task_id": "task03",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_1"
+        }
+      ]
+    },
+    {
+      "profile": "P2B",
+      "sample": {
+        "records": {
+          "task03": {
+            "request": {
+              "request_id": "HC-PUBLIC-V26:1:task03",
+              "episode_id": "HC-PUBLIC-V26",
+              "base_episode_id": "HC-PUBLIC-V26",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "oven": "idle"
+                },
+                "services": {
+                  "oven": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "BakingAgent",
+                "role": "Operate the oven service interface.",
+                "tools": [
+                  "oven_preset_1",
+                  "oven_preset_2",
+                  "oven_off"
+                ],
+                "observable_state": [
+                  "devices.oven",
+                  "services.oven"
+                ],
+                "writable_resources": [
+                  "devices.oven"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task03",
+                "agent_id": "BakingAgent",
+                "release_at_ms": 0,
+                "goal": "Grill the food using the upper radiant programme. Complete the requested service within 85 minutes.",
+                "priority": 90,
+                "completion_deadline_ms": 5100000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "oven_preset_1",
+                "oven_preset_2",
+                "oven_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "BakingAgent",
+                  "tool_name": "oven_preset_1",
+                  "target": "oven",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide convection baking. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "BakingAgent",
+                  "tool_name": "oven_off",
+                  "target": "oven",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "BakingAgent",
+                  "tool_name": "oven_preset_2",
+                  "target": "oven",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide upper radiant grilling. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "task03-oven-preset-2",
+                  "target": "oven",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1080,
+            "logical_latency_ms": 1081
+          },
+          "task01": {
+            "request": {
+              "request_id": "HC-PUBLIC-V26:1:task01",
+              "episode_id": "HC-PUBLIC-V26",
+              "base_episode_id": "HC-PUBLIC-V26",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dishwasher": "idle"
+                },
+                "services": {
+                  "dishwasher": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "DishwashingAgent",
+                "role": "Operate the dishwasher service interface.",
+                "tools": [
+                  "dishwasher_preset_1",
+                  "dishwasher_preset_2",
+                  "dishwasher_off"
+                ],
+                "observable_state": [
+                  "devices.dishwasher",
+                  "services.dishwasher"
+                ],
+                "writable_resources": [
+                  "devices.dishwasher"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task01",
+                "agent_id": "DishwashingAgent",
+                "release_at_ms": 0,
+                "goal": "The baby feeding items need a hygiene treatment, not only ordinary cleaning. Complete the requested service within 190 minutes.",
+                "priority": 50,
+                "completion_deadline_ms": 11400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "dishwasher_preset_1",
+                "dishwasher_preset_2",
+                "dishwasher_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_off",
+                  "target": "dishwasher",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_preset_2",
+                  "target": "dishwasher",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide dish cleaning with hygiene treatment. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "dishwasher_preset_1",
+                  "target": "dishwasher",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide ordinary dish cleaning. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "p1",
+                  "target": "dishwasher",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 2.4
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1184,
+            "logical_latency_ms": 1184
+          },
+          "task02": {
+            "request": {
+              "request_id": "HC-PUBLIC-V26:1:task02",
+              "episode_id": "HC-PUBLIC-V26",
+              "base_episode_id": "HC-PUBLIC-V26",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "water_heater": "idle"
+                },
+                "services": {
+                  "water_heater": "none"
+                }
+              },
+              "agent": {
+                "agent_id": "WaterHeatingAgent",
+                "role": "Operate the water_heater service interface.",
+                "tools": [
+                  "water_heater_preset_1",
+                  "water_heater_preset_2",
+                  "water_heater_off"
+                ],
+                "observable_state": [
+                  "devices.water_heater",
+                  "services.water_heater"
+                ],
+                "writable_resources": [
+                  "devices.water_heater"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "task02",
+                "agent_id": "WaterHeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Prepare the water service for a 60-degree cleaning request. Complete the requested service within 105 minutes.",
+                "priority": 95,
+                "completion_deadline_ms": 6300000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "water_heater_preset_1",
+                "water_heater_preset_2",
+                "water_heater_off"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_preset_1",
+                  "target": "water_heater",
+                  "operation": "preset_1",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide a 40-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                },
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_off",
+                  "target": "water_heater",
+                  "operation": "off",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+                },
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "water_heater_preset_2",
+                  "target": "water_heater",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Provide a 60-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-PUBLIC-V26:1:task02:proposal:1",
+                  "target": "water_heater",
+                  "operation": "preset_2",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1242,
+            "logical_latency_ms": 1243
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1243,
+        "completion_order": [
+          "task03",
+          "task01",
+          "task02"
+        ]
+      },
+      "proposal_scores": [
+        {
+          "task_id": "task01",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_2"
+        },
+        {
+          "task_id": "task02",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_2"
+        },
+        {
+          "task_id": "task03",
+          "authorized": true,
+          "semantic_correct": true,
+          "operation": "preset_2"
+        }
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "profile": "P1A",
+      "pressure": 0.8,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 0.8,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 0.8,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 0.8,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1604,
+      "first_goal_progress_ms": 2701604,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 0.8,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.2,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": false,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": false,
+        "task03": true
+      },
+      "final_goal_success": false,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task03",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.2,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.2,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.2,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1604,
+      "first_goal_progress_ms": 2701604,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.2,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.6,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": false,
+        "task02": false,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": false,
+        "task02": false,
+        "task03": true
+      },
+      "final_goal_success": false,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 2,
+      "start_order": [
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.6,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 2,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.6,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.6,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1604,
+      "first_goal_progress_ms": 2701604,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1A",
+      "pressure": 1.6,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1346,
+      "first_goal_progress_ms": 2701346,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 0.8,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 2701499,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task01",
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 0.8,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 2701499,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task01",
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 0.8,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 2701499,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task01",
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 0.8,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1499,
+      "first_goal_progress_ms": 2701499,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 0.8,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 2701499,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task01",
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.2,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": false
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": false
+      },
+      "final_goal_success": false,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 3601249,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.2,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": false
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 3601249,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task01",
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.2,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": false
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 3601249,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task01",
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.2,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1499,
+      "first_goal_progress_ms": 2701499,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.2,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": false
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 3601249,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task01",
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.6,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": false
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": false
+      },
+      "final_goal_success": false,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 3601249,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.6,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": false
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 3601249,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task01",
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.6,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": false
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1249,
+      "first_goal_progress_ms": 3601249,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task01",
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.6,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1499,
+      "first_goal_progress_ms": 2701499,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P1B",
+      "pressure": 1.6,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1499,
+      "first_goal_progress_ms": 2701499,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 0.8,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 0.8,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 0.8,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 0.8,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1514,
+      "first_goal_progress_ms": 2701514,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 0.8,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.2,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": false,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": false,
+        "task03": true
+      },
+      "final_goal_success": false,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task03",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.2,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.2,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.2,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1514,
+      "first_goal_progress_ms": 2701514,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.2,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.6,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": false,
+        "task02": false,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": false,
+        "task02": false,
+        "task03": true
+      },
+      "final_goal_success": false,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 2,
+      "start_order": [
+        "task03"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.6,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 2,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.6,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": false,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.6,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1514,
+      "first_goal_progress_ms": 2701514,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2A",
+      "pressure": 1.6,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1198,
+      "first_goal_progress_ms": 2701198,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 0.8,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 0.8,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 0.8,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 0.8,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1343,
+      "first_goal_progress_ms": 2701343,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 0.8,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.2,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": false,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": false,
+        "task03": true
+      },
+      "final_goal_success": false,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task03",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.2,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.2,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.2,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1343,
+      "first_goal_progress_ms": 2701343,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.2,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.6,
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": false,
+        "task02": false,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": false,
+        "task02": false,
+        "task03": true
+      },
+      "final_goal_success": false,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 2,
+      "start_order": [
+        "task03"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.6,
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 2,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.6,
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": false,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task01",
+        "task02"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.6,
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1343,
+      "first_goal_progress_ms": 2701343,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    },
+    {
+      "profile": "P2B",
+      "pressure": 1.6,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "task_deadline_met": {
+        "task01": true,
+        "task02": true,
+        "task03": true
+      },
+      "final_goal_success": true,
+      "first_safe_action_ms": 1181,
+      "first_goal_progress_ms": 2701181,
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "task03",
+        "task02",
+        "task01"
+      ]
+    }
+  ],
+  "summary": {
+    "P1A": {
+      "0.8": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1604
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        }
+      },
+      "1.2": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "final_goal_success": 0,
+          "median_first_safe_action_ms": 1346
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1604
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        }
+      },
+      "1.6": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "final_goal_success": 0,
+          "median_first_safe_action_ms": 1346
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1604
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1346
+        }
+      }
+    },
+    "P1B": {
+      "0.8": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1249
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1249
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1249
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1499
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1249
+        }
+      },
+      "1.2": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "final_goal_success": 0,
+          "median_first_safe_action_ms": 1249
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 0,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1249
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 0,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1249
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1499
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 0,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1249
+        }
+      },
+      "1.6": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "final_goal_success": 0,
+          "median_first_safe_action_ms": 1249
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 0,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1249
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 0,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1249
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1499
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1499
+        }
+      }
+    },
+    "P2A": {
+      "0.8": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1514
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        }
+      },
+      "1.2": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "final_goal_success": 0,
+          "median_first_safe_action_ms": 1198
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1514
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        }
+      },
+      "1.6": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "final_goal_success": 0,
+          "median_first_safe_action_ms": 1198
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 0,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1514
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1198
+        }
+      }
+    },
+    "P2B": {
+      "0.8": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1343
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        }
+      },
+      "1.2": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "final_goal_success": 0,
+          "median_first_safe_action_ms": 1181
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1343
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        }
+      },
+      "1.6": {
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "final_goal_success": 0,
+          "median_first_safe_action_ms": 1181
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        },
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 0,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1343
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": 1,
+          "final_goal_success": 1,
+          "median_first_safe_action_ms": 1181
+        }
+      }
+    }
+  }
+}

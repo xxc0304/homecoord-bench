@@ -1,0 +1,267 @@
+{
+  "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONTROL",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "dimensionally_consistent_assumption_pilot",
+  "generator_version": "0.3.0",
+  "review_status": "unreviewed_assumptions_not_device_calibrated",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 7.2
+    }
+  },
+  "initial_state": {
+    "version": 113,
+    "values": {
+      "vehicle": {
+        "battery_pct": 20,
+        "departure_deadline_ms": 19200000,
+        "battery_capacity_kwh": 60.0
+      },
+      "water": {
+        "temperature_c": 35,
+        "tank_liters": 100.0,
+        "shower_deadline_ms": 21600000
+      },
+      "devices": {
+        "ev_charger": "off",
+        "water_heater": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "EVChargingAgent",
+      "role": "ev_charging",
+      "tools": [
+        "charge_ev"
+      ],
+      "observable_state": [
+        "vehicle.battery_pct",
+        "vehicle.departure_deadline_ms",
+        "vehicle.battery_capacity_kwh"
+      ],
+      "writable_resources": [
+        "devices.ev_charger"
+      ]
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "role": "water_heating",
+      "tools": [
+        "heat_water"
+      ],
+      "observable_state": [
+        "water.temperature_c",
+        "water.tank_liters",
+        "water.shower_deadline_ms"
+      ],
+      "writable_resources": [
+        "devices.water_heater"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "charge_ev",
+      "agent_id": "EVChargingAgent",
+      "release_at_ms": 0,
+      "goal": "Charge the 60 kWh EV battery from 20% to at least 50% before departure in 5 h 20 min.",
+      "priority": 100,
+      "required_action": {
+        "target": "ev_charger",
+        "operation": "charge"
+      },
+      "action_template": {
+        "target": "ev_charger",
+        "operation": "charge",
+        "parameters": {
+          "target_battery_pct": 50
+        },
+        "duration_ms": 18000000,
+        "power_kw": 4.0,
+        "requires": []
+      },
+      "completion_deadline_ms": 19200000
+    },
+    {
+      "task_id": "heat_water",
+      "agent_id": "WaterHeatingAgent",
+      "release_at_ms": 100,
+      "goal": "Heat the 100 L water tank from 35 C to at least 50 C before a shower in 6 h.",
+      "priority": 80,
+      "required_action": {
+        "target": "water_heater",
+        "operation": "heat"
+      },
+      "action_template": {
+        "target": "water_heater",
+        "operation": "heat",
+        "parameters": {
+          "target_temperature_c": 50
+        },
+        "duration_ms": 2325556,
+        "power_kw": 3.0,
+        "requires": []
+      },
+      "completion_deadline_ms": 21600000
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "vehicle.battery_pct",
+      "op": "gte",
+      "value": 50
+    },
+    {
+      "path": "water.temperature_c",
+      "op": "gte",
+      "value": 50
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 7.2
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "EVChargingAgent",
+      "task_id": "charge_ev",
+      "operation": "charge",
+      "target": "ev_charger",
+      "grounded_operation": "charge",
+      "start_effects": {
+        "devices.ev_charger": "charging"
+      },
+      "completion_effects": {
+        "devices.ev_charger": "complete",
+        "vehicle.battery_pct": 50
+      },
+      "effects": {
+        "devices.ev_charger": "charging",
+        "vehicle.battery_pct": 50
+      },
+      "duration_ms": 18000000,
+      "power_kw": 4.0
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "task_id": "heat_water",
+      "operation": "heat",
+      "target": "water_heater",
+      "grounded_operation": "heat",
+      "start_effects": {
+        "devices.water_heater": "heating"
+      },
+      "completion_effects": {
+        "devices.water_heater": "idle",
+        "water.temperature_c": 50
+      },
+      "effects": {
+        "devices.water_heater": "heating",
+        "water.temperature_c": 50
+      },
+      "duration_ms": 2325556,
+      "power_kw": 3.0
+    },
+    {
+      "agent_id": "EVChargingAgent",
+      "task_id": "charge_ev",
+      "operation": "off",
+      "target": "ev_charger",
+      "grounded_operation": "off",
+      "effects": {
+        "devices.ev_charger": "off"
+      },
+      "duration_ms": 100,
+      "power_kw": 0.0
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "task_id": "heat_water",
+      "operation": "off",
+      "target": "water_heater",
+      "grounded_operation": "off",
+      "effects": {
+        "devices.water_heater": "off"
+      },
+      "duration_ms": 100,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "source": "derived_from_nominal_placeholder",
+    "duration_relative_range": [
+      0.8,
+      1.2
+    ],
+    "power_relative_range": [
+      0.85,
+      1.15
+    ],
+    "event_jitter_ms": 0,
+    "notes": "Robustness assumptions only; replace with simulator/device traces before physical claims."
+  },
+  "pair_id": "C3-EV-WATER",
+  "pair_condition": "control",
+  "tool_catalog": [
+    {
+      "agent_id": "EVChargingAgent",
+      "target": "ev_charger",
+      "operation": "charge",
+      "parameters": [
+        {
+          "name": "target_battery_pct",
+          "type": "number"
+        }
+      ],
+      "description": "Charge the EV to the requested battery percentage."
+    },
+    {
+      "agent_id": "EVChargingAgent",
+      "target": "ev_charger",
+      "operation": "off",
+      "parameters": [],
+      "description": "Turn off vehicle charging."
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "target": "water_heater",
+      "operation": "heat",
+      "parameters": [
+        {
+          "name": "target_temperature_c",
+          "type": "number"
+        }
+      ],
+      "description": "Heat the tank to the requested temperature."
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "target": "water_heater",
+      "operation": "off",
+      "parameters": [],
+      "description": "Turn off water heating."
+    }
+  ],
+  "base_episode_id": "HC-M13",
+  "physical_assumptions": {
+    "battery_capacity_kwh": 60.0,
+    "charger_input_kw": 4.0,
+    "water_heater_input_kw": 3.0,
+    "efficiency": 0.9,
+    "tank_liters": 100.0,
+    "water_density_kg_per_liter": 1.0,
+    "water_specific_heat_kj_per_kg_c": 4.186,
+    "status": "assumed_not_measured",
+    "effect_phase": "physical_completion"
+  }
+}

@@ -95,6 +95,9 @@ def build_agent_request(
     current_state: dict[str, Any] | None = None,
     state_version: int | None = None,
     pending_proposals: list[dict[str, Any]] | None = None,
+    include_evaluation_hints: bool = False,
+    request_id: str | None = None,
+    released_task_ids: set[str] | None = None,
 ) -> dict[str, Any]:
     """Build the exact provider-neutral input supplied to an agent."""
     source_state = deepcopy(episode["initial_state"]["values"] if current_state is None else current_state)
@@ -107,23 +110,63 @@ def build_agent_request(
             value = _get_path(source_state, path)
             if value is not _MISSING:
                 _set_path(visible_state, path, deepcopy(value))
+    visible_task = deepcopy(task)
+    if not include_evaluation_hints:
+        # These fields are scoring keys or deterministic-script templates, not
+        # information that a deployed agent would receive from a user.
+        visible_task.pop("required_action", None)
+        visible_task.pop("acceptable_actions", None)
+        visible_task.pop("action_template", None)
+    catalog = episode.get("tool_catalog", [])
+    available_actions = [
+        deepcopy(item) for item in catalog
+        if agent["agent_id"] == "CentralAgent" or item.get("agent_id") == agent["agent_id"]
+    ]
+    blind_future = bool(episode.get("simulation", {}).get("blind_future_task_arrivals", False))
+    visible_goals = deepcopy(episode["goals"] if agent.get("goal_visibility", "all") == "all" else [])
+    if blind_future:
+        if released_task_ids is None:
+            raise ValueError("blind_future_task_arrivals requires released_task_ids")
+        if not episode.get("base_episode_id"):
+            raise ValueError("blind_future_task_arrivals requires a public base_episode_id")
+        unreleased_paths = {
+            f"devices.{item['required_action']['target']}"
+            for item in episode["task_stream"]
+            if item["task_id"] not in released_task_ids
+            and isinstance(item.get("required_action"), dict)
+            and "target" in item["required_action"]
+        }
+        released_paths = {
+            f"devices.{item['required_action']['target']}"
+            for item in episode["task_stream"]
+            if item["task_id"] in released_task_ids
+            and isinstance(item.get("required_action"), dict)
+            and "target" in item["required_action"]
+        }
+        if unreleased_paths & released_paths & {goal.get("path") for goal in visible_goals}:
+            raise ValueError("blind_future_task_arrivals cannot disambiguate a shared task goal")
+        visible_goals = [goal for goal in visible_goals
+                         if goal.get("path") not in unreleased_paths]
+    public_episode_id = (episode.get("base_episode_id", episode["episode_id"])
+                         if blind_future else episode["episode_id"])
     return {
-        "request_id": str(uuid4()),
-        "episode_id": episode["episode_id"],
+        "request_id": request_id or str(uuid4()),
+        "episode_id": public_episode_id,
         "base_episode_id": episode.get("base_episode_id", episode["episode_id"]),
         "architecture": architecture,
         "current_time_ms": current_time_ms,
         "state_version": episode["initial_state"]["version"] if state_version is None else state_version,
         "state": visible_state,
         "agent": deepcopy(agent),
-        "task": deepcopy(task),
-        "goals": deepcopy(episode["goals"]),
+        "task": visible_task,
+        "goals": visible_goals,
         "constraints": deepcopy(
             episode["constraints"]
             if agent.get("constraint_visibility", "all") == "all"
             else agent.get("policy_constraints", [])
         ),
         "allowed_tools": deepcopy(agent.get("tools", [])),
+        "available_actions": available_actions,
         "pending_proposals": deepcopy(pending_proposals or []),
     }
 

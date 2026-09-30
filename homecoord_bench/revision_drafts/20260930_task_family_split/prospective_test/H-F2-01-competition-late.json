@@ -1,0 +1,361 @@
+{
+  "episode_id": "H-F2-01-competition-late",
+  "base_episode_id": "H-F2-01",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "prospective_task_family_synthetic_contract",
+  "review_status": "author_candidate_not_independently_reviewed",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 2,
+      "task_power_bounds_kw": {
+        "drying": 2,
+        "water": 2
+      }
+    }
+  },
+  "initial_state": {
+    "version": 1,
+    "values": {
+      "devices": {
+        "drying_device": "idle",
+        "water_device": "idle"
+      },
+      "coordination_context": {
+        "resource_capacity_units": 2,
+        "objective": "all services/deadlines then earlier whole-house completion",
+        "requests": [
+          {
+            "task_id": "drying",
+            "deadline_ms": 1080000,
+            "release_at_ms": 0,
+            "requested_service": "drying_completed",
+            "modes": [
+              {
+                "operation": "prepare",
+                "duration_ms": 600000,
+                "resource_units": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "DryingAgent",
+      "role": "drying",
+      "tools": [
+        "drying_prepare",
+        "drying_off"
+      ],
+      "observable_state": [
+        "devices.drying_device",
+        "coordination_context"
+      ],
+      "writable_resources": [
+        "devices.drying_device"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "WaterAgent",
+      "role": "water",
+      "tools": [
+        "water_prepare",
+        "water_off"
+      ],
+      "observable_state": [
+        "devices.water_device",
+        "coordination_context"
+      ],
+      "writable_resources": [
+        "devices.water_device"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "drying",
+      "agent_id": "DryingAgent",
+      "release_at_ms": 0,
+      "goal": "Provide drying service. Acceptable modes: prepare. Complete within 1080000 ms of this task release. Use only your own authorized tools. All services and deadlines first; prefer earlier whole-house completion when feasible.",
+      "priority": 100,
+      "completion_deadline_ms": 1080000,
+      "action_template": {
+        "target": "drying_device",
+        "operation": "prepare",
+        "parameters": {},
+        "duration_ms": 600000,
+        "power_kw": 2,
+        "requires": [
+          {
+            "path": "devices.drying_device",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      },
+      "requested_service": "drying_completed",
+      "acceptable_actions": [
+        {
+          "target": "drying_device",
+          "operation": "prepare"
+        }
+      ]
+    },
+    {
+      "task_id": "water",
+      "agent_id": "WaterAgent",
+      "release_at_ms": 120000,
+      "goal": "Provide water service. Acceptable modes: prepare. Complete within 240000 ms of this task release. Use only your own authorized tools. All services and deadlines first; prefer earlier whole-house completion when feasible.",
+      "priority": 95,
+      "completion_deadline_ms": 360000,
+      "action_template": {
+        "target": "water_device",
+        "operation": "prepare",
+        "parameters": {},
+        "duration_ms": 180000,
+        "power_kw": 2,
+        "requires": [
+          {
+            "path": "devices.water_device",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      },
+      "requested_service": "water_completed",
+      "acceptable_actions": [
+        {
+          "target": "water_device",
+          "operation": "prepare"
+        }
+      ]
+    }
+  ],
+  "exogenous_events": [
+    {
+      "event": "new_public_request",
+      "at_ms": 120000,
+      "patch": {
+        "coordination_context": {
+          "resource_capacity_units": 2,
+          "objective": "all services/deadlines then earlier whole-house completion",
+          "requests": [
+            {
+              "task_id": "drying",
+              "deadline_ms": 1080000,
+              "release_at_ms": 0,
+              "requested_service": "drying_completed",
+              "modes": [
+                {
+                  "operation": "prepare",
+                  "duration_ms": 600000,
+                  "resource_units": 2
+                }
+              ]
+            },
+            {
+              "task_id": "water",
+              "deadline_ms": 360000,
+              "release_at_ms": 120000,
+              "requested_service": "water_completed",
+              "modes": [
+                {
+                  "operation": "prepare",
+                  "duration_ms": 180000,
+                  "resource_units": 2
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "goals": [
+    {
+      "path": "devices.drying_device",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.water_device",
+      "op": "eq",
+      "value": "complete"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 2
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "DryingAgent",
+      "task_id": "drying",
+      "target": "drying_device",
+      "operation": "prepare",
+      "grounded_operation": "prepare",
+      "start_effects": {
+        "devices.drying_device": "running"
+      },
+      "completion_effects": {
+        "devices.drying_device": "complete"
+      },
+      "effects": {
+        "devices.drying_device": "complete"
+      },
+      "duration_ms": 600000,
+      "power_kw": 2
+    },
+    {
+      "agent_id": "WaterAgent",
+      "task_id": "water",
+      "target": "water_device",
+      "operation": "prepare",
+      "grounded_operation": "prepare",
+      "start_effects": {
+        "devices.water_device": "running"
+      },
+      "completion_effects": {
+        "devices.water_device": "complete"
+      },
+      "effects": {
+        "devices.water_device": "complete"
+      },
+      "duration_ms": 180000,
+      "power_kw": 2
+    },
+    {
+      "agent_id": "DryingAgent",
+      "task_id": "drying",
+      "target": "drying_device",
+      "operation": "off",
+      "grounded_operation": "off",
+      "start_effects": {},
+      "completion_effects": {},
+      "effects": {},
+      "duration_ms": 100,
+      "power_kw": 0
+    },
+    {
+      "agent_id": "WaterAgent",
+      "task_id": "water",
+      "target": "water_device",
+      "operation": "off",
+      "grounded_operation": "off",
+      "start_effects": {},
+      "completion_effects": {},
+      "effects": {},
+      "duration_ms": 100,
+      "power_kw": 0
+    }
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "DryingAgent",
+      "tool_name": "drying_prepare",
+      "target": "drying_device",
+      "operation": "prepare",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.drying_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provides drying_completed; synthetic contract 600000ms/2 admission units.",
+      "provides_service": "drying_completed",
+      "cost_contract": {
+        "duration_ms": 600000,
+        "resource_units": 2
+      }
+    },
+    {
+      "agent_id": "WaterAgent",
+      "tool_name": "water_prepare",
+      "target": "water_device",
+      "operation": "prepare",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.water_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provides water_completed; synthetic contract 180000ms/2 admission units.",
+      "provides_service": "water_completed",
+      "cost_contract": {
+        "duration_ms": 180000,
+        "resource_units": 2
+      }
+    },
+    {
+      "agent_id": "DryingAgent",
+      "tool_name": "drying_off",
+      "target": "drying_device",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.drying_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave idle; does not provide requested service.",
+      "provides_service": "none",
+      "cost_contract": {
+        "duration_ms": 100,
+        "resource_units": 0
+      }
+    },
+    {
+      "agent_id": "WaterAgent",
+      "tool_name": "water_off",
+      "target": "water_device",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.water_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave idle; does not provide requested service.",
+      "provides_service": "none",
+      "cost_contract": {
+        "duration_ms": 100,
+        "resource_units": 0
+      }
+    }
+  ],
+  "tool_contract_version": "strict-v1",
+  "simulation": {
+    "command_latency_ms": 100
+  },
+  "scenario_assumptions": {
+    "physical_calibration": "none",
+    "resource_semantics": "abstract admission units in legacy power_kw fields",
+    "execution": "constant load, noninterruptible, public declared costs",
+    "future_information": "not given to online policy"
+  },
+  "split": "prospective_test",
+  "family_block": "F2",
+  "pairing": {
+    "resource_arm": "competition",
+    "temporal_arm": "late"
+  },
+  "resource_unit": "abstract_admission_unit"
+}

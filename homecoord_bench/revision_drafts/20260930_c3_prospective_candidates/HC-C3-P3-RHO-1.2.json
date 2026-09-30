@@ -1,0 +1,299 @@
+{
+  "episode_id": "HC-C3-PROSPECTIVE-P3-RHO-1.2",
+  "base_episode_id": "HC-C3-PROSPECTIVE-P3",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "controlled_author_generated_prospective_candidate",
+  "review_status": "unreviewed_mechanism_candidate",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 6.333333,
+      "task_power_bounds_kw": {
+        "charge_ev": 3.3,
+        "heat_home": 2.5,
+        "boil_water": 1.8
+      }
+    }
+  },
+  "initial_state": {
+    "version": 1,
+    "values": {
+      "devices": {
+        "ev_charger": "idle",
+        "heat_pump": "idle",
+        "kettle": "idle"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "EVChargingAgent",
+      "role": "charge_ev",
+      "tools": [
+        "start_ev_charger"
+      ],
+      "observable_state": [
+        "devices.ev_charger"
+      ],
+      "writable_resources": [
+        "devices.ev_charger"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "role": "heat_home",
+      "tools": [
+        "start_heat_pump"
+      ],
+      "observable_state": [
+        "devices.heat_pump"
+      ],
+      "writable_resources": [
+        "devices.heat_pump"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "role": "boil_water",
+      "tools": [
+        "start_kettle"
+      ],
+      "observable_state": [
+        "devices.kettle"
+      ],
+      "writable_resources": [
+        "devices.kettle"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "charge_ev",
+      "agent_id": "EVChargingAgent",
+      "release_at_ms": 0,
+      "goal": "Complete charge_ev within 240 minutes.",
+      "priority": 40,
+      "completion_deadline_ms": 14400000,
+      "required_action": {
+        "target": "ev_charger",
+        "operation": "charge"
+      },
+      "action_template": {
+        "target": "ev_charger",
+        "operation": "charge",
+        "parameters": {},
+        "duration_ms": 7200000,
+        "power_kw": 3.3,
+        "requires": [
+          {
+            "path": "devices.ev_charger",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "heat_home",
+      "agent_id": "HeatingAgent",
+      "release_at_ms": 0,
+      "goal": "Complete heat_home within 180 minutes.",
+      "priority": 70,
+      "completion_deadline_ms": 10800000,
+      "required_action": {
+        "target": "heat_pump",
+        "operation": "heat"
+      },
+      "action_template": {
+        "target": "heat_pump",
+        "operation": "heat",
+        "parameters": {},
+        "duration_ms": 3600000,
+        "power_kw": 2.5,
+        "requires": [
+          {
+            "path": "devices.heat_pump",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "boil_water",
+      "agent_id": "BeverageAgent",
+      "release_at_ms": 0,
+      "goal": "Complete boil_water within 12 minutes.",
+      "priority": 100,
+      "completion_deadline_ms": 720000,
+      "required_action": {
+        "target": "kettle",
+        "operation": "boil"
+      },
+      "action_template": {
+        "target": "kettle",
+        "operation": "boil",
+        "parameters": {},
+        "duration_ms": 300000,
+        "power_kw": 1.8,
+        "requires": [
+          {
+            "path": "devices.kettle",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "goals": [
+    {
+      "path": "devices.ev_charger",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.heat_pump",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.kettle",
+      "op": "eq",
+      "value": "complete"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 6.333333
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "EVChargingAgent",
+      "task_id": "charge_ev",
+      "target": "ev_charger",
+      "operation": "charge",
+      "grounded_operation": "charge",
+      "start_effects": {
+        "devices.ev_charger": "running"
+      },
+      "completion_effects": {
+        "devices.ev_charger": "complete"
+      },
+      "effects": {
+        "devices.ev_charger": "complete"
+      },
+      "duration_ms": 7200000,
+      "power_kw": 3.3
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "task_id": "heat_home",
+      "target": "heat_pump",
+      "operation": "heat",
+      "grounded_operation": "heat",
+      "start_effects": {
+        "devices.heat_pump": "running"
+      },
+      "completion_effects": {
+        "devices.heat_pump": "complete"
+      },
+      "effects": {
+        "devices.heat_pump": "complete"
+      },
+      "duration_ms": 3600000,
+      "power_kw": 2.5
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "task_id": "boil_water",
+      "target": "kettle",
+      "operation": "boil",
+      "grounded_operation": "boil",
+      "start_effects": {
+        "devices.kettle": "running"
+      },
+      "completion_effects": {
+        "devices.kettle": "complete"
+      },
+      "effects": {
+        "devices.kettle": "complete"
+      },
+      "duration_ms": 300000,
+      "power_kw": 1.8
+    }
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "EVChargingAgent",
+      "tool_name": "start_ev_charger",
+      "target": "ev_charger",
+      "operation": "charge",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.ev_charger",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 120-minute cycle at nominal 3.3 kW."
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "tool_name": "start_heat_pump",
+      "target": "heat_pump",
+      "operation": "heat",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.heat_pump",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 60-minute cycle at nominal 2.5 kW."
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "tool_name": "start_kettle",
+      "target": "kettle",
+      "operation": "boil",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.kettle",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 5-minute cycle at nominal 1.8 kW."
+    }
+  ],
+  "tool_contract_version": "strict-v1",
+  "simulation": {
+    "command_latency_ms": 100
+  },
+  "resource_pressure": {
+    "load_to_capacity_ratio": 1.2,
+    "sum_nominal_requested_power_kw": 7.6,
+    "capacity_kw": 6.333333,
+    "source": "controlled_benchmark_factor"
+  },
+  "scenario_assumptions": {
+    "power_semantics": "constant nominal load during a fixed noninterruptible cycle",
+    "physical_calibration": "none",
+    "purpose": "mechanism isolation and structural generalization only",
+    "cross_task_dependencies": "none; every cycle is an independent service"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "schema": "research-design-card-0.1",
+  "status": "author_design_not_runtime_episode",
+  "parameter_provenance": "E4 controlled logical service contract; no physical calibration",
+  "execution": "noninterruptible; half-open resource intervals; dependencies on completion",
+  "independent_review": "pending",
+  "model_tested": false,
+  "runtime_integrated": false,
+  "card_id": "D-MULTIMODE-CAPACITY-01",
+  "family": "multiple_valid_resource_time_modes",
+  "agent_count": 3,
+  "resource_capacity_units": 4,
+  "story": "An ordinary laundry request permits either service mode. Eco and fast both satisfy the same declared outcome but consume different admission units for different durations.",
+  "tasks": [
+    {
+      "task_id": "laundry",
+      "agent_id": "LaundryAgent",
+      "release_ms": 0,
+      "deadline_ms": 600000,
+      "predecessors": [],
+      "acceptable_modes": [
+        {
+          "mode": "eco",
+          "duration_ms": 480000,
+          "resource_units": 1
+        },
+        {
+          "mode": "fast",
+          "duration_ms": 240000,
+          "resource_units": 2
+        }
+      ]
+    },
+    {
+      "task_id": "water",
+      "agent_id": "WaterAgent",
+      "release_ms": 0,
+      "deadline_ms": 360000,
+      "predecessors": [],
+      "acceptable_modes": [
+        {
+          "mode": "prepare",
+          "duration_ms": 300000,
+          "resource_units": 2
+        }
+      ]
+    },
+    {
+      "task_id": "meal",
+      "agent_id": "MealAgent",
+      "release_ms": 0,
+      "deadline_ms": 660000,
+      "predecessors": [],
+      "acceptable_modes": [
+        {
+          "mode": "prepare",
+          "duration_ms": 300000,
+          "resource_units": 1
+        }
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "laundry": {
+        "mode": "eco",
+        "start_ms": 0
+      },
+      "water": {
+        "mode": "prepare",
+        "start_ms": 0
+      },
+      "meal": {
+        "mode": "prepare",
+        "start_ms": 0
+      }
+    },
+    {
+      "laundry": {
+        "mode": "fast",
+        "start_ms": 0
+      },
+      "water": {
+        "mode": "prepare",
+        "start_ms": 0
+      },
+      "meal": {
+        "mode": "prepare",
+        "start_ms": 240000
+      }
+    }
+  ],
+  "required_baseline": "enumerate acceptable modes then exact capacity/deadline schedule, alongside fixed-mode and greedy rules",
+  "implementation_gaps": [
+    "set-valued service acceptance scoring",
+    "mode-aware public cost contract",
+    "mode-enumerating strong baseline",
+    "avoid hidden single required operation"
+  ],
+  "claim_limit": "fast is not always better; report service, deadlines, per-task waits and completions without inventing one universal winner"
+}

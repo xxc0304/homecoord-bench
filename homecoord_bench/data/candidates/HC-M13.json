@@ -129,6 +129,13 @@
       "operation": "charge",
       "target": "ev_charger",
       "grounded_operation": "charge",
+      "start_effects": {
+        "devices.ev_charger": "charging"
+      },
+      "completion_effects": {
+        "devices.ev_charger": "complete",
+        "vehicle.battery_pct": 50
+      },
       "effects": {
         "devices.ev_charger": "charging",
         "vehicle.battery_pct": 50
@@ -142,6 +149,13 @@
       "operation": "heat",
       "target": "water_heater",
       "grounded_operation": "heat",
+      "start_effects": {
+        "devices.water_heater": "heating"
+      },
+      "completion_effects": {
+        "devices.water_heater": "idle",
+        "water.temperature_c": 50
+      },
       "effects": {
         "devices.water_heater": "heating",
         "water.temperature_c": 50

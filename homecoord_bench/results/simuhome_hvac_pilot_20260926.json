@@ -1,0 +1,2827 @@
+{
+  "schema_version": "simuhome-hvac-pilot-summary-0.1",
+  "date": "2026-09-26",
+  "backend": {
+    "name": "SimuHome",
+    "commit": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+    "base_url": "http://127.0.0.1:8765/api",
+    "upstream_source_modified": false
+  },
+  "method": {
+    "models_called": 0,
+    "physical_devices_used": 0,
+    "initial_temperature_raw": 2900,
+    "temperature_units_calibrated": false,
+    "trial_count": 12,
+    "cards": {
+      "A": 3,
+      "B_cool_then_off": 3,
+      "B_off_then_cool": 3,
+      "C": 3
+    },
+    "note": "Local fixed-configuration adapter pilot only. temperature_delta_raw is in the simulator's unvalidated internal scale; command workflow API timing is not Agent/model latency."
+  },
+  "results": [
+    {
+      "run_id": "A-r1",
+      "card": "A",
+      "scenario_id": "simuhome-hvac-reset-cool",
+      "schedule_id": "cool-at-t20",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\A-r1.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "final_tick": 25,
+      "workflow_status": {
+        "workflow_id": "82587a93-3872-4265-855b-fd6e8b3f41f8",
+        "description": "homecoord-cool-cool",
+        "start_time": "2026-09-26 00:00:02",
+        "status": "completed",
+        "current_step": 3,
+        "total_steps": 4,
+        "error": null
+      },
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        }
+      ]
+    },
+    {
+      "run_id": "A-r2",
+      "card": "A",
+      "scenario_id": "simuhome-hvac-reset-cool",
+      "schedule_id": "cool-at-t20",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\A-r2.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "final_tick": 25,
+      "workflow_status": {
+        "workflow_id": "c73deca6-0d58-44e9-8528-432d59e0889f",
+        "description": "homecoord-cool-cool",
+        "start_time": "2026-09-26 00:00:02",
+        "status": "completed",
+        "current_step": 3,
+        "total_steps": 4,
+        "error": null
+      },
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        }
+      ]
+    },
+    {
+      "run_id": "A-r3",
+      "card": "A",
+      "scenario_id": "simuhome-hvac-reset-cool",
+      "schedule_id": "cool-at-t20",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\A-r3.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "final_tick": 25,
+      "workflow_status": {
+        "workflow_id": "459c1301-3dd1-4f6d-b60e-45233954def5",
+        "description": "homecoord-cool-cool",
+        "start_time": "2026-09-26 00:00:02",
+        "status": "completed",
+        "current_step": 3,
+        "total_steps": 4,
+        "error": null
+      },
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        }
+      ]
+    },
+    {
+      "run_id": "B-cool-then-off-r1",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "cool-then-off",
+      "expected_proposal_order": [
+        "p-cool",
+        "p-off"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-cool-then-off-r1.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "dc50c047ca23448d90bf840eb540a0e2401f81cfd89f6f2094cc7bf4e0534ba1",
+      "final_state_digest": "4e86712e1e5b69daaebf777420039f0cf95bbe876c9ba3fe3ea9161d36f1bf36",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "fb16d59a-5a7c-43b1-9f30-2fe9faa51497",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        },
+        {
+          "workflow_id": "73c1539e-900f-48cd-b740-742361e97ab4",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.963707259276,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.036292740724093164,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.082
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.25
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.388
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fb16d59a-5a7c-43b1-9f30-2fe9faa51497/status",
+          "adapter_wall_latency_ms": 99.845
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.29
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/73c1539e-900f-48cd-b740-742361e97ab4/status",
+          "adapter_wall_latency_ms": 99.939
+        }
+      ]
+    },
+    {
+      "run_id": "B-cool-then-off-r2",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "cool-then-off",
+      "expected_proposal_order": [
+        "p-cool",
+        "p-off"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-cool-then-off-r2.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "dc50c047ca23448d90bf840eb540a0e2401f81cfd89f6f2094cc7bf4e0534ba1",
+      "final_state_digest": "4e86712e1e5b69daaebf777420039f0cf95bbe876c9ba3fe3ea9161d36f1bf36",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "cd012224-c70f-4875-bef6-c8df55e56cdc",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        },
+        {
+          "workflow_id": "9bce0ab3-996c-44fe-84e6-96309292d1e1",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.963707259276,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.036292740724093164,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.082
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.25
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.388
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fb16d59a-5a7c-43b1-9f30-2fe9faa51497/status",
+          "adapter_wall_latency_ms": 99.845
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.29
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/73c1539e-900f-48cd-b740-742361e97ab4/status",
+          "adapter_wall_latency_ms": 99.939
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.104
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.02
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.301
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.351
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/cd012224-c70f-4875-bef6-c8df55e56cdc/status",
+          "adapter_wall_latency_ms": 99.814
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.733
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/9bce0ab3-996c-44fe-84e6-96309292d1e1/status",
+          "adapter_wall_latency_ms": 99.773
+        }
+      ]
+    },
+    {
+      "run_id": "B-cool-then-off-r3",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "cool-then-off",
+      "expected_proposal_order": [
+        "p-cool",
+        "p-off"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-cool-then-off-r3.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "dc50c047ca23448d90bf840eb540a0e2401f81cfd89f6f2094cc7bf4e0534ba1",
+      "final_state_digest": "4e86712e1e5b69daaebf777420039f0cf95bbe876c9ba3fe3ea9161d36f1bf36",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "0eb5cecd-c0b6-4ca4-a158-0c545470cb1e",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        },
+        {
+          "workflow_id": "7f324dfa-55a7-4375-bbad-7d304e482074",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.963707259276,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.036292740724093164,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.082
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.25
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.388
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fb16d59a-5a7c-43b1-9f30-2fe9faa51497/status",
+          "adapter_wall_latency_ms": 99.845
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.29
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/73c1539e-900f-48cd-b740-742361e97ab4/status",
+          "adapter_wall_latency_ms": 99.939
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.104
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.02
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.301
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.351
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/cd012224-c70f-4875-bef6-c8df55e56cdc/status",
+          "adapter_wall_latency_ms": 99.814
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.733
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/9bce0ab3-996c-44fe-84e6-96309292d1e1/status",
+          "adapter_wall_latency_ms": 99.773
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.521
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.144
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.222
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.21
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/0eb5cecd-c0b6-4ca4-a158-0c545470cb1e/status",
+          "adapter_wall_latency_ms": 100.076
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.43
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/7f324dfa-55a7-4375-bbad-7d304e482074/status",
+          "adapter_wall_latency_ms": 99.956
+        }
+      ]
+    },
+    {
+      "run_id": "B-off-then-cool-r1",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "off-then-cool",
+      "expected_proposal_order": [
+        "p-off",
+        "p-cool"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-off-then-cool-r1.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "c3f7365a6a3426b83979c6be9c4846e92491a3f640bf85f71634f335bd0cba6e",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "aa49d9e2-ba48-4cba-94f4-11182a3956eb",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        },
+        {
+          "workflow_id": "90a7f3a7-5588-4245-b080-6673bbe101dc",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.082
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.25
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.388
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fb16d59a-5a7c-43b1-9f30-2fe9faa51497/status",
+          "adapter_wall_latency_ms": 99.845
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.29
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/73c1539e-900f-48cd-b740-742361e97ab4/status",
+          "adapter_wall_latency_ms": 99.939
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.104
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.02
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.301
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.351
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/cd012224-c70f-4875-bef6-c8df55e56cdc/status",
+          "adapter_wall_latency_ms": 99.814
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.733
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/9bce0ab3-996c-44fe-84e6-96309292d1e1/status",
+          "adapter_wall_latency_ms": 99.773
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.521
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.144
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.222
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.21
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/0eb5cecd-c0b6-4ca4-a158-0c545470cb1e/status",
+          "adapter_wall_latency_ms": 100.076
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.43
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/7f324dfa-55a7-4375-bbad-7d304e482074/status",
+          "adapter_wall_latency_ms": 99.956
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.683
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.995
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.93
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.283
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/aa49d9e2-ba48-4cba-94f4-11182a3956eb/status",
+          "adapter_wall_latency_ms": 100.268
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.341
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/90a7f3a7-5588-4245-b080-6673bbe101dc/status",
+          "adapter_wall_latency_ms": 100.049
+        }
+      ]
+    },
+    {
+      "run_id": "B-off-then-cool-r2",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "off-then-cool",
+      "expected_proposal_order": [
+        "p-off",
+        "p-cool"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-off-then-cool-r2.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "c3f7365a6a3426b83979c6be9c4846e92491a3f640bf85f71634f335bd0cba6e",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "c67575c6-4059-4f39-91d0-5598845e6a17",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        },
+        {
+          "workflow_id": "3600f2ac-db24-4a61-beb1-46bbf72f8042",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.082
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.25
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.388
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fb16d59a-5a7c-43b1-9f30-2fe9faa51497/status",
+          "adapter_wall_latency_ms": 99.845
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.29
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/73c1539e-900f-48cd-b740-742361e97ab4/status",
+          "adapter_wall_latency_ms": 99.939
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.104
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.02
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.301
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.351
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/cd012224-c70f-4875-bef6-c8df55e56cdc/status",
+          "adapter_wall_latency_ms": 99.814
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.733
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/9bce0ab3-996c-44fe-84e6-96309292d1e1/status",
+          "adapter_wall_latency_ms": 99.773
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.521
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.144
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.222
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.21
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/0eb5cecd-c0b6-4ca4-a158-0c545470cb1e/status",
+          "adapter_wall_latency_ms": 100.076
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.43
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/7f324dfa-55a7-4375-bbad-7d304e482074/status",
+          "adapter_wall_latency_ms": 99.956
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.683
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.995
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.93
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.283
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/aa49d9e2-ba48-4cba-94f4-11182a3956eb/status",
+          "adapter_wall_latency_ms": 100.268
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.341
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/90a7f3a7-5588-4245-b080-6673bbe101dc/status",
+          "adapter_wall_latency_ms": 100.049
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.36
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.246
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.187
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.406
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c67575c6-4059-4f39-91d0-5598845e6a17/status",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.184
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/3600f2ac-db24-4a61-beb1-46bbf72f8042/status",
+          "adapter_wall_latency_ms": 100.192
+        }
+      ]
+    },
+    {
+      "run_id": "B-off-then-cool-r3",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "off-then-cool",
+      "expected_proposal_order": [
+        "p-off",
+        "p-cool"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-off-then-cool-r3.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "c3f7365a6a3426b83979c6be9c4846e92491a3f640bf85f71634f335bd0cba6e",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "b88df481-c838-4850-a7a0-bf6f9123dd9d",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        },
+        {
+          "workflow_id": "98c9ea89-cc8c-4ff3-8cd6-1ba65fb249dc",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.082
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.25
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.388
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fb16d59a-5a7c-43b1-9f30-2fe9faa51497/status",
+          "adapter_wall_latency_ms": 99.845
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.29
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/73c1539e-900f-48cd-b740-742361e97ab4/status",
+          "adapter_wall_latency_ms": 99.939
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.104
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.02
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.301
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.351
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/cd012224-c70f-4875-bef6-c8df55e56cdc/status",
+          "adapter_wall_latency_ms": 99.814
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.733
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/9bce0ab3-996c-44fe-84e6-96309292d1e1/status",
+          "adapter_wall_latency_ms": 99.773
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.521
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.144
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.222
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.21
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/0eb5cecd-c0b6-4ca4-a158-0c545470cb1e/status",
+          "adapter_wall_latency_ms": 100.076
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.43
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/7f324dfa-55a7-4375-bbad-7d304e482074/status",
+          "adapter_wall_latency_ms": 99.956
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.683
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.995
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.93
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.283
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/aa49d9e2-ba48-4cba-94f4-11182a3956eb/status",
+          "adapter_wall_latency_ms": 100.268
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.341
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/90a7f3a7-5588-4245-b080-6673bbe101dc/status",
+          "adapter_wall_latency_ms": 100.049
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.36
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.246
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.187
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.406
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c67575c6-4059-4f39-91d0-5598845e6a17/status",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.184
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/3600f2ac-db24-4a61-beb1-46bbf72f8042/status",
+          "adapter_wall_latency_ms": 100.192
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.289
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.327
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.84
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.483
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/b88df481-c838-4850-a7a0-bf6f9123dd9d/status",
+          "adapter_wall_latency_ms": 100.158
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.318
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/98c9ea89-cc8c-4ff3-8cd6-1ba65fb249dc/status",
+          "adapter_wall_latency_ms": 100.089
+        }
+      ]
+    },
+    {
+      "run_id": "C-r1",
+      "card": "C",
+      "scenario_id": "simuhome-clock-step",
+      "schedule_id": "single-step-fast-forward",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\C-r1.jsonl",
+      "reset_initial_state_digest": "0d93bc7fb5df06d93132c84797ad012f082f65f3fcf27c64603679502a3a4c8c",
+      "clock_steps": [
+        {
+          "tick": 1,
+          "digest": "e1c3f8469229be618ea72896e48d534462663e22cf1a3721bda4f5eefdc5f22a",
+          "virtual_time": "2026-09-26 00:00:01"
+        },
+        {
+          "tick": 2,
+          "digest": "212096a10f0ae58934920f9c84f0e2d4b7b60abe9d1ffad884118cf49282f114",
+          "virtual_time": "2026-09-26 00:00:02"
+        },
+        {
+          "tick": 3,
+          "digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+          "virtual_time": "2026-09-26 00:00:03"
+        }
+      ],
+      "final_state_digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.082
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.25
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.388
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fb16d59a-5a7c-43b1-9f30-2fe9faa51497/status",
+          "adapter_wall_latency_ms": 99.845
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.29
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/73c1539e-900f-48cd-b740-742361e97ab4/status",
+          "adapter_wall_latency_ms": 99.939
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.104
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.02
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.301
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.351
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/cd012224-c70f-4875-bef6-c8df55e56cdc/status",
+          "adapter_wall_latency_ms": 99.814
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.733
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/9bce0ab3-996c-44fe-84e6-96309292d1e1/status",
+          "adapter_wall_latency_ms": 99.773
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.521
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.144
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.222
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.21
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/0eb5cecd-c0b6-4ca4-a158-0c545470cb1e/status",
+          "adapter_wall_latency_ms": 100.076
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.43
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/7f324dfa-55a7-4375-bbad-7d304e482074/status",
+          "adapter_wall_latency_ms": 99.956
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.683
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.995
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.93
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.283
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/aa49d9e2-ba48-4cba-94f4-11182a3956eb/status",
+          "adapter_wall_latency_ms": 100.268
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.341
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/90a7f3a7-5588-4245-b080-6673bbe101dc/status",
+          "adapter_wall_latency_ms": 100.049
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.36
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.246
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.187
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.406
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c67575c6-4059-4f39-91d0-5598845e6a17/status",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.184
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/3600f2ac-db24-4a61-beb1-46bbf72f8042/status",
+          "adapter_wall_latency_ms": 100.192
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.289
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.327
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.84
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.483
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/b88df481-c838-4850-a7a0-bf6f9123dd9d/status",
+          "adapter_wall_latency_ms": 100.158
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.318
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/98c9ea89-cc8c-4ff3-8cd6-1ba65fb249dc/status",
+          "adapter_wall_latency_ms": 100.089
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.264
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.068
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 999.979
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.207
+        }
+      ]
+    },
+    {
+      "run_id": "C-r2",
+      "card": "C",
+      "scenario_id": "simuhome-clock-step",
+      "schedule_id": "single-step-fast-forward",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\C-r2.jsonl",
+      "reset_initial_state_digest": "0d93bc7fb5df06d93132c84797ad012f082f65f3fcf27c64603679502a3a4c8c",
+      "clock_steps": [
+        {
+          "tick": 1,
+          "digest": "e1c3f8469229be618ea72896e48d534462663e22cf1a3721bda4f5eefdc5f22a",
+          "virtual_time": "2026-09-26 00:00:01"
+        },
+        {
+          "tick": 2,
+          "digest": "212096a10f0ae58934920f9c84f0e2d4b7b60abe9d1ffad884118cf49282f114",
+          "virtual_time": "2026-09-26 00:00:02"
+        },
+        {
+          "tick": 3,
+          "digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+          "virtual_time": "2026-09-26 00:00:03"
+        }
+      ],
+      "final_state_digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.082
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.25
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.388
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fb16d59a-5a7c-43b1-9f30-2fe9faa51497/status",
+          "adapter_wall_latency_ms": 99.845
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.29
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/73c1539e-900f-48cd-b740-742361e97ab4/status",
+          "adapter_wall_latency_ms": 99.939
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.104
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.02
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.301
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.351
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/cd012224-c70f-4875-bef6-c8df55e56cdc/status",
+          "adapter_wall_latency_ms": 99.814
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.733
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/9bce0ab3-996c-44fe-84e6-96309292d1e1/status",
+          "adapter_wall_latency_ms": 99.773
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.521
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.144
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.222
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.21
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/0eb5cecd-c0b6-4ca4-a158-0c545470cb1e/status",
+          "adapter_wall_latency_ms": 100.076
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.43
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/7f324dfa-55a7-4375-bbad-7d304e482074/status",
+          "adapter_wall_latency_ms": 99.956
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.683
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.995
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.93
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.283
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/aa49d9e2-ba48-4cba-94f4-11182a3956eb/status",
+          "adapter_wall_latency_ms": 100.268
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.341
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/90a7f3a7-5588-4245-b080-6673bbe101dc/status",
+          "adapter_wall_latency_ms": 100.049
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.36
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.246
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.187
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.406
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c67575c6-4059-4f39-91d0-5598845e6a17/status",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.184
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/3600f2ac-db24-4a61-beb1-46bbf72f8042/status",
+          "adapter_wall_latency_ms": 100.192
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.289
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.327
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.84
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.483
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/b88df481-c838-4850-a7a0-bf6f9123dd9d/status",
+          "adapter_wall_latency_ms": 100.158
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.318
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/98c9ea89-cc8c-4ff3-8cd6-1ba65fb249dc/status",
+          "adapter_wall_latency_ms": 100.089
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.264
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.068
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 999.979
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.207
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 999.748
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.333
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.09
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.104
+        }
+      ]
+    },
+    {
+      "run_id": "C-r3",
+      "card": "C",
+      "scenario_id": "simuhome-clock-step",
+      "schedule_id": "single-step-fast-forward",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\C-r3.jsonl",
+      "reset_initial_state_digest": "0d93bc7fb5df06d93132c84797ad012f082f65f3fcf27c64603679502a3a4c8c",
+      "clock_steps": [
+        {
+          "tick": 1,
+          "digest": "e1c3f8469229be618ea72896e48d534462663e22cf1a3721bda4f5eefdc5f22a",
+          "virtual_time": "2026-09-26 00:00:01"
+        },
+        {
+          "tick": 2,
+          "digest": "212096a10f0ae58934920f9c84f0e2d4b7b60abe9d1ffad884118cf49282f114",
+          "virtual_time": "2026-09-26 00:00:02"
+        },
+        {
+          "tick": 3,
+          "digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+          "virtual_time": "2026-09-26 00:00:03"
+        }
+      ],
+      "final_state_digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "GET",
+          "path": "/__health__",
+          "adapter_wall_latency_ms": 73.1
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.88
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.518
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.496
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/82587a93-3872-4265-855b-fd6e8b3f41f8/status",
+          "adapter_wall_latency_ms": 99.585
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.022
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.007
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c73deca6-0d58-44e9-8528-432d59e0889f/status",
+          "adapter_wall_latency_ms": 99.774
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.608
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.872
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.296
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/459c1301-3dd1-4f6d-b60e-45233954def5/status",
+          "adapter_wall_latency_ms": 100.615
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.082
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.25
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.388
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fb16d59a-5a7c-43b1-9f30-2fe9faa51497/status",
+          "adapter_wall_latency_ms": 99.845
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.29
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/73c1539e-900f-48cd-b740-742361e97ab4/status",
+          "adapter_wall_latency_ms": 99.939
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.104
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.02
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.301
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.351
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/cd012224-c70f-4875-bef6-c8df55e56cdc/status",
+          "adapter_wall_latency_ms": 99.814
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.733
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/9bce0ab3-996c-44fe-84e6-96309292d1e1/status",
+          "adapter_wall_latency_ms": 99.773
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.521
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.144
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.222
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.21
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/0eb5cecd-c0b6-4ca4-a158-0c545470cb1e/status",
+          "adapter_wall_latency_ms": 100.076
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.43
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/7f324dfa-55a7-4375-bbad-7d304e482074/status",
+          "adapter_wall_latency_ms": 99.956
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.683
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.995
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.93
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.283
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/aa49d9e2-ba48-4cba-94f4-11182a3956eb/status",
+          "adapter_wall_latency_ms": 100.268
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.341
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/90a7f3a7-5588-4245-b080-6673bbe101dc/status",
+          "adapter_wall_latency_ms": 100.049
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.36
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.246
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.187
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.406
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/c67575c6-4059-4f39-91d0-5598845e6a17/status",
+          "adapter_wall_latency_ms": 100.138
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.184
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/3600f2ac-db24-4a61-beb1-46bbf72f8042/status",
+          "adapter_wall_latency_ms": 100.192
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.289
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.327
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.84
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.483
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/b88df481-c838-4850-a7a0-bf6f9123dd9d/status",
+          "adapter_wall_latency_ms": 100.158
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.318
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/98c9ea89-cc8c-4ff3-8cd6-1ba65fb249dc/status",
+          "adapter_wall_latency_ms": 100.089
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.264
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.068
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 999.979
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.207
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 999.748
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.333
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.09
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.104
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 999.288
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.064
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 999.986
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.32
+        }
+      ]
+    }
+  ],
+  "passed_count": 12,
+  "failed_count": 0
+}

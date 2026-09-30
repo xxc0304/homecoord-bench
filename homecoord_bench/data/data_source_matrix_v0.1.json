@@ -1,0 +1,76 @@
+{
+  "schema_version": "homecoord-data-source-matrix-0.1",
+  "updated_on": "2026-09-28",
+  "allowed_evidence_levels": ["E1", "E2", "E3", "E4", "E5", "E6"],
+  "families": [
+    {
+      "family": "C1",
+      "claim": "Directly incompatible commands to one device create a coordination-versus-waiting tradeoff.",
+      "minimum_evidence": ["E2", "E4", "E5", "E6"],
+      "available_evidence": ["E3", "E4", "E5"],
+      "readiness": "mechanism_ready_review_missing",
+      "permitted_claims": [
+        "command-conflict mechanism under controlled timing",
+        "coordination overhead in the event simulator"
+      ],
+      "prohibited_claims": [
+        "real room-temperature response",
+        "deployed device response-time distribution",
+        "population conflict prevalence"
+      ],
+      "next_evidence": "specific device command/feedback contract and independent review"
+    },
+    {
+      "family": "C2",
+      "claim": "Actions on different devices can interfere through a shared physical environment.",
+      "minimum_evidence": ["E1", "E3", "E4", "E5", "E6"],
+      "available_evidence": ["E1", "E4"],
+      "readiness": "measured_context_replicated_current_physics_rejected",
+      "permitted_claims": [
+        "measured open-window and heating context exists in two independently recorded anonymized units",
+        "controlled task construction on a measured initial state"
+      ],
+      "prohibited_claims": [
+        "causal energy or comfort benefit of coordination",
+        "one-second response validation",
+        "calibration of the existing 2.5-5 ppm/s ventilation-rate model",
+        "population conflict prevalence"
+      ],
+      "next_evidence": "intervention traces or a validated counterfactual ventilation-heating simulator; the current synthetic dynamics must remain exploratory"
+    },
+    {
+      "family": "C3",
+      "claim": "Individually feasible loads can exceed a shared capacity when executed concurrently.",
+      "minimum_evidence": ["E2", "E4", "E5", "E6"],
+      "available_evidence": ["E2", "E4", "E5"],
+      "readiness": "mechanism_ready_capacity_source_missing",
+      "permitted_claims": [
+        "capacity-conflict mechanism under disclosed synthetic budgets",
+        "safety-service-latency tradeoff in controlled replay"
+      ],
+      "prohibited_claims": [
+        "representative household capacity",
+        "real deadline distribution",
+        "population conflict prevalence"
+      ],
+      "next_evidence": "named capacity enforcement point, matched load settings, and independent review"
+    },
+    {
+      "family": "C4",
+      "claim": "State changes at different action phases can invalidate an earlier Agent decision.",
+      "minimum_evidence": ["E2", "E4", "E5", "E6"],
+      "available_evidence": ["E4", "E5"],
+      "readiness": "detection_ready_recovery_contract_missing",
+      "permitted_claims": [
+        "stale-state detection at controlled lifecycle phases",
+        "revalidation overhead in controlled replay"
+      ],
+      "prohibited_claims": [
+        "physical stopping time",
+        "real recovery cost",
+        "population event frequency"
+      ],
+      "next_evidence": "interruptibility, stop latency, partial-progress, and recovery contracts"
+    }
+  ]
+}

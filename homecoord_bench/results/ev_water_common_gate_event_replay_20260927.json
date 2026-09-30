@@ -1,0 +1,2027 @@
+{
+  "schema_version": "ev-water-common-gate-event-replay-0.1",
+  "status": "uncalibrated_physical_assumptions_scripted_actions_logged_model_latencies",
+  "source": "results\\physical_capacity_v2.json",
+  "source_sha256": "c7765bfeb8816c98f2c72f57793a728fd566e592514db9c9b16b8f0788c688aa",
+  "source_model": "deepseek-flash",
+  "physical_assumptions": {
+    "battery_capacity_kwh": 60.0,
+    "charger_input_kw": 4.0,
+    "water_heater_input_kw": 3.0,
+    "efficiency": 0.9,
+    "tank_liters": 100.0,
+    "water_density_kg_per_liter": 1.0,
+    "water_specific_heat_kj_per_kg_c": 4.186,
+    "status": "assumed_not_measured",
+    "effect_phase": "physical_completion"
+  },
+  "same_shared_safety_gate_for_all_policies": true,
+  "public_task_power_bounds_kw": {
+    "charge_ev": 4.0,
+    "heat_water": 3.0
+  },
+  "new_api_calls": 0,
+  "real_devices": 0,
+  "rows": [
+    {
+      "source_repetition": 1,
+      "condition": "conflict",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1344,
+      "task_action_finish_time_ms": {
+        "charge_ev": null,
+        "heat_water": 2326900
+      },
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 1,
+      "condition": "conflict",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1344,
+      "task_action_finish_time_ms": {
+        "charge_ev": null,
+        "heat_water": 2326900
+      },
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 1,
+      "condition": "conflict",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1344,
+      "task_action_finish_time_ms": {
+        "charge_ev": 20326900,
+        "heat_water": 2326900
+      },
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 1,
+      "condition": "conflict",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1524,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 20327080
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 1,
+      "condition": "conflict",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1524,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 20327080
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 1,
+      "condition": "conflict",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1344,
+      "task_action_finish_time_ms": {
+        "charge_ev": 20326900,
+        "heat_water": 2326900
+      },
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 1,
+      "condition": "control",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1344,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 1,
+      "condition": "control",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1344,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 1,
+      "condition": "control",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1344,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 1,
+      "condition": "control",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1524,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2327080
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 1,
+      "condition": "control",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1344,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 1,
+      "condition": "control",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      },
+      "first_proposal_returned_task": "heat_water",
+      "first_action_start_latency_ms": 1344,
+      "task_action_finish_time_ms": {
+        "charge_ev": 20326900,
+        "heat_water": 2326900
+      },
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "conflict",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": null
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 2,
+      "condition": "conflict",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": null
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 2,
+      "condition": "conflict",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 20327040
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "conflict",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1909,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 20327465
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "conflict",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 20327040
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "conflict",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 20327040
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "control",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "control",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "control",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "control",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1909,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 2327465
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "control",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 2,
+      "condition": "control",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1484,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 20327040
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "conflict",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": null
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 3,
+      "condition": "conflict",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": null
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 3,
+      "condition": "conflict",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 20327242
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "conflict",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1695,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 20327251
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "conflict",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 20327242
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "conflict",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 20327242
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "control",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "control",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "control",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "control",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1695,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 2327251
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "control",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 3,
+      "condition": "control",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1586,
+        "heat_water": 1495
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1686,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 20327242
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "conflict",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": null
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 4,
+      "condition": "conflict",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": null
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 4,
+      "condition": "conflict",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 20327151
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "conflict",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1948,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 20327504
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "conflict",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 20327151
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "conflict",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 20327151
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "control",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "control",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "control",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "control",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1948,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 2327504
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "control",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 4,
+      "condition": "control",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1495,
+        "heat_water": 1748
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1595,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 20327151
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "conflict",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": null
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 5,
+      "condition": "conflict",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": null
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_deadlines_met": false,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "all_tasks_served": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "source_repetition": 5,
+      "condition": "conflict",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 20327302
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "conflict",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1823,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 20327379
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "conflict",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 20327302
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "conflict",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 20327302
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "control",
+      "policy": "IndependentMultiAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "control",
+      "policy": "RuleCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "control",
+      "policy": "ConstraintCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "control",
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1823,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 2327379
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "control",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "source_repetition": 5,
+      "condition": "control",
+      "policy": "CentralSingleAgent",
+      "proposal_latency_by_task_ms": {
+        "charge_ev": 1646,
+        "heat_water": 1623
+      },
+      "first_proposal_returned_task": "charge_ev",
+      "first_action_start_latency_ms": 1746,
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 20327302
+      },
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_deadlines_met": true,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "all_tasks_served": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": []
+    }
+  ]
+}

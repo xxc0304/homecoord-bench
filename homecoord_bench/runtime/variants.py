@@ -23,6 +23,7 @@ def direct_conflict_variants(seed: dict[str, Any]) -> list[dict[str, Any]]:
             if visibility == "local_only":
                 energy["observable_state"] = ["devices.living_hvac"]
                 energy["constraint_visibility"] = "local"
+                energy["goal_visibility"] = "local"
                 energy["policy_constraints"] = []
             else:
                 energy["observable_state"] = ["devices.living_hvac", "request.comfort_active"]

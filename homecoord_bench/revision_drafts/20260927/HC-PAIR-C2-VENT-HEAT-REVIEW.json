@@ -1,0 +1,92 @@
+{
+  "scenario_id": "HC-PAIR-C2-VENT-HEAT-REVIEW",
+  "base_candidate_id": "HC-M06",
+  "scenario_type": "standalone_continuous_physics_probe",
+  "review_status": "proposed_revision_not_scored",
+  "conflict_family": "C2_indirect_environmental_interference",
+  "question": "When elevated CO2 requires ventilation, does heating while the window remains open create a measurable completion-time and energy tradeoff, and when does delaying heat protect energy at the cost of missing the service deadline?",
+  "conflict_condition": {
+    "initial_co2_ppm": 1600,
+    "ventilation_goal_ppm": 900,
+    "window_opening_start_ms": 7000,
+    "window_open_command_end_ms": 9000,
+    "heater_ready_ms": 8000
+  },
+  "matched_control": {
+    "single_changed_factor": "initial_co2_ppm",
+    "initial_co2_ppm": 850,
+    "rationale": "CO2 is already below the ventilation threshold, so no window-opening action is needed; all thermal parameters, room goals, heater availability, and evaluation deadlines remain matched."
+  },
+  "tasks": [
+    {
+      "task_id": "ventilate_if_needed",
+      "goal": "If CO2 exceeds 900 ppm, lower it to 900 ppm or below and close the window.",
+      "agent_role": "air_quality",
+      "target": "window",
+      "operation": "open_then_close",
+      "service_completion_requires": ["co2_ppm <= 900", "window_closed"]
+    },
+    {
+      "task_id": "restore_comfort_temperature",
+      "goal": "Reach indoor temperature 21 C.",
+      "agent_role": "climate",
+      "target": "heater",
+      "operation": "heat",
+      "service_completion_requires": ["indoor_temperature_c >= 21"]
+    }
+  ],
+  "shared_environment_model": {
+    "time_step_ms": 1000,
+    "initial_indoor_temperature_c": 17,
+    "outdoor_temperature_c": 8,
+    "heater_rate_c_per_s": 0.025,
+    "heater_power_kw": 2,
+    "ventilation_rate_ppm_per_s_grid": [2.5, 5.0],
+    "window_heat_exchange_per_s_grid": [0.0005, 0.0015, 0.003],
+    "window_close_delay_ms_after_co2_goal": 3000
+  },
+  "evaluation_deadline_ms_grid": [240000, 360000, 480000],
+  "optimistic_feasibility_screen": {
+    "minimum_heat_time_ms": 160000,
+    "ventilation_time_formula_ms": "(initial_co2_ppm - 900) / ventilation_rate_ppm_per_s * 1000",
+    "window_open_and_close_overhead_ms": 10000,
+    "completion_lower_bound_formula_ms": "max(heater_ready_ms + minimum_heat_time_ms, window_opening_start_ms + ventilation_time_ms + window_open_and_close_overhead_ms)",
+    "known_provably_infeasible_grid_cells": 3,
+    "infeasibility_condition": "initial_co2_ppm=1600, ventilation_rate_ppm_per_s=2.5, deadline_ms=240000; optimistic ventilation-only completion bound is 290000 ms",
+    "rule": "Exclude lower-bound-infeasible cells from coordination-caused deadline-miss rates. A cell below the optimistic bound is not thereby proven feasible because the bound ignores heat loss."
+  },
+  "policies_in_existing_probe": [
+    "Independent",
+    "DeviceLock",
+    "ActionOverlapLock",
+    "StateGate",
+    "OracleSwitch_reference_upper_bound"
+  ],
+  "metrics": [
+    "both_task_goals_complete_by_deadline",
+    "goal_completion_time_ms",
+    "heater_energy_wh",
+    "heater_energy_while_window_open_wh",
+    "window_open_heat_loss_degree_seconds",
+    "paired_deadline_success_difference_vs_control",
+    "paired_completion_time_difference_vs_control",
+    "paired_heater_energy_difference_vs_control"
+  ],
+  "interpretation_rule": "Heating while the window is open is an environmental cost and possible deadline tradeoff, not automatically a safety violation. C2 conflict counts should only be used if the shared-state effect and measured penalty are explicit.",
+  "provenance_and_limits": {
+    "status": "synthetic_uncalibrated_parameters_not_physical_ground_truth",
+    "simulator_entrypoint": "homecoord_bench/probe_ventilation_heating_tradeoff.py",
+    "existing_result": "homecoord_bench/results/ventilation_heating_tradeoff_20260927.json",
+    "has_real_device_data": false,
+    "has_simuhome_window_co2_thermal_trace": false,
+    "has_real_model_proposals": false,
+    "has_action_cancellation_or_recovery": false,
+    "review_needed": [
+      "confirm this is a meaningful C2 environmental interaction rather than a policy preference",
+      "confirm the matched control changes only the need for ventilation",
+      "validate heat and ventilation equations and parameter ranges against domain evidence",
+      "confirm service deadlines are feasible and independently meaningful",
+      "review whether the listed metrics separate safety, service, energy and elapsed time"
+    ]
+  }
+}

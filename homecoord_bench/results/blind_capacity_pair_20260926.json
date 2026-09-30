@@ -1,0 +1,2348 @@
+{
+  "experiment": "blind_capacity_pair",
+  "rows": [
+    {
+      "repetition": 1,
+      "model_records": [
+        {
+          "request": {
+            "request_id": "b612447f-26e8-40db-9bd9-b3933ca955d3",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 111,
+            "state": {
+              "study": {
+                "lux": 100
+              },
+              "devices": {
+                "study_light": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "StudyLightAgent",
+              "role": "study_lighting",
+              "tools": [
+                "set_light"
+              ],
+              "observable_state": [
+                "study.lux"
+              ],
+              "writable_resources": [
+                "devices.study_light"
+              ]
+            },
+            "task": {
+              "task_id": "study_light",
+              "agent_id": "StudyLightAgent",
+              "release_at_ms": 0,
+              "goal": "light the study",
+              "priority": 50
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_light"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "type": "number",
+                    "example": 500
+                  }
+                ],
+                "description": "Turn on the study light in reading mode."
+              },
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the study light."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "p1",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "value": 500
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "study.lux",
+                    "op": "lt",
+                    "value": 300,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 2000,
+                "estimated_power_kw": 0.01
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1427
+        },
+        {
+          "request": {
+            "request_id": "e3c5f8ca-665f-4d8b-bb5f-d2396ab0827a",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 111,
+            "state": {
+              "bedroom": {
+                "temperature_c": 29
+              },
+              "devices": {
+                "bedroom_hvac": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomClimateAgent",
+              "role": "bedroom_climate",
+              "tools": [
+                "set_hvac"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.bedroom_hvac"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_cool",
+              "agent_id": "BedroomClimateAgent",
+              "release_at_ms": 100,
+              "goal": "cool the bedroom",
+              "priority": 60
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_hvac"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "type": "number",
+                    "example": 25
+                  }
+                ],
+                "description": "Cool the bedroom to the chosen temperature."
+              },
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the bedroom HVAC."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "e3c5f8ca-665f-4d8b-bb5f-d2396ab0827a-1",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "value": 25
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "gte",
+                    "value": 29,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 600000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 3290
+        }
+      ],
+      "outcomes": {
+        "low_IndependentMultiAgent": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1527,
+          "goal_first_satisfied_ms": 3490,
+          "last_action_end_ms": 6490,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "low_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1527,
+          "goal_first_satisfied_ms": 3490,
+          "last_action_end_ms": 6490,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_IndependentMultiAgent": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1527,
+          "goal_first_satisfied_ms": 3490,
+          "last_action_end_ms": 6490,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1527,
+          "goal_first_satisfied_ms": 3490,
+          "last_action_end_ms": 6490,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      },
+      "low_goal_delay_ms": 0,
+      "high_goal_delay_ms": 0
+    },
+    {
+      "repetition": 2,
+      "model_records": [
+        {
+          "request": {
+            "request_id": "ad45328b-a093-454e-bc70-425f8feb84af",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 111,
+            "state": {
+              "study": {
+                "lux": 100
+              },
+              "devices": {
+                "study_light": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "StudyLightAgent",
+              "role": "study_lighting",
+              "tools": [
+                "set_light"
+              ],
+              "observable_state": [
+                "study.lux"
+              ],
+              "writable_resources": [
+                "devices.study_light"
+              ]
+            },
+            "task": {
+              "task_id": "study_light",
+              "agent_id": "StudyLightAgent",
+              "release_at_ms": 0,
+              "goal": "light the study",
+              "priority": 50
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_light"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "type": "number",
+                    "example": 500
+                  }
+                ],
+                "description": "Turn on the study light in reading mode."
+              },
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the study light."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "p1",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "value": 500
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [],
+                "estimated_duration_ms": 1000,
+                "estimated_power_kw": 0.02
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1263
+        },
+        {
+          "request": {
+            "request_id": "f2877655-d3f0-4a0f-9f3d-043c588aabf3",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 111,
+            "state": {
+              "bedroom": {
+                "temperature_c": 29
+              },
+              "devices": {
+                "bedroom_hvac": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomClimateAgent",
+              "role": "bedroom_climate",
+              "tools": [
+                "set_hvac"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.bedroom_hvac"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_cool",
+              "agent_id": "BedroomClimateAgent",
+              "release_at_ms": 100,
+              "goal": "cool the bedroom",
+              "priority": 60
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_hvac"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "type": "number",
+                    "example": 25
+                  }
+                ],
+                "description": "Cool the bedroom to the chosen temperature."
+              },
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the bedroom HVAC."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "prop-cool-bedroom-1",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "value": 25
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "gt",
+                    "value": 26,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 600000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1501
+        }
+      ],
+      "outcomes": {
+        "low_IndependentMultiAgent": {
+          "process_valid_success": false,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1363,
+          "goal_first_satisfied_ms": 1701,
+          "last_action_end_ms": 4701,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "low_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1363,
+          "goal_first_satisfied_ms": 2363,
+          "last_action_end_ms": 5363,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_IndependentMultiAgent": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1363,
+          "goal_first_satisfied_ms": 1701,
+          "last_action_end_ms": 4701,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1363,
+          "goal_first_satisfied_ms": 1701,
+          "last_action_end_ms": 4701,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      },
+      "low_goal_delay_ms": 662,
+      "high_goal_delay_ms": 0
+    },
+    {
+      "repetition": 3,
+      "model_records": [
+        {
+          "request": {
+            "request_id": "6a3b5d40-511f-4c4c-9850-5812d394c71c",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 111,
+            "state": {
+              "study": {
+                "lux": 100
+              },
+              "devices": {
+                "study_light": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "StudyLightAgent",
+              "role": "study_lighting",
+              "tools": [
+                "set_light"
+              ],
+              "observable_state": [
+                "study.lux"
+              ],
+              "writable_resources": [
+                "devices.study_light"
+              ]
+            },
+            "task": {
+              "task_id": "study_light",
+              "agent_id": "StudyLightAgent",
+              "release_at_ms": 0,
+              "goal": "light the study",
+              "priority": 50
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_light"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "type": "number",
+                    "example": 500
+                  }
+                ],
+                "description": "Turn on the study light in reading mode."
+              },
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the study light."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "study_light_reading_1",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "value": 500
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "study.lux",
+                    "op": "lt",
+                    "value": 300,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1000,
+                "estimated_power_kw": 0.05
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 2216
+        },
+        {
+          "request": {
+            "request_id": "ddc91a11-a4d8-4e68-8231-28c5ca4559ed",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 111,
+            "state": {
+              "bedroom": {
+                "temperature_c": 29
+              },
+              "devices": {
+                "bedroom_hvac": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomClimateAgent",
+              "role": "bedroom_climate",
+              "tools": [
+                "set_hvac"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.bedroom_hvac"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_cool",
+              "agent_id": "BedroomClimateAgent",
+              "release_at_ms": 100,
+              "goal": "cool the bedroom",
+              "priority": 60
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_hvac"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "type": "number",
+                    "example": 25
+                  }
+                ],
+                "description": "Cool the bedroom to the chosen temperature."
+              },
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the bedroom HVAC."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "prop-bedroom-cool-1",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "value": 25
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "gt",
+                    "value": 26,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1800000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 2606
+        }
+      ],
+      "outcomes": {
+        "low_IndependentMultiAgent": {
+          "process_valid_success": false,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 2316,
+          "goal_first_satisfied_ms": 2806,
+          "last_action_end_ms": 5806,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "low_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 2316,
+          "goal_first_satisfied_ms": 3316,
+          "last_action_end_ms": 6316,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_IndependentMultiAgent": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 2316,
+          "goal_first_satisfied_ms": 2806,
+          "last_action_end_ms": 5806,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 2316,
+          "goal_first_satisfied_ms": 2806,
+          "last_action_end_ms": 5806,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      },
+      "low_goal_delay_ms": 510,
+      "high_goal_delay_ms": 0
+    },
+    {
+      "repetition": 4,
+      "model_records": [
+        {
+          "request": {
+            "request_id": "dc878942-65b2-4a63-9b9a-8f27917f8829",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 111,
+            "state": {
+              "study": {
+                "lux": 100
+              },
+              "devices": {
+                "study_light": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "StudyLightAgent",
+              "role": "study_lighting",
+              "tools": [
+                "set_light"
+              ],
+              "observable_state": [
+                "study.lux"
+              ],
+              "writable_resources": [
+                "devices.study_light"
+              ]
+            },
+            "task": {
+              "task_id": "study_light",
+              "agent_id": "StudyLightAgent",
+              "release_at_ms": 0,
+              "goal": "light the study",
+              "priority": 50
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_light"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "type": "number",
+                    "example": 500
+                  }
+                ],
+                "description": "Turn on the study light in reading mode."
+              },
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the study light."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "p1",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "value": 500
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "study.lux",
+                    "op": "lt",
+                    "value": 300,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.study_light",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1000,
+                "estimated_power_kw": 0.01
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1718
+        },
+        {
+          "request": {
+            "request_id": "1eb572a5-5723-41db-b818-734e5020b330",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 111,
+            "state": {
+              "bedroom": {
+                "temperature_c": 29
+              },
+              "devices": {
+                "bedroom_hvac": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomClimateAgent",
+              "role": "bedroom_climate",
+              "tools": [
+                "set_hvac"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.bedroom_hvac"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_cool",
+              "agent_id": "BedroomClimateAgent",
+              "release_at_ms": 100,
+              "goal": "cool the bedroom",
+              "priority": 60
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_hvac"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "type": "number",
+                    "example": 25
+                  }
+                ],
+                "description": "Cool the bedroom to the chosen temperature."
+              },
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the bedroom HVAC."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "p-1eb572a5",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "value": 25
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "gt",
+                    "value": 26,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1800000,
+                "estimated_power_kw": 1.2
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1802
+        }
+      ],
+      "outcomes": {
+        "low_IndependentMultiAgent": {
+          "process_valid_success": false,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1818,
+          "goal_first_satisfied_ms": 2002,
+          "last_action_end_ms": 5002,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "low_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1818,
+          "goal_first_satisfied_ms": 2818,
+          "last_action_end_ms": 5818,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_IndependentMultiAgent": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1818,
+          "goal_first_satisfied_ms": 2002,
+          "last_action_end_ms": 5002,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1818,
+          "goal_first_satisfied_ms": 2002,
+          "last_action_end_ms": 5002,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      },
+      "low_goal_delay_ms": 816,
+      "high_goal_delay_ms": 0
+    },
+    {
+      "repetition": 5,
+      "model_records": [
+        {
+          "request": {
+            "request_id": "37fda825-24f2-4df4-83f1-3354474f0ea6",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 111,
+            "state": {
+              "study": {
+                "lux": 100
+              },
+              "devices": {
+                "study_light": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "StudyLightAgent",
+              "role": "study_lighting",
+              "tools": [
+                "set_light"
+              ],
+              "observable_state": [
+                "study.lux"
+              ],
+              "writable_resources": [
+                "devices.study_light"
+              ]
+            },
+            "task": {
+              "task_id": "study_light",
+              "agent_id": "StudyLightAgent",
+              "release_at_ms": 0,
+              "goal": "light the study",
+              "priority": 50
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_light"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "type": "number",
+                    "example": 500
+                  }
+                ],
+                "description": "Turn on the study light in reading mode."
+              },
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the study light."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "prop-study-light-1",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "value": 300
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "devices.study_light",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1000,
+                "estimated_power_kw": 0.05
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1331
+        },
+        {
+          "request": {
+            "request_id": "7da109f5-d21d-44c2-9bc4-4962b11d601b",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 111,
+            "state": {
+              "bedroom": {
+                "temperature_c": 29
+              },
+              "devices": {
+                "bedroom_hvac": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomClimateAgent",
+              "role": "bedroom_climate",
+              "tools": [
+                "set_hvac"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.bedroom_hvac"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_cool",
+              "agent_id": "BedroomClimateAgent",
+              "release_at_ms": 100,
+              "goal": "cool the bedroom",
+              "priority": 60
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_hvac"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "type": "number",
+                    "example": 25
+                  }
+                ],
+                "description": "Cool the bedroom to the chosen temperature."
+              },
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the bedroom HVAC."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "7da109f5-bedroom-cool",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "value": 25
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1276
+        }
+      ],
+      "outcomes": {
+        "low_IndependentMultiAgent": {
+          "process_valid_success": false,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1431,
+          "goal_first_satisfied_ms": 1476,
+          "last_action_end_ms": 4476,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "low_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1431,
+          "goal_first_satisfied_ms": 2431,
+          "last_action_end_ms": 5431,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_IndependentMultiAgent": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1431,
+          "goal_first_satisfied_ms": 1476,
+          "last_action_end_ms": 4476,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1431,
+          "goal_first_satisfied_ms": 1476,
+          "last_action_end_ms": 4476,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      },
+      "low_goal_delay_ms": 955,
+      "high_goal_delay_ms": 0
+    },
+    {
+      "repetition": 6,
+      "model_records": [
+        {
+          "request": {
+            "request_id": "5a511234-e381-4c43-bd74-f6a21bafb73b",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 111,
+            "state": {
+              "study": {
+                "lux": 100
+              },
+              "devices": {
+                "study_light": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "StudyLightAgent",
+              "role": "study_lighting",
+              "tools": [
+                "set_light"
+              ],
+              "observable_state": [
+                "study.lux"
+              ],
+              "writable_resources": [
+                "devices.study_light"
+              ]
+            },
+            "task": {
+              "task_id": "study_light",
+              "agent_id": "StudyLightAgent",
+              "release_at_ms": 0,
+              "goal": "light the study",
+              "priority": 50
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_light"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "type": "number",
+                    "example": 500
+                  }
+                ],
+                "description": "Turn on the study light in reading mode."
+              },
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the study light."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "5a511234-e381-4c43-bd74-f6a21bafb73b",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "value": 500
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "study.lux",
+                    "op": "lt",
+                    "value": 300,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1000,
+                "estimated_power_kw": 0.015
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1778
+        },
+        {
+          "request": {
+            "request_id": "23a15519-a407-4586-8f79-d5eb70e27ebd",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 111,
+            "state": {
+              "bedroom": {
+                "temperature_c": 29
+              },
+              "devices": {
+                "bedroom_hvac": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomClimateAgent",
+              "role": "bedroom_climate",
+              "tools": [
+                "set_hvac"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.bedroom_hvac"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_cool",
+              "agent_id": "BedroomClimateAgent",
+              "release_at_ms": 100,
+              "goal": "cool the bedroom",
+              "priority": 60
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_hvac"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "type": "number",
+                    "example": 25
+                  }
+                ],
+                "description": "Cool the bedroom to the chosen temperature."
+              },
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the bedroom HVAC."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "cool-bedroom-25",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "value": 25
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "gt",
+                    "value": 26,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 600000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1537
+        }
+      ],
+      "outcomes": {
+        "low_IndependentMultiAgent": {
+          "process_valid_success": false,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1737,
+          "goal_first_satisfied_ms": 1878,
+          "last_action_end_ms": 4737,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "low_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1737,
+          "goal_first_satisfied_ms": 4737,
+          "last_action_end_ms": 5737,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_IndependentMultiAgent": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1737,
+          "goal_first_satisfied_ms": 1878,
+          "last_action_end_ms": 4737,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1737,
+          "goal_first_satisfied_ms": 1878,
+          "last_action_end_ms": 4737,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      },
+      "low_goal_delay_ms": 2859,
+      "high_goal_delay_ms": 0
+    },
+    {
+      "repetition": 7,
+      "model_records": [
+        {
+          "request": {
+            "request_id": "a7f3eb10-3652-40c0-a778-a9f72068b7ef",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 111,
+            "state": {
+              "study": {
+                "lux": 100
+              },
+              "devices": {
+                "study_light": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "StudyLightAgent",
+              "role": "study_lighting",
+              "tools": [
+                "set_light"
+              ],
+              "observable_state": [
+                "study.lux"
+              ],
+              "writable_resources": [
+                "devices.study_light"
+              ]
+            },
+            "task": {
+              "task_id": "study_light",
+              "agent_id": "StudyLightAgent",
+              "release_at_ms": 0,
+              "goal": "light the study",
+              "priority": 50
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_light"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "type": "number",
+                    "example": 500
+                  }
+                ],
+                "description": "Turn on the study light in reading mode."
+              },
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the study light."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "proposal-study-light-on-1",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "value": 500
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "study.lux",
+                    "op": "lt",
+                    "value": 300,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1000,
+                "estimated_power_kw": 0.02
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1374
+        },
+        {
+          "request": {
+            "request_id": "6cd12424-b9b8-4bba-8674-9245c3d8c6e2",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 111,
+            "state": {
+              "bedroom": {
+                "temperature_c": 29
+              },
+              "devices": {
+                "bedroom_hvac": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomClimateAgent",
+              "role": "bedroom_climate",
+              "tools": [
+                "set_hvac"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.bedroom_hvac"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_cool",
+              "agent_id": "BedroomClimateAgent",
+              "release_at_ms": 100,
+              "goal": "cool the bedroom",
+              "priority": 60
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_hvac"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "type": "number",
+                    "example": 25
+                  }
+                ],
+                "description": "Cool the bedroom to the chosen temperature."
+              },
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the bedroom HVAC."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "6cd12424-bedroom-cool",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "value": 25
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "gt",
+                    "value": 26,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1800000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1499
+        }
+      ],
+      "outcomes": {
+        "low_IndependentMultiAgent": {
+          "process_valid_success": false,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1474,
+          "goal_first_satisfied_ms": 1699,
+          "last_action_end_ms": 4699,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "low_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1474,
+          "goal_first_satisfied_ms": 2474,
+          "last_action_end_ms": 5474,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_IndependentMultiAgent": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1474,
+          "goal_first_satisfied_ms": 1699,
+          "last_action_end_ms": 4699,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1474,
+          "goal_first_satisfied_ms": 1699,
+          "last_action_end_ms": 4699,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      },
+      "low_goal_delay_ms": 775,
+      "high_goal_delay_ms": 0
+    },
+    {
+      "repetition": 8,
+      "model_records": [
+        {
+          "request": {
+            "request_id": "b02f3bbf-88cc-452c-87ad-e02ed937c02f",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 111,
+            "state": {
+              "study": {
+                "lux": 100
+              },
+              "devices": {
+                "study_light": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "StudyLightAgent",
+              "role": "study_lighting",
+              "tools": [
+                "set_light"
+              ],
+              "observable_state": [
+                "study.lux"
+              ],
+              "writable_resources": [
+                "devices.study_light"
+              ]
+            },
+            "task": {
+              "task_id": "study_light",
+              "agent_id": "StudyLightAgent",
+              "release_at_ms": 0,
+              "goal": "light the study",
+              "priority": 50
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_light"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "type": "number",
+                    "example": 500
+                  }
+                ],
+                "description": "Turn on the study light in reading mode."
+              },
+              {
+                "agent_id": "StudyLightAgent",
+                "target": "study_light",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the study light."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "p1",
+                "target": "study_light",
+                "operation": "set_reading",
+                "parameters": [
+                  {
+                    "name": "lux",
+                    "value": 500
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1649
+        },
+        {
+          "request": {
+            "request_id": "a25d8f77-7af5-45db-a30d-129ed775aaaf",
+            "episode_id": "HC-BLIND-C3-cap-1p2",
+            "base_episode_id": "HC-M11",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 111,
+            "state": {
+              "bedroom": {
+                "temperature_c": 29
+              },
+              "devices": {
+                "bedroom_hvac": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomClimateAgent",
+              "role": "bedroom_climate",
+              "tools": [
+                "set_hvac"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.bedroom_hvac"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_cool",
+              "agent_id": "BedroomClimateAgent",
+              "release_at_ms": 100,
+              "goal": "cool the bedroom",
+              "priority": 60
+            },
+            "goals": [
+              {
+                "path": "study.lux",
+                "op": "gte",
+                "value": 300
+              },
+              {
+                "path": "bedroom.temperature_c",
+                "op": "between",
+                "value": [
+                  24,
+                  26
+                ]
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "set_hvac"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "type": "number",
+                    "example": 25
+                  }
+                ],
+                "description": "Cool the bedroom to the chosen temperature."
+              },
+              {
+                "agent_id": "BedroomClimateAgent",
+                "target": "bedroom_hvac",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off the bedroom HVAC."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "p1",
+                "target": "bedroom_hvac",
+                "operation": "cool",
+                "parameters": [
+                  {
+                    "name": "temperature_c",
+                    "value": 25
+                  }
+                ],
+                "based_on_state_version": 111,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "gt",
+                    "value": 26,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 600000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1344
+        }
+      ],
+      "outcomes": {
+        "low_IndependentMultiAgent": {
+          "process_valid_success": false,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1544,
+          "goal_first_satisfied_ms": 1749,
+          "last_action_end_ms": 4544,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "low_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1544,
+          "goal_first_satisfied_ms": 4544,
+          "last_action_end_ms": 5544,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_IndependentMultiAgent": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1544,
+          "goal_first_satisfied_ms": 1749,
+          "last_action_end_ms": 4544,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "high_ConstraintCoordinator": {
+          "process_valid_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1544,
+          "goal_first_satisfied_ms": 1749,
+          "last_action_end_ms": 4544,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      },
+      "low_goal_delay_ms": 2795,
+      "high_goal_delay_ms": 0
+    }
+  ]
+}

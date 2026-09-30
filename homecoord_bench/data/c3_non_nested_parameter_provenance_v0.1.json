@@ -1,0 +1,128 @@
+{
+  "schema_version": "homecoord-c3-parameter-provenance-0.1",
+  "status": "partial_e2_grounding_not_frozen",
+  "verified_on": "2026-09-29",
+  "records": [
+    {
+      "template_id": "KITCHEN_CIRCUIT",
+      "task_id": "boil_water",
+      "device": "kettle",
+      "configured": {"power_kw": 1.8, "duration_min": 5, "deadline_min": 10},
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact",
+        "value_kw": 1.8,
+        "source_title": "Xiaomi Electric Kettle 2 Specs",
+        "url": "https://www.mi.com/global/product/xiaomi-electric-kettle-2/specs/"
+      },
+      "duration_evidence": {"level": "E4", "status": "controlled_not_product_matched"},
+      "deadline_evidence": {"level": "E4", "status": "researcher_defined_service_deadline"}
+    },
+    {
+      "template_id": "KITCHEN_CIRCUIT",
+      "task_id": "bake_meal",
+      "device": "oven",
+      "configured": {"power_kw": 3.0, "duration_min": 45, "deadline_min": 60},
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact_connection_rating",
+        "value_kw": 3.0,
+        "source_title": "Bosch HVA541NS0 product specification",
+        "url": "https://media3.bosch-home.com/Documents/specsheet/en-AU/HVA541NS0.pdf"
+      },
+      "duration_evidence": {"level": "E4", "status": "controlled_cycle_not_program_matched"},
+      "deadline_evidence": {"level": "E4", "status": "researcher_defined_service_deadline"}
+    },
+    {
+      "template_id": "KITCHEN_CIRCUIT",
+      "task_id": "wash_dishes",
+      "device": "dishwasher",
+      "configured": {"power_kw": 2.4, "duration_min": 90, "deadline_min": 180},
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact_connection_rating",
+        "value_kw": 2.4,
+        "source_title": "Bosch SMV4HTX27G product specification",
+        "url": "https://media3.bosch-home.com/Documents/specsheet/en-IE/SMV4HTX27G.pdf"
+      },
+      "duration_evidence": {"level": "E4", "status": "controlled_cycle_not_program_matched"},
+      "deadline_evidence": {"level": "E4", "status": "researcher_defined_service_deadline"}
+    },
+    {
+      "template_id": "MORNING_DEPARTURE",
+      "task_id": "dry_hair",
+      "device": "hair_dryer",
+      "configured": {"power_kw": 1.6, "duration_min": 10, "deadline_min": 15},
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact",
+        "value_kw": 1.6,
+        "source_title": "First-generation Dyson Supersonic Hair Dryer specifications",
+        "url": "https://www.dyson.com/hair-care/hair-dryers/supersonic/fuchsia-iron-hd01"
+      },
+      "duration_evidence": {"level": "E4", "status": "user_service_duration"},
+      "deadline_evidence": {"level": "E4", "status": "researcher_defined_service_deadline"}
+    },
+    {
+      "template_id": "MORNING_DEPARTURE",
+      "task_id": "heat_shower",
+      "device": "water_heater",
+      "configured": {"power_kw": 3.0, "duration_min": 60, "deadline_min": 75},
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact",
+        "value_kw": 3.0,
+        "source_title": "Ariston PRO1 ECO electric storage water heater",
+        "url": "https://www.ariston.com/en-uk/products/electric-gas-water-heaters/electric-storage-water-heaters/pro1-eco-uk/"
+      },
+      "duration_evidence": {
+        "level": "E2",
+        "match": "exact_for_reported_delta_t_45c_heat_up",
+        "value_min": 60,
+        "source_title": "Ariston PRO1 ECO electric storage water heater",
+        "url": "https://www.ariston.com/en-uk/products/electric-gas-water-heaters/electric-storage-water-heaters/pro1-eco-uk/"
+      },
+      "deadline_evidence": {"level": "E4", "status": "heat_up_time_plus_15_min_controlled_slack"}
+    },
+    {
+      "template_id": "MORNING_DEPARTURE",
+      "task_id": "wash_clothes",
+      "device": "washer",
+      "configured": {"power_kw": 2.0, "duration_min": 60, "deadline_min": 150},
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact_connection_rating",
+        "value_kw": 2.0,
+        "source_title": "Bosch WAB28161GB product specification",
+        "url": "https://media3.bosch-home.com/Documents/specsheet/en-IE/WAB28161GB.pdf"
+      },
+      "duration_evidence": {"level": "E4", "status": "controlled_cycle_not_program_matched"},
+      "deadline_evidence": {"level": "E4", "status": "researcher_defined_service_deadline"}
+    },
+    {
+      "template_id": "MORNING_DEPARTURE",
+      "task_id": "charge_ev",
+      "device": "ev_charger",
+      "configured": {"power_kw": 3.3, "duration_min": 120, "deadline_min": 210},
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact_output_rating",
+        "value_kw": 3.3,
+        "source_title": "Bolt.Earth Pro 3.3kW Smart EV Charging Socket",
+        "url": "https://bolt.earth/ev-charging-products/smart-sockets-for-all-evs/pro"
+      },
+      "duration_evidence": {"level": "E4", "status": "controlled_energy_workload_not_vehicle_matched"},
+      "deadline_evidence": {"level": "E4", "status": "researcher_defined_departure_deadline"}
+    }
+  ],
+  "allowed_claims": [
+    "all seven task power values match a named public product specification",
+    "one water-heating duration matches a named product heat-up specification",
+    "resource pressure, most durations, and all service deadlines remain controlled factors"
+  ],
+  "disallowed_claims": [
+    "the selected products co-occur in a representative household",
+    "the deadlines or simultaneous request frequency are observational distributions",
+    "the dishwasher cycle duration is product-calibrated"
+  ]
+}

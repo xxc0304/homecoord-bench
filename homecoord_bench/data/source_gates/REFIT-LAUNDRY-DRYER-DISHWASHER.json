@@ -1,0 +1,545 @@
+{
+  "schema_version": "homecoord-candidate-source-gate-0.1",
+  "candidate_id": "REFIT-LAUNDRY-DRYER-DISHWASHER",
+  "status": "house5_house1_house3_full_cleaned_traces_audited; house3_channel_mapping_pending",
+  "preferred_house": "REFIT House 5",
+  "device_types_confirmed_in_published_table": [
+    "washing_machine",
+    "tumble_dryer",
+    "dishwasher"
+  ],
+  "same_household_candidates_from_published_table": [
+    1,
+    3,
+    5,
+    8,
+    13,
+    15,
+    20,
+    21
+  ],
+  "household_candidates_without_reported_aggregate_solar_interference": [
+    1,
+    5,
+    8,
+    13,
+    15,
+    20
+  ],
+  "preferred_house_rationale": "House 5 is in the published three-device intersection, is not among the three households whose aggregate readings were reported to have solar interference, and its cleaned CSV is listed in the Zenodo record.",
+  "primary_sources": {
+    "paper": "https://www.nature.com/articles/sdata2016122",
+    "household_appliance_table": "https://www.nature.com/articles/sdata2016122/tables/4",
+    "official_data_page": "https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements/",
+    "official_cleaned_data_page": "https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/",
+    "official_cleaned_readme": "https://pureportal.strath.ac.uk/ws/portalfiles/portal/52873458/REFIT_Readme.txt",
+    "official_clean_csv_readme": "https://pure.strath.ac.uk/ws/portalfiles/portal/62090183/CLEAN_READ_ME_081116.txt",
+    "cleaned_data_zenodo": "https://zenodo.org/records/5063428",
+    "dataset_doi": "10.5281/zenodo.5063428"
+  },
+  "license": "CC BY 4.0 as shown on official Strathclyde data page and Zenodo record",
+  "measurement_contract": {
+    "sampling_interval_seconds": 8,
+    "publisher_page_description": "20 households, aggregate and appliance active power in Watts, nominal 8-second sampling, October 2013 to June 2015.",
+    "cleaned_readme_description": "CSV fields include DateTime, Unix timestamp, Aggregate, and Appliance1 through Appliance9; logger polled approximately every 6-8 seconds and sensors were not synchronized.",
+    "sensor_alignment_note": "The cleaned ReadMe says readings were change-triggered and forward-filled; a sensor could have updated anywhere in the preceding 6-8 seconds. Do not treat nominal sample timestamps as synchronized action boundaries.",
+    "cleaning_note": "The cleaned publisher page says duplicate timestamps were merged, IAM values above 4000 W zeroed, and NaNs forward-filled for gaps under 2 minutes or zeroed for longer gaps. A zero can be imputed rather than an observed off-state.",
+    "official_issues_definition": "CLEAN_READ_ME_081116.txt defines Issues=1 as the sum of nine appliance readings exceeding the aggregate reading; discard the row or explicitly note the inconsistency. Monitor-move sections were remapped during cleaning.",
+    "quality_flag_column": "Issues"
+  },
+  "trace_listing": {
+    "filename": "CLEAN_House5.csv",
+    "is_publisher_cleaned_trace": true,
+    "zenodo_api_size_bytes": 435272416,
+    "zenodo_page_listed_md5": "03938c844fdb09d787eb637bcf65f956",
+    "zenodo_api_content_url": "https://zenodo.org/api/records/5063428/files/CLEAN_House5.csv/content",
+    "downloaded": true,
+    "local_path": "homecoord_bench/data/external/REFIT/CLEAN_House5.csv",
+    "partial_bytes_downloaded": true,
+    "full_file_size_verified": true,
+    "full_file_md5_verified": true,
+    "local_sha256": "897defbaeadb048ced0d7f6b0ba262a7fa701b7a6943b6a7ca8ad515d7fa3c50",
+    "note": "The complete Zenodo House 5 CSV was downloaded. Its byte size is 435,272,416 and MD5 matches the record. The Zenodo record lists six household CSVs despite describing a 20-household dataset, so it remains a partial file listing of REFIT as a whole."
+  },
+  "partial_trace_probe": {
+    "audit_document": "docs/REFIT_HOUSE5_RANGE_PROBE_2026-09-29.md",
+    "prefix_bytes": 1495040,
+    "prefix_complete_rows": 25529,
+    "prefix_time_span": "2013-09-26 09:56:09 to 2013-09-28 06:39:44",
+    "range_start_mib": [
+      50,
+      150,
+      250,
+      350,
+      400
+    ],
+    "range_requested_bytes_each": 1048576,
+    "range_complete_rows": [
+      17637,
+      17787,
+      17603,
+      17821,
+      18071
+    ],
+    "range_issues_1_rows": [
+      2341,
+      764,
+      484,
+      562,
+      975
+    ],
+    "sampling_method": "Fixed-position convenience probes, not a random sample; partial first and last CSV rows excluded.",
+    "permitted_use": "Format, channel activity, and quality-flag sanity check only.",
+    "prohibited_inference": "Do not estimate full-file quality rates, device-cycle counts, conflict prevalence, or coordination effects from these ranges.",
+    "identity_verified_against_full_file_checksum": true,
+    "byte_ranges_compared_to_verified_full_file": true,
+    "all_five_byte_ranges_match_full_file": true
+  },
+  "full_trace_audit": {
+    "audit_document": "docs/REFIT_HOUSE5_FULL_TRACE_AUDIT_2026-09-29.md",
+    "machine_report": "homecoord_bench/results/refit_house5_source_audit_20260929.json#full_trace_audit",
+    "rows": 7430755,
+    "time_column": "Time",
+    "time_span": [
+      "2013-09-26 09:56:09",
+      "2015-07-06 17:48:55"
+    ],
+    "expected_interval_seconds": 8,
+    "timestamp_gaps_over_16_seconds": 57520,
+    "largest_timestamp_gap_seconds": 747249,
+    "issues_flagged_rows": 425766,
+    "issues_flagged_fraction": 0.05729781159518784,
+    "invalid_or_missing_quality_flags": 0,
+    "target_channels_numeric_complete": true,
+    "observed_max_power_w": {
+      "Appliance2": 3922,
+      "Appliance3": 2437,
+      "Appliance4": 2653
+    },
+    "method_note": "Initial observational summary only. REFIT cleaning can forward-fill or zero-fill; numeric completeness does not imply raw observation or an observed off-state."
+  },
+  "pre_dehumidifier_overlap_probe": {
+    "date_field": "Time",
+    "date_range_end_exclusive": "2014-11-21",
+    "activity_threshold_w": 100,
+    "issues_one_rows_excluded": true,
+    "rows": 4985937,
+    "issues_one_rows": 331715,
+    "clear_rows": 4654222,
+    "clear_row_overlap_counts": {
+      "dryer_and_washer": 42891,
+      "dryer_and_dishwasher": 5023,
+      "washer_and_dishwasher": 1253,
+      "all_three": 452
+    },
+    "interpretation": "Counts are 8-second sample rows under an exploratory threshold, not independent events or task conflicts; do not use as event prevalence."
+  },
+  "pre_dehumidifier_activity_bout_probe": {
+    "machine_report": "homecoord_bench/results/refit_house5_source_audit_20260929.json#pre_dehumidifier_contiguous_power_run_probe",
+    "window_time_field": "Time",
+    "window_end_exclusive": "2014-11-21",
+    "issues_one_rows_excluded_and_used_as_boundaries": true,
+    "gap_over_16_seconds_used_as_boundary": true,
+    "threshold_sweep_w": [
+      50,
+      100,
+      300,
+      500,
+      1000
+    ],
+    "threshold_100w_median_run_seconds": {
+      "dryer": 38.0,
+      "washer": 23.0,
+      "dishwasher": 15.0
+    },
+    "threshold_100w_run_counts": {
+      "dryer": 20672,
+      "washer": 9818,
+      "dishwasher": 2034
+    },
+    "threshold_500w_run_counts": {
+      "dryer": 14288,
+      "washer": 1917,
+      "dishwasher": 1994
+    },
+    "validated_appliance_cycles": false,
+    "interpretation": "Naive contiguous threshold runs are short, fragmented power phases; do not treat them as service cycles or use their durations as task service times."
+  },
+  "pre_dehumidifier_coactivity_window_probe": {
+    "script": "homecoord_bench/extract_refit_coactivity_windows.py",
+    "portable_review_set": "homecoord_bench/results/refit_house5_coactivity_review_20260929.json",
+    "local_full_window_dump_ignored": "homecoord_bench/data/external/REFIT/coactivity_windows_20260929.json",
+    "date_range_end_exclusive": "2014-11-21",
+    "activity_threshold_w": 100,
+    "threshold_sensitivity_pair_window_counts": {
+      "50": 11286,
+      "100": 6274,
+      "300": 1571
+    },
+    "threshold_sensitivity_pair_windows_at_least_5min": {
+      "50": 221,
+      "100": 108,
+      "300": 25
+    },
+    "issues_one_rows_excluded_and_break_windows": true,
+    "timestamp_gap_over_16_seconds_breaks_windows": true,
+    "by_pair": {
+      "dryer+washer": {
+        "sample_rows": 42891,
+        "windows": 5443,
+        "median_seconds": 23,
+        "at_least_5min": 87
+      },
+      "dryer+dishwasher": {
+        "sample_rows": 5023,
+        "windows": 676,
+        "median_seconds": 18,
+        "at_least_5min": 14
+      },
+      "washer+dishwasher": {
+        "sample_rows": 1253,
+        "windows": 155,
+        "median_seconds": 16,
+        "at_least_5min": 7
+      }
+    },
+    "review_set_windows_at_least_5min": 108,
+    "independent_human_review_complete": false,
+    "interpretation": "Observed same-row power co-activity only. These are correlated sample windows, not independent task conflicts, user requests, or appliance cycles."
+  },
+  "pre_dehumidifier_coactivity_context_audit": {
+    "script": "homecoord_bench/export_refit_coactivity_review_rows.py",
+    "review_rows_csv": "homecoord_bench/results/refit_house5_coactivity_review_rows_20260929.csv",
+    "review_summary_csv": "homecoord_bench/results/refit_house5_coactivity_review_summary_20260929.csv",
+    "context_rows_each_side": 30,
+    "windows": 108,
+    "exported_rows": 14604,
+    "candidate_rows": 8124,
+    "context_rows": 6480,
+    "candidate_row_line_span_quality_flag_threshold_and_gap_checks": "passed_for_all_108_windows",
+    "duration_seconds_min_median_max": [
+      301,
+      428.5,
+      1933
+    ],
+    "start_boundary_status_counts": {
+      "clean_below_threshold": 40,
+      "Issues_nonzero": 60,
+      "timestamp_gap_over_16s": 8
+    },
+    "end_boundary_status_counts": {
+      "clean_below_threshold": 37,
+      "Issues_nonzero": 63,
+      "timestamp_gap_over_16s": 8
+    },
+    "strict_clean_boundary_pair_count": 20,
+    "strict_clean_boundary_pair_by_device_pair": {
+      "dryer+washer": 17,
+      "dryer+dishwasher": 2,
+      "washer+dishwasher": 1
+    },
+    "strict_clean_boundary_pair_window_ids": [
+      "REFIT-H5-COACT-000719",
+      "REFIT-H5-COACT-000741",
+      "REFIT-H5-COACT-000772",
+      "REFIT-H5-COACT-000779",
+      "REFIT-H5-COACT-000975",
+      "REFIT-H5-COACT-001197",
+      "REFIT-H5-COACT-001427",
+      "REFIT-H5-COACT-001536",
+      "REFIT-H5-COACT-001666",
+      "REFIT-H5-COACT-001791",
+      "REFIT-H5-COACT-001799",
+      "REFIT-H5-COACT-001828",
+      "REFIT-H5-COACT-001832",
+      "REFIT-H5-COACT-001936",
+      "REFIT-H5-COACT-002136",
+      "REFIT-H5-COACT-004457",
+      "REFIT-H5-COACT-004689",
+      "REFIT-H5-COACT-004714",
+      "REFIT-H5-COACT-005110",
+      "REFIT-H5-COACT-006136"
+    ],
+    "independent_human_review_complete": false,
+    "interpretation": "Strict boundary means only that immediately adjacent records on both ends have Issues=0 and, within 16 seconds, at least one channel in the device pair is below 100 W so the pair no longer jointly meets the activity threshold. It does not establish a full appliance cycle, task, or conflict; the 20 windows remain a priority review subset."
+  },
+  "triple_coactivity_within_long_pair_review_set": {
+    "script": "homecoord_bench/extract_refit_triple_coactivity_bouts.py",
+    "summary_json": "homecoord_bench/results/refit_house5_triple_coactivity_bouts_20260929.json",
+    "summary_csv": "homecoord_bench/results/refit_house5_triple_coactivity_bouts_20260929.csv",
+    "deduplicated_source_rows_csv": "homecoord_bench/results/refit_house5_triple_coactivity_source_rows_20260929.csv",
+    "scope": "Only source rows inside the 108 selected >=5-minute pair windows at 100 W; not a full-trace census.",
+    "all_three_channels_threshold_sensitivity_unique_source_rows": {
+      "50": 559,
+      "100": 91,
+      "300": 44
+    },
+    "review_windows_with_any_all_three_activity": {
+      "50": 20,
+      "100": 7,
+      "300": 3
+    },
+    "strict_20_boundary_subset_unique_source_rows": {
+      "50": 16,
+      "100": 0,
+      "300": 0
+    },
+    "unique_100w_triple_bouts": 7,
+    "bouts_at_least_300_seconds": 1,
+    "longest_bout": {
+      "start_time": "2014-01-02 15:18:06",
+      "end_time": "2014-01-02 15:24:19",
+      "source_csv_lines": [
+        1220130,
+        1220173
+      ],
+      "clean_rows": 44,
+      "observed_first_to_last_span_seconds": 373,
+      "duration_estimate_with_8s_tail_seconds": 381,
+      "maximum_adjacent_gap_seconds": 15,
+      "issues_flagged_rows_inside": 0,
+      "boundary_before_and_after": "Issues_nonzero",
+      "median_power_w": {
+        "Appliance2": 1839,
+        "Appliance3": 1981,
+        "Appliance4": 2220,
+        "Aggregate": 6524
+      },
+      "appears_in_pair_windows": [
+        "REFIT-H5-COACT-001630",
+        "REFIT-H5-COACT-001631",
+        "REFIT-H5-COACT-001632"
+      ]
+    },
+    "interpretation": "This is evidence of one observed three-channel high-load interval in cleaned household data, not evidence of three user tasks, a circuit-limit violation, or Agent conflict. Its exact endpoints are uncertain because the adjacent rows are quality-flagged; the same source interval appears in three pair windows and has been deduplicated."
+  },
+  "official_clean_archive": {
+    "filename": "CLEAN_REFIT_081116.7z",
+    "page_listed_size": "490 MB",
+    "license": "CC BY 4.0",
+    "downloaded": false,
+    "sha256": null,
+    "source_page": "https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/"
+  },
+  "official_channel_mapping": {
+    "source": "https://pureportal.strath.ac.uk/ws/portalfiles/portal/52873458/REFIT_Readme.txt",
+    "source_type": "University of Strathclyde cleaned-dataset ReadMe",
+    "mapping_scope": "appliances known to be monitored at the beginning of the study period; publisher cannot guarantee that occupants did not later remove or switch monitored devices",
+    "house5_channels": {
+      "Appliance2": "Tumble Dryer",
+      "Appliance3": "Washing Machine",
+      "Appliance4": "Dishwasher"
+    },
+    "house5_changes": [
+      {
+        "channel": "Appliance2",
+        "date": "2014-11-21",
+        "note": "A dehumidifier was added. Treat this channel as potentially mixed from this date onward; exclude post-date readings from dryer-only analysis unless separability is established."
+      },
+      {
+        "channel": "Appliance5",
+        "date": "2015-01-27",
+        "note": "Signature change in Computer Site; not one of the target three channels but retained as a documented household change."
+      }
+    ],
+    "provisional_dryer_only_window_end_exclusive": "2014-11-21",
+    "window_start_and_trace_coverage_verified": true,
+    "actual_time_span_from_csv_Time_field": [
+      "2013-09-26 09:56:09",
+      "2015-07-06 17:48:55"
+    ]
+  },
+  "raw_trace_verified": false,
+  "published_clean_trace_verified": true,
+  "official_channel_mapping_verified": true,
+  "official_metadata_access": {
+    "metadata_file": "MetaData_Tables.xlsx",
+    "official_license": "CC BY 4.0",
+    "read_this_round": false,
+    "official_dataset_page": "https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/",
+    "linked_file": "https://pureportal.strath.ac.uk/files/62090313/MetaData_Tables.xlsx",
+    "reason_not_read": "The official page was accessible and lists this workbook, but it was not retrieved in this pass. The publisher ReadMe direct link displayed a Cloudflare security verification page; no bypass was attempted."
+  },
+  "secondary_mapping_lead": {
+    "source": "https://github.com/Agent07-X-lab/Internship-NIML-Project/blob/main/data_processing/refit_processor.py",
+    "mapping_claim": {
+      "Appliance2": "Tumble Dryer",
+      "Appliance3": "Washing Machine",
+      "Appliance4": "Dishwasher"
+    },
+    "accepted_as_label_source": false,
+    "reason": "Community implementation is not the dataset publisher; cross-check with official REFIT ReadMe or metadata before mapping CSV columns."
+  },
+  "secondary_package_lead": {
+    "source": "https://github.com/frictionlessdata/frictionlessdata.io/blob/main/site/blog/2017-12-19-dm4t/README.md",
+    "publisher_context": "Frictionless Data / TEDDINET 2017 data-packaging demonstration; not the REFIT data publisher",
+    "explicitly_downsampled_for_demonstration": true,
+    "documented_package_resource_count": 20,
+    "documented_example_house1_rows": 999,
+    "documented_package_total_rows": 19980,
+    "house1_only_channel_labels": {
+      "Appliance4": "Tumble Dryer",
+      "Appliance5": "Washing Machine",
+      "Appliance6": "Dishwasher"
+    },
+    "house5_channel_mapping_provided": false,
+    "s3_descriptor_access": "blocked_by_browser_client",
+    "accepted_as_house5_trace_or_label_source": false,
+    "reason": "The README says the REFIT package was reduced for demonstration and its device descriptions are scoped to house-1; do not transfer those labels to House 5. The S3 descriptor could not be opened in this client, and no alternate route was used."
+  },
+  "not_inferred": [
+    "actual event co-occurrence from House 5 time series",
+    "complete service-cycle durations",
+    "user task requests or release times",
+    "hard deadlines or urgency",
+    "remote-start capability",
+    "household circuit capacity",
+    "counterfactual coordination effects"
+  ],
+  "workload": {
+    "agents": [
+      "laundry_agent",
+      "dryer_agent",
+      "dishwasher_agent"
+    ],
+    "researcher_defined_dependency": [
+      "washing_complete_before_drying_start"
+    ],
+    "task_release_times": null,
+    "service_durations": null,
+    "hard_deadlines": null,
+    "managed_capacity_budgets": null
+  },
+  "next_gate": [
+    "obtain the official REFIT House3 channel mapping; do not infer appliance identity from power shape",
+    "after mapping, isolate only the confirmed target-channel combination and independently review candidate segment boundaries and threshold sensitivity",
+    "retain human-review status as incomplete until an independent reviewer actually completes it",
+    "only then consider trace-backed controlled replay; keep task arrivals, deadlines, control capability, and capacity budgets explicitly researcher-defined",
+    "cross-house triple-activity replication is a later generality check and must use each household's own official channel mapping"
+  ],
+  "secondary_house_recheck": {
+    "house_id": "REFIT-House1",
+    "file": "CLEAN_House1.csv",
+    "local_path": "homecoord_bench/data/external/REFIT/CLEAN_House1.csv",
+    "bytes": 400840083,
+    "md5": "f5336d80c700f866af0d997ea8d39146",
+    "sha256": "15b8c60c0bf32f1fccfafae81a9bb04e1a24937cfb29840d5b955310df25ff30",
+    "device_columns": {
+      "washer": "Appliance5",
+      "dryer": "Appliance4",
+      "dishwasher": "Appliance6"
+    },
+    "audit": "homecoord_bench/results/refit_house1_source_audit_20260929.json",
+    "cross_house_observation": "At least one washer-dishwasher co-activity interval lasts 443 seconds at 100 W and 323 seconds at 300 W; both candidate boundaries are quality-clear and below threshold. This is measured power co-activity only, not a task or conflict label.",
+    "reviewer_status": "machine checks passed; independent human review pending",
+    "three_channel_scan": {
+      "pair_windows_at_100w": 60,
+      "context_rows_exported": 3975,
+      "unique_three_channel_rows_at_100w": 0,
+      "bouts_at_least_300_seconds": 0,
+      "scope": "All 100 W pair windows across the audited date range; Issues=1 excluded and gaps over 16 seconds break runs",
+      "result": "No clear same-row triple activity at >=100 W. This excludes only this operational threshold on the publisher-cleaned trace."
+    }
+  },
+  "house3_download_probe": {
+    "house_id": "REFIT-House3",
+    "source": "https://zenodo.org/records/5063428",
+    "filename": "CLEAN_House3.csv",
+    "publisher_size_display": "407.3 MB",
+    "expected_md5": "ab6e34ea386eb4563bfcb9762619dc8f",
+    "license": "CC BY 4.0",
+    "partial_path": "homecoord_bench/data/external/REFIT/CLEAN_House3.csv.part (historical incomplete probe; superseded)",
+    "partial_bytes": 2625536,
+    "complete_file": true,
+    "download_note": "Full file obtained and checksum verified on 2026-09-30; the old partial-download probe is superseded.",
+    "official_channel_mapping": "unverified: the current publisher page exposes REFIT_Readme.txt and MetaData_Tables.xlsx; direct ReadMe access displayed Cloudflare security verification; no bypass attempted",
+    "aggregate_note": "House 3 aggregate is reported to have solar interference; use device channels only if later verified.",
+    "complete_bytes": 407273065,
+    "actual_md5": "ab6e34ea386eb4563bfcb9762619dc8f",
+    "actual_sha256": "3694186fd607a779d90dc34f834db908c152a86cfb0fd32e4bf009d86e444e97"
+  },
+  "house3_full_trace_audit": {
+    "audit_json": "homecoord_bench/results/refit_house3_source_audit_20260930.json",
+    "source_file": "homecoord_bench/data/external/REFIT/CLEAN_House3.csv",
+    "bytes": 407273065,
+    "publisher_expected_md5": "ab6e34ea386eb4563bfcb9762619dc8f",
+    "verified_md5": "ab6e34ea386eb4563bfcb9762619dc8f",
+    "sha256": "3694186fd607a779d90dc34f834db908c152a86cfb0fd32e4bf009d86e444e97",
+    "rows": 6994594,
+    "quality_flags": {
+      "Issues_0_rows": 6585967,
+      "Issues_1_rows": 408627,
+      "Issues_1_fraction": 0.05842040295691215,
+      "invalid_or_missing_rows": 0
+    },
+    "expected_cadence_seconds": 8,
+    "timestamp_gaps_over_16_seconds": 12447,
+    "largest_timestamp_gap_seconds": 3594416,
+    "nine_appliance_columns_numeric_complete": true,
+    "official_channel_mapping_verified": false,
+    "aggregate_solar_interference_reported": true
+  },
+  "house3_triple_coactivity_screen": {
+    "screen_json": "homecoord_bench/results/refit_house3_triple_coactivity_20260930.json",
+    "episodes_csv": "homecoord_bench/results/refit_house3_triple_coactivity_bouts_20260930.csv",
+    "script": "homecoord_bench/extract_refit_triple_coactivity_full_trace.py",
+    "scope": "All 84 combinations of Appliance1..Appliance9; full trace; same-row measured power; Issues=1 excluded and breaks bouts; timestamp gaps >16 seconds break bouts.",
+    "channel_mapping": "unverified; raw Appliance labels only",
+    "threshold_w": {
+      "50": {
+        "triples_with_any_rows": 84,
+        "unique_source_rows_with_any_triple": 783145,
+        "triple_row_occurrences": 1287046,
+        "bouts": 98091,
+        "bouts_ge_60_seconds": 24753,
+        "bouts_ge_300_seconds": 6792,
+        "bouts_ge_1800_seconds": 157,
+        "duration_seconds_median_max": [
+          20,
+          9307
+        ]
+      },
+      "100": {
+        "triples_with_any_rows": 83,
+        "unique_source_rows_with_any_triple": 105327,
+        "triple_row_occurrences": 141750,
+        "bouts": 22538,
+        "bouts_ge_60_seconds": 3281,
+        "bouts_ge_300_seconds": 389,
+        "bouts_ge_1800_seconds": 8,
+        "bouts_ge_300_seconds_with_both_clear_threshold_boundaries": 186,
+        "duration_seconds_median_max": [
+          15,
+          3694
+        ]
+      },
+      "300": {
+        "triples_with_any_rows": 26,
+        "unique_source_rows_with_any_triple": 1864,
+        "triple_row_occurrences": 1984,
+        "bouts": 291,
+        "bouts_ge_60_seconds": 74,
+        "bouts_ge_300_seconds": 0,
+        "bouts_ge_1800_seconds": 0,
+        "duration_seconds_median_max": [
+          22,
+          272
+        ]
+      }
+    },
+    "candidate_export_minimum_duration_seconds": 60,
+    "candidate_export_rows": 28108,
+    "interpretation": "Observed thresholded channel co-activity only; not appliance-cycle, task, deadline, circuit-capacity, or Agent-conflict evidence.",
+    "unit_test": "homecoord_bench.tests.test_refit_triple_coactivity_full_trace; passed"
+  },
+  "house3_official_channel_mapping": {
+    "status": "unverified",
+    "official_dataset_page": "https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/",
+    "official_readme": "https://pureportal.strath.ac.uk/files/52873458/REFIT_Readme.txt",
+    "official_metadata_workbook": "https://pureportal.strath.ac.uk/files/62090313/MetaData_Tables.xlsx",
+    "publisher_page_lists_both_files": true,
+    "direct_readme_access_result": "Cloudflare security verification page; stopped without solving or bypassing",
+    "metadata_workbook_retrieved": false,
+    "labels_inferred_from_power_profiles": false
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "version": "main-experiment-matrix-0.1",
+  "status": "author_pilot_design_not_frozen_benchmark",
+  "research_question": "How does coordination affect correct, safe and timely service when home agents act asynchronously?",
+  "axes": {
+    "agent_count": [
+      2,
+      4,
+      5
+    ],
+    "release": [
+      "together",
+      "urgent_late",
+      "urgent_first"
+    ],
+    "pressure": [
+      0.8,
+      1.2,
+      1.6
+    ],
+    "deadline": [
+      "tight",
+      "loose"
+    ],
+    "requirement": [
+      "fixed",
+      "visible_at_release_update"
+    ],
+    "note": "structured blocks, not complete Cartesian product; device composition confounds agent-count-only effects"
+  },
+  "blocks": [
+    {
+      "id": "B1",
+      "purpose": "rule-sufficient same-device control",
+      "coverage": "C1",
+      "status": "historical_pilot"
+    },
+    {
+      "id": "B2",
+      "purpose": "asynchronous pooled resource admission",
+      "coverage": "C3",
+      "status": "largest_existing_pilot"
+    },
+    {
+      "id": "B3",
+      "purpose": "late arrivals and information limits",
+      "coverage": "C3",
+      "status": "hybrid_late_calls_and_counterfactuals"
+    },
+    {
+      "id": "B4",
+      "purpose": "visible current demand selection vs scheduling",
+      "coverage": "C3_context",
+      "status": "simple_semantics_negative_result"
+    },
+    {
+      "id": "B5",
+      "purpose": "indirect environment influence",
+      "coverage": "C2",
+      "status": "separate_exploration_not_uniform_core"
+    },
+    {
+      "id": "B6",
+      "purpose": "state validity and lifecycle",
+      "coverage": "C4",
+      "status": "historical_pilot_missing_cancellation"
+    },
+    {
+      "id": "E1",
+      "purpose": "shared-service dependency",
+      "status": "design_card_only_not_in_main_score"
+    },
+    {
+      "id": "E2",
+      "purpose": "multiple acceptable modes with unequal costs",
+      "status": "single_structure_runtime_pilot_not_frozen_main_data"
+    }
+  ],
+  "information_contract": {
+    "specialists": "local device plus explicitly declared visible records; no hidden scoring answer",
+    "scheduler": "released metadata/public costs/returned proposals/current state and reservations",
+    "privileged": "perfect future announcements and known-future oracle separated",
+    "limitations": "audit views are not a read-isolation sandbox; shared gate has synthetic exact costs"
+  },
+  "baselines": [
+    "shared gate only",
+    "gate retry",
+    "constraint scheduling",
+    "deadline batching",
+    "capacity-aware deadline",
+    "released feasibility strict",
+    "released feasibility fallback"
+  ],
+  "metrics": [
+    "protocol validity",
+    "authorized and semantically correct service",
+    "actual task service",
+    "all/per-task deadline success",
+    "own-release correct-start wait",
+    "actual completion latency",
+    "completion tardiness",
+    "missing start/completion",
+    "process safety",
+    "solver compute cost separately"
+  ],
+  "analysis_units": "task structure and independent model batch; variants, permutations and reused-proposal replays are dependent",
+  "required_controls": [
+    "noncontending resource capacity",
+    "looser deadline",
+    "stable requirement",
+    "both update directions",
+    "rule-sufficient structure",
+    "oracle feasibility",
+    "explicitly impossible tasks excluded from avoidable-failure claims"
+  ],
+  "held_out_status": "all current candidates are development; no independent held-out split claimed",
+  "evidence": [
+    {
+      "evidence_id": "C3-scale",
+      "path": "results/c3_scale_release_offline_20260930.json",
+      "sha256": "0F3F938D464B904A7CA08657E934D99E1888EC01CC01110A23CA92DE2DCF0D89",
+      "execution_kind": "scripted_grid",
+      "limit": "six structures; 108 cells; 26280 runs; no new model decisions",
+      "source_status": "controlled_scale_release_deadline_grid"
+    },
+    {
+      "evidence_id": "C3-scale-model",
+      "path": "results/c3_scale_release_model_20260930.json",
+      "sha256": "6A77014DA60DD40692786D78A841D19B529479158F01ADCB1F6AC7E44BDF78D7",
+      "execution_kind": "fresh_canonical_plus_counterfactual",
+      "limit": "11 saved proposals; 270 replays",
+      "source_status": "canonical_concurrent_proposals_plus_counterfactual_replay"
+    },
+    {
+      "evidence_id": "strong-information",
+      "path": "results/c3_information_baselines_20260930.json",
+      "sha256": "092CFDD0B54A73E7B432CD7E9DC37660A1AEC85E9A47939BD7E07DA852406EBA",
+      "execution_kind": "scripted_and_reused_proposals",
+      "limit": "perfect announcement explicitly privileged",
+      "source_status": "stronger_baseline_information_diagnostic"
+    },
+    {
+      "evidence_id": "own-task-metrics",
+      "path": "results/c3_task_response_contract_20260930.json",
+      "sha256": "95DC914C980AE5792B91F21B23B8849EE042F14192B7A0C9D4827086ECF257DE",
+      "execution_kind": "existing_proposal_reevaluation",
+      "limit": "396 replays; not independent model samples",
+      "source_status": "see original source"
+    },
+    {
+      "evidence_id": "local-compute",
+      "path": "results/c3_runtime_cost_20260930.json",
+      "sha256": "A19628CDBC1052BE04953683B5AFBEB6798B69E686C326B1CFEE6A3E500B3C3F",
+      "execution_kind": "local_wall_timer",
+      "limit": "720 timed runs; not deployment latency",
+      "source_status": "measured_local_wall_time_not_injected_into_virtual_clock"
+    },
+    {
+      "evidence_id": "fresh-repeats",
+      "path": "results/c3_runtime_repeat_audit_20260930.json",
+      "sha256": "C5E3427526F26C79E36707068AFC190E4EA64C485ED5C4DFC257E871DAE70037",
+      "execution_kind": "fresh_canonical_plus_counterfactual",
+      "limit": "33 fresh proposals; 171 replays; late cells counterfactual",
+      "source_status": "audited_runtime_and_fresh_proposal_repeats"
+    },
+    {
+      "evidence_id": "late-release",
+      "path": "results/c3_release_state_audit_20260930.json",
+      "sha256": "EE3B025CC035DF7382B7A01663CA4ED8A4F55499877CAF84112C50A63EF98F0D",
+      "execution_kind": "hybrid_fresh_late",
+      "limit": "36 provider attempts;35 valid;1 protocol failure; local state unchanged",
+      "source_status": "completed_attempts_with_explicit_failure"
+    },
+    {
+      "evidence_id": "visible-update",
+      "path": "results/c3_visible_request_update_audit_20260930.json",
+      "sha256": "3DE1FD34958AFE951A79C74EE3D9210CC329595DE8E46CB2DA9090D72954F2B4",
+      "execution_kind": "hybrid_fresh_late_plus_counterfactual",
+      "limit": "24 fresh proposals;12 visible updated views; all correct;96 replays",
+      "source_status": "audited_visible_update_pilot"
+    },
+    {
+      "evidence_id": "C1-core-control",
+      "path": "results/core_paired_baselines_20260930.json",
+      "sha256": "0F4455FC054F832F25B00819DB4202DDBB5F2074EEE37C9FEECCDAC7FBA3F066",
+      "execution_kind": "historical_mechanism_control",
+      "limit": "do not merge old outcome metrics into latest C3 totals",
+      "source_status": "controlled_author_side_mechanism_probe_not_frozen_benchmark"
+    },
+    {
+      "evidence_id": "C2-physics-pilot",
+      "path": "results/c2_recorded_model_physics_20260928.json",
+      "sha256": "E878A43A377082EA3E834298D55A6B480C25384E94BDA4570DB8E4640BC2E39C",
+      "execution_kind": "historical_separate_physics_exploration",
+      "limit": "not integrated into the C3 categorical service contracts",
+      "source_status": "uncalibrated_synthetic_room_real_model_initial_proposals"
+    },
+    {
+      "evidence_id": "C4-message",
+      "path": "results/c4_agent_message_pilot_20260928.json",
+      "sha256": "F2CD1B0808AA8CE84E1D5A597D39C46100D981E29494B3AC616B87376CFA20ED",
+      "execution_kind": "historical_lifecycle_exploration",
+      "limit": "not evidence of implemented cancellation or general multi-turn repair",
+      "source_status": "synthetic_message_and_robot_timing_real_model_reports"
+    },
+    {
+      "evidence_id": "multimode",
+      "path": "results/c3_multimode_audit_20260930.json",
+      "sha256": "FA6F5CC11D7F54C63939B580BAEE4ADA2F2731F4D59C259A1849FA4BDF9BFB4E",
+      "execution_kind": "fresh_all_released_proposals_and_policy_replay",
+      "limit": "18 fresh calls;30 policy runs;one structure;mode revision authority separated",
+      "source_status": "audited_multimode_runtime_pilot"
+    },
+    {
+      "evidence_id": "multimode_replication",
+      "path": "results/c3_multimode_replication_audit_20260930.json",
+      "sha256": "25C4A2D7F0DB88FF25F48834A2DB8104B402D530B58C7CB02507380788964ADB",
+      "execution_kind": "fresh_dual_mode_structure_proposals_and_policy_replay",
+      "limit": "18 requests;17 successes;1 SSL failure;25 policy runs;second author-designed structure;not held-out",
+      "source_status": "audited"
+    },
+    {
+      "evidence_id": "compute_clock",
+      "path": "results/c3_compute_clock_audit_20260930.json",
+      "sha256": "AB3D7169B5A13C10533C565E0F2EBA9E07334747F8B4E2D72CB37130E36DBCB9",
+      "execution_kind": "measured_compute_charged_paired_replay",
+      "limit": "30 measurements;60 paired runs;4 controls;no fresh API;only exact batch plan cost;not online replanning",
+      "source_status": "audited"
+    },
+    {
+      "evidence_id": "ordinary_compute",
+      "path": "results/c3_ordinary_compute_audit_20260930.json",
+      "sha256": "62AC119E4B59B35BB89103E396738A39887B9ED47788A51E591FDAB2B380E8D2",
+      "execution_kind": "calibrated_dispatch_retry_compute_replay",
+      "limit": "48 calibration;32 paired runs;2 controls;no API;FIFO worker;partial callback cost not architecture latency",
+      "source_status": "audited"
+    },
+    {
+      "evidence_id": "task_family_split",
+      "path": "results/task_family_split_audit_20260930.json",
+      "sha256": "41440293F0A777D50C3EF65A348F273182E72A1AA122C2F7C15479D18A4C3F54",
+      "execution_kind": "prospective_structural_split_development_only",
+      "limit": "12 structures;48 candidate episodes;24 dev;24 unexecuted prospective test;360 scripted dev runs;no API",
+      "source_status": "audited_prospective_split_development_only"
+    },
+    {
+      "evidence_id": "development_model",
+      "path": "results/development_model_audit_20260930.json",
+      "sha256": "DC0B439C4BC71421631475B37F1D40DA0DA791C5D6804F4871DFC62C91501316",
+      "execution_kind": "fresh_development_parallel_and_release_state_model_pilot",
+      "limit": "26 new successful API calls;26 policy runs;6 dev conditions;single model;one repetition;not full architecture ranking",
+      "source_status": "audited_development_model_pilot"
+    },
+    {
+      "evidence_id": "central_batch_adapter",
+      "path": "results/central_batch_adapter_audit_20260930.json",
+      "sha256": "A0E686AC02E20AEF70755852597803294DA6E8A0C266EDCCAEA47B89AEE47A01",
+      "execution_kind": "scripted_release_batch_interface_identity_control",
+      "limit": "240 scripted executions;120 matched pairs;no API;batch adapter not architecture/model efficacy",
+      "source_status": "audited_release_batch_interface"
+    }
+  ],
+  "new_design_cards_sha256": {
+    "D-DEPENDENCY-01.json": "2CF13CBB21251E04B0E5BC40BA91BC140C7C4221A8878B9C0218D1349BDD2F5D",
+    "D-DEPENDENCY-READY-01.json": "0F958B1EFE64F1B6BEA5A38634CAE66D66D82419EE304E75F04123702A27B249",
+    "D-MULTIMODE-01.json": "246A8B882B2875AF6C5BAA42BC6CDC8DE6770343029A1865D8C181B954376358",
+    "D-MULTIMODE-CAPACITY-01.json": "07D349CACD027529AB0EBBEEDECE2B702C51B147C0C754A1220A03432D659E85"
+  },
+  "next_implementation": "preregister same-model central/functional pilot with common executor and pooled-information ablation, preserve failures and budgets, then second structures/repeats/model; prospective test unopened; E1 optional"
+}

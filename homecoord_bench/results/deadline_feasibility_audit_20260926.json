@@ -1,0 +1,227 @@
+{
+  "schema_version": "deadline-feasibility-audit-0.1",
+  "status": "optimistic_scheduling_bound_not_runtime_prediction",
+  "episode_count_with_explicit_deadlines": 2,
+  "supported_episode_count": 2,
+  "deadline_task_count": 4,
+  "network_calls": 0,
+  "rows": [
+    {
+      "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+      "source": "pilot_physical_v2/conflict.json",
+      "pair_id": "C3-EV-WATER",
+      "pair_condition": "conflict",
+      "capacity_kw": 6.0,
+      "task_count": 2,
+      "deadline_task_count": 2,
+      "workload_status": "assumed_or_unverified",
+      "status": "order_sensitive",
+      "orders_evaluated": 2,
+      "capacity_feasible_order_count": 2,
+      "deadline_feasible_order_count": 1,
+      "feasible_dispatch_orders": [
+        [
+          "charge_ev",
+          "heat_water"
+        ]
+      ],
+      "tasks": [
+        {
+          "task_id": "charge_ev",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 19200000,
+          "duration_ms": 18000000,
+          "power_kw": 4.0,
+          "required_action": {
+            "target": "ev_charger",
+            "operation": "charge"
+          },
+          "requires": []
+        },
+        {
+          "task_id": "heat_water",
+          "release_at_ms": 100,
+          "completion_deadline_ms": 21600000,
+          "duration_ms": 2325556,
+          "power_kw": 3.0,
+          "required_action": {
+            "target": "water_heater",
+            "operation": "heat"
+          },
+          "requires": []
+        }
+      ],
+      "order_outcomes": [
+        {
+          "dispatch_order": [
+            "charge_ev",
+            "heat_water"
+          ],
+          "capacity_feasible": true,
+          "deadline_feasible": true,
+          "events": [
+            {
+              "task_id": "charge_ev",
+              "start_ms": 0,
+              "finish_ms": 18000000,
+              "power_kw": 4.0,
+              "deadline_ms": 19200000,
+              "deadline_met": true
+            },
+            {
+              "task_id": "heat_water",
+              "start_ms": 18000000,
+              "finish_ms": 20325556,
+              "power_kw": 3.0,
+              "deadline_ms": 21600000,
+              "deadline_met": true
+            }
+          ]
+        },
+        {
+          "dispatch_order": [
+            "heat_water",
+            "charge_ev"
+          ],
+          "capacity_feasible": true,
+          "deadline_feasible": false,
+          "events": [
+            {
+              "task_id": "heat_water",
+              "start_ms": 100,
+              "finish_ms": 2325656,
+              "power_kw": 3.0,
+              "deadline_ms": 21600000,
+              "deadline_met": true
+            },
+            {
+              "task_id": "charge_ev",
+              "start_ms": 2325656,
+              "finish_ms": 20325656,
+              "power_kw": 4.0,
+              "deadline_ms": 19200000,
+              "deadline_met": false
+            }
+          ]
+        }
+      ],
+      "scope_limits": [
+        "optimistic release-time readiness; no model proposal or network latency",
+        "non-preemptive tasks; numeric aggregate power cap only",
+        "does not model task dependencies, shared-environment effects, or device feedback",
+        "assumed durations and powers are not physical calibration"
+      ]
+    },
+    {
+      "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONTROL",
+      "source": "pilot_physical_v2/control.json",
+      "pair_id": "C3-EV-WATER",
+      "pair_condition": "control",
+      "capacity_kw": 7.2,
+      "task_count": 2,
+      "deadline_task_count": 2,
+      "workload_status": "assumed_or_unverified",
+      "status": "feasible_all_capacity_orders",
+      "orders_evaluated": 2,
+      "capacity_feasible_order_count": 2,
+      "deadline_feasible_order_count": 2,
+      "feasible_dispatch_orders": [
+        [
+          "charge_ev",
+          "heat_water"
+        ],
+        [
+          "heat_water",
+          "charge_ev"
+        ]
+      ],
+      "tasks": [
+        {
+          "task_id": "charge_ev",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 19200000,
+          "duration_ms": 18000000,
+          "power_kw": 4.0,
+          "required_action": {
+            "target": "ev_charger",
+            "operation": "charge"
+          },
+          "requires": []
+        },
+        {
+          "task_id": "heat_water",
+          "release_at_ms": 100,
+          "completion_deadline_ms": 21600000,
+          "duration_ms": 2325556,
+          "power_kw": 3.0,
+          "required_action": {
+            "target": "water_heater",
+            "operation": "heat"
+          },
+          "requires": []
+        }
+      ],
+      "order_outcomes": [
+        {
+          "dispatch_order": [
+            "charge_ev",
+            "heat_water"
+          ],
+          "capacity_feasible": true,
+          "deadline_feasible": true,
+          "events": [
+            {
+              "task_id": "charge_ev",
+              "start_ms": 0,
+              "finish_ms": 18000000,
+              "power_kw": 4.0,
+              "deadline_ms": 19200000,
+              "deadline_met": true
+            },
+            {
+              "task_id": "heat_water",
+              "start_ms": 100,
+              "finish_ms": 2325656,
+              "power_kw": 3.0,
+              "deadline_ms": 21600000,
+              "deadline_met": true
+            }
+          ]
+        },
+        {
+          "dispatch_order": [
+            "heat_water",
+            "charge_ev"
+          ],
+          "capacity_feasible": true,
+          "deadline_feasible": true,
+          "events": [
+            {
+              "task_id": "heat_water",
+              "start_ms": 100,
+              "finish_ms": 2325656,
+              "power_kw": 3.0,
+              "deadline_ms": 21600000,
+              "deadline_met": true
+            },
+            {
+              "task_id": "charge_ev",
+              "start_ms": 0,
+              "finish_ms": 18000000,
+              "power_kw": 4.0,
+              "deadline_ms": 19200000,
+              "deadline_met": true
+            }
+          ]
+        }
+      ],
+      "scope_limits": [
+        "optimistic release-time readiness; no model proposal or network latency",
+        "non-preemptive tasks; numeric aggregate power cap only",
+        "does not model task dependencies, shared-environment effects, or device feedback",
+        "assumed durations and powers are not physical calibration"
+      ]
+    }
+  ],
+  "interpretation": "A deadline is treated as physically schedulable only if at least one dispatch order meets all explicit deadlines under the declared power cap and durations. This optimistic check excludes proposal latency, so it can rule out impossible cases but cannot certify online success."
+}

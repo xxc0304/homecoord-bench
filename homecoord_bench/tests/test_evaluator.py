@@ -1,6 +1,7 @@
 import json
 import sys
 import unittest
+from copy import deepcopy
 from pathlib import Path
 
 BENCH_ROOT = Path(__file__).resolve().parents[1]
@@ -17,9 +18,13 @@ class SeedEpisodeTests(unittest.TestCase):
         return evaluate(episode, trace)
 
     def test_all_episodes_have_minimum_shape(self):
-        for path in (BENCH_ROOT / "data" / "seeds").glob("*.json"):
-            with self.subTest(path=path.name):
-                self.assertEqual([], validate_episode_shape(load_json(path)))
+        groups = ("seeds", "pilot_pairs_v1", "pilot_physical_v2", "candidates")
+        for group in groups:
+            for path in (BENCH_ROOT / "data" / group).glob("*.json"):
+                if path.name == "manifest.json":
+                    continue
+                with self.subTest(group=group, path=path.name):
+                    self.assertEqual([], validate_episode_shape(load_json(path)))
 
     def test_safe_parallel_trace_exposes_serialization_cost(self):
         parallel = self.case("HC-SEED-001", "HC-SEED-001.parallel.json")
@@ -67,6 +72,17 @@ class SeedEpisodeTests(unittest.TestCase):
         result = self.case("HC-SEED-002", "HC-SEED-002.coordinated.json")
         self.assertEqual(250, result["coordination_decision_latency_ms"])
         self.assertEqual(700, result["first_effective_action_latency_ms"])
+
+    def test_fresh_action_with_false_precondition_is_process_invalid(self):
+        episode = load_json(BENCH_ROOT / "data" / "seeds" / "HC-SEED-002.json")
+        trace = deepcopy(load_json(BENCH_ROOT / "traces" / "HC-SEED-002.coordinated.json"))
+        action = next(event for event in trace["events"] if event["type"] == "action_effective")
+        action["based_on_state_version"] = episode["initial_state"]["version"]
+        action["requires"] = [{"path": "request.comfort_active", "op": "eq", "value": False}]
+        result = evaluate(episode, trace)
+        self.assertEqual(1, result["precondition_violation_count"])
+        self.assertEqual(0, result["stale_action_count"])
+        self.assertFalse(result["process_valid_success"])
 
     def test_multiple_coordination_decisions_are_supported(self):
         episode = load_json(BENCH_ROOT / "data" / "seeds" / "HC-SEED-001.json")

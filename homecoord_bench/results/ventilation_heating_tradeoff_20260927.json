@@ -1,0 +1,6216 @@
+{
+  "experiment": "hc_m06_ventilation_heating_design_probe",
+  "status": "synthetic_unreviewed_design_experiment",
+  "source_episode": "HC-M06",
+  "assumptions": {
+    "step_ms": 1000,
+    "open_at_ms": 7000,
+    "open_command_end_ms": 9000,
+    "heater_ready_ms": 8000,
+    "close_delay_ms": 3000,
+    "initial_temp_c": 17.0,
+    "outdoor_temp_c": 8.0,
+    "target_temp_c": 21.0,
+    "target_co2_ppm": 900.0,
+    "heat_rate_c_per_s": 0.025,
+    "heater_power_kw": 2.0
+  },
+  "limitations": "Standalone synthetic room model with uncalibrated rates and deadlines; no model API or real device. Heating target is an endpoint, not a hard safety rule; window-open heating is not automatically invalid. StateGate has direct physical-state access; OracleSwitch additionally knows exact dynamics and is an unfair reference upper bound. Repeated deadline rows share the same physical run and are not independent samples. This is not benchmark runtime evidence or a validated method gap.",
+  "summary": {
+    "Independent": {
+      "cases": 36,
+      "deadline_met": 30,
+      "total_heater_wh": 4638.334,
+      "total_window_open_heater_wh": 2120.0
+    },
+    "DeviceLock": {
+      "cases": 36,
+      "deadline_met": 30,
+      "total_heater_wh": 4638.334,
+      "total_window_open_heater_wh": 2120.0
+    },
+    "ActionOverlapLock": {
+      "cases": 36,
+      "deadline_met": 30,
+      "total_heater_wh": 4636.667,
+      "total_window_open_heater_wh": 2110.0
+    },
+    "StateGate": {
+      "cases": 36,
+      "deadline_met": 22,
+      "total_heater_wh": 4201.667,
+      "total_window_open_heater_wh": 0.0
+    },
+    "OracleSwitch": {
+      "cases": 36,
+      "deadline_met": 30,
+      "total_heater_wh": 4610.556,
+      "total_window_open_heater_wh": 1804.445
+    }
+  },
+  "paired_summary": {
+    "conflict_grid_cells": 18,
+    "matched_control_grid_cells": 18,
+    "conflict_independent_on_time_gate_miss": 8,
+    "control_independent_on_time_gate_miss": 0,
+    "conflict_gate_saves_energy_positive": 18,
+    "control_gate_saves_energy_positive": 0
+  },
+  "optimistic_feasibility_strata": {
+    "conflict": {
+      "total_grid_cells": 18,
+      "lower_bound_infeasible_cells": 3,
+      "lower_bound_feasible_cells": 15,
+      "note": "The optimistic lower bound ignores heat loss. Above-deadline cells are provably infeasible; below-deadline cells are only not ruled out.",
+      "by_policy_on_lower_bound_feasible_cells": {
+        "Independent": {
+          "deadline_met": 12,
+          "cells": 15,
+          "heater_energy_wh_mean": 162.6667
+        },
+        "DeviceLock": {
+          "deadline_met": 12,
+          "cells": 15,
+          "heater_energy_wh_mean": 162.6667
+        },
+        "ActionOverlapLock": {
+          "deadline_met": 12,
+          "cells": 15,
+          "heater_energy_wh_mean": 162.5926
+        },
+        "StateGate": {
+          "deadline_met": 4,
+          "cells": 15,
+          "heater_energy_wh_mean": 141.5926
+        },
+        "OracleSwitch": {
+          "deadline_met": 12,
+          "cells": 15,
+          "heater_energy_wh_mean": 160.8148
+        }
+      },
+      "independent_on_time_gate_misses_among_feasible": 8
+    },
+    "matched_control": {
+      "total_grid_cells": 18,
+      "lower_bound_infeasible_cells": 0,
+      "lower_bound_feasible_cells": 18,
+      "note": "The optimistic lower bound ignores heat loss. Above-deadline cells are provably infeasible; below-deadline cells are only not ruled out.",
+      "by_policy_on_lower_bound_feasible_cells": {
+        "Independent": {
+          "deadline_met": 18,
+          "cells": 18,
+          "heater_energy_wh_mean": 88.8889
+        },
+        "DeviceLock": {
+          "deadline_met": 18,
+          "cells": 18,
+          "heater_energy_wh_mean": 88.8889
+        },
+        "ActionOverlapLock": {
+          "deadline_met": 18,
+          "cells": 18,
+          "heater_energy_wh_mean": 88.8889
+        },
+        "StateGate": {
+          "deadline_met": 18,
+          "cells": 18,
+          "heater_energy_wh_mean": 88.8889
+        },
+        "OracleSwitch": {
+          "deadline_met": 18,
+          "cells": 18,
+          "heater_energy_wh_mean": 88.8889
+        }
+      }
+    }
+  },
+  "paired_tradeoffs": [
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 0.0
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 41.1111
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": true,
+      "gate_saves_energy_wh": 41.1111
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": true,
+      "gate_saves_energy_wh": 41.1111
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 28.8889
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": true,
+      "gate_saves_energy_wh": 28.8889
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": true,
+      "gate_saves_energy_wh": 28.8889
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 50.5555
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 50.5555
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": true,
+      "gate_saves_energy_wh": 50.5555
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": true,
+      "gate_saves_energy_wh": 2.7778
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 2.7778
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 2.7778
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 7.7778
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": true,
+      "gate_saves_energy_wh": 7.7778
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 7.7778
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 14.4444
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "independent_meets_gate_misses": true,
+      "gate_saves_energy_wh": 14.4444
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "independent_meets_gate_misses": false,
+      "gate_saves_energy_wh": 14.4444
+    }
+  ],
+  "rows": [
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": null,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 168000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "Independent",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 291000,
+      "deadline_met": false,
+      "heater_on_ms": 282000,
+      "heater_energy_wh": 156.6667,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6343,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "DeviceLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 291000,
+      "deadline_met": false,
+      "heater_on_ms": 282000,
+      "heater_energy_wh": 156.6667,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6343,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 291000,
+      "deadline_met": false,
+      "heater_on_ms": 281000,
+      "heater_energy_wh": 156.1111,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6319,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "StateGate",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 290000,
+      "goal_completion_ms": 498000,
+      "deadline_met": false,
+      "heater_on_ms": 208000,
+      "heater_energy_wh": 115.5556,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.1878,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 290000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "OracleSwitch",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 291000,
+      "deadline_met": false,
+      "heater_on_ms": 282000,
+      "heater_energy_wh": 156.6667,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6343,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 291000,
+      "deadline_met": true,
+      "heater_on_ms": 282000,
+      "heater_energy_wh": 156.6667,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6343,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 291000,
+      "deadline_met": true,
+      "heater_on_ms": 282000,
+      "heater_energy_wh": 156.6667,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6343,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 291000,
+      "deadline_met": true,
+      "heater_on_ms": 281000,
+      "heater_energy_wh": 156.1111,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6319,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 290000,
+      "goal_completion_ms": 498000,
+      "deadline_met": false,
+      "heater_on_ms": 208000,
+      "heater_energy_wh": 115.5556,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.1878,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 290000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 291000,
+      "deadline_met": true,
+      "heater_on_ms": 282000,
+      "heater_energy_wh": 156.6667,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6343,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 291000,
+      "deadline_met": true,
+      "heater_on_ms": 282000,
+      "heater_energy_wh": 156.6667,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6343,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 291000,
+      "deadline_met": true,
+      "heater_on_ms": 282000,
+      "heater_energy_wh": 156.6667,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6343,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 291000,
+      "deadline_met": true,
+      "heater_on_ms": 281000,
+      "heater_energy_wh": 156.1111,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6319,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 290000,
+      "goal_completion_ms": 498000,
+      "deadline_met": false,
+      "heater_on_ms": 208000,
+      "heater_energy_wh": 115.5556,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.1878,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 290000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 291000,
+      "deadline_met": true,
+      "heater_on_ms": 282000,
+      "heater_energy_wh": 156.6667,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 1.6343,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "Independent",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 345000,
+      "deadline_met": false,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "DeviceLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 345000,
+      "deadline_met": false,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 346000,
+      "deadline_met": false,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4042,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "StateGate",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 290000,
+      "goal_completion_ms": 575000,
+      "deadline_met": false,
+      "heater_on_ms": 285000,
+      "heater_energy_wh": 158.3333,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.115,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 290000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "OracleSwitch",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 345000,
+      "deadline_met": false,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 345000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 345000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 346000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4042,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 290000,
+      "goal_completion_ms": 575000,
+      "deadline_met": false,
+      "heater_on_ms": 285000,
+      "heater_energy_wh": 158.3333,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.115,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 290000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 345000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 345000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 345000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 346000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4042,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 290000,
+      "goal_completion_ms": 575000,
+      "deadline_met": false,
+      "heater_on_ms": 285000,
+      "heater_energy_wh": 158.3333,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.115,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 290000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 345000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "Independent",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 466000,
+      "deadline_met": false,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4425,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "DeviceLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 466000,
+      "deadline_met": false,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4425,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 467000,
+      "deadline_met": false,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4283,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "StateGate",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 290000,
+      "goal_completion_ms": 657000,
+      "deadline_met": false,
+      "heater_on_ms": 367000,
+      "heater_energy_wh": 203.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 5.1543,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 290000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": false,
+      "policy": "OracleSwitch",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 466000,
+      "deadline_met": false,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4425,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 466000,
+      "deadline_met": false,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4425,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 466000,
+      "deadline_met": false,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4425,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 467000,
+      "deadline_met": false,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4283,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 290000,
+      "goal_completion_ms": 657000,
+      "deadline_met": false,
+      "heater_on_ms": 367000,
+      "heater_energy_wh": 203.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 5.1543,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 290000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 466000,
+      "deadline_met": false,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4425,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 466000,
+      "deadline_met": true,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4425,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 466000,
+      "deadline_met": true,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4425,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 467000,
+      "deadline_met": true,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4283,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 290000,
+      "goal_completion_ms": 657000,
+      "deadline_met": false,
+      "heater_on_ms": 367000,
+      "heater_energy_wh": 203.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 5.1543,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 290000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 2.5,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 290000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 290000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 466000,
+      "deadline_met": true,
+      "heater_on_ms": 458000,
+      "heater_energy_wh": 254.4444,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 7.4425,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 287000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 290000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 198000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7435,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 198000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7435,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 199000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7417,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 335000,
+      "deadline_met": false,
+      "heater_on_ms": 185000,
+      "heater_energy_wh": 102.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.6212,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 198000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7435,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 198000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7435,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 198000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7435,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 199000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7417,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 335000,
+      "deadline_met": true,
+      "heater_on_ms": 185000,
+      "heater_energy_wh": 102.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.6212,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 335000,
+      "deadline_met": true,
+      "heater_on_ms": 185000,
+      "heater_energy_wh": 102.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.6212,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 198000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7435,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 198000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7435,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 199000,
+      "deadline_met": true,
+      "heater_on_ms": 190000,
+      "heater_energy_wh": 105.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 0.7417,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 335000,
+      "deadline_met": true,
+      "heater_on_ms": 185000,
+      "heater_energy_wh": 102.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.6212,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0005,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 335000,
+      "deadline_met": true,
+      "heater_on_ms": 185000,
+      "heater_energy_wh": 102.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.6212,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 252000,
+      "deadline_met": false,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 252000,
+      "deadline_met": false,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 253000,
+      "deadline_met": false,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0843,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 380000,
+      "deadline_met": false,
+      "heater_on_ms": 230000,
+      "heater_energy_wh": 127.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.7387,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 252000,
+      "deadline_met": false,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 252000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 252000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 253000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0843,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 380000,
+      "deadline_met": false,
+      "heater_on_ms": 230000,
+      "heater_energy_wh": 127.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.7387,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 252000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 252000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 252000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 253000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0843,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 380000,
+      "deadline_met": true,
+      "heater_on_ms": 230000,
+      "heater_energy_wh": 127.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.7387,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 380000,
+      "deadline_met": true,
+      "heater_on_ms": 230000,
+      "heater_energy_wh": 127.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.7387,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 320000,
+      "deadline_met": false,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7992,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 320000,
+      "deadline_met": false,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7992,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 321000,
+      "deadline_met": false,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7905,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 436000,
+      "deadline_met": false,
+      "heater_on_ms": 286000,
+      "heater_energy_wh": 158.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.1433,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 240000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 320000,
+      "deadline_met": false,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7992,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 320000,
+      "deadline_met": true,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7992,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 320000,
+      "deadline_met": true,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7992,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 321000,
+      "deadline_met": true,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7905,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 436000,
+      "deadline_met": false,
+      "heater_on_ms": 286000,
+      "heater_energy_wh": 158.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.1433,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 360000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 320000,
+      "deadline_met": true,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7992,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "Independent",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 320000,
+      "deadline_met": true,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7992,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "DeviceLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 8000,
+      "goal_completion_ms": 320000,
+      "deadline_met": true,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7992,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 8000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 9000,
+      "goal_completion_ms": 321000,
+      "deadline_met": true,
+      "heater_on_ms": 312000,
+      "heater_energy_wh": 173.3333,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 3.7905,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 9000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "StateGate",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 436000,
+      "deadline_met": true,
+      "heater_on_ms": 286000,
+      "heater_energy_wh": 158.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.1433,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "ventilation_rate_ppm_s": 5.0,
+      "open_exchange_per_s": 0.003,
+      "deadline_ms": 480000,
+      "optimistic_completion_lower_bound_ms": 168000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "policy": "OracleSwitch",
+      "window_close_ms": 150000,
+      "heater_first_start_ms": 150000,
+      "goal_completion_ms": 436000,
+      "deadline_met": true,
+      "heater_on_ms": 286000,
+      "heater_energy_wh": 158.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.1433,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 7000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 147000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 150000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 150000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    }
+  ]
+}

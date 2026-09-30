@@ -1,0 +1,133 @@
+{
+  "schema_version": "baseline-coverage-audit-0.1",
+  "status": "partial_coverage_strong_rules_present_with_model_architecture_gap",
+  "event_matrix": {
+    "run_count": 170,
+    "episode_count": 34,
+    "policies": [
+      "CentralSingleAgent",
+      "ConstraintCoordinator",
+      "DeadlineAwareCoordinator",
+      "IndependentMultiAgent",
+      "RuleCoordinator"
+    ],
+    "policy_run_counts": {
+      "CentralSingleAgent": 34,
+      "ConstraintCoordinator": 34,
+      "DeadlineAwareCoordinator": 34,
+      "IndependentMultiAgent": 34,
+      "RuleCoordinator": 34
+    },
+    "group_policy_run_counts": {
+      "candidates": {
+        "CentralSingleAgent": 20,
+        "ConstraintCoordinator": 20,
+        "DeadlineAwareCoordinator": 20,
+        "IndependentMultiAgent": 20,
+        "RuleCoordinator": 20
+      },
+      "pilot_pairs_v1": {
+        "CentralSingleAgent": 8,
+        "ConstraintCoordinator": 8,
+        "DeadlineAwareCoordinator": 8,
+        "IndependentMultiAgent": 8,
+        "RuleCoordinator": 8
+      },
+      "pilot_physical_v2": {
+        "CentralSingleAgent": 2,
+        "ConstraintCoordinator": 2,
+        "DeadlineAwareCoordinator": 2,
+        "IndependentMultiAgent": 2,
+        "RuleCoordinator": 2
+      },
+      "seeds": {
+        "CentralSingleAgent": 4,
+        "ConstraintCoordinator": 4,
+        "DeadlineAwareCoordinator": 4,
+        "IndependentMultiAgent": 4,
+        "RuleCoordinator": 4
+      }
+    },
+    "proposal_source": "deterministic_dry_run"
+  },
+  "recorded_model_proposal_replay": {
+    "run_count": 224,
+    "policies": [
+      "ConstraintCoordinator",
+      "DeadlineAwareCoordinator",
+      "IndependentMultiAgent",
+      "RuleCoordinator"
+    ],
+    "policy_run_counts": {
+      "ConstraintCoordinator": 56,
+      "DeadlineAwareCoordinator": 56,
+      "IndependentMultiAgent": 56,
+      "RuleCoordinator": 56
+    },
+    "network_calls": 0,
+    "api_calls_concurrent": false,
+    "central_agent_excluded": true,
+    "central_agent_exclusion_reason": "CentralSingleAgent needs its own central-agent proposals; specialist outputs would be an unfair substitution",
+    "scope": [
+      "IndependentMultiAgent",
+      "RuleCoordinator",
+      "ConstraintCoordinator",
+      "DeadlineAwareCoordinator"
+    ]
+  },
+  "deadline_sensitivity_replay": {
+    "run_count": 200,
+    "policies": [
+      "ConstraintCoordinator",
+      "DeadlineAwareCoordinator",
+      "IndependentMultiAgent",
+      "RuleCoordinator"
+    ],
+    "policy_run_counts": {
+      "ConstraintCoordinator": 50,
+      "DeadlineAwareCoordinator": 50,
+      "IndependentMultiAgent": 50,
+      "RuleCoordinator": 50
+    },
+    "distinct_deadline_values_ms": [
+      18000000,
+      18600000,
+      19200000,
+      20400000,
+      21600000
+    ],
+    "network_calls": 0
+  },
+  "direct_online_rule_replay": {
+    "run_count": 40,
+    "conditions": [
+      "conflict",
+      "control"
+    ],
+    "policies": [
+      "ImmediateFIFO",
+      "WaitReleasedEDF",
+      "WaitReleasedPriority",
+      "WaitReleasedPriorityCapacityAware"
+    ],
+    "policy_run_counts": {
+      "ImmediateFIFO": 10,
+      "WaitReleasedEDF": 10,
+      "WaitReleasedPriority": 10,
+      "WaitReleasedPriorityCapacityAware": 10
+    },
+    "source_status": "exploratory_fixed_model_proposals_synthetic_devices"
+  },
+  "coordination_overhead": {
+    "event_matrix_runs": 170,
+    "runs_with_numeric_decision_latency": 0,
+    "status": "not_measured_in_current_event_matrix"
+  },
+  "gaps": [
+    "CentralSingleAgent is present in the scripted event matrix but excluded from the saved specialist-proposal replay; a fair model comparison needs its own central-agent proposals and equal budgets.",
+    "Saved DeepSeek calls were collected sequentially and their latencies replayed on a logical clock; this is not concurrent API execution.",
+    "Local coordination computation, state-read/network synchronization, device acknowledgement, and feedback costs are not timed in the current event matrix.",
+    "The available deadline tasks are one EV/water template under conflict/control conditions, not broad deadline coverage."
+  ],
+  "interpretation": "The pilots already include meaningful deterministic and deadline-aware rules, so a weak no-coordination baseline is not the only comparator. Coverage is still incomplete for fair model-based architecture comparisons and real coordination overhead."
+}

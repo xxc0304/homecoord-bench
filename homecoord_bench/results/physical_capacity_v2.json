@@ -1,0 +1,2407 @@
+{
+  "status": "dimensionally_consistent_assumptions_not_device_calibration",
+  "model": "deepseek-flash",
+  "assumptions": {
+    "battery_capacity_kwh": 60.0,
+    "charger_input_kw": 4.0,
+    "water_heater_input_kw": 3.0,
+    "efficiency": 0.9,
+    "tank_liters": 100.0,
+    "water_density_kg_per_liter": 1.0,
+    "water_specific_heat_kj_per_kg_c": 4.186,
+    "status": "assumed_not_measured",
+    "effect_phase": "physical_completion"
+  },
+  "rows": [
+    {
+      "repetition": 1,
+      "model_records": {
+        "charge_ev": {
+          "request": {
+            "request_id": "f2ae8096-9d01-4abe-a914-26f3343e0295",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 113,
+            "state": {
+              "vehicle": {
+                "battery_pct": 20,
+                "departure_deadline_ms": 19200000,
+                "battery_capacity_kwh": 60.0
+              },
+              "devices": {
+                "ev_charger": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "EVChargingAgent",
+              "role": "ev_charging",
+              "tools": [
+                "charge_ev"
+              ],
+              "observable_state": [
+                "vehicle.battery_pct",
+                "vehicle.departure_deadline_ms",
+                "vehicle.battery_capacity_kwh"
+              ],
+              "writable_resources": [
+                "devices.ev_charger"
+              ]
+            },
+            "task": {
+              "task_id": "charge_ev",
+              "agent_id": "EVChargingAgent",
+              "release_at_ms": 0,
+              "goal": "Charge the 60 kWh EV battery from 20% to at least 50% before departure in 5 h 20 min.",
+              "priority": 100,
+              "completion_deadline_ms": 19200000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "charge_ev"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "type": "number"
+                  }
+                ],
+                "description": "Charge the EV to the requested battery percentage."
+              },
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off vehicle charging."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "ev_charge_50pct",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [
+                  {
+                    "path": "vehicle.battery_pct",
+                    "op": "lt",
+                    "value": 50,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.ev_charger",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": 7.2
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1424
+        },
+        "heat_water": {
+          "request": {
+            "request_id": "2c8a700c-a899-4c9a-8593-1402c202deb7",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 113,
+            "state": {
+              "water": {
+                "temperature_c": 35,
+                "tank_liters": 100.0,
+                "shower_deadline_ms": 21600000
+              },
+              "devices": {
+                "water_heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WaterHeatingAgent",
+              "role": "water_heating",
+              "tools": [
+                "heat_water"
+              ],
+              "observable_state": [
+                "water.temperature_c",
+                "water.tank_liters",
+                "water.shower_deadline_ms"
+              ],
+              "writable_resources": [
+                "devices.water_heater"
+              ]
+            },
+            "task": {
+              "task_id": "heat_water",
+              "agent_id": "WaterHeatingAgent",
+              "release_at_ms": 100,
+              "goal": "Heat the 100 L water tank from 35 C to at least 50 C before a shower in 6 h.",
+              "priority": 80,
+              "completion_deadline_ms": 21600000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "heat_water"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "type": "number"
+                  }
+                ],
+                "description": "Heat the tank to the requested temperature."
+              },
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off water heating."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "wh-heat-50-113",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [],
+                "estimated_duration_ms": 7200000,
+                "estimated_power_kw": 3.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1144
+        }
+      },
+      "outcomes": {
+        "conflict": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1244,
+                "start_ms": 1244,
+                "finish_ms": 2326800,
+                "power_kw": 3.0
+              },
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1424,
+                "start_ms": 2326800,
+                "finish_ms": 20326800,
+                "power_kw": 4.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1244,
+            "physical_completion_ms": {
+              "heat_water": 2326800,
+              "charge_ev": 20326800
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": false,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": false,
+              "19200000": false,
+              "19800000": false,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1424,
+                "start_ms": 1424,
+                "finish_ms": 18001424,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1244,
+                "start_ms": 18001424,
+                "finish_ms": 20326980,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1424,
+            "physical_completion_ms": {
+              "charge_ev": 18001424,
+              "heat_water": 20326980
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": true
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1424,
+                "start_ms": 1424,
+                "finish_ms": 18001424,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1244,
+                "start_ms": 18001424,
+                "finish_ms": 20326980,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1424,
+            "physical_completion_ms": {
+              "charge_ev": 18001424,
+              "heat_water": 20326980
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": true
+          }
+        },
+        "control": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1244,
+                "start_ms": 1244,
+                "finish_ms": 2326800,
+                "power_kw": 3.0
+              },
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1424,
+                "start_ms": 1424,
+                "finish_ms": 18001424,
+                "power_kw": 4.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1244,
+            "physical_completion_ms": {
+              "heat_water": 2326800,
+              "charge_ev": 18001424
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1424,
+                "start_ms": 1424,
+                "finish_ms": 18001424,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1244,
+                "start_ms": 1424,
+                "finish_ms": 2326980,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1424,
+            "physical_completion_ms": {
+              "charge_ev": 18001424,
+              "heat_water": 2326980
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": true
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1244,
+                "start_ms": 1244,
+                "finish_ms": 2326800,
+                "power_kw": 3.0
+              },
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1424,
+                "start_ms": 1424,
+                "finish_ms": 18001424,
+                "power_kw": 4.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1244,
+            "physical_completion_ms": {
+              "heat_water": 2326800,
+              "charge_ev": 18001424
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          }
+        }
+      }
+    },
+    {
+      "repetition": 2,
+      "model_records": {
+        "charge_ev": {
+          "request": {
+            "request_id": "1e698492-ab65-4891-88de-c0d1e3479efb",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 113,
+            "state": {
+              "vehicle": {
+                "battery_pct": 20,
+                "departure_deadline_ms": 19200000,
+                "battery_capacity_kwh": 60.0
+              },
+              "devices": {
+                "ev_charger": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "EVChargingAgent",
+              "role": "ev_charging",
+              "tools": [
+                "charge_ev"
+              ],
+              "observable_state": [
+                "vehicle.battery_pct",
+                "vehicle.departure_deadline_ms",
+                "vehicle.battery_capacity_kwh"
+              ],
+              "writable_resources": [
+                "devices.ev_charger"
+              ]
+            },
+            "task": {
+              "task_id": "charge_ev",
+              "agent_id": "EVChargingAgent",
+              "release_at_ms": 0,
+              "goal": "Charge the 60 kWh EV battery from 20% to at least 50% before departure in 5 h 20 min.",
+              "priority": 100,
+              "completion_deadline_ms": 19200000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "charge_ev"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "type": "number"
+                  }
+                ],
+                "description": "Charge the EV to the requested battery percentage."
+              },
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off vehicle charging."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "prop-1e698492-1",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [
+                  {
+                    "path": "vehicle.battery_pct",
+                    "op": "lt",
+                    "value": 50,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "vehicle.departure_deadline_ms",
+                    "op": "gt",
+                    "value": 0,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1384
+        },
+        "heat_water": {
+          "request": {
+            "request_id": "308f2fe2-dcf2-460f-820f-61221ac04b7a",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 113,
+            "state": {
+              "water": {
+                "temperature_c": 35,
+                "tank_liters": 100.0,
+                "shower_deadline_ms": 21600000
+              },
+              "devices": {
+                "water_heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WaterHeatingAgent",
+              "role": "water_heating",
+              "tools": [
+                "heat_water"
+              ],
+              "observable_state": [
+                "water.temperature_c",
+                "water.tank_liters",
+                "water.shower_deadline_ms"
+              ],
+              "writable_resources": [
+                "devices.water_heater"
+              ]
+            },
+            "task": {
+              "task_id": "heat_water",
+              "agent_id": "WaterHeatingAgent",
+              "release_at_ms": 100,
+              "goal": "Heat the 100 L water tank from 35 C to at least 50 C before a shower in 6 h.",
+              "priority": 80,
+              "completion_deadline_ms": 21600000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "heat_water"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "type": "number"
+                  }
+                ],
+                "description": "Heat the tank to the requested temperature."
+              },
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off water heating."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "wh-heat-113",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [
+                  {
+                    "path": "water.tank_liters",
+                    "op": "gte",
+                    "value": 1,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 7200000,
+                "estimated_power_kw": 3.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1709
+        }
+      },
+      "outcomes": {
+        "conflict": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1384,
+                "start_ms": 1384,
+                "finish_ms": 18001384,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1809,
+                "start_ms": 18001384,
+                "finish_ms": 20326940,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1384,
+            "physical_completion_ms": {
+              "charge_ev": 18001384,
+              "heat_water": 20326940
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1384,
+                "start_ms": 1384,
+                "finish_ms": 18001384,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1809,
+                "start_ms": 18001384,
+                "finish_ms": 20326940,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1384,
+            "physical_completion_ms": {
+              "charge_ev": 18001384,
+              "heat_water": 20326940
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1384,
+                "start_ms": 1384,
+                "finish_ms": 18001384,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1809,
+                "start_ms": 18001384,
+                "finish_ms": 20326940,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1384,
+            "physical_completion_ms": {
+              "charge_ev": 18001384,
+              "heat_water": 20326940
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          }
+        },
+        "control": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1384,
+                "start_ms": 1384,
+                "finish_ms": 18001384,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1809,
+                "start_ms": 1809,
+                "finish_ms": 2327365,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1384,
+            "physical_completion_ms": {
+              "charge_ev": 18001384,
+              "heat_water": 2327365
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1384,
+                "start_ms": 1384,
+                "finish_ms": 18001384,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1809,
+                "start_ms": 1809,
+                "finish_ms": 2327365,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1384,
+            "physical_completion_ms": {
+              "charge_ev": 18001384,
+              "heat_water": 2327365
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1384,
+                "start_ms": 1384,
+                "finish_ms": 18001384,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1809,
+                "start_ms": 1809,
+                "finish_ms": 2327365,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1384,
+            "physical_completion_ms": {
+              "charge_ev": 18001384,
+              "heat_water": 2327365
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          }
+        }
+      }
+    },
+    {
+      "repetition": 3,
+      "model_records": {
+        "charge_ev": {
+          "request": {
+            "request_id": "67cd30ba-9edc-4bbf-8660-da10fb73810a",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 113,
+            "state": {
+              "vehicle": {
+                "battery_pct": 20,
+                "departure_deadline_ms": 19200000,
+                "battery_capacity_kwh": 60.0
+              },
+              "devices": {
+                "ev_charger": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "EVChargingAgent",
+              "role": "ev_charging",
+              "tools": [
+                "charge_ev"
+              ],
+              "observable_state": [
+                "vehicle.battery_pct",
+                "vehicle.departure_deadline_ms",
+                "vehicle.battery_capacity_kwh"
+              ],
+              "writable_resources": [
+                "devices.ev_charger"
+              ]
+            },
+            "task": {
+              "task_id": "charge_ev",
+              "agent_id": "EVChargingAgent",
+              "release_at_ms": 0,
+              "goal": "Charge the 60 kWh EV battery from 20% to at least 50% before departure in 5 h 20 min.",
+              "priority": 100,
+              "completion_deadline_ms": 19200000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "charge_ev"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "type": "number"
+                  }
+                ],
+                "description": "Charge the EV to the requested battery percentage."
+              },
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off vehicle charging."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "ev-charge-67cd30ba",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [
+                  {
+                    "path": "devices.ev_charger",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "vehicle.battery_pct",
+                    "op": "lt",
+                    "value": 50,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 10800000,
+                "estimated_power_kw": 7.2
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1586
+        },
+        "heat_water": {
+          "request": {
+            "request_id": "47cb7b68-d315-4135-83b5-c2162051dc34",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 113,
+            "state": {
+              "water": {
+                "temperature_c": 35,
+                "tank_liters": 100.0,
+                "shower_deadline_ms": 21600000
+              },
+              "devices": {
+                "water_heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WaterHeatingAgent",
+              "role": "water_heating",
+              "tools": [
+                "heat_water"
+              ],
+              "observable_state": [
+                "water.temperature_c",
+                "water.tank_liters",
+                "water.shower_deadline_ms"
+              ],
+              "writable_resources": [
+                "devices.water_heater"
+              ]
+            },
+            "task": {
+              "task_id": "heat_water",
+              "agent_id": "WaterHeatingAgent",
+              "release_at_ms": 100,
+              "goal": "Heat the 100 L water tank from 35 C to at least 50 C before a shower in 6 h.",
+              "priority": 80,
+              "completion_deadline_ms": 21600000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "heat_water"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "type": "number"
+                  }
+                ],
+                "description": "Heat the tank to the requested temperature."
+              },
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off water heating."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "47cb7b68-wha-heat-50",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [
+                  {
+                    "path": "water.temperature_c",
+                    "op": "lt",
+                    "value": 50,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.water_heater",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 900000,
+                "estimated_power_kw": 3.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1495
+        }
+      },
+      "outcomes": {
+        "conflict": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1586,
+                "start_ms": 1586,
+                "finish_ms": 18001586,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1595,
+                "start_ms": 18001586,
+                "finish_ms": 20327142,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1586,
+            "physical_completion_ms": {
+              "charge_ev": 18001586,
+              "heat_water": 20327142
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1586,
+                "start_ms": 1586,
+                "finish_ms": 18001586,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1595,
+                "start_ms": 18001586,
+                "finish_ms": 20327142,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1586,
+            "physical_completion_ms": {
+              "charge_ev": 18001586,
+              "heat_water": 20327142
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1586,
+                "start_ms": 1586,
+                "finish_ms": 18001586,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1595,
+                "start_ms": 18001586,
+                "finish_ms": 20327142,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1586,
+            "physical_completion_ms": {
+              "charge_ev": 18001586,
+              "heat_water": 20327142
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          }
+        },
+        "control": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1586,
+                "start_ms": 1586,
+                "finish_ms": 18001586,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1595,
+                "start_ms": 1595,
+                "finish_ms": 2327151,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1586,
+            "physical_completion_ms": {
+              "charge_ev": 18001586,
+              "heat_water": 2327151
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1586,
+                "start_ms": 1586,
+                "finish_ms": 18001586,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1595,
+                "start_ms": 1595,
+                "finish_ms": 2327151,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1586,
+            "physical_completion_ms": {
+              "charge_ev": 18001586,
+              "heat_water": 2327151
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1586,
+                "start_ms": 1586,
+                "finish_ms": 18001586,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1595,
+                "start_ms": 1595,
+                "finish_ms": 2327151,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1586,
+            "physical_completion_ms": {
+              "charge_ev": 18001586,
+              "heat_water": 2327151
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          }
+        }
+      }
+    },
+    {
+      "repetition": 4,
+      "model_records": {
+        "charge_ev": {
+          "request": {
+            "request_id": "2170b929-c0c1-4731-9ba3-7e8c2034c660",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 113,
+            "state": {
+              "vehicle": {
+                "battery_pct": 20,
+                "departure_deadline_ms": 19200000,
+                "battery_capacity_kwh": 60.0
+              },
+              "devices": {
+                "ev_charger": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "EVChargingAgent",
+              "role": "ev_charging",
+              "tools": [
+                "charge_ev"
+              ],
+              "observable_state": [
+                "vehicle.battery_pct",
+                "vehicle.departure_deadline_ms",
+                "vehicle.battery_capacity_kwh"
+              ],
+              "writable_resources": [
+                "devices.ev_charger"
+              ]
+            },
+            "task": {
+              "task_id": "charge_ev",
+              "agent_id": "EVChargingAgent",
+              "release_at_ms": 0,
+              "goal": "Charge the 60 kWh EV battery from 20% to at least 50% before departure in 5 h 20 min.",
+              "priority": 100,
+              "completion_deadline_ms": 19200000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "charge_ev"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "type": "number"
+                  }
+                ],
+                "description": "Charge the EV to the requested battery percentage."
+              },
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off vehicle charging."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "ev-charge-2170b929",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [
+                  {
+                    "path": "vehicle.battery_pct",
+                    "op": "lt",
+                    "value": 50,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "vehicle.departure_deadline_ms",
+                    "op": "gt",
+                    "value": 0,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1495
+        },
+        "heat_water": {
+          "request": {
+            "request_id": "e3329e10-743c-4c9a-a579-a2872f7034c1",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 113,
+            "state": {
+              "water": {
+                "temperature_c": 35,
+                "tank_liters": 100.0,
+                "shower_deadline_ms": 21600000
+              },
+              "devices": {
+                "water_heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WaterHeatingAgent",
+              "role": "water_heating",
+              "tools": [
+                "heat_water"
+              ],
+              "observable_state": [
+                "water.temperature_c",
+                "water.tank_liters",
+                "water.shower_deadline_ms"
+              ],
+              "writable_resources": [
+                "devices.water_heater"
+              ]
+            },
+            "task": {
+              "task_id": "heat_water",
+              "agent_id": "WaterHeatingAgent",
+              "release_at_ms": 100,
+              "goal": "Heat the 100 L water tank from 35 C to at least 50 C before a shower in 6 h.",
+              "priority": 80,
+              "completion_deadline_ms": 21600000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "heat_water"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "type": "number"
+                  }
+                ],
+                "description": "Heat the tank to the requested temperature."
+              },
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off water heating."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "wh-heat-50c-v113",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [
+                  {
+                    "path": "water.tank_liters",
+                    "op": "gte",
+                    "value": 50,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "water.shower_deadline_ms",
+                    "op": "gt",
+                    "value": 0,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 5400000,
+                "estimated_power_kw": 3.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1748
+        }
+      },
+      "outcomes": {
+        "conflict": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1495,
+                "start_ms": 1495,
+                "finish_ms": 18001495,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1848,
+                "start_ms": 18001495,
+                "finish_ms": 20327051,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1495,
+            "physical_completion_ms": {
+              "charge_ev": 18001495,
+              "heat_water": 20327051
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1495,
+                "start_ms": 1495,
+                "finish_ms": 18001495,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1848,
+                "start_ms": 18001495,
+                "finish_ms": 20327051,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1495,
+            "physical_completion_ms": {
+              "charge_ev": 18001495,
+              "heat_water": 20327051
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1495,
+                "start_ms": 1495,
+                "finish_ms": 18001495,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1848,
+                "start_ms": 18001495,
+                "finish_ms": 20327051,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1495,
+            "physical_completion_ms": {
+              "charge_ev": 18001495,
+              "heat_water": 20327051
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          }
+        },
+        "control": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1495,
+                "start_ms": 1495,
+                "finish_ms": 18001495,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1848,
+                "start_ms": 1848,
+                "finish_ms": 2327404,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1495,
+            "physical_completion_ms": {
+              "charge_ev": 18001495,
+              "heat_water": 2327404
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1495,
+                "start_ms": 1495,
+                "finish_ms": 18001495,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1848,
+                "start_ms": 1848,
+                "finish_ms": 2327404,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1495,
+            "physical_completion_ms": {
+              "charge_ev": 18001495,
+              "heat_water": 2327404
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1495,
+                "start_ms": 1495,
+                "finish_ms": 18001495,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1848,
+                "start_ms": 1848,
+                "finish_ms": 2327404,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1495,
+            "physical_completion_ms": {
+              "charge_ev": 18001495,
+              "heat_water": 2327404
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          }
+        }
+      }
+    },
+    {
+      "repetition": 5,
+      "model_records": {
+        "charge_ev": {
+          "request": {
+            "request_id": "c1ba866f-a942-4410-8713-66481818e385",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 113,
+            "state": {
+              "vehicle": {
+                "battery_pct": 20,
+                "departure_deadline_ms": 19200000,
+                "battery_capacity_kwh": 60.0
+              },
+              "devices": {
+                "ev_charger": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "EVChargingAgent",
+              "role": "ev_charging",
+              "tools": [
+                "charge_ev"
+              ],
+              "observable_state": [
+                "vehicle.battery_pct",
+                "vehicle.departure_deadline_ms",
+                "vehicle.battery_capacity_kwh"
+              ],
+              "writable_resources": [
+                "devices.ev_charger"
+              ]
+            },
+            "task": {
+              "task_id": "charge_ev",
+              "agent_id": "EVChargingAgent",
+              "release_at_ms": 0,
+              "goal": "Charge the 60 kWh EV battery from 20% to at least 50% before departure in 5 h 20 min.",
+              "priority": 100,
+              "completion_deadline_ms": 19200000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "charge_ev"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "type": "number"
+                  }
+                ],
+                "description": "Charge the EV to the requested battery percentage."
+              },
+              {
+                "agent_id": "EVChargingAgent",
+                "target": "ev_charger",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off vehicle charging."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "prop-ev-charge-113",
+                "target": "ev_charger",
+                "operation": "charge",
+                "parameters": [
+                  {
+                    "name": "target_battery_pct",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [
+                  {
+                    "path": "devices.ev_charger",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "vehicle.battery_pct",
+                    "op": "lt",
+                    "value": 50,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 14400000,
+                "estimated_power_kw": 7.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1646
+        },
+        "heat_water": {
+          "request": {
+            "request_id": "683de41a-9e30-4051-bd08-92a5ba55c79c",
+            "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+            "base_episode_id": "HC-M13",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 113,
+            "state": {
+              "water": {
+                "temperature_c": 35,
+                "tank_liters": 100.0,
+                "shower_deadline_ms": 21600000
+              },
+              "devices": {
+                "water_heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WaterHeatingAgent",
+              "role": "water_heating",
+              "tools": [
+                "heat_water"
+              ],
+              "observable_state": [
+                "water.temperature_c",
+                "water.tank_liters",
+                "water.shower_deadline_ms"
+              ],
+              "writable_resources": [
+                "devices.water_heater"
+              ]
+            },
+            "task": {
+              "task_id": "heat_water",
+              "agent_id": "WaterHeatingAgent",
+              "release_at_ms": 100,
+              "goal": "Heat the 100 L water tank from 35 C to at least 50 C before a shower in 6 h.",
+              "priority": 80,
+              "completion_deadline_ms": 21600000
+            },
+            "goals": [
+              {
+                "path": "vehicle.battery_pct",
+                "op": "gte",
+                "value": 50
+              },
+              {
+                "path": "water.temperature_c",
+                "op": "gte",
+                "value": 50
+              }
+            ],
+            "constraints": [],
+            "allowed_tools": [
+              "heat_water"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "type": "number"
+                  }
+                ],
+                "description": "Heat the tank to the requested temperature."
+              },
+              {
+                "agent_id": "WaterHeatingAgent",
+                "target": "water_heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Turn off water heating."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "wh-heat-50-683de41a",
+                "target": "water_heater",
+                "operation": "heat",
+                "parameters": [
+                  {
+                    "name": "target_temperature_c",
+                    "value": 50
+                  }
+                ],
+                "based_on_state_version": 113,
+                "requires": [
+                  {
+                    "path": "water.temperature_c",
+                    "op": "lt",
+                    "value": 50,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "water.tank_liters",
+                    "op": "gte",
+                    "value": 1,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "water.shower_deadline_ms",
+                    "op": "gt",
+                    "value": 100,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1623
+        }
+      },
+      "outcomes": {
+        "conflict": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1646,
+                "start_ms": 1646,
+                "finish_ms": 18001646,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1723,
+                "start_ms": 18001646,
+                "finish_ms": 20327202,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1646,
+            "physical_completion_ms": {
+              "charge_ev": 18001646,
+              "heat_water": 20327202
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1646,
+                "start_ms": 1646,
+                "finish_ms": 18001646,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1723,
+                "start_ms": 18001646,
+                "finish_ms": 20327202,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1646,
+            "physical_completion_ms": {
+              "charge_ev": 18001646,
+              "heat_water": 20327202
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "conflict",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1646,
+                "start_ms": 1646,
+                "finish_ms": 18001646,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1723,
+                "start_ms": 18001646,
+                "finish_ms": 20327202,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1646,
+            "physical_completion_ms": {
+              "charge_ev": 18001646,
+              "heat_water": 20327202
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          }
+        },
+        "control": {
+          "ImmediateFIFO": {
+            "policy": "ImmediateFIFO",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1646,
+                "start_ms": 1646,
+                "finish_ms": 18001646,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1723,
+                "start_ms": 1723,
+                "finish_ms": 2327279,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1646,
+            "physical_completion_ms": {
+              "charge_ev": 18001646,
+              "heat_water": 2327279
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriority": {
+            "policy": "WaitReleasedPriority",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1646,
+                "start_ms": 1646,
+                "finish_ms": 18001646,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1723,
+                "start_ms": 1723,
+                "finish_ms": 2327279,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1646,
+            "physical_completion_ms": {
+              "charge_ev": 18001646,
+              "heat_water": 2327279
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          },
+          "WaitReleasedPriorityCapacityAware": {
+            "policy": "WaitReleasedPriorityCapacityAware",
+            "condition": "control",
+            "events": [
+              {
+                "task_id": "charge_ev",
+                "ready_ms": 1646,
+                "start_ms": 1646,
+                "finish_ms": 18001646,
+                "power_kw": 4.0
+              },
+              {
+                "task_id": "heat_water",
+                "ready_ms": 1723,
+                "start_ms": 1723,
+                "finish_ms": 2327279,
+                "power_kw": 3.0
+              }
+            ],
+            "safe": true,
+            "first_physical_start_ms": 1646,
+            "physical_completion_ms": {
+              "charge_ev": 18001646,
+              "heat_water": 2327279
+            },
+            "all_tasks_completed": true,
+            "ev_deadline_met": true,
+            "water_deadline_met": true,
+            "ev_deadline_sensitivity": {
+              "18000000": false,
+              "18600000": true,
+              "19200000": true,
+              "19800000": true,
+              "20700000": true,
+              "21600000": true
+            },
+            "waited_for_urgent": false
+          }
+        }
+      }
+    }
+  ]
+}

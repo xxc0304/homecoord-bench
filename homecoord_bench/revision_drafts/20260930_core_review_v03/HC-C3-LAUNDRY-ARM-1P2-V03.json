@@ -1,0 +1,306 @@
+{
+  "episode_id": "HC-C3-LAUNDRY-ARM-1P2-V03",
+  "base_episode_id": "HC-C3-PUB-C9T5",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "controlled_feasibility_repair_candidate",
+  "review_status": "proposed_revision_not_scored",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 5.0,
+      "task_power_bounds_kw": {
+        "wash_new_load": 2.0,
+        "dry_prior_load": 2.5,
+        "heat_room": 1.5
+      }
+    }
+  },
+  "initial_state": {
+    "version": 1,
+    "values": {
+      "devices": {
+        "washer": "idle",
+        "dryer": "idle",
+        "heat_pump": "idle"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "WasherAgent",
+      "role": "wash_new_load",
+      "tools": [
+        "start_washer"
+      ],
+      "observable_state": [
+        "devices.washer"
+      ],
+      "writable_resources": [
+        "devices.washer"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "DryerAgent",
+      "role": "dry_prior_load",
+      "tools": [
+        "start_dryer"
+      ],
+      "observable_state": [
+        "devices.dryer"
+      ],
+      "writable_resources": [
+        "devices.dryer"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "ClimateAgent",
+      "role": "heat_room",
+      "tools": [
+        "start_heat_pump"
+      ],
+      "observable_state": [
+        "devices.heat_pump"
+      ],
+      "writable_resources": [
+        "devices.heat_pump"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "wash_new_load",
+      "agent_id": "WasherAgent",
+      "release_at_ms": 0,
+      "goal": "Wash a new laundry load within 120 minutes.",
+      "priority": 100,
+      "completion_deadline_ms": 7200000,
+      "required_action": {
+        "target": "washer",
+        "operation": "wash"
+      },
+      "action_template": {
+        "target": "washer",
+        "operation": "wash",
+        "parameters": {},
+        "duration_ms": 3600000,
+        "power_kw": 2.0,
+        "requires": [
+          {
+            "path": "devices.washer",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "dry_prior_load",
+      "agent_id": "DryerAgent",
+      "release_at_ms": 0,
+      "goal": "Dry a previously washed, already-ready load within 130 minutes.",
+      "priority": 90,
+      "completion_deadline_ms": 7800000,
+      "required_action": {
+        "target": "dryer",
+        "operation": "dry"
+      },
+      "action_template": {
+        "target": "dryer",
+        "operation": "dry",
+        "parameters": {},
+        "duration_ms": 3900000,
+        "power_kw": 2.5,
+        "requires": [
+          {
+            "path": "devices.dryer",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "heat_room",
+      "agent_id": "ClimateAgent",
+      "release_at_ms": 0,
+      "goal": "Complete a room-heating service cycle within 240 minutes.",
+      "priority": 40,
+      "completion_deadline_ms": 14400000,
+      "required_action": {
+        "target": "heat_pump",
+        "operation": "heat"
+      },
+      "action_template": {
+        "target": "heat_pump",
+        "operation": "heat",
+        "parameters": {},
+        "duration_ms": 5400000,
+        "power_kw": 1.5,
+        "requires": [
+          {
+            "path": "devices.heat_pump",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "goals": [
+    {
+      "path": "devices.washer",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.dryer",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.heat_pump",
+      "op": "eq",
+      "value": "complete"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 5.0
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "WasherAgent",
+      "task_id": "wash_new_load",
+      "target": "washer",
+      "operation": "wash",
+      "grounded_operation": "wash",
+      "start_effects": {
+        "devices.washer": "running"
+      },
+      "completion_effects": {
+        "devices.washer": "complete"
+      },
+      "effects": {
+        "devices.washer": "complete"
+      },
+      "duration_ms": 3600000,
+      "power_kw": 2.0
+    },
+    {
+      "agent_id": "DryerAgent",
+      "task_id": "dry_prior_load",
+      "target": "dryer",
+      "operation": "dry",
+      "grounded_operation": "dry",
+      "start_effects": {
+        "devices.dryer": "running"
+      },
+      "completion_effects": {
+        "devices.dryer": "complete"
+      },
+      "effects": {
+        "devices.dryer": "complete"
+      },
+      "duration_ms": 3900000,
+      "power_kw": 2.5
+    },
+    {
+      "agent_id": "ClimateAgent",
+      "task_id": "heat_room",
+      "target": "heat_pump",
+      "operation": "heat",
+      "grounded_operation": "heat",
+      "start_effects": {
+        "devices.heat_pump": "running"
+      },
+      "completion_effects": {
+        "devices.heat_pump": "complete"
+      },
+      "effects": {
+        "devices.heat_pump": "complete"
+      },
+      "duration_ms": 5400000,
+      "power_kw": 1.5
+    }
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "WasherAgent",
+      "tool_name": "start_washer",
+      "target": "washer",
+      "operation": "wash",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.washer",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 60-minute cycle at nominal 2.0 kW."
+    },
+    {
+      "agent_id": "DryerAgent",
+      "tool_name": "start_dryer",
+      "target": "dryer",
+      "operation": "dry",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.dryer",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 65-minute cycle at nominal 2.5 kW."
+    },
+    {
+      "agent_id": "ClimateAgent",
+      "tool_name": "start_heat_pump",
+      "target": "heat_pump",
+      "operation": "heat",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.heat_pump",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 90-minute cycle at nominal 1.5 kW."
+    }
+  ],
+  "tool_contract_version": "strict-v1",
+  "simulation": {
+    "command_latency_ms": 100,
+    "blind_future_task_arrivals": true
+  },
+  "resource_pressure": {
+    "load_to_capacity_ratio": 1.2,
+    "sum_nominal_requested_power_kw": 6.0,
+    "capacity_kw": 5.0,
+    "source": "controlled_benchmark_factor"
+  },
+  "scenario_assumptions": {
+    "power_semantics": "constant nominal load during a fixed noninterruptible cycle",
+    "physical_calibration": "none",
+    "purpose": "mechanism isolation and structural generalization only",
+    "load_relationship": "The dryer holds a prior washed load; the washer handles a different new load. There is no wash-to-dry dependency in this episode.",
+    "remote_control": "assumed virtual appliance capability, not device-verified",
+    "revision_reason": "v0.1 ρ=1.6 had no all-deadline-feasible schedule even for a full-information oracle; only the flexible heating deadline changes from 210 to 240 minutes."
+  },
+  "variant": {
+    "design": "C3-laundry-heat-v0.2",
+    "condition": "rho=1.2"
+  }
+}

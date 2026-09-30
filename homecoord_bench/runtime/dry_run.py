@@ -8,6 +8,10 @@ from .protocol import assert_agent_decision
 
 
 class DryRunClient:
+    # Deterministic scripted baselines need the template; live model requests
+    # must not receive this evaluation-only field.
+    include_evaluation_hints = True
+
     def decide(self, agent_request: dict[str, Any], instructions: str = "") -> dict[str, Any]:
         task = agent_request["task"]
         agent = agent_request["agent"]

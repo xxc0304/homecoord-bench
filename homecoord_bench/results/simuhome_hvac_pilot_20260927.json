@@ -1,0 +1,1447 @@
+{
+  "schema_version": "simuhome-hvac-pilot-summary-0.1",
+  "date": "2026-09-27",
+  "backend": {
+    "name": "SimuHome",
+    "commit": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+    "base_url": "http://127.0.0.1:8765/api",
+    "upstream_source_modified": false
+  },
+  "method": {
+    "models_called": 0,
+    "physical_devices_used": 0,
+    "initial_temperature_raw": 2900,
+    "temperature_units_calibrated": false,
+    "trial_count": 21,
+    "cards": {
+      "A": 3,
+      "B_cool_then_off": 3,
+      "B_off_then_cool": 3,
+      "C": 3,
+      "D_idle_control": 3,
+      "E_one_hour_idle": 3,
+      "E_one_hour_cool": 3
+    },
+    "note": "Local fixed-configuration adapter pilot only. temperature_delta_raw is in the simulator's unvalidated internal scale; command workflow API timing is not Agent/model latency."
+  },
+  "results": [
+    {
+      "run_id": "A-r1",
+      "card": "A",
+      "scenario_id": "simuhome-hvac-reset-cool",
+      "schedule_id": "cool-at-t20",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\A-r1.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "final_tick": 25,
+      "workflow_status": {
+        "workflow_id": "10adeddd-e951-45b2-b293-4e2329f8d8dd",
+        "description": "homecoord-cool-cool",
+        "start_time": "2026-09-26 00:00:02",
+        "status": "completed",
+        "current_step": 3,
+        "total_steps": 4,
+        "error": null
+      },
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 59.615
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 97.729
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.434
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/10adeddd-e951-45b2-b293-4e2329f8d8dd/status",
+          "adapter_wall_latency_ms": 100.212
+        }
+      ]
+    },
+    {
+      "run_id": "A-r2",
+      "card": "A",
+      "scenario_id": "simuhome-hvac-reset-cool",
+      "schedule_id": "cool-at-t20",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\A-r2.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "final_tick": 25,
+      "workflow_status": {
+        "workflow_id": "e8eb042a-f79e-49c8-930a-2e5254a34031",
+        "description": "homecoord-cool-cool",
+        "start_time": "2026-09-26 00:00:02",
+        "status": "completed",
+        "current_step": 3,
+        "total_steps": 4,
+        "error": null
+      },
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.146
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.909
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.787
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/e8eb042a-f79e-49c8-930a-2e5254a34031/status",
+          "adapter_wall_latency_ms": 99.816
+        }
+      ]
+    },
+    {
+      "run_id": "A-r3",
+      "card": "A",
+      "scenario_id": "simuhome-hvac-reset-cool",
+      "schedule_id": "cool-at-t20",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\A-r3.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "final_tick": 25,
+      "workflow_status": {
+        "workflow_id": "af1f62ee-4bd4-41eb-ad23-813a773752ad",
+        "description": "homecoord-cool-cool",
+        "start_time": "2026-09-26 00:00:02",
+        "status": "completed",
+        "current_step": 3,
+        "total_steps": 4,
+        "error": null
+      },
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.802
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 102.005
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 99.021
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/af1f62ee-4bd4-41eb-ad23-813a773752ad/status",
+          "adapter_wall_latency_ms": 99.555
+        }
+      ]
+    },
+    {
+      "run_id": "B-cool-then-off-r1",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "cool-then-off",
+      "expected_proposal_order": [
+        "p-cool",
+        "p-off"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-cool-then-off-r1.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "dc50c047ca23448d90bf840eb540a0e2401f81cfd89f6f2094cc7bf4e0534ba1",
+      "final_state_digest": "4e86712e1e5b69daaebf777420039f0cf95bbe876c9ba3fe3ea9161d36f1bf36",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "b75fb523-0c2a-44d3-8c02-727587cb247f",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        },
+        {
+          "workflow_id": "d176a8bd-c542-48d6-9bf1-b2e01e859011",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.963707259276,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.036292740724093164,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 101.219
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.716
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.059
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.634
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/b75fb523-0c2a-44d3-8c02-727587cb247f/status",
+          "adapter_wall_latency_ms": 99.81
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.675
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/d176a8bd-c542-48d6-9bf1-b2e01e859011/status",
+          "adapter_wall_latency_ms": 99.971
+        }
+      ]
+    },
+    {
+      "run_id": "B-cool-then-off-r2",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "cool-then-off",
+      "expected_proposal_order": [
+        "p-cool",
+        "p-off"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-cool-then-off-r2.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "dc50c047ca23448d90bf840eb540a0e2401f81cfd89f6f2094cc7bf4e0534ba1",
+      "final_state_digest": "4e86712e1e5b69daaebf777420039f0cf95bbe876c9ba3fe3ea9161d36f1bf36",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "e3e0f527-7e62-4d07-ba7c-d10ff89d2211",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        },
+        {
+          "workflow_id": "ecf385a6-3a87-45cf-9ee0-7f85a211991d",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.963707259276,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.036292740724093164,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.386
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.273
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.032
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.454
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/e3e0f527-7e62-4d07-ba7c-d10ff89d2211/status",
+          "adapter_wall_latency_ms": 100.277
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.574
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/ecf385a6-3a87-45cf-9ee0-7f85a211991d/status",
+          "adapter_wall_latency_ms": 100.01
+        }
+      ]
+    },
+    {
+      "run_id": "B-cool-then-off-r3",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "cool-then-off",
+      "expected_proposal_order": [
+        "p-cool",
+        "p-off"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-cool-then-off-r3.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "dc50c047ca23448d90bf840eb540a0e2401f81cfd89f6f2094cc7bf4e0534ba1",
+      "final_state_digest": "4e86712e1e5b69daaebf777420039f0cf95bbe876c9ba3fe3ea9161d36f1bf36",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "8f5f6ef9-f202-418a-b9e9-30c7ef49f6a3",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        },
+        {
+          "workflow_id": "f2395c0a-adf8-409c-8744-ffb005254702",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.963707259276,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.036292740724093164,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.696
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.202
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.3
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.212
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/8f5f6ef9-f202-418a-b9e9-30c7ef49f6a3/status",
+          "adapter_wall_latency_ms": 100.483
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.104
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/f2395c0a-adf8-409c-8744-ffb005254702/status",
+          "adapter_wall_latency_ms": 100.261
+        }
+      ]
+    },
+    {
+      "run_id": "B-off-then-cool-r1",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "off-then-cool",
+      "expected_proposal_order": [
+        "p-off",
+        "p-cool"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-off-then-cool-r1.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "c3f7365a6a3426b83979c6be9c4846e92491a3f640bf85f71634f335bd0cba6e",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "6e056da5-4027-4aeb-af56-2799327b2a10",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        },
+        {
+          "workflow_id": "4a36851b-ba48-4fa4-9c5c-e4ac7a6dc809",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 98.775
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.245
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.102
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.375
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/6e056da5-4027-4aeb-af56-2799327b2a10/status",
+          "adapter_wall_latency_ms": 100.128
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.422
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/4a36851b-ba48-4fa4-9c5c-e4ac7a6dc809/status",
+          "adapter_wall_latency_ms": 100.092
+        }
+      ]
+    },
+    {
+      "run_id": "B-off-then-cool-r2",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "off-then-cool",
+      "expected_proposal_order": [
+        "p-off",
+        "p-cool"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-off-then-cool-r2.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "c3f7365a6a3426b83979c6be9c4846e92491a3f640bf85f71634f335bd0cba6e",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "4dbf5f4f-a329-415c-84f7-8d2685d3d3ec",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        },
+        {
+          "workflow_id": "edf8c148-7c53-47de-b5e1-1f7f43603561",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 100.836
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.871
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.372
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.527
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/4dbf5f4f-a329-415c-84f7-8d2685d3d3ec/status",
+          "adapter_wall_latency_ms": 100.338
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.131
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/edf8c148-7c53-47de-b5e1-1f7f43603561/status",
+          "adapter_wall_latency_ms": 99.799
+        }
+      ]
+    },
+    {
+      "run_id": "B-off-then-cool-r3",
+      "card": "B",
+      "scenario_id": "simuhome-hvac-opposite-proposal-order",
+      "schedule_id": "off-then-cool",
+      "expected_proposal_order": [
+        "p-off",
+        "p-cool"
+      ],
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\B-off-then-cool-r3.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "mid_state_digest": "c3f7365a6a3426b83979c6be9c4846e92491a3f640bf85f71634f335bd0cba6e",
+      "final_state_digest": "73e55d38c76c85b03219ec4b2180c108d3d0a2aa77bea9101b77804b0d4f603a",
+      "mid_tick": 15,
+      "final_tick": 25,
+      "workflow_statuses": [
+        {
+          "workflow_id": "aa9f4653-6731-46eb-b8b9-50446aa6dd92",
+          "description": "homecoord-off-off",
+          "start_time": "2026-09-26 00:00:01",
+          "status": "completed",
+          "current_step": 0,
+          "total_steps": 1,
+          "error": null
+        },
+        {
+          "workflow_id": "fcd1f5d6-8193-4a2d-af74-a029af61b09e",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2899,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2899.9868006599877,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -0.013199340012306493,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.566
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.455
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 99.916
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.095
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/aa9f4653-6731-46eb-b8b9-50446aa6dd92/status",
+          "adapter_wall_latency_ms": 100.02
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.433
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/fcd1f5d6-8193-4a2d-af74-a029af61b09e/status",
+          "adapter_wall_latency_ms": 100.04
+        }
+      ]
+    },
+    {
+      "run_id": "C-r1",
+      "card": "C",
+      "scenario_id": "simuhome-clock-step",
+      "schedule_id": "single-step-fast-forward",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\C-r1.jsonl",
+      "reset_initial_state_digest": "0d93bc7fb5df06d93132c84797ad012f082f65f3fcf27c64603679502a3a4c8c",
+      "clock_steps": [
+        {
+          "tick": 1,
+          "digest": "e1c3f8469229be618ea72896e48d534462663e22cf1a3721bda4f5eefdc5f22a",
+          "virtual_time": "2026-09-26 00:00:01"
+        },
+        {
+          "tick": 2,
+          "digest": "212096a10f0ae58934920f9c84f0e2d4b7b60abe9d1ffad884118cf49282f114",
+          "virtual_time": "2026-09-26 00:00:02"
+        },
+        {
+          "tick": 3,
+          "digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+          "virtual_time": "2026-09-26 00:00:03"
+        }
+      ],
+      "final_state_digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.824
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.376
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.188
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1001.547
+        }
+      ]
+    },
+    {
+      "run_id": "C-r2",
+      "card": "C",
+      "scenario_id": "simuhome-clock-step",
+      "schedule_id": "single-step-fast-forward",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\C-r2.jsonl",
+      "reset_initial_state_digest": "0d93bc7fb5df06d93132c84797ad012f082f65f3fcf27c64603679502a3a4c8c",
+      "clock_steps": [
+        {
+          "tick": 1,
+          "digest": "e1c3f8469229be618ea72896e48d534462663e22cf1a3721bda4f5eefdc5f22a",
+          "virtual_time": "2026-09-26 00:00:01"
+        },
+        {
+          "tick": 2,
+          "digest": "212096a10f0ae58934920f9c84f0e2d4b7b60abe9d1ffad884118cf49282f114",
+          "virtual_time": "2026-09-26 00:00:02"
+        },
+        {
+          "tick": 3,
+          "digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+          "virtual_time": "2026-09-26 00:00:03"
+        }
+      ],
+      "final_state_digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 998.492
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.438
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.441
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.204
+        }
+      ]
+    },
+    {
+      "run_id": "C-r3",
+      "card": "C",
+      "scenario_id": "simuhome-clock-step",
+      "schedule_id": "single-step-fast-forward",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\C-r3.jsonl",
+      "reset_initial_state_digest": "0d93bc7fb5df06d93132c84797ad012f082f65f3fcf27c64603679502a3a4c8c",
+      "clock_steps": [
+        {
+          "tick": 1,
+          "digest": "e1c3f8469229be618ea72896e48d534462663e22cf1a3721bda4f5eefdc5f22a",
+          "virtual_time": "2026-09-26 00:00:01"
+        },
+        {
+          "tick": 2,
+          "digest": "212096a10f0ae58934920f9c84f0e2d4b7b60abe9d1ffad884118cf49282f114",
+          "virtual_time": "2026-09-26 00:00:02"
+        },
+        {
+          "tick": 3,
+          "digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+          "virtual_time": "2026-09-26 00:00:03"
+        }
+      ],
+      "final_state_digest": "ff612f8a555ad80c23556f6ecdfcf4216fb482768bf890c81500fb17a2229987",
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 999.536
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.214
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 1000.112
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 999.855
+        }
+      ]
+    },
+    {
+      "run_id": "D-idle-control-r1",
+      "card": "D",
+      "scenario_id": "simuhome-hvac-idle-control",
+      "schedule_id": "no-command-to-t25",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\D-idle-control-r1.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "2dcb3d38e45fc8bb27990f7c13d7c63a453754b1ec0251e9ebb12fbb1ebd781a",
+      "final_tick": 25,
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2900,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2600,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 0,
+        "1.FanControl.FanMode": 0,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 0,
+        "1.FanControl.PercentCurrent": 0
+      },
+      "room_state": {
+        "temperature": 2900.0,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": 0.0,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 999.235
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.271
+        }
+      ]
+    },
+    {
+      "run_id": "D-idle-control-r2",
+      "card": "D",
+      "scenario_id": "simuhome-hvac-idle-control",
+      "schedule_id": "no-command-to-t25",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\D-idle-control-r2.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "2dcb3d38e45fc8bb27990f7c13d7c63a453754b1ec0251e9ebb12fbb1ebd781a",
+      "final_tick": 25,
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2900,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2600,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 0,
+        "1.FanControl.FanMode": 0,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 0,
+        "1.FanControl.PercentCurrent": 0
+      },
+      "room_state": {
+        "temperature": 2900.0,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": 0.0,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.444
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.245
+        }
+      ]
+    },
+    {
+      "run_id": "D-idle-control-r3",
+      "card": "D",
+      "scenario_id": "simuhome-hvac-idle-control",
+      "schedule_id": "no-command-to-t25",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\D-idle-control-r3.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "2dcb3d38e45fc8bb27990f7c13d7c63a453754b1ec0251e9ebb12fbb1ebd781a",
+      "final_tick": 25,
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2900,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2600,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 0,
+        "1.FanControl.FanMode": 0,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 0,
+        "1.FanControl.PercentCurrent": 0
+      },
+      "room_state": {
+        "temperature": 2900.0,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": 0.0,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 100.04
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 100.115
+        }
+      ]
+    },
+    {
+      "run_id": "E-idle-r1",
+      "card": "E",
+      "condition": "idle",
+      "scenario_id": "simuhome-hvac-thermal-response",
+      "schedule_id": "idle-one-virtual-hour",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\E-idle-r1.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "5904727d294b67ee26c313d4f1585ecf89f64ac293afd58953632d0883564ed3",
+      "final_tick": 36000,
+      "virtual_time": "2026-09-26 01:00:00",
+      "workflow_statuses": [],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2900,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2600,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 0,
+        "1.FanControl.FanMode": 0,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 0,
+        "1.FanControl.PercentCurrent": 0
+      },
+      "room_state": {
+        "temperature": 2900.0,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": 0.0,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.606
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 127.8
+        }
+      ]
+    },
+    {
+      "run_id": "E-idle-r2",
+      "card": "E",
+      "condition": "idle",
+      "scenario_id": "simuhome-hvac-thermal-response",
+      "schedule_id": "idle-one-virtual-hour",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\E-idle-r2.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "5904727d294b67ee26c313d4f1585ecf89f64ac293afd58953632d0883564ed3",
+      "final_tick": 36000,
+      "virtual_time": "2026-09-26 01:00:00",
+      "workflow_statuses": [],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2900,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2600,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 0,
+        "1.FanControl.FanMode": 0,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 0,
+        "1.FanControl.PercentCurrent": 0
+      },
+      "room_state": {
+        "temperature": 2900.0,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": 0.0,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 71.703
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 127.536
+        }
+      ]
+    },
+    {
+      "run_id": "E-idle-r3",
+      "card": "E",
+      "condition": "idle",
+      "scenario_id": "simuhome-hvac-thermal-response",
+      "schedule_id": "idle-one-virtual-hour",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\E-idle-r3.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "5904727d294b67ee26c313d4f1585ecf89f64ac293afd58953632d0883564ed3",
+      "final_tick": 36000,
+      "virtual_time": "2026-09-26 01:00:00",
+      "workflow_statuses": [],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": false,
+        "1.Thermostat.LocalTemperature": 2900,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2600,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 0,
+        "1.FanControl.FanMode": 0,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 0,
+        "1.FanControl.PercentCurrent": 0
+      },
+      "room_state": {
+        "temperature": 2900.0,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": 0.0,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 72.325
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 127.245
+        }
+      ]
+    },
+    {
+      "run_id": "E-cool-r1",
+      "card": "E",
+      "condition": "cool",
+      "scenario_id": "simuhome-hvac-thermal-response",
+      "schedule_id": "cool-one-virtual-hour",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\E-cool-r1.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "07ab6f3d1e8e7b0c8ed100684bad2c9331187518d1861554dbcdd30caadd30e8",
+      "final_tick": 36000,
+      "virtual_time": "2026-09-26 01:00:00",
+      "workflow_statuses": [
+        {
+          "workflow_id": "f580b8fd-b325-4e3b-abe0-0b9dfeebadc3",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2815,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2815.348976134728,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -84.65102386527178,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 72.369
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.252
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 126.918
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/f580b8fd-b325-4e3b-abe0-0b9dfeebadc3/status",
+          "adapter_wall_latency_ms": 73.382
+        }
+      ]
+    },
+    {
+      "run_id": "E-cool-r2",
+      "card": "E",
+      "condition": "cool",
+      "scenario_id": "simuhome-hvac-thermal-response",
+      "schedule_id": "cool-one-virtual-hour",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\E-cool-r2.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "07ab6f3d1e8e7b0c8ed100684bad2c9331187518d1861554dbcdd30caadd30e8",
+      "final_tick": 36000,
+      "virtual_time": "2026-09-26 01:00:00",
+      "workflow_statuses": [
+        {
+          "workflow_id": "8af561ea-bb24-4c37-a652-e692e94b6f65",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2815,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2815.348976134728,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -84.65102386527178,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.666
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.113
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 127.213
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/8af561ea-bb24-4c37-a652-e692e94b6f65/status",
+          "adapter_wall_latency_ms": 73.433
+        }
+      ]
+    },
+    {
+      "run_id": "E-cool-r3",
+      "card": "E",
+      "condition": "cool",
+      "scenario_id": "simuhome-hvac-thermal-response",
+      "schedule_id": "cool-one-virtual-hour",
+      "trace_path": "homecoord_bench\\results\\simuhome_hvac_pilot_traces\\E-cool-r3.jsonl",
+      "reset_initial_state_digest": "3e915084574699db5ecad3c8e8089646a006ed0d48b15bf3e158d4c328389526",
+      "final_state_digest": "07ab6f3d1e8e7b0c8ed100684bad2c9331187518d1861554dbcdd30caadd30e8",
+      "final_tick": 36000,
+      "virtual_time": "2026-09-26 01:00:00",
+      "workflow_statuses": [
+        {
+          "workflow_id": "5546b47f-d57c-40dd-b827-221c17bd2b67",
+          "description": "homecoord-cool-cool",
+          "start_time": "2026-09-26 00:00:02",
+          "status": "completed",
+          "current_step": 3,
+          "total_steps": 4,
+          "error": null
+        }
+      ],
+      "final_attributes": {
+        "0.BasicInformation.VendorName": "LG Electronics",
+        "0.BasicInformation.VendorID": 1,
+        "0.BasicInformation.ProductName": "Air Conditioner",
+        "0.BasicInformation.ProductID": 1,
+        "1.OnOff.OnOff": true,
+        "1.Thermostat.LocalTemperature": 2815,
+        "1.Thermostat.OccupiedCoolingSetpoint": 2400,
+        "1.Thermostat.OccupiedHeatingSetpoint": 2200,
+        "1.Thermostat.ControlSequenceOfOperation": 4,
+        "1.Thermostat.SystemMode": 3,
+        "1.FanControl.FanMode": 2,
+        "1.FanControl.FanModeSequence": 1,
+        "1.FanControl.PercentSetting": 66,
+        "1.FanControl.PercentCurrent": 66
+      },
+      "room_state": {
+        "temperature": 2815.348976134728,
+        "pm10": 35.0,
+        "illuminance": 1000,
+        "humidity": 5000.0
+      },
+      "room_temperature_delta_raw": -84.65102386527178,
+      "pass": true,
+      "api_wall_latencies": [
+        {
+          "method": "POST",
+          "path": "/simulation/reset",
+          "adapter_wall_latency_ms": 99.264
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/workflow",
+          "adapter_wall_latency_ms": 100.105
+        },
+        {
+          "method": "POST",
+          "path": "/simulation/fast_forward_to",
+          "adapter_wall_latency_ms": 128.82
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/workflow/5546b47f-d57c-40dd-b827-221c17bd2b67/status",
+          "adapter_wall_latency_ms": 71.704
+        }
+      ]
+    }
+  ],
+  "passed_count": 21,
+  "failed_count": 0
+}

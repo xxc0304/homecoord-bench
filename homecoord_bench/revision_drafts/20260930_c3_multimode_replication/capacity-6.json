@@ -1,0 +1,570 @@
+{
+  "episode_id": "HC-E2-DUAL-6",
+  "base_episode_id": "HC-E2-DUAL-6",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "controlled_dual_multimode_service_contract",
+  "review_status": "mechanism_probe_not_frozen_benchmark_data",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 6,
+      "task_power_bounds_kw": {
+        "laundry": 2,
+        "water": 2,
+        "meal": 2
+      }
+    }
+  },
+  "initial_state": {
+    "version": 1,
+    "values": {
+      "devices": {
+        "washer": "idle",
+        "water_heater": "idle",
+        "cooktop": "idle"
+      },
+      "coordination_context": {
+        "resource_capacity_units": 6,
+        "all_tasks_released": true,
+        "objective": "all services and deadlines first; then earliest whole-house completion",
+        "requests": [
+          {
+            "task_id": "laundry",
+            "deadline_ms": 720000,
+            "requested_service": "ordinary_cleaned",
+            "modes": [
+              {
+                "operation": "eco",
+                "duration_ms": 420000,
+                "resource_units": 1
+              },
+              {
+                "operation": "fast",
+                "duration_ms": 180000,
+                "resource_units": 2
+              }
+            ]
+          },
+          {
+            "task_id": "water",
+            "deadline_ms": 300000,
+            "requested_service": "completed",
+            "modes": [
+              {
+                "operation": "prepare",
+                "duration_ms": 240000,
+                "resource_units": 2
+              }
+            ]
+          },
+          {
+            "task_id": "meal",
+            "deadline_ms": 720000,
+            "requested_service": "completed",
+            "modes": [
+              {
+                "operation": "eco",
+                "duration_ms": 360000,
+                "resource_units": 1
+              },
+              {
+                "operation": "fast",
+                "duration_ms": 180000,
+                "resource_units": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "LaundryAgent",
+      "role": "laundry",
+      "tools": [
+        "start_washer",
+        "washer_fast",
+        "washer_off"
+      ],
+      "observable_state": [
+        "devices.washer",
+        "coordination_context"
+      ],
+      "writable_resources": [
+        "devices.washer"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "WaterAgent",
+      "role": "water",
+      "tools": [
+        "start_water_heater",
+        "water_heater_off"
+      ],
+      "observable_state": [
+        "devices.water_heater",
+        "coordination_context"
+      ],
+      "writable_resources": [
+        "devices.water_heater"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "MealAgent",
+      "role": "meal",
+      "tools": [
+        "cooktop_eco",
+        "cooktop_off",
+        "cooktop_fast"
+      ],
+      "observable_state": [
+        "devices.cooktop",
+        "coordination_context"
+      ],
+      "writable_resources": [
+        "devices.cooktop"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "laundry",
+      "agent_id": "LaundryAgent",
+      "release_at_ms": 0,
+      "goal": "Provide laundry service. Both eco and fast are acceptable. Do not miss any task deadline; among feasible household plans, prefer earlier completion of all requests. Use the current public coordination_context. Propose only your own device action.",
+      "priority": 80,
+      "completion_deadline_ms": 720000,
+      "action_template": {
+        "target": "washer",
+        "operation": "eco",
+        "parameters": {},
+        "duration_ms": 420000,
+        "power_kw": 1,
+        "requires": [
+          {
+            "path": "devices.washer",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      },
+      "requested_service": "ordinary_cleaned",
+      "acceptable_actions": [
+        {
+          "target": "washer",
+          "operation": "eco"
+        },
+        {
+          "target": "washer",
+          "operation": "fast"
+        }
+      ]
+    },
+    {
+      "task_id": "water",
+      "agent_id": "WaterAgent",
+      "release_at_ms": 0,
+      "goal": "Provide water service. Do not miss any task deadline; among feasible household plans, prefer earlier completion of all requests. Use the current public coordination_context. Propose only your own device action.",
+      "priority": 100,
+      "completion_deadline_ms": 300000,
+      "action_template": {
+        "target": "water_heater",
+        "operation": "prepare",
+        "parameters": {},
+        "duration_ms": 240000,
+        "power_kw": 2,
+        "requires": [
+          {
+            "path": "devices.water_heater",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      },
+      "requested_service": "completed",
+      "acceptable_actions": [
+        {
+          "target": "water_heater",
+          "operation": "prepare"
+        }
+      ]
+    },
+    {
+      "task_id": "meal",
+      "agent_id": "MealAgent",
+      "release_at_ms": 0,
+      "goal": "Provide meal service. Both eco and fast are acceptable. Do not miss any task deadline; among feasible household plans, prefer earlier completion of all requests. Use the current public coordination_context. Propose only your own device action.",
+      "priority": 70,
+      "completion_deadline_ms": 720000,
+      "action_template": {
+        "target": "cooktop",
+        "operation": "eco",
+        "parameters": {},
+        "duration_ms": 360000,
+        "power_kw": 1,
+        "requires": [
+          {
+            "path": "devices.cooktop",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      },
+      "requested_service": "completed",
+      "acceptable_actions": [
+        {
+          "target": "cooktop",
+          "operation": "eco"
+        },
+        {
+          "target": "cooktop",
+          "operation": "fast"
+        }
+      ]
+    }
+  ],
+  "exogenous_events": [],
+  "goals": [
+    {
+      "path": "devices.washer",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.water_heater",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.cooktop",
+      "op": "eq",
+      "value": "complete"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 6
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "LaundryAgent",
+      "task_id": "laundry",
+      "target": "washer",
+      "operation": "eco",
+      "grounded_operation": "eco",
+      "start_effects": {
+        "devices.washer": "running"
+      },
+      "completion_effects": {
+        "devices.washer": "complete"
+      },
+      "effects": {
+        "devices.washer": "complete"
+      },
+      "duration_ms": 420000,
+      "power_kw": 1
+    },
+    {
+      "agent_id": "WaterAgent",
+      "task_id": "water",
+      "target": "water_heater",
+      "operation": "prepare",
+      "grounded_operation": "prepare",
+      "start_effects": {
+        "devices.water_heater": "running"
+      },
+      "completion_effects": {
+        "devices.water_heater": "complete"
+      },
+      "effects": {
+        "devices.water_heater": "complete"
+      },
+      "duration_ms": 240000,
+      "power_kw": 2
+    },
+    {
+      "agent_id": "MealAgent",
+      "task_id": "meal",
+      "target": "cooktop",
+      "operation": "eco",
+      "grounded_operation": "eco",
+      "start_effects": {
+        "devices.cooktop": "running"
+      },
+      "completion_effects": {
+        "devices.cooktop": "complete"
+      },
+      "effects": {
+        "devices.cooktop": "complete"
+      },
+      "duration_ms": 360000,
+      "power_kw": 1
+    },
+    {
+      "agent_id": "LaundryAgent",
+      "task_id": "laundry",
+      "target": "washer",
+      "operation": "fast",
+      "grounded_operation": "fast",
+      "start_effects": {
+        "devices.washer": "running"
+      },
+      "completion_effects": {
+        "devices.washer": "complete"
+      },
+      "effects": {
+        "devices.washer": "complete"
+      },
+      "duration_ms": 180000,
+      "power_kw": 2
+    },
+    {
+      "agent_id": "LaundryAgent",
+      "task_id": "laundry",
+      "target": "washer",
+      "operation": "off",
+      "grounded_operation": "off",
+      "duration_ms": 100,
+      "power_kw": 0,
+      "effects": {
+        "devices.washer": "idle"
+      },
+      "completion_effects": {
+        "devices.washer": "idle"
+      }
+    },
+    {
+      "agent_id": "WaterAgent",
+      "task_id": "water",
+      "target": "water_heater",
+      "operation": "off",
+      "grounded_operation": "off",
+      "duration_ms": 100,
+      "power_kw": 0,
+      "effects": {
+        "devices.water_heater": "idle"
+      },
+      "completion_effects": {
+        "devices.water_heater": "idle"
+      }
+    },
+    {
+      "agent_id": "MealAgent",
+      "task_id": "meal",
+      "target": "cooktop",
+      "operation": "off",
+      "grounded_operation": "off",
+      "duration_ms": 100,
+      "power_kw": 0,
+      "effects": {
+        "devices.cooktop": "idle"
+      },
+      "completion_effects": {
+        "devices.cooktop": "idle"
+      }
+    },
+    {
+      "agent_id": "MealAgent",
+      "task_id": "meal",
+      "target": "cooktop",
+      "operation": "fast",
+      "grounded_operation": "fast",
+      "start_effects": {
+        "devices.cooktop": "running"
+      },
+      "completion_effects": {
+        "devices.cooktop": "complete"
+      },
+      "effects": {
+        "devices.cooktop": "complete"
+      },
+      "duration_ms": 180000,
+      "power_kw": 2
+    }
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "LaundryAgent",
+      "tool_name": "start_washer",
+      "target": "washer",
+      "operation": "eco",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.washer",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide ordinary_cleaned using eco. Declared cost: 420000 ms and 1 abstract admission units. Synthetic contract.",
+      "provides_service": "ordinary_cleaned",
+      "cost_contract": {
+        "duration_ms": 420000,
+        "resource_units": 1
+      }
+    },
+    {
+      "agent_id": "WaterAgent",
+      "tool_name": "start_water_heater",
+      "target": "water_heater",
+      "operation": "prepare",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.water_heater",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide completed using prepare. Declared cost: 240000 ms and 2 abstract admission units. Synthetic contract.",
+      "provides_service": "completed",
+      "cost_contract": {
+        "duration_ms": 240000,
+        "resource_units": 2
+      }
+    },
+    {
+      "agent_id": "MealAgent",
+      "tool_name": "cooktop_eco",
+      "target": "cooktop",
+      "operation": "eco",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.cooktop",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide completed using eco. Declared cost: 360000 ms and 1 abstract admission units. Synthetic contract.",
+      "provides_service": "completed",
+      "cost_contract": {
+        "duration_ms": 360000,
+        "resource_units": 1
+      }
+    },
+    {
+      "agent_id": "LaundryAgent",
+      "tool_name": "washer_fast",
+      "target": "washer",
+      "operation": "fast",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.washer",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide ordinary_cleaned using fast. Declared cost: 180000 ms and 2 abstract admission units. Synthetic contract.",
+      "provides_service": "ordinary_cleaned",
+      "cost_contract": {
+        "duration_ms": 180000,
+        "resource_units": 2
+      }
+    },
+    {
+      "agent_id": "LaundryAgent",
+      "tool_name": "washer_off",
+      "target": "washer",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.washer",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "provides_service": "none",
+      "cost_contract": {
+        "duration_ms": 100,
+        "resource_units": 0
+      },
+      "description": "Leave idle; supplies no requested service."
+    },
+    {
+      "agent_id": "WaterAgent",
+      "tool_name": "water_heater_off",
+      "target": "water_heater",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.water_heater",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "provides_service": "none",
+      "cost_contract": {
+        "duration_ms": 100,
+        "resource_units": 0
+      },
+      "description": "Leave idle; supplies no requested service."
+    },
+    {
+      "agent_id": "MealAgent",
+      "tool_name": "cooktop_off",
+      "target": "cooktop",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.cooktop",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "provides_service": "none",
+      "cost_contract": {
+        "duration_ms": 100,
+        "resource_units": 0
+      },
+      "description": "Leave idle; supplies no requested service."
+    },
+    {
+      "agent_id": "MealAgent",
+      "tool_name": "cooktop_fast",
+      "target": "cooktop",
+      "operation": "fast",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.cooktop",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide completed using fast. Declared cost: 180000 ms and 2 abstract admission units. Synthetic contract.",
+      "provides_service": "completed",
+      "cost_contract": {
+        "duration_ms": 180000,
+        "resource_units": 2
+      }
+    }
+  ],
+  "tool_contract_version": "strict-v1",
+  "simulation": {
+    "command_latency_ms": 100
+  },
+  "scenario_assumptions": {
+    "resource_semantics": "abstract constant admission units, not measured kW",
+    "legacy_field_mapping": "power_kw/max_power_kw store abstract units for this opt-in pilot",
+    "mode_authority": "fixed proposal methods cannot change operation; mode enumeration may choose any publicly declared acceptable service",
+    "physical_calibration": "none",
+    "future_information": "all tasks released at zero",
+    "structure": "two mode-selecting tasks and one tight fixed service"
+  },
+  "resource_unit": "abstract_admission_unit"
+}

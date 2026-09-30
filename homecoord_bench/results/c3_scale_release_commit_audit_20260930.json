@@ -1,0 +1,127 @@
+{
+  "status": "post_hoc_canonical_rank_mechanism_diagnostic",
+  "api_calls": 0,
+  "manifest_sha256": "B2EEC05484EE60A106F1B3B2C0ECB34245264E1C31FFD34C46C525C868AB94DB",
+  "rows": [
+    {
+      "template": "N2-1",
+      "late_task_release_ms": 60000,
+      "committed_starts_before_release": {
+        "task01": 900
+      },
+      "all_deadlines_met_by_policy": false,
+      "oracle_schedule_without_prior_commits": [
+        {
+          "task_id": "task02",
+          "start_ms": 60000,
+          "finish_ms": 2760000
+        },
+        {
+          "task_id": "task01",
+          "start_ms": 2760000,
+          "finish_ms": 8160000
+        }
+      ],
+      "oracle_feasible_after_actual_commits": false,
+      "oracle_schedule_after_actual_commits": null
+    },
+    {
+      "template": "N4-1",
+      "late_task_release_ms": 60000,
+      "committed_starts_before_release": {
+        "task04": 1500,
+        "task01": 1500
+      },
+      "all_deadlines_met_by_policy": false,
+      "oracle_schedule_without_prior_commits": [
+        {
+          "task_id": "task01",
+          "start_ms": 0,
+          "finish_ms": 2700000
+        },
+        {
+          "task_id": "task02",
+          "start_ms": 60000,
+          "finish_ms": 360000
+        },
+        {
+          "task_id": "task04",
+          "start_ms": 360000,
+          "finish_ms": 1860000
+        },
+        {
+          "task_id": "task03",
+          "start_ms": 1860000,
+          "finish_ms": 9060000
+        }
+      ],
+      "oracle_feasible_after_actual_commits": false,
+      "oracle_schedule_after_actual_commits": null
+    },
+    {
+      "template": "N5-1",
+      "late_task_release_ms": 60000,
+      "committed_starts_before_release": {
+        "task04": 1500,
+        "task01": 1500
+      },
+      "all_deadlines_met_by_policy": true,
+      "oracle_schedule_without_prior_commits": [
+        {
+          "task_id": "task01",
+          "start_ms": 0,
+          "finish_ms": 3600000
+        },
+        {
+          "task_id": "task02",
+          "start_ms": 0,
+          "finish_ms": 3600000
+        },
+        {
+          "task_id": "task05",
+          "start_ms": 60000,
+          "finish_ms": 360000
+        },
+        {
+          "task_id": "task03",
+          "start_ms": 360000,
+          "finish_ms": 5760000
+        },
+        {
+          "task_id": "task04",
+          "start_ms": 3600000,
+          "finish_ms": 6300000
+        }
+      ],
+      "oracle_feasible_after_actual_commits": true,
+      "oracle_schedule_after_actual_commits": [
+        {
+          "task_id": "task01",
+          "start_ms": 1500,
+          "finish_ms": 3601500
+        },
+        {
+          "task_id": "task04",
+          "start_ms": 1500,
+          "finish_ms": 2701500
+        },
+        {
+          "task_id": "task05",
+          "start_ms": 60000,
+          "finish_ms": 360000
+        },
+        {
+          "task_id": "task02",
+          "start_ms": 2701500,
+          "finish_ms": 6301500
+        },
+        {
+          "task_id": "task03",
+          "start_ms": 2701500,
+          "finish_ms": 8101500
+        }
+      ]
+    }
+  ],
+  "limitations": "Known-future oracle diagnoses loss of feasibility; it is not an online baseline."
+}

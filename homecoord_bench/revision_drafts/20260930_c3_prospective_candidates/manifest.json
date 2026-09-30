@@ -1,0 +1,156 @@
+{
+  "schema_version": "c3-prospective-candidate-manifest-0.1",
+  "seed": 20260930,
+  "pool_order": [
+    "kettle",
+    "cooktop",
+    "oven",
+    "dishwasher",
+    "washer",
+    "water_heater",
+    "ev_charger",
+    "heat_pump"
+  ],
+  "template_device_sets": {
+    "P1": [
+      "heat_pump",
+      "dishwasher",
+      "water_heater"
+    ],
+    "P2": [
+      "dishwasher",
+      "water_heater",
+      "oven"
+    ],
+    "P3": [
+      "ev_charger",
+      "heat_pump",
+      "kettle"
+    ],
+    "P4": [
+      "kettle",
+      "washer",
+      "water_heater"
+    ]
+  },
+  "controlled_task_specs": {
+    "kettle": {
+      "task_id": "boil_water",
+      "agent_id": "BeverageAgent",
+      "device": "kettle",
+      "operation": "boil",
+      "power_kw": 1.8,
+      "duration_min": 5,
+      "deadline_min": 12,
+      "priority": 100
+    },
+    "cooktop": {
+      "task_id": "cook_meal",
+      "agent_id": "CookingAgent",
+      "device": "cooktop",
+      "operation": "cook",
+      "power_kw": 2.0,
+      "duration_min": 25,
+      "deadline_min": 45,
+      "priority": 80
+    },
+    "oven": {
+      "task_id": "bake_meal",
+      "agent_id": "BakingAgent",
+      "device": "oven",
+      "operation": "bake",
+      "power_kw": 3.0,
+      "duration_min": 45,
+      "deadline_min": 85,
+      "priority": 90
+    },
+    "dishwasher": {
+      "task_id": "wash_dishes",
+      "agent_id": "DishwashingAgent",
+      "device": "dishwasher",
+      "operation": "wash",
+      "power_kw": 2.4,
+      "duration_min": 90,
+      "deadline_min": 190,
+      "priority": 50
+    },
+    "washer": {
+      "task_id": "wash_clothes",
+      "agent_id": "LaundryAgent",
+      "device": "washer",
+      "operation": "wash",
+      "power_kw": 2.0,
+      "duration_min": 60,
+      "deadline_min": 150,
+      "priority": 60
+    },
+    "water_heater": {
+      "task_id": "heat_water",
+      "agent_id": "WaterHeatingAgent",
+      "device": "water_heater",
+      "operation": "heat",
+      "power_kw": 3.0,
+      "duration_min": 45,
+      "deadline_min": 105,
+      "priority": 95
+    },
+    "ev_charger": {
+      "task_id": "charge_ev",
+      "agent_id": "EVChargingAgent",
+      "device": "ev_charger",
+      "operation": "charge",
+      "power_kw": 3.3,
+      "duration_min": 120,
+      "deadline_min": 240,
+      "priority": 40
+    },
+    "heat_pump": {
+      "task_id": "heat_home",
+      "agent_id": "HeatingAgent",
+      "device": "heat_pump",
+      "operation": "heat",
+      "power_kw": 2.5,
+      "duration_min": 60,
+      "deadline_min": 180,
+      "priority": 70
+    }
+  },
+  "pressures": [
+    0.8,
+    1.2,
+    1.6
+  ],
+  "policies": [
+    "IndependentMultiAgent",
+    "ConstraintCoordinator",
+    "DeadlineAwareCoordinator",
+    "CapacityAwareDeadlineCoordinator"
+  ],
+  "arrival_orders": "all six permutations per template; 800/1000/1200 ms",
+  "scripted_replay_cells": 288,
+  "model_sample_templates": [
+    "P1",
+    "P2"
+  ],
+  "model_sample_repetitions": 2,
+  "candidate_sha256": {
+    "HC-C3-P1-RHO-0.8.json": "1D7D9B516659105ECD676CFE1053C55B174C5AAC89779F49E6A5455807A09C58",
+    "HC-C3-P1-RHO-1.2.json": "7A8D0C2410576183ED9204E8605060A795EB187E65C7D57FF7E796DF2BEEDC47",
+    "HC-C3-P1-RHO-1.6.json": "F841C134C336B1D2AAD5EFD8388CDBA5024B695C8534C0EFB02A175CF3C122FB",
+    "HC-C3-P2-RHO-0.8.json": "483B043E51BF13D7E4B5A827F9FD2B87E7ECA941A03E3167627FD228E74E83B2",
+    "HC-C3-P2-RHO-1.2.json": "E29EAF50CCE0864FBC661CF2C5BFD4AD520799233E05CF0FB340D258C82EC5B2",
+    "HC-C3-P2-RHO-1.6.json": "715B7361A005C6EC7418851E05524B77A8D8A921A9D169A46FFB81A10BF39AB7",
+    "HC-C3-P3-RHO-0.8.json": "D816D2C7B955A929E0F0A94423465F0EFC56A015D7D709E111FB3FA61F2BE703",
+    "HC-C3-P3-RHO-1.2.json": "7A5292749BCC498B84A6DDD002A50AC680316E8D3F36F375CC99914F8E907568",
+    "HC-C3-P3-RHO-1.6.json": "341E8F94DB999266BC9C328692A7D02F6CC6B1FA3DBCE5787AF6D4247DA31157",
+    "HC-C3-P4-RHO-0.8.json": "F452DA5374371645F6C8837E3072112358B0F3B0EE519FDDE92E7C2E92E51386",
+    "HC-C3-P4-RHO-1.2.json": "3538FA99EA1864D9DB580B41DBCD3077402C55602D6C0F05D4EACFF0CF1C50C1",
+    "HC-C3-P4-RHO-1.6.json": "9B59A2846CD1F2A3A69333875AE8C52136B2465299350F489DF109869CC12304"
+  },
+  "status": "design_locked_before_oracle_and_policy_replay",
+  "limitations": [
+    "All powers, durations and deadlines are controlled settings, not measured household values.",
+    "The same device may recur across templates; templates are not independent households.",
+    "The sample subset is fixed before seeing replay outcomes."
+  ]
+}

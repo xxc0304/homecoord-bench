@@ -1,0 +1,259 @@
+{
+  "episode_id": "HC-C1-COMMAND-NONOVERLAP-V03",
+  "task_family": "direct_device_conflict",
+  "source_type": "controlled_command_semantics_revision",
+  "generator_version": "0.3.0",
+  "review_status": "proposed_revision_not_scored",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 101,
+    "values": {
+      "living_room": {
+        "temperature_c": 29
+      },
+      "request": {
+        "comfort_active": true,
+        "comfort_served": false
+      },
+      "devices": {
+        "living_hvac": "off"
+      },
+      "grid": {
+        "peak_alert": true,
+        "peak_reduced": false
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "ComfortAgent",
+      "role": "comfort",
+      "tools": [
+        "set_hvac"
+      ],
+      "observable_state": [
+        "living_room.temperature_c",
+        "request.comfort_active"
+      ],
+      "writable_resources": [
+        "devices.living_hvac"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "role": "energy",
+      "tools": [
+        "set_hvac"
+      ],
+      "observable_state": [
+        "devices.living_hvac",
+        "grid.peak_alert"
+      ],
+      "writable_resources": [
+        "devices.living_hvac"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "comfort_cool",
+      "agent_id": "ComfortAgent",
+      "release_at_ms": 0,
+      "goal": "Keep the living-room HVAC in cooling service until the active comfort session finishes.",
+      "priority": 100,
+      "required_action": {
+        "target": "living_hvac",
+        "operation": "cool"
+      },
+      "action_template": {
+        "target": "living_hvac",
+        "operation": "cool",
+        "parameters": {
+          "temperature_c": 24
+        },
+        "duration_ms": 6000,
+        "power_kw": 1.4,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "peak_off",
+      "agent_id": "EnergyAgent",
+      "release_at_ms": 6200,
+      "goal": "Respond to the peak alert by turning off the HVAC when allowed.",
+      "priority": 20,
+      "required_action": {
+        "target": "living_hvac",
+        "operation": "off"
+      },
+      "action_template": {
+        "target": "living_hvac",
+        "operation": "off",
+        "parameters": {},
+        "duration_ms": 500,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "request.comfort_served",
+      "op": "eq",
+      "value": true
+    },
+    {
+      "path": "grid.peak_reduced",
+      "op": "eq",
+      "value": true
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "request.comfort_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.living_hvac",
+          "op": "neq",
+          "value": "forced_off"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C1",
+      "a": {
+        "target": "living_hvac",
+        "operation": "cool"
+      },
+      "b": {
+        "target": "living_hvac",
+        "operation": "off"
+      },
+      "min_overlap_ms": 1
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "ComfortAgent",
+      "task_id": "comfort_cool",
+      "operation": "cool",
+      "target": "living_hvac",
+      "grounded_operation": "cool",
+      "start_effects": {
+        "devices.living_hvac": "cooling"
+      },
+      "completion_effects": {
+        "devices.living_hvac": "cool_24",
+        "request.comfort_active": false,
+        "request.comfort_served": true
+      },
+      "effects": {
+        "devices.living_hvac": "cooling"
+      },
+      "duration_ms": 6000,
+      "power_kw": 1.4
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "task_id": "peak_off",
+      "operation": "off",
+      "target": "living_hvac",
+      "grounded_operation": "off",
+      "start_effects": {
+        "devices.living_hvac": "forced_off"
+      },
+      "completion_effects": {
+        "devices.living_hvac": "forced_off",
+        "grid.peak_reduced": true
+      },
+      "effects": {
+        "devices.living_hvac": "forced_off"
+      },
+      "duration_ms": 500,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_range",
+    "physical_parameters_verified": false
+  },
+  "base_episode_id": "HC-C1-PUB-Q4R8",
+  "tool_contract_version": "strict-v1",
+  "variant": {
+    "design": "C1-command-only-v0.2",
+    "condition": "nonoverlap"
+  },
+  "draft_notes": [
+    "Review-only direct device command task, not a thermal comfort evaluation.",
+    "The 6000 ms cooling-service interval is a controlled scheduling factor, not measured HVAC cooling time.",
+    "EnergyAgent observes a peak alert but not the active comfort request.",
+    "No new model proposal may be reused from the previous wording without rechecking its request."
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "ComfortAgent",
+      "tool_name": "set_hvac",
+      "description": "Start cooling to the requested set point.",
+      "target": "living_hvac",
+      "operation": "cool",
+      "parameters": [
+        {
+          "name": "temperature_c",
+          "type": "number",
+          "minimum": 16,
+          "maximum": 30,
+          "required": true
+        }
+      ],
+      "preconditions": [],
+      "returns": {
+        "status": [
+          "accepted",
+          "rejected"
+        ],
+        "observed_state": "object"
+      }
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "tool_name": "set_hvac",
+      "description": "Switch the living-room HVAC off for peak reduction.",
+      "target": "living_hvac",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [],
+      "returns": {
+        "status": [
+          "accepted",
+          "rejected"
+        ],
+        "observed_state": "object"
+      }
+    }
+  ],
+  "simulation": {
+    "command_latency_ms": 100,
+    "blind_future_task_arrivals": true
+  }
+}

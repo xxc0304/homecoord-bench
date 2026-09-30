@@ -1,0 +1,511 @@
+{
+  "episode_id": "HC-CHOICE-P1B-0.8",
+  "base_episode_id": "HC-CHOICE-P1B",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "controlled_paired_action_choice",
+  "review_status": "unreviewed_controlled_service_contract",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 9.875,
+      "task_power_bounds_kw": {
+        "task01": 2.5,
+        "task02": 2.4,
+        "task03": 3.0
+      }
+    }
+  },
+  "initial_state": {
+    "version": 1,
+    "values": {
+      "devices": {
+        "heat_pump": "idle",
+        "dishwasher": "idle",
+        "water_heater": "idle"
+      },
+      "services": {
+        "heat_pump": "none",
+        "dishwasher": "none",
+        "water_heater": "none"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "HeatingAgent",
+      "role": "Operate the heat_pump service interface.",
+      "tools": [
+        "heat_pump_preset_1",
+        "heat_pump_preset_2",
+        "heat_pump_off"
+      ],
+      "observable_state": [
+        "devices.heat_pump",
+        "services.heat_pump"
+      ],
+      "writable_resources": [
+        "devices.heat_pump"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "role": "Operate the dishwasher service interface.",
+      "tools": [
+        "dishwasher_preset_1",
+        "dishwasher_preset_2",
+        "dishwasher_off"
+      ],
+      "observable_state": [
+        "devices.dishwasher",
+        "services.dishwasher"
+      ],
+      "writable_resources": [
+        "devices.dishwasher"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "role": "Operate the water_heater service interface.",
+      "tools": [
+        "water_heater_preset_1",
+        "water_heater_preset_2",
+        "water_heater_off"
+      ],
+      "observable_state": [
+        "devices.water_heater",
+        "services.water_heater"
+      ],
+      "writable_resources": [
+        "devices.water_heater"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "task01",
+      "agent_id": "HeatingAgent",
+      "release_at_ms": 0,
+      "goal": "Deliver a cooling service for this room. Complete the requested service within 180 minutes.",
+      "priority": 70,
+      "completion_deadline_ms": 10800000,
+      "required_action": {
+        "target": "heat_pump",
+        "operation": "preset_2"
+      },
+      "action_template": {
+        "target": "heat_pump",
+        "operation": "preset_2",
+        "parameters": {},
+        "duration_ms": 3600000,
+        "power_kw": 2.5,
+        "requires": [
+          {
+            "path": "devices.heat_pump",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "task02",
+      "agent_id": "DishwashingAgent",
+      "release_at_ms": 0,
+      "goal": "The baby feeding items need a hygiene treatment, not only ordinary cleaning. Complete the requested service within 190 minutes.",
+      "priority": 50,
+      "completion_deadline_ms": 11400000,
+      "required_action": {
+        "target": "dishwasher",
+        "operation": "preset_2"
+      },
+      "action_template": {
+        "target": "dishwasher",
+        "operation": "preset_2",
+        "parameters": {},
+        "duration_ms": 5400000,
+        "power_kw": 2.4,
+        "requires": [
+          {
+            "path": "devices.dishwasher",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "task03",
+      "agent_id": "WaterHeatingAgent",
+      "release_at_ms": 0,
+      "goal": "Prepare the water service for a 60-degree cleaning request. Complete the requested service within 105 minutes.",
+      "priority": 95,
+      "completion_deadline_ms": 6300000,
+      "required_action": {
+        "target": "water_heater",
+        "operation": "preset_2"
+      },
+      "action_template": {
+        "target": "water_heater",
+        "operation": "preset_2",
+        "parameters": {},
+        "duration_ms": 2700000,
+        "power_kw": 3.0,
+        "requires": [
+          {
+            "path": "devices.water_heater",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "goals": [
+    {
+      "path": "services.heat_pump",
+      "op": "eq",
+      "value": "cooling"
+    },
+    {
+      "path": "services.dishwasher",
+      "op": "eq",
+      "value": "hygiene"
+    },
+    {
+      "path": "services.water_heater",
+      "op": "eq",
+      "value": "water60"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 9.875
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "HeatingAgent",
+      "task_id": "task01",
+      "target": "heat_pump",
+      "operation": "preset_1",
+      "grounded_operation": "preset_1",
+      "start_effects": {
+        "devices.heat_pump": "running"
+      },
+      "completion_effects": {
+        "devices.heat_pump": "complete",
+        "services.heat_pump": "warming"
+      },
+      "effects": {
+        "devices.heat_pump": "complete",
+        "services.heat_pump": "warming"
+      },
+      "duration_ms": 3600000,
+      "power_kw": 2.5
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "task_id": "task01",
+      "target": "heat_pump",
+      "operation": "preset_2",
+      "grounded_operation": "preset_2",
+      "start_effects": {
+        "devices.heat_pump": "running"
+      },
+      "completion_effects": {
+        "devices.heat_pump": "complete",
+        "services.heat_pump": "cooling"
+      },
+      "effects": {
+        "devices.heat_pump": "complete",
+        "services.heat_pump": "cooling"
+      },
+      "duration_ms": 3600000,
+      "power_kw": 2.5
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "task_id": "task01",
+      "target": "heat_pump",
+      "operation": "off",
+      "grounded_operation": "off",
+      "effects": {
+        "devices.heat_pump": "idle",
+        "services.heat_pump": "none"
+      },
+      "duration_ms": 100,
+      "power_kw": 0.0
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "task_id": "task02",
+      "target": "dishwasher",
+      "operation": "preset_1",
+      "grounded_operation": "preset_1",
+      "start_effects": {
+        "devices.dishwasher": "running"
+      },
+      "completion_effects": {
+        "devices.dishwasher": "complete",
+        "services.dishwasher": "ordinary"
+      },
+      "effects": {
+        "devices.dishwasher": "complete",
+        "services.dishwasher": "ordinary"
+      },
+      "duration_ms": 5400000,
+      "power_kw": 2.4
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "task_id": "task02",
+      "target": "dishwasher",
+      "operation": "preset_2",
+      "grounded_operation": "preset_2",
+      "start_effects": {
+        "devices.dishwasher": "running"
+      },
+      "completion_effects": {
+        "devices.dishwasher": "complete",
+        "services.dishwasher": "hygiene"
+      },
+      "effects": {
+        "devices.dishwasher": "complete",
+        "services.dishwasher": "hygiene"
+      },
+      "duration_ms": 5400000,
+      "power_kw": 2.4
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "task_id": "task02",
+      "target": "dishwasher",
+      "operation": "off",
+      "grounded_operation": "off",
+      "effects": {
+        "devices.dishwasher": "idle",
+        "services.dishwasher": "none"
+      },
+      "duration_ms": 100,
+      "power_kw": 0.0
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "task_id": "task03",
+      "target": "water_heater",
+      "operation": "preset_1",
+      "grounded_operation": "preset_1",
+      "start_effects": {
+        "devices.water_heater": "running"
+      },
+      "completion_effects": {
+        "devices.water_heater": "complete",
+        "services.water_heater": "water40"
+      },
+      "effects": {
+        "devices.water_heater": "complete",
+        "services.water_heater": "water40"
+      },
+      "duration_ms": 2700000,
+      "power_kw": 3.0
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "task_id": "task03",
+      "target": "water_heater",
+      "operation": "preset_2",
+      "grounded_operation": "preset_2",
+      "start_effects": {
+        "devices.water_heater": "running"
+      },
+      "completion_effects": {
+        "devices.water_heater": "complete",
+        "services.water_heater": "water60"
+      },
+      "effects": {
+        "devices.water_heater": "complete",
+        "services.water_heater": "water60"
+      },
+      "duration_ms": 2700000,
+      "power_kw": 3.0
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "task_id": "task03",
+      "target": "water_heater",
+      "operation": "off",
+      "grounded_operation": "off",
+      "effects": {
+        "devices.water_heater": "idle",
+        "services.water_heater": "none"
+      },
+      "duration_ms": 100,
+      "power_kw": 0.0
+    }
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "HeatingAgent",
+      "tool_name": "heat_pump_preset_2",
+      "target": "heat_pump",
+      "operation": "preset_2",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.heat_pump",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide cooling-service. Controlled cycle: 3600000 ms, 2.5 kW. These costs are scenario settings."
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "tool_name": "heat_pump_off",
+      "target": "heat_pump",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.heat_pump",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "tool_name": "heat_pump_preset_1",
+      "target": "heat_pump",
+      "operation": "preset_1",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.heat_pump",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide warming-service. Controlled cycle: 3600000 ms, 2.5 kW. These costs are scenario settings."
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "tool_name": "dishwasher_preset_2",
+      "target": "dishwasher",
+      "operation": "preset_2",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.dishwasher",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide dish cleaning with hygiene treatment. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "tool_name": "dishwasher_preset_1",
+      "target": "dishwasher",
+      "operation": "preset_1",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.dishwasher",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide ordinary dish cleaning. Controlled cycle: 5400000 ms, 2.4 kW. These costs are scenario settings."
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "tool_name": "dishwasher_off",
+      "target": "dishwasher",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.dishwasher",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "tool_name": "water_heater_preset_1",
+      "target": "water_heater",
+      "operation": "preset_1",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.water_heater",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide a 40-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "tool_name": "water_heater_off",
+      "target": "water_heater",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.water_heater",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave this device idle; provide no requested service. Cost: 100 ms, 0 kW."
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "tool_name": "water_heater_preset_2",
+      "target": "water_heater",
+      "operation": "preset_2",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.water_heater",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide a 60-degree water-service request. Controlled cycle: 2700000 ms, 3.0 kW. These costs are scenario settings."
+    }
+  ],
+  "tool_contract_version": "strict-v1",
+  "simulation": {
+    "command_latency_ms": 100
+  },
+  "resource_pressure": {
+    "load_to_capacity_ratio": 0.8,
+    "sum_nominal_requested_power_kw": 7.9,
+    "capacity_kw": 9.875,
+    "source": "controlled_benchmark_factor"
+  },
+  "scenario_assumptions": {
+    "power_semantics": "constant nominal load during a fixed noninterruptible cycle",
+    "physical_calibration": "none",
+    "purpose": "mechanism isolation and structural generalization only",
+    "cross_task_dependencies": "none; every cycle is an independent service",
+    "service_semantics": "declared categorical service contract; no thermal or hygiene physics",
+    "equal_preset_costs": "intentional controlled abstraction to isolate action-choice errors",
+    "mode_effects_independent_of_requested_mode": true
+  }
+}

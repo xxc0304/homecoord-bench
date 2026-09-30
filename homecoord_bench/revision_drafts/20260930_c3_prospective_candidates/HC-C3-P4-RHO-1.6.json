@@ -1,0 +1,299 @@
+{
+  "episode_id": "HC-C3-PROSPECTIVE-P4-RHO-1.6",
+  "base_episode_id": "HC-C3-PROSPECTIVE-P4",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "controlled_author_generated_prospective_candidate",
+  "review_status": "unreviewed_mechanism_candidate",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 4.25,
+      "task_power_bounds_kw": {
+        "boil_water": 1.8,
+        "wash_clothes": 2.0,
+        "heat_water": 3.0
+      }
+    }
+  },
+  "initial_state": {
+    "version": 1,
+    "values": {
+      "devices": {
+        "kettle": "idle",
+        "washer": "idle",
+        "water_heater": "idle"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "BeverageAgent",
+      "role": "boil_water",
+      "tools": [
+        "start_kettle"
+      ],
+      "observable_state": [
+        "devices.kettle"
+      ],
+      "writable_resources": [
+        "devices.kettle"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "LaundryAgent",
+      "role": "wash_clothes",
+      "tools": [
+        "start_washer"
+      ],
+      "observable_state": [
+        "devices.washer"
+      ],
+      "writable_resources": [
+        "devices.washer"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "role": "heat_water",
+      "tools": [
+        "start_water_heater"
+      ],
+      "observable_state": [
+        "devices.water_heater"
+      ],
+      "writable_resources": [
+        "devices.water_heater"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "boil_water",
+      "agent_id": "BeverageAgent",
+      "release_at_ms": 0,
+      "goal": "Complete boil_water within 12 minutes.",
+      "priority": 100,
+      "completion_deadline_ms": 720000,
+      "required_action": {
+        "target": "kettle",
+        "operation": "boil"
+      },
+      "action_template": {
+        "target": "kettle",
+        "operation": "boil",
+        "parameters": {},
+        "duration_ms": 300000,
+        "power_kw": 1.8,
+        "requires": [
+          {
+            "path": "devices.kettle",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "wash_clothes",
+      "agent_id": "LaundryAgent",
+      "release_at_ms": 0,
+      "goal": "Complete wash_clothes within 150 minutes.",
+      "priority": 60,
+      "completion_deadline_ms": 9000000,
+      "required_action": {
+        "target": "washer",
+        "operation": "wash"
+      },
+      "action_template": {
+        "target": "washer",
+        "operation": "wash",
+        "parameters": {},
+        "duration_ms": 3600000,
+        "power_kw": 2.0,
+        "requires": [
+          {
+            "path": "devices.washer",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "heat_water",
+      "agent_id": "WaterHeatingAgent",
+      "release_at_ms": 0,
+      "goal": "Complete heat_water within 105 minutes.",
+      "priority": 95,
+      "completion_deadline_ms": 6300000,
+      "required_action": {
+        "target": "water_heater",
+        "operation": "heat"
+      },
+      "action_template": {
+        "target": "water_heater",
+        "operation": "heat",
+        "parameters": {},
+        "duration_ms": 2700000,
+        "power_kw": 3.0,
+        "requires": [
+          {
+            "path": "devices.water_heater",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "goals": [
+    {
+      "path": "devices.kettle",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.washer",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.water_heater",
+      "op": "eq",
+      "value": "complete"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 4.25
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "BeverageAgent",
+      "task_id": "boil_water",
+      "target": "kettle",
+      "operation": "boil",
+      "grounded_operation": "boil",
+      "start_effects": {
+        "devices.kettle": "running"
+      },
+      "completion_effects": {
+        "devices.kettle": "complete"
+      },
+      "effects": {
+        "devices.kettle": "complete"
+      },
+      "duration_ms": 300000,
+      "power_kw": 1.8
+    },
+    {
+      "agent_id": "LaundryAgent",
+      "task_id": "wash_clothes",
+      "target": "washer",
+      "operation": "wash",
+      "grounded_operation": "wash",
+      "start_effects": {
+        "devices.washer": "running"
+      },
+      "completion_effects": {
+        "devices.washer": "complete"
+      },
+      "effects": {
+        "devices.washer": "complete"
+      },
+      "duration_ms": 3600000,
+      "power_kw": 2.0
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "task_id": "heat_water",
+      "target": "water_heater",
+      "operation": "heat",
+      "grounded_operation": "heat",
+      "start_effects": {
+        "devices.water_heater": "running"
+      },
+      "completion_effects": {
+        "devices.water_heater": "complete"
+      },
+      "effects": {
+        "devices.water_heater": "complete"
+      },
+      "duration_ms": 2700000,
+      "power_kw": 3.0
+    }
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "BeverageAgent",
+      "tool_name": "start_kettle",
+      "target": "kettle",
+      "operation": "boil",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.kettle",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 5-minute cycle at nominal 1.8 kW."
+    },
+    {
+      "agent_id": "LaundryAgent",
+      "tool_name": "start_washer",
+      "target": "washer",
+      "operation": "wash",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.washer",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 60-minute cycle at nominal 2.0 kW."
+    },
+    {
+      "agent_id": "WaterHeatingAgent",
+      "tool_name": "start_water_heater",
+      "target": "water_heater",
+      "operation": "heat",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.water_heater",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 45-minute cycle at nominal 3.0 kW."
+    }
+  ],
+  "tool_contract_version": "strict-v1",
+  "simulation": {
+    "command_latency_ms": 100
+  },
+  "resource_pressure": {
+    "load_to_capacity_ratio": 1.6,
+    "sum_nominal_requested_power_kw": 6.8,
+    "capacity_kw": 4.25,
+    "source": "controlled_benchmark_factor"
+  },
+  "scenario_assumptions": {
+    "power_semantics": "constant nominal load during a fixed noninterruptible cycle",
+    "physical_calibration": "none",
+    "purpose": "mechanism isolation and structural generalization only",
+    "cross_task_dependencies": "none; every cycle is an independent service"
+  }
+}

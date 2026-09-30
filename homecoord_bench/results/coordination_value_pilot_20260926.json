@@ -1,0 +1,560 @@
+{
+  "experiment": "coordination_value_pilot",
+  "status": "unreviewed_candidate_pilot_real_llm_proposals_synthetic_devices",
+  "model": "deepseek-flash",
+  "comparison": "IndependentMultiAgent versus ConstraintCoordinator on identical decisions and measured logical API latencies",
+  "limits": [
+    "Candidate tasks and generated controls lack human double review and device calibration.",
+    "One API draw per condition; no population-level confidence interval.",
+    "The replay holds model proposals fixed and does not measure proposal adaptation in a coordinator-aware closed loop.",
+    "Simulator coordination checks consume zero virtual time; real state synchronization, networking and device feedback are not measured.",
+    "Last action end is the end of the final accepted action, not a proof that the household goal persisted."
+  ],
+  "summary": {
+    "selected_pairs": 6,
+    "completed_cases": 11,
+    "errors": 1,
+    "safe_controls_completed": 6,
+    "safe_controls_independent_process_valid": 6,
+    "safe_controls_with_any_strong_penalty": 0,
+    "safe_control_goal_latency_delta_median_ms": 0.0
+  },
+  "rows": [
+    {
+      "episode_id": "HC-M06",
+      "base_episode_id": "HC-M06",
+      "family": "indirect_environment_conflict",
+      "condition": "original",
+      "error_type": "ValueError",
+      "error": "proposal cannot be grounded: ('HC-M06', 'AirQualityAgent', 'bedroom_air')"
+    },
+    {
+      "episode_id": "HC-M06.matched_safe",
+      "base_episode_id": "HC-M06",
+      "family": "indirect_environment_conflict",
+      "condition": "matched_safe",
+      "model_call_latencies_ms": [
+        1776,
+        1417
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1876,
+        "goal_first_satisfied_ms": 4517,
+        "last_action_end_ms": 7517,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1876,
+        "goal_first_satisfied_ms": 4517,
+        "last_action_end_ms": 7517,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 0,
+      "delta_last_action_end_ms": 0,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M07",
+      "base_episode_id": "HC-M07",
+      "family": "indirect_environment_conflict",
+      "condition": "original",
+      "model_call_latencies_ms": [
+        1381,
+        1450
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 1,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1481,
+        "goal_first_satisfied_ms": 1650,
+        "last_action_end_ms": 11650,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1481,
+        "goal_first_satisfied_ms": 3481,
+        "last_action_end_ms": 13481,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 1831,
+      "delta_last_action_end_ms": 1831,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M07.matched_safe",
+      "base_episode_id": "HC-M07",
+      "family": "indirect_environment_conflict",
+      "condition": "matched_safe",
+      "model_call_latencies_ms": [
+        2953,
+        1396
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 3053,
+        "goal_first_satisfied_ms": 4496,
+        "last_action_end_ms": 14496,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 3053,
+        "goal_first_satisfied_ms": 4496,
+        "last_action_end_ms": 14496,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 0,
+      "delta_last_action_end_ms": 0,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M08",
+      "base_episode_id": "HC-M08",
+      "family": "indirect_environment_conflict",
+      "condition": "original",
+      "model_call_latencies_ms": [
+        1502,
+        1208
+      ],
+      "proposal_action_counts": [
+        1,
+        0
+      ],
+      "independent": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 0.5,
+        "first_action_ms": 1602,
+        "goal_first_satisfied_ms": 1602,
+        "last_action_end_ms": 4602,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 0.5,
+        "first_action_ms": 1602,
+        "goal_first_satisfied_ms": 1602,
+        "last_action_end_ms": 4602,
+        "accepted_action_count": 1,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 0,
+      "delta_last_action_end_ms": 0,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M08.matched_safe",
+      "base_episode_id": "HC-M08",
+      "family": "indirect_environment_conflict",
+      "condition": "matched_safe",
+      "model_call_latencies_ms": [
+        1445,
+        1477
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1545,
+        "goal_first_satisfied_ms": 1545,
+        "last_action_end_ms": 8577,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1545,
+        "goal_first_satisfied_ms": 1545,
+        "last_action_end_ms": 8577,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 0,
+      "delta_last_action_end_ms": 0,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M11",
+      "base_episode_id": "HC-M11",
+      "family": "resource_capacity_conflict",
+      "condition": "original",
+      "model_call_latencies_ms": [
+        1392,
+        1530
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 1,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1492,
+        "goal_first_satisfied_ms": 1730,
+        "last_action_end_ms": 4730,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1492,
+        "goal_first_satisfied_ms": 2492,
+        "last_action_end_ms": 5492,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 762,
+      "delta_last_action_end_ms": 762,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M11.matched_safe",
+      "base_episode_id": "HC-M11",
+      "family": "resource_capacity_conflict",
+      "condition": "matched_safe",
+      "model_call_latencies_ms": [
+        1543,
+        1528
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1643,
+        "goal_first_satisfied_ms": 1728,
+        "last_action_end_ms": 4728,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1643,
+        "goal_first_satisfied_ms": 1728,
+        "last_action_end_ms": 4728,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 0,
+      "delta_last_action_end_ms": 0,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M12",
+      "base_episode_id": "HC-M12",
+      "family": "resource_capacity_conflict",
+      "condition": "original",
+      "model_call_latencies_ms": [
+        1734,
+        1337
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 1,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1537,
+        "goal_first_satisfied_ms": 1834,
+        "last_action_end_ms": 5834,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1537,
+        "goal_first_satisfied_ms": 5537,
+        "last_action_end_ms": 9537,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 3703,
+      "delta_last_action_end_ms": 3703,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M12.matched_safe",
+      "base_episode_id": "HC-M12",
+      "family": "resource_capacity_conflict",
+      "condition": "matched_safe",
+      "model_call_latencies_ms": [
+        2898,
+        1407
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1607,
+        "goal_first_satisfied_ms": 2998,
+        "last_action_end_ms": 6998,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1607,
+        "goal_first_satisfied_ms": 2998,
+        "last_action_end_ms": 6998,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 0,
+      "delta_last_action_end_ms": 0,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M13",
+      "base_episode_id": "HC-M13",
+      "family": "resource_capacity_conflict",
+      "condition": "original",
+      "model_call_latencies_ms": [
+        1487,
+        1455
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 1,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1587,
+        "goal_first_satisfied_ms": 1655,
+        "last_action_end_ms": 7587,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1587,
+        "goal_first_satisfied_ms": 7587,
+        "last_action_end_ms": 10587,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 5932,
+      "delta_last_action_end_ms": 3000,
+      "delta_task_service_rate": 0.0
+    },
+    {
+      "episode_id": "HC-M13.matched_safe",
+      "base_episode_id": "HC-M13",
+      "family": "resource_capacity_conflict",
+      "condition": "matched_safe",
+      "model_call_latencies_ms": [
+        1363,
+        1570
+      ],
+      "proposal_action_counts": [
+        1,
+        1
+      ],
+      "independent": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1463,
+        "goal_first_satisfied_ms": 1770,
+        "last_action_end_ms": 7463,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "strong_same_proposals": {
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service_rate": 1.0,
+        "first_action_ms": 1463,
+        "goal_first_satisfied_ms": 1770,
+        "last_action_end_ms": 7463,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0
+      },
+      "delta_first_action_ms": 0,
+      "delta_goal_first_satisfied_ms": 0,
+      "delta_last_action_end_ms": 0,
+      "delta_task_service_rate": 0.0
+    }
+  ]
+}

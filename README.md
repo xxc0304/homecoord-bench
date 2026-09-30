@@ -1,123 +1,39 @@
-# HomeCoord-Bench 最小验证原型
+# HomeCoord-Bench
 
-这个目录实现数据规范 v0.3 的验证闭环：4 条种子 episode、20 条参数化变体、20 条候选任务、人工正反轨迹、确定性评测器、四种架构和 DeepSeek API 适配。人工轨迹、dry-run 和真实 API 结果在文档中分别标注，不混为一类证据。
+智慧家庭多 Agent 的冲突—时延评测研究原型。当前关注：协调如何影响安全执行、逐任务等待与按时完成，以及这种影响如何随资源竞争、任务发布时间和可选执行模式变化。
 
-运行验证：
+## 当前进展（2026-09-30）
 
-```powershell
-python -m unittest discover -s homecoord_bench/tests -v
+- 已实现离散事件模拟器、工具权限/状态版本校验、共享安全门控、规则与精确调度基线、DeepSeek 提案适配及逐任务过程指标。
+- 最新任务家族为 F1 已发布固定服务、F2 晚到服务、F3 多合格模式；12 个结构、48 个作者设计候选，开发与前瞻测试各 24 个情境。前瞻测试只做静态检查，未求解或执行。
+- 开发集 360 次脚本回放全部完成服务且安全；无竞争 180/180 按时，竞争 142/180 按时。它们是模拟执行，不是 360 个独立模型样本。
+- 最新真实开发试点完成 26 次 DeepSeek 请求和 26 次策略执行。部分条件强规则足够，部分晚到条件超期；模式选择和执行排序可能改善总完成时间，也可能转移个体等待。
+- 集中批次提案接口完成 240 次脚本执行、120 个匹配配对，动作与指标一致；集中 132 次模拟批调用、功能 Agent 504 次模拟调用，尚未验证真实 API 成本优势。
+
+这些结果支持继续完善 benchmark，不构成新算法优越性、真实设备性能或测试集泛化结论。资源参数包含明确声明的抽象预约单位；历史物理/外部数据探针与核心评测分开。
+
+## 最新报告与跨设备入口
+
+- [研究交接](docs/RESEARCH_HANDOFF.md) / [继续讨论提示词](docs/CONTINUE_PROMPT.md)
+- [主实验证据矩阵](docs/MAIN_EXPERIMENT_MATRIX_2026-09-30.md)
+- [任务家族与划分](docs/TASK_FAMILY_SPLIT_RESULT_2026-09-30.md)
+- [真实开发模型试点](docs/DEVELOPMENT_MODEL_RESULT_2026-09-30.md)
+- [集中批次接口验证](docs/CENTRAL_BATCH_RESULT_2026-09-30.md)
+- [详细运行说明](homecoord_bench/README.md)
+
+## 本地验证
+
+在仓库根目录使用 Python 3 运行（基础测试无需模型 API）：
+
+```sh
+python -m unittest discover -s homecoord_bench/tests
 python homecoord_bench/evaluate.py --all
-python homecoord_bench/run_scripted_baselines.py
-python homecoord_bench/run_protocol_pilot.py --provider dry-run
 ```
 
-评测器输出：
+真实调用须在本机环境变量中配置 `DEEPSEEK_API_KEY`，按对应预登记协议和预算运行，勿无意重跑已用满预算的试点。完整原始调用日志和第三方原始数据未上传；部分来源审计需要自行取得原始数据，因此克隆仓库不保证能重建所有外部数据探针。
 
-- `final_goal_success`：结束状态是否满足目标；
-- `process_valid_success`：目标满足且过程未违反硬约束；
-- `conflict_counts`：C1–C4 冲突次数；
-- `first_effective_action_latency_ms`：从任务发布到第一个产生目标正向进展且不立即违规的物理动作；
-- `task_completion_time_ms`：第一次满足全部目标的时间；
-- `coordination_decision_latency_ms`：首次协调决策时间，单独报告，不冒充物理响应。
-- `task_service_rate`：实际完成了多少声明 `required_action` 的局部任务，用于识别安全但不执行任务的策略。
+## 目录与项目边界
 
-`run_scripted_baselines.py` 是人工轨迹上的架构冒烟试验，用来检查 4 条种子任务是否有区分度。它不调用 LLM，也不能被当成论文中的模型实验。
+`homecoord_bench/` 是当前代码、schema、候选输入、锁定 manifest、结果和测试的唯一代码入口；`docs/` 保存研究方案及实验报告。根目录旧脚本和 JSON 是先前上传保留的历史快照，不作为最新运行入口。根目录交接文档已同步，但优先阅读 `docs/`。
 
-## 模型协议试跑
-
-`run_protocol_pilot.py` 默认使用确定性假模型，验证 4 条 episode 中 8 个专业 Agent 的统一请求、结构化动作提案和 JSONL 事件记录。动作参数和前置条件使用原生 JSON `value` 字段，不在字符串中再次编码 JSON。指定供应商才会发出真实请求。
-
-DeepSeek 首轮使用 `deepseek-flash` 和非思考模式：
-
-```powershell
-$env:DEEPSEEK_API_KEY = "在本机设置，不要写入仓库"
-python homecoord_bench/run_protocol_pilot.py --provider deepseek
-```
-
-第二模型对照可显式指定模型名；当前已用 `deepseek-v4-pro` 完成 8 个专业 Agent 决策的兼容性试跑和 C1–C4 关键边界各 5 次初筛：
-
-```powershell
-python homecoord_bench/run_protocol_pilot.py --provider deepseek --model deepseek-v4-pro
-python homecoord_bench/run_targeted_repetitions.py --provider deepseek --model deepseek-v4-pro --repetitions 5
-```
-
-OpenAI 对照仍可使用 `--provider openai`。两种适配器都使用严格 JSON Schema；DeepSeek Responses API 固定不存储响应，OpenAI 请求显式设置 `store=false`。运行日志写到已被 Git 忽略的 `homecoord_bench/runs/`，不记录 API Key。
-
-## 最小执行闭环
-
-四种架构的离线闭环验证：
-
-```powershell
-python homecoord_bench/run_closed_loop.py --provider dry-run
-```
-
-已实现候选任务（HC-M02、HC-M03、HC-M07、HC-M08、HC-M12、HC-M13、HC-M17、HC-M20）的四架构确定性回放：
-
-```powershell
-python homecoord_bench/run_candidate_dry_run.py
-```
-
-候选任务用 episode 内的 `action_grounding` 能力表描述动作效果，用任务内的 `action_template` 驱动确定性客户端；新增设备类型不需要修改种子任务的硬编码分派表。当前候选仍是待双审的校准样本，不能与正式金标准或真实模型结果混合报告。
-
-生成候选任务机器预审矩阵：
-
-```powershell
-python homecoord_bench/review_candidates.py
-```
-
-结果写入 `docs/HOMECOORD_BENCH_REVIEW_MATRIX_v0.1.md` 和 `homecoord_bench/results/candidate_pre_review_20260920.json`。机器预审只检查结构、引用、冲突可判定性和确定性回放准备情况；物理参数仍需人工双审和设备／模拟器校准。
-
-没有真实设备时运行合成参数敏感性分析：
-
-```powershell
-python homecoord_bench/annotate_synthetic_calibration.py
-python homecoord_bench/run_calibration_sweep.py --replicates 10
-```
-
-该 sweep 只改变动作持续时间和功耗的声明范围，用于检查结论是否依赖固定占位值；输出明确标记为 `sensitivity_only`，不能作为真实设备性能结果。
-
-真实 DeepSeek 小样本闭环：
-
-```powershell
-python homecoord_bench/run_closed_loop.py --provider deepseek
-```
-
-闭环会注入外部状态事件、执行动作、更新共享状态并把轨迹交给确定性评测器。`CentralSingleAgent` 使用一个具有全局可见性和全部工具的中央 Agent；其余三种架构使用具有不同状态与工具边界的专业 Agent。设备实际持续时间和功率由环境能力表确定，模型给出的估计只作为提案元数据保存。
-
-## 参数扫描与重复校准
-
-运行 20 条信息可见性、事件时机和冲突边界变体：
-
-```powershell
-python homecoord_bench/run_variant_sweep.py --provider dry-run
-python homecoord_bench/run_variant_sweep.py --provider deepseek
-```
-
-只重复能够区分机制的关键临界配置：
-
-```powershell
-python homecoord_bench/run_targeted_repetitions.py --provider deepseek --suite core --repetitions 20
-python homecoord_bench/run_targeted_repetitions.py --provider deepseek --suite c2c3 --repetitions 20
-```
-
-聚合原始轨迹、模型时延、格式重试、Token、费用、冲突和任务服务率：
-
-```powershell
-python homecoord_bench/analyze_variant_sweep.py <run_dir> <result.json>
-```
-
-C2/C3 边界和强约束规则基线：
-
-```powershell
-python homecoord_bench/run_conflict_family_sweep.py --provider dry-run
-python homecoord_bench/run_conflict_family_sweep.py --provider deepseek
-```
-
-同一批专业 Agent 提案的反事实架构回放：
-
-```powershell
-python homecoord_bench/run_counterfactual_replay.py <run_dir> <result.json> --family direct_device_conflict --target-architecture RuleCoordinator
-python homecoord_bench/run_counterfactual_replay.py <run_dir> <result.json> --family indirect_environment_conflict --target-architecture ConstraintCoordinator
-```
-
-原始请求和轨迹保存在被 Git 忽略的 `homecoord_bench/runs/`。不含密钥的聚合结果保存在 `homecoord_bench/results/`。C1–C4 的关键边界配置均已各重复 20 次，当前仍属于数据校准证据。
+本仓库用于 HomeCoord-Bench 实证研究。文献综述写作在独立项目中继续，未纳入本次同步。下一步是预登记同模型集中/功能 Agent 的真实小比较，加入同汇集信息消融、失败保留与评分、重复和第二结构；前瞻测试继续保持未打开。

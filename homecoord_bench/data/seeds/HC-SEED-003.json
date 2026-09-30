@@ -22,6 +22,10 @@
     {"path": "living_room.temperature_c", "op": "between", "value": [20, 22]}
   ],
   "constraints": [],
+  "action_grounding": [
+    {"agent_id": "AirQualityAgent", "task_id": "air", "operation": "open", "target": "window", "grounded_operation": "open", "duration_ms": 2000, "power_kw": 0.0, "effects": {"devices.window": "open", "living_room.co2_ppm": 900}, "start_effects": {}, "completion_effects": {"devices.window": "open", "living_room.co2_ppm": 900}},
+    {"agent_id": "ClimateAgent", "task_id": "heat", "operation": "heat_high", "target": "heater", "grounded_operation": "heat_high", "duration_ms": 3000, "power_kw": 2.0, "effects": {"devices.heater": "high", "living_room.temperature_c": 21}, "start_effects": {}, "completion_effects": {"devices.heater": "high", "living_room.temperature_c": 21}}
+  ],
   "conflict_rules": [
     {"type": "C2", "a": {"target": "window", "operation": "open"}, "b": {"target": "heater", "operation": "heat_high"}, "min_overlap_ms": 1000},
     {"type": "C3", "capacity": 8.0}

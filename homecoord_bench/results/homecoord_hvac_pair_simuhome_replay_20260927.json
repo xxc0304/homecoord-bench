@@ -1,0 +1,1373 @@
+{
+  "schema_version": "homecoord-hvac-simuhome-replay-0.1",
+  "date": "2026-09-27",
+  "source_model_records": {
+    "path": "homecoord_bench\\results\\paired_task_batch_v1_probe.json",
+    "pair_id": "C1-HVAC",
+    "repetition": 1,
+    "model": "deepseek-flash",
+    "models_called_during_this_replay": 0
+  },
+  "backend": {
+    "name": "SimuHome",
+    "commit": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+    "local_api_only": true,
+    "physical_devices_used": 0
+  },
+  "mapping": {
+    "homecoord_ms_to_backend_ticks": "1 logical millisecond = 1 SimuHome tick at 1 ms/tick",
+    "cool": [
+      "On",
+      "SystemMode=3",
+      "OccupiedCoolingSetpoint=2400",
+      "PercentSetting=66"
+    ],
+    "off": [
+      "OnOff.Off"
+    ],
+    "duration_note": "HomeCoord action duration is held in its event timeline; SimuHome commands change device state immediately."
+  },
+  "rows": [
+    {
+      "run_id": "F-conflict-IndependentMultiAgent-r1",
+      "condition": "conflict",
+      "architecture": "IndependentMultiAgent",
+      "repetition": 1,
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "pair_condition": "conflict",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONFLICT.IndependentMultiAgent.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-conflict-IndependentMultiAgent-r1.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "49883914c49fff2b8f24c083752c01631a3d7b3379b8640976fed033a1e8fed8",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 7534,
+      "homecoord": {
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 7534,
+          "peak_off": 2065
+        },
+        "first_effective_action_latency_ms": 1534
+      },
+      "homecoord_coordination_decisions": [],
+      "replayed_actions": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-comfort-cool24",
+          "operation": "cool",
+          "homecoord_timestamp_ms": 1534,
+          "requested_backend_tick": 1534,
+          "completion_time_ms": 7534,
+          "device_state_after_bundle": {
+            "on": true,
+            "system_mode": 3,
+            "cooling_setpoint_raw": 2400,
+            "fan_percent": 66,
+            "room_temperature_raw": 2899.9999010000406
+          },
+          "command_steps": [
+            {
+              "command_name": "On",
+              "requested_tick": 1534,
+              "submit_tick": 1536,
+              "execution_tick_estimate": 1539,
+              "observation_tick": 1540,
+              "state_digest": "e3a5d0131bf3dc252efc37cd991bfe9e489a559789fe515d0e76dfb6b777909f",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "On",
+                "result": "Device turned on"
+              }
+            },
+            {
+              "command_name": "SystemMode",
+              "requested_tick": 1534,
+              "submit_tick": 1542,
+              "execution_tick_estimate": 1543,
+              "observation_tick": 1544,
+              "state_digest": "41dd92e798dfbc1bc5e9b570d22de6026ef0efd8068bdb0b920c0c1f27a23668",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "SystemMode",
+                "old_value": 0,
+                "new_value": 3
+              }
+            },
+            {
+              "command_name": "OccupiedCoolingSetpoint",
+              "requested_tick": 1534,
+              "submit_tick": 1546,
+              "execution_tick_estimate": 1548,
+              "observation_tick": 1549,
+              "state_digest": "a42be77a37abdbf05b7a6c5bb776762084956722da20d0fdf265aabadf460cad",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "OccupiedCoolingSetpoint",
+                "old_value": 2600,
+                "new_value": 2400
+              }
+            },
+            {
+              "command_name": "PercentSetting",
+              "requested_tick": 1534,
+              "submit_tick": 1550,
+              "execution_tick_estimate": 1552,
+              "observation_tick": 1553,
+              "state_digest": "3f5fd873486e97fc075036803e1dad659e44209a46fd064f1d1a7e5639d10874",
+              "backend_receipt": {
+                "cluster": "FanControl",
+                "attribute": "PercentSetting",
+                "new_value": 66
+              }
+            }
+          ]
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "operation": "off",
+          "homecoord_timestamp_ms": 1565,
+          "requested_backend_tick": 1565,
+          "completion_time_ms": 2065,
+          "device_state_after_bundle": {
+            "on": false,
+            "system_mode": 3,
+            "cooling_setpoint_raw": 2400,
+            "fan_percent": 66,
+            "room_temperature_raw": 2899.999439001351
+          },
+          "command_steps": [
+            {
+              "command_name": "Off",
+              "requested_tick": 1565,
+              "submit_tick": 1566,
+              "execution_tick_estimate": 1568,
+              "observation_tick": 1569,
+              "state_digest": "28cdc808764a4c9959d36067d4e5500d511aeb09c9bcd44d824b1daf67432758",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "Off",
+                "result": "Device turned off"
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": false,
+        "system_mode": 3,
+        "cooling_setpoint_raw": 2400,
+        "room_temperature_raw": 2899.999439670535,
+        "room_temperature_c_by_internal_scale": 28.99999439670535
+      },
+      "simuhome_physical_goal_proxy_satisfied": false,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-conflict-IndependentMultiAgent-r2",
+      "condition": "conflict",
+      "architecture": "IndependentMultiAgent",
+      "repetition": 2,
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "pair_condition": "conflict",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONFLICT.IndependentMultiAgent.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-conflict-IndependentMultiAgent-r2.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "e3146fafe80c3215f5e394cb22bcfe057d1f11229c8e73afa805d1bfab910ef7",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 7534,
+      "homecoord": {
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 7534,
+          "peak_off": 2065
+        },
+        "first_effective_action_latency_ms": 1534
+      },
+      "homecoord_coordination_decisions": [],
+      "replayed_actions": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-comfort-cool24",
+          "operation": "cool",
+          "homecoord_timestamp_ms": 1534,
+          "requested_backend_tick": 1534,
+          "completion_time_ms": 7534,
+          "device_state_after_bundle": {
+            "on": true,
+            "system_mode": 3,
+            "cooling_setpoint_raw": 2400,
+            "fan_percent": 66,
+            "room_temperature_raw": 2899.999868000067
+          },
+          "command_steps": [
+            {
+              "command_name": "On",
+              "requested_tick": 1534,
+              "submit_tick": 1536,
+              "execution_tick_estimate": 1538,
+              "observation_tick": 1539,
+              "state_digest": "22ab01bf4f87e2dfdab327b8192b64d7259f4676490b0602ff490ad32d319241",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "On",
+                "result": "Device turned on"
+              }
+            },
+            {
+              "command_name": "SystemMode",
+              "requested_tick": 1534,
+              "submit_tick": 1540,
+              "execution_tick_estimate": 1541,
+              "observation_tick": 1542,
+              "state_digest": "e8954dcf2cfea26f15600b848b6b67f67a0b7230b58f83399475e47ca9013854",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "SystemMode",
+                "old_value": 0,
+                "new_value": 3
+              }
+            },
+            {
+              "command_name": "OccupiedCoolingSetpoint",
+              "requested_tick": 1534,
+              "submit_tick": 1543,
+              "execution_tick_estimate": 1544,
+              "observation_tick": 1545,
+              "state_digest": "3e65ac634e77ae489f98ee0bffef5881fc355c288998f933f54e7ff5bb8318b0",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "OccupiedCoolingSetpoint",
+                "old_value": 2600,
+                "new_value": 2400
+              }
+            },
+            {
+              "command_name": "PercentSetting",
+              "requested_tick": 1534,
+              "submit_tick": 1547,
+              "execution_tick_estimate": 1550,
+              "observation_tick": 1551,
+              "state_digest": "b2a10f9bda218c4a5a0995fd370f74576b1c0f8e99ccbf51dc07d9851368ff09",
+              "backend_receipt": {
+                "cluster": "FanControl",
+                "attribute": "PercentSetting",
+                "new_value": 66
+              }
+            }
+          ]
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "operation": "off",
+          "homecoord_timestamp_ms": 1565,
+          "requested_backend_tick": 1565,
+          "completion_time_ms": 2065,
+          "device_state_after_bundle": {
+            "on": false,
+            "system_mode": 3,
+            "cooling_setpoint_raw": 2400,
+            "fan_percent": 66,
+            "room_temperature_raw": 2899.9993400017865
+          },
+          "command_steps": [
+            {
+              "command_name": "Off",
+              "requested_tick": 1565,
+              "submit_tick": 1566,
+              "execution_tick_estimate": 1568,
+              "observation_tick": 1569,
+              "state_digest": "32410c285a3856c32f06b512e47376580346adc93eb68b6142c6c8c22cec2f1c",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "Off",
+                "result": "Device turned off"
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": false,
+        "system_mode": 3,
+        "cooling_setpoint_raw": 2400,
+        "room_temperature_raw": 2899.9993407881675,
+        "room_temperature_c_by_internal_scale": 28.999993407881675
+      },
+      "simuhome_physical_goal_proxy_satisfied": false,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-conflict-IndependentMultiAgent-r3",
+      "condition": "conflict",
+      "architecture": "IndependentMultiAgent",
+      "repetition": 3,
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "pair_condition": "conflict",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONFLICT.IndependentMultiAgent.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-conflict-IndependentMultiAgent-r3.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "3b6f9d77c316572c714ccde29bed8c0d1dd55251753002253b093bed44d47485",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 7534,
+      "homecoord": {
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 7534,
+          "peak_off": 2065
+        },
+        "first_effective_action_latency_ms": 1534
+      },
+      "homecoord_coordination_decisions": [],
+      "replayed_actions": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-comfort-cool24",
+          "operation": "cool",
+          "homecoord_timestamp_ms": 1534,
+          "requested_backend_tick": 1534,
+          "completion_time_ms": 7534,
+          "device_state_after_bundle": {
+            "on": true,
+            "system_mode": 3,
+            "cooling_setpoint_raw": 2400,
+            "fan_percent": 66,
+            "room_temperature_raw": 2899.9999010000406
+          },
+          "command_steps": [
+            {
+              "command_name": "On",
+              "requested_tick": 1534,
+              "submit_tick": 1536,
+              "execution_tick_estimate": 1538,
+              "observation_tick": 1539,
+              "state_digest": "22ab01bf4f87e2dfdab327b8192b64d7259f4676490b0602ff490ad32d319241",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "On",
+                "result": "Device turned on"
+              }
+            },
+            {
+              "command_name": "SystemMode",
+              "requested_tick": 1534,
+              "submit_tick": 1540,
+              "execution_tick_estimate": 1541,
+              "observation_tick": 1542,
+              "state_digest": "e8954dcf2cfea26f15600b848b6b67f67a0b7230b58f83399475e47ca9013854",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "SystemMode",
+                "old_value": 0,
+                "new_value": 3
+              }
+            },
+            {
+              "command_name": "OccupiedCoolingSetpoint",
+              "requested_tick": 1534,
+              "submit_tick": 1543,
+              "execution_tick_estimate": 1544,
+              "observation_tick": 1545,
+              "state_digest": "3e65ac634e77ae489f98ee0bffef5881fc355c288998f933f54e7ff5bb8318b0",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "OccupiedCoolingSetpoint",
+                "old_value": 2600,
+                "new_value": 2400
+              }
+            },
+            {
+              "command_name": "PercentSetting",
+              "requested_tick": 1534,
+              "submit_tick": 1546,
+              "execution_tick_estimate": 1547,
+              "observation_tick": 1548,
+              "state_digest": "51242df8488775ce20a5d8e9a8b01392ef2144e02b8b10168856d059724f9f96",
+              "backend_receipt": {
+                "cluster": "FanControl",
+                "attribute": "PercentSetting",
+                "new_value": 66
+              }
+            }
+          ]
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "operation": "off",
+          "homecoord_timestamp_ms": 1565,
+          "requested_backend_tick": 1565,
+          "completion_time_ms": 2065,
+          "device_state_after_bundle": {
+            "on": false,
+            "system_mode": 3,
+            "cooling_setpoint_raw": 2400,
+            "fan_percent": 66,
+            "room_temperature_raw": 2899.9993400016547
+          },
+          "command_steps": [
+            {
+              "command_name": "Off",
+              "requested_tick": 1565,
+              "submit_tick": 1565,
+              "execution_tick_estimate": 1566,
+              "observation_tick": 1567,
+              "state_digest": "bfd0b9b1d216b0665fd618348cad6ea2bc5c29aa4ad06f90def3e43dcf695238",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "Off",
+                "result": "Device turned off"
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": false,
+        "system_mode": 3,
+        "cooling_setpoint_raw": 2400,
+        "room_temperature_raw": 2899.9993407884313,
+        "room_temperature_c_by_internal_scale": 28.99999340788431
+      },
+      "simuhome_physical_goal_proxy_satisfied": false,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-conflict-ConstraintCoordinator-r1",
+      "condition": "conflict",
+      "architecture": "ConstraintCoordinator",
+      "repetition": 1,
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "pair_condition": "conflict",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONFLICT.ConstraintCoordinator.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-conflict-ConstraintCoordinator-r1.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "177a01efeaa5513aa38d0c2735e0e3a3f7ff9454d9593b60de48054381189772",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 7534,
+      "homecoord": {
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": false
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 7534,
+          "peak_off": null
+        },
+        "first_effective_action_latency_ms": 1534
+      },
+      "homecoord_coordination_decisions": [
+        {
+          "type": "coordination_decision",
+          "timestamp_ms": 1434,
+          "decision": "accept",
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-comfort-cool24"
+        },
+        {
+          "type": "coordination_decision",
+          "timestamp_ms": 1465,
+          "decision": "reject",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "reason": "constraint_violation"
+        }
+      ],
+      "replayed_actions": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-comfort-cool24",
+          "operation": "cool",
+          "homecoord_timestamp_ms": 1534,
+          "requested_backend_tick": 1534,
+          "completion_time_ms": 7534,
+          "device_state_after_bundle": {
+            "on": true,
+            "system_mode": 3,
+            "cooling_setpoint_raw": 2400,
+            "fan_percent": 66,
+            "room_temperature_raw": 2899.9999340000204
+          },
+          "command_steps": [
+            {
+              "command_name": "On",
+              "requested_tick": 1534,
+              "submit_tick": 1535,
+              "execution_tick_estimate": 1536,
+              "observation_tick": 1537,
+              "state_digest": "e008d3c756b1448aeecce7afd40f45a529d48bbef7cf960873916960deec83ae",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "On",
+                "result": "Device turned on"
+              }
+            },
+            {
+              "command_name": "SystemMode",
+              "requested_tick": 1534,
+              "submit_tick": 1538,
+              "execution_tick_estimate": 1540,
+              "observation_tick": 1541,
+              "state_digest": "56a22847319b675e28f96d137372489b5400093e41e36390da368365bca8bb77",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "SystemMode",
+                "old_value": 0,
+                "new_value": 3
+              }
+            },
+            {
+              "command_name": "OccupiedCoolingSetpoint",
+              "requested_tick": 1534,
+              "submit_tick": 1542,
+              "execution_tick_estimate": 1543,
+              "observation_tick": 1544,
+              "state_digest": "be40401f55d8be6092d2f28f204c404a2561b2b9b2628f345c1ea7763c4de3b7",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "OccupiedCoolingSetpoint",
+                "old_value": 2600,
+                "new_value": 2400
+              }
+            },
+            {
+              "command_name": "PercentSetting",
+              "requested_tick": 1534,
+              "submit_tick": 1545,
+              "execution_tick_estimate": 1546,
+              "observation_tick": 1547,
+              "state_digest": "10a8e1f882620e0c31adb98071f62cd1c20b6408ae248c9d985b60436f6fc005",
+              "backend_receipt": {
+                "cluster": "FanControl",
+                "attribute": "PercentSetting",
+                "new_value": 66
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": true,
+        "system_mode": 3,
+        "cooling_setpoint_raw": 2400,
+        "room_temperature_raw": 2899.8025142990173,
+        "room_temperature_c_by_internal_scale": 28.998025142990173
+      },
+      "simuhome_physical_goal_proxy_satisfied": false,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-conflict-ConstraintCoordinator-r2",
+      "condition": "conflict",
+      "architecture": "ConstraintCoordinator",
+      "repetition": 2,
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "pair_condition": "conflict",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONFLICT.ConstraintCoordinator.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-conflict-ConstraintCoordinator-r2.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "53fbf332e529b59c76f43fca6f17a9d336d1b2382016b8e93d3fbb0f0177fe78",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 7534,
+      "homecoord": {
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": false
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 7534,
+          "peak_off": null
+        },
+        "first_effective_action_latency_ms": 1534
+      },
+      "homecoord_coordination_decisions": [
+        {
+          "type": "coordination_decision",
+          "timestamp_ms": 1434,
+          "decision": "accept",
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-comfort-cool24"
+        },
+        {
+          "type": "coordination_decision",
+          "timestamp_ms": 1465,
+          "decision": "reject",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "reason": "constraint_violation"
+        }
+      ],
+      "replayed_actions": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-comfort-cool24",
+          "operation": "cool",
+          "homecoord_timestamp_ms": 1534,
+          "requested_backend_tick": 1534,
+          "completion_time_ms": 7534,
+          "device_state_after_bundle": {
+            "on": true,
+            "system_mode": 3,
+            "cooling_setpoint_raw": 2400,
+            "fan_percent": 66,
+            "room_temperature_raw": 2899.9999340000204
+          },
+          "command_steps": [
+            {
+              "command_name": "On",
+              "requested_tick": 1534,
+              "submit_tick": 1536,
+              "execution_tick_estimate": 1538,
+              "observation_tick": 1539,
+              "state_digest": "22ab01bf4f87e2dfdab327b8192b64d7259f4676490b0602ff490ad32d319241",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "On",
+                "result": "Device turned on"
+              }
+            },
+            {
+              "command_name": "SystemMode",
+              "requested_tick": 1534,
+              "submit_tick": 1540,
+              "execution_tick_estimate": 1542,
+              "observation_tick": 1543,
+              "state_digest": "3b5a2c0db95cc8998c14f98d9066a3f75c230e58a9238817db6d9f9ed591e029",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "SystemMode",
+                "old_value": 0,
+                "new_value": 3
+              }
+            },
+            {
+              "command_name": "OccupiedCoolingSetpoint",
+              "requested_tick": 1534,
+              "submit_tick": 1545,
+              "execution_tick_estimate": 1547,
+              "observation_tick": 1548,
+              "state_digest": "630cb30bbabe644fe49afd9a7e9bf22812a3c2c1f180e46a811aee1ad211edb7",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "OccupiedCoolingSetpoint",
+                "old_value": 2600,
+                "new_value": 2400
+              }
+            },
+            {
+              "command_name": "PercentSetting",
+              "requested_tick": 1534,
+              "submit_tick": 1549,
+              "execution_tick_estimate": 1550,
+              "observation_tick": 1551,
+              "state_digest": "4e1cdc50f13c4e08bf1c3455b5668e7b6e4045c15fdcd3f6c434cec2d04b2a06",
+              "backend_receipt": {
+                "cluster": "FanControl",
+                "attribute": "PercentSetting",
+                "new_value": 66
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": true,
+        "system_mode": 3,
+        "cooling_setpoint_raw": 2400,
+        "room_temperature_raw": 2899.8026461410673,
+        "room_temperature_c_by_internal_scale": 28.998026461410674
+      },
+      "simuhome_physical_goal_proxy_satisfied": false,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-conflict-ConstraintCoordinator-r3",
+      "condition": "conflict",
+      "architecture": "ConstraintCoordinator",
+      "repetition": 3,
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "pair_condition": "conflict",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONFLICT.ConstraintCoordinator.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-conflict-ConstraintCoordinator-r3.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "ecdc29e10cddce8968905ed510ac6f0bc448da59eccee0786875d3edd68854d6",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 7534,
+      "homecoord": {
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": false
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 7534,
+          "peak_off": null
+        },
+        "first_effective_action_latency_ms": 1534
+      },
+      "homecoord_coordination_decisions": [
+        {
+          "type": "coordination_decision",
+          "timestamp_ms": 1434,
+          "decision": "accept",
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-comfort-cool24"
+        },
+        {
+          "type": "coordination_decision",
+          "timestamp_ms": 1465,
+          "decision": "reject",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "reason": "constraint_violation"
+        }
+      ],
+      "replayed_actions": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-comfort-cool24",
+          "operation": "cool",
+          "homecoord_timestamp_ms": 1534,
+          "requested_backend_tick": 1534,
+          "completion_time_ms": 7534,
+          "device_state_after_bundle": {
+            "on": true,
+            "system_mode": 3,
+            "cooling_setpoint_raw": 2400,
+            "fan_percent": 66,
+            "room_temperature_raw": 2899.9999340000204
+          },
+          "command_steps": [
+            {
+              "command_name": "On",
+              "requested_tick": 1534,
+              "submit_tick": 1536,
+              "execution_tick_estimate": 1538,
+              "observation_tick": 1539,
+              "state_digest": "22ab01bf4f87e2dfdab327b8192b64d7259f4676490b0602ff490ad32d319241",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "On",
+                "result": "Device turned on"
+              }
+            },
+            {
+              "command_name": "SystemMode",
+              "requested_tick": 1534,
+              "submit_tick": 1541,
+              "execution_tick_estimate": 1543,
+              "observation_tick": 1544,
+              "state_digest": "41dd92e798dfbc1bc5e9b570d22de6026ef0efd8068bdb0b920c0c1f27a23668",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "SystemMode",
+                "old_value": 0,
+                "new_value": 3
+              }
+            },
+            {
+              "command_name": "OccupiedCoolingSetpoint",
+              "requested_tick": 1534,
+              "submit_tick": 1545,
+              "execution_tick_estimate": 1548,
+              "observation_tick": 1549,
+              "state_digest": "a42be77a37abdbf05b7a6c5bb776762084956722da20d0fdf265aabadf460cad",
+              "backend_receipt": {
+                "cluster": "Thermostat",
+                "attribute": "OccupiedCoolingSetpoint",
+                "old_value": 2600,
+                "new_value": 2400
+              }
+            },
+            {
+              "command_name": "PercentSetting",
+              "requested_tick": 1534,
+              "submit_tick": 1551,
+              "execution_tick_estimate": 1553,
+              "observation_tick": 1554,
+              "state_digest": "24d8cd46502c8c205ce1d898f0cd7c1c01d9175927b890700c8c8c1b60f3f5ff",
+              "backend_receipt": {
+                "cluster": "FanControl",
+                "attribute": "PercentSetting",
+                "new_value": 66
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": true,
+        "system_mode": 3,
+        "cooling_setpoint_raw": 2400,
+        "room_temperature_raw": 2899.802745022674,
+        "room_temperature_c_by_internal_scale": 28.99802745022674
+      },
+      "simuhome_physical_goal_proxy_satisfied": false,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-control-IndependentMultiAgent-r1",
+      "condition": "control",
+      "architecture": "IndependentMultiAgent",
+      "repetition": 1,
+      "episode_id": "HC-PAIR-C1-HVAC-CONTROL",
+      "pair_condition": "control",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONTROL.IndependentMultiAgent.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-control-IndependentMultiAgent-r1.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "c88bfaa9fab00122a862d087a9132bb7f296dd7cc295606ff77ffc05b03c3872",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 2065,
+      "homecoord": {
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "peak_off": 2065
+        },
+        "first_effective_action_latency_ms": 1565
+      },
+      "homecoord_coordination_decisions": [],
+      "replayed_actions": [
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "operation": "off",
+          "homecoord_timestamp_ms": 1565,
+          "requested_backend_tick": 1565,
+          "completion_time_ms": 2065,
+          "device_state_after_bundle": {
+            "on": false,
+            "system_mode": 0,
+            "cooling_setpoint_raw": 2600,
+            "fan_percent": 0,
+            "room_temperature_raw": 2900.0
+          },
+          "command_steps": [
+            {
+              "command_name": "Off",
+              "requested_tick": 1565,
+              "submit_tick": 1577,
+              "execution_tick_estimate": 1579,
+              "observation_tick": 1580,
+              "state_digest": "c067a0b264cab05459f39620cb2be87e06ddae8895b79b575672b0e971e4543e",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "Off",
+                "result": "Device turned off"
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": false,
+        "system_mode": 0,
+        "cooling_setpoint_raw": 2600,
+        "room_temperature_raw": 2900.0,
+        "room_temperature_c_by_internal_scale": 29.0
+      },
+      "simuhome_physical_goal_proxy_satisfied": true,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-control-IndependentMultiAgent-r2",
+      "condition": "control",
+      "architecture": "IndependentMultiAgent",
+      "repetition": 2,
+      "episode_id": "HC-PAIR-C1-HVAC-CONTROL",
+      "pair_condition": "control",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONTROL.IndependentMultiAgent.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-control-IndependentMultiAgent-r2.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "c88bfaa9fab00122a862d087a9132bb7f296dd7cc295606ff77ffc05b03c3872",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 2065,
+      "homecoord": {
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "peak_off": 2065
+        },
+        "first_effective_action_latency_ms": 1565
+      },
+      "homecoord_coordination_decisions": [],
+      "replayed_actions": [
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "operation": "off",
+          "homecoord_timestamp_ms": 1565,
+          "requested_backend_tick": 1565,
+          "completion_time_ms": 2065,
+          "device_state_after_bundle": {
+            "on": false,
+            "system_mode": 0,
+            "cooling_setpoint_raw": 2600,
+            "fan_percent": 0,
+            "room_temperature_raw": 2900.0
+          },
+          "command_steps": [
+            {
+              "command_name": "Off",
+              "requested_tick": 1565,
+              "submit_tick": 1567,
+              "execution_tick_estimate": 1569,
+              "observation_tick": 1570,
+              "state_digest": "fab652fd3c8487a98c1dc14387ca1b3e46ba4f63af316fc4052d44b6e751e8ca",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "Off",
+                "result": "Device turned off"
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": false,
+        "system_mode": 0,
+        "cooling_setpoint_raw": 2600,
+        "room_temperature_raw": 2900.0,
+        "room_temperature_c_by_internal_scale": 29.0
+      },
+      "simuhome_physical_goal_proxy_satisfied": true,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-control-IndependentMultiAgent-r3",
+      "condition": "control",
+      "architecture": "IndependentMultiAgent",
+      "repetition": 3,
+      "episode_id": "HC-PAIR-C1-HVAC-CONTROL",
+      "pair_condition": "control",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONTROL.IndependentMultiAgent.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-control-IndependentMultiAgent-r3.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "c88bfaa9fab00122a862d087a9132bb7f296dd7cc295606ff77ffc05b03c3872",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 2065,
+      "homecoord": {
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "peak_off": 2065
+        },
+        "first_effective_action_latency_ms": 1565
+      },
+      "homecoord_coordination_decisions": [],
+      "replayed_actions": [
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "operation": "off",
+          "homecoord_timestamp_ms": 1565,
+          "requested_backend_tick": 1565,
+          "completion_time_ms": 2065,
+          "device_state_after_bundle": {
+            "on": false,
+            "system_mode": 0,
+            "cooling_setpoint_raw": 2600,
+            "fan_percent": 0,
+            "room_temperature_raw": 2900.0
+          },
+          "command_steps": [
+            {
+              "command_name": "Off",
+              "requested_tick": 1565,
+              "submit_tick": 1567,
+              "execution_tick_estimate": 1570,
+              "observation_tick": 1571,
+              "state_digest": "0426a9e6ab660bba03dada7deb0aef8e37abda154da22be4b71593d78c0d19b9",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "Off",
+                "result": "Device turned off"
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": false,
+        "system_mode": 0,
+        "cooling_setpoint_raw": 2600,
+        "room_temperature_raw": 2900.0,
+        "room_temperature_c_by_internal_scale": 29.0
+      },
+      "simuhome_physical_goal_proxy_satisfied": true,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-control-ConstraintCoordinator-r1",
+      "condition": "control",
+      "architecture": "ConstraintCoordinator",
+      "repetition": 1,
+      "episode_id": "HC-PAIR-C1-HVAC-CONTROL",
+      "pair_condition": "control",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONTROL.ConstraintCoordinator.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-control-ConstraintCoordinator-r1.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "c88bfaa9fab00122a862d087a9132bb7f296dd7cc295606ff77ffc05b03c3872",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 2065,
+      "homecoord": {
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "peak_off": 2065
+        },
+        "first_effective_action_latency_ms": 1565
+      },
+      "homecoord_coordination_decisions": [
+        {
+          "type": "coordination_decision",
+          "timestamp_ms": 1465,
+          "decision": "accept",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1"
+        }
+      ],
+      "replayed_actions": [
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "operation": "off",
+          "homecoord_timestamp_ms": 1565,
+          "requested_backend_tick": 1565,
+          "completion_time_ms": 2065,
+          "device_state_after_bundle": {
+            "on": false,
+            "system_mode": 0,
+            "cooling_setpoint_raw": 2600,
+            "fan_percent": 0,
+            "room_temperature_raw": 2900.0
+          },
+          "command_steps": [
+            {
+              "command_name": "Off",
+              "requested_tick": 1565,
+              "submit_tick": 1567,
+              "execution_tick_estimate": 1581,
+              "observation_tick": 1582,
+              "state_digest": "2d70aa388a4e6c8696cf7ead12b5a2329e39c2802026d028e07bd8021797bae9",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "Off",
+                "result": "Device turned off"
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": false,
+        "system_mode": 0,
+        "cooling_setpoint_raw": 2600,
+        "room_temperature_raw": 2900.0,
+        "room_temperature_c_by_internal_scale": 29.0
+      },
+      "simuhome_physical_goal_proxy_satisfied": true,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-control-ConstraintCoordinator-r2",
+      "condition": "control",
+      "architecture": "ConstraintCoordinator",
+      "repetition": 2,
+      "episode_id": "HC-PAIR-C1-HVAC-CONTROL",
+      "pair_condition": "control",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONTROL.ConstraintCoordinator.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-control-ConstraintCoordinator-r2.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "c88bfaa9fab00122a862d087a9132bb7f296dd7cc295606ff77ffc05b03c3872",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 2065,
+      "homecoord": {
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "peak_off": 2065
+        },
+        "first_effective_action_latency_ms": 1565
+      },
+      "homecoord_coordination_decisions": [
+        {
+          "type": "coordination_decision",
+          "timestamp_ms": 1465,
+          "decision": "accept",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1"
+        }
+      ],
+      "replayed_actions": [
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "operation": "off",
+          "homecoord_timestamp_ms": 1565,
+          "requested_backend_tick": 1565,
+          "completion_time_ms": 2065,
+          "device_state_after_bundle": {
+            "on": false,
+            "system_mode": 0,
+            "cooling_setpoint_raw": 2600,
+            "fan_percent": 0,
+            "room_temperature_raw": 2900.0
+          },
+          "command_steps": [
+            {
+              "command_name": "Off",
+              "requested_tick": 1565,
+              "submit_tick": 1567,
+              "execution_tick_estimate": 1570,
+              "observation_tick": 1571,
+              "state_digest": "0426a9e6ab660bba03dada7deb0aef8e37abda154da22be4b71593d78c0d19b9",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "Off",
+                "result": "Device turned off"
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": false,
+        "system_mode": 0,
+        "cooling_setpoint_raw": 2600,
+        "room_temperature_raw": 2900.0,
+        "room_temperature_c_by_internal_scale": 29.0
+      },
+      "simuhome_physical_goal_proxy_satisfied": true,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    },
+    {
+      "run_id": "F-control-ConstraintCoordinator-r3",
+      "condition": "control",
+      "architecture": "ConstraintCoordinator",
+      "repetition": 3,
+      "episode_id": "HC-PAIR-C1-HVAC-CONTROL",
+      "pair_condition": "control",
+      "homecoord_trace_id": "HC-PAIR-C1-HVAC-CONTROL.ConstraintCoordinator.closed_loop",
+      "trace_path": "homecoord_bench\\results\\homecoord_hvac_pair_simuhome_replay_traces\\F-control-ConstraintCoordinator-r3.jsonl",
+      "reset_initial_digest": "11070be18d31f9ba7fb0514053404f344f5c87a1433d9493000000426d45baef",
+      "final_state_digest": "c88bfaa9fab00122a862d087a9132bb7f296dd7cc295606ff77ffc05b03c3872",
+      "backend_revision": "83d28837b69f0cbf1bc02ed5334cb8b561a9d54d",
+      "backend_tick_ms": 1,
+      "clock_origin_tick": 0,
+      "final_tick": 2065,
+      "homecoord": {
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "peak_off": 2065
+        },
+        "first_effective_action_latency_ms": 1565
+      },
+      "homecoord_coordination_decisions": [
+        {
+          "type": "coordination_decision",
+          "timestamp_ms": 1465,
+          "decision": "accept",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1"
+        }
+      ],
+      "replayed_actions": [
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "proposal_id": "4db439d1-885f-481c-8f82-7773c58cf466-1",
+          "operation": "off",
+          "homecoord_timestamp_ms": 1565,
+          "requested_backend_tick": 1565,
+          "completion_time_ms": 2065,
+          "device_state_after_bundle": {
+            "on": false,
+            "system_mode": 0,
+            "cooling_setpoint_raw": 2600,
+            "fan_percent": 0,
+            "room_temperature_raw": 2900.0
+          },
+          "command_steps": [
+            {
+              "command_name": "Off",
+              "requested_tick": 1565,
+              "submit_tick": 1567,
+              "execution_tick_estimate": 1570,
+              "observation_tick": 1571,
+              "state_digest": "0426a9e6ab660bba03dada7deb0aef8e37abda154da22be4b71593d78c0d19b9",
+              "backend_receipt": {
+                "cluster": "OnOff",
+                "command": "Off",
+                "result": "Device turned off"
+              }
+            }
+          ]
+        }
+      ],
+      "simuhome_final_state": {
+        "hvac_on": false,
+        "system_mode": 0,
+        "cooling_setpoint_raw": 2600,
+        "room_temperature_raw": 2900.0,
+        "room_temperature_c_by_internal_scale": 29.0
+      },
+      "simuhome_physical_goal_proxy_satisfied": true,
+      "interpretation": "Backend state replay of saved HomeCoord actions. The HomeCoord evaluator applies action effects at start; SimuHome evolves HVAC room state over time. Raw thermal values are uncalibrated.",
+      "pass": true
+    }
+  ],
+  "run_count": 12,
+  "passed_count": 12,
+  "failed_count": 0
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": "refit-observed-coactivity-windows-0.1",
+  "status": "descriptive_observation_only_review_subset_not_task_or_conflict_labels",
+  "source_file_name": "CLEAN_House1.csv",
+  "source_file_size_bytes": 400840083,
+  "selection": {
+    "device_columns": {
+      "dryer": "Appliance4",
+      "washer": "Appliance5",
+      "dishwasher": "Appliance6"
+    },
+    "date_field": "Time",
+    "start_date_inclusive": "2013-10-09",
+    "end_date_exclusive": "2015-07-11",
+    "publisher_quality_flag": "Issues=1 rows excluded and break windows",
+    "threshold_w": 300.0,
+    "pair_active_when_both_channels_at_or_above_threshold": true,
+    "max_gap_seconds_within_window": 16.0,
+    "duration_estimate": "last timestamp - first timestamp + 8 seconds"
+  },
+  "counts": {
+    "rows_in_date_window": 6960008,
+    "clear_rows": 6901825,
+    "issues_1_rows_excluded": 58183,
+    "invalid_or_missing_quality_flags": 0
+  },
+  "by_pair": {
+    "dryer+washer": {
+      "qualifying_sample_rows": 57,
+      "window_count": 4,
+      "median_duration_seconds": 93.0,
+      "p90_duration_seconds": 130,
+      "windows_at_least_60_seconds": 2,
+      "windows_at_least_300_seconds": 0,
+      "windows_at_least_1800_seconds": 0
+    },
+    "dryer+dishwasher": {
+      "qualifying_sample_rows": 0,
+      "window_count": 0,
+      "median_duration_seconds": null,
+      "p90_duration_seconds": null,
+      "windows_at_least_60_seconds": 0,
+      "windows_at_least_300_seconds": 0,
+      "windows_at_least_1800_seconds": 0
+    },
+    "washer+dishwasher": {
+      "qualifying_sample_rows": 142,
+      "window_count": 9,
+      "median_duration_seconds": 61,
+      "p90_duration_seconds": 311,
+      "windows_at_least_60_seconds": 5,
+      "windows_at_least_300_seconds": 2,
+      "windows_at_least_1800_seconds": 0
+    }
+  },
+  "windows": [
+    {
+      "pair": [
+        "washer",
+        "dishwasher"
+      ],
+      "start_time": "2014-11-24 04:58:49",
+      "end_time": "2014-11-24 05:03:52",
+      "start_unix": 1416805129,
+      "end_unix": 1416805432,
+      "source_csv_line_start": 4404467,
+      "source_csv_line_end": 4404512,
+      "qualifying_rows": 46,
+      "duration_estimate_seconds": 311,
+      "mean_power_w_by_device": {
+        "washer": 2230.54,
+        "dishwasher": 2196.09
+      },
+      "peak_pair_power_w": 4578.0,
+      "peak_all_three_power_w": 4578.0,
+      "window_id": "REFIT-H1-COACT-000005"
+    },
+    {
+      "pair": [
+        "washer",
+        "dishwasher"
+      ],
+      "start_time": "2014-12-27 11:58:07",
+      "end_time": "2014-12-27 12:03:22",
+      "start_unix": 1419681487,
+      "end_unix": 1419681802,
+      "source_csv_line_start": 4816746,
+      "source_csv_line_end": 4816793,
+      "qualifying_rows": 48,
+      "duration_estimate_seconds": 323,
+      "mean_power_w_by_device": {
+        "washer": 475.56,
+        "dishwasher": 2185.54
+      },
+      "peak_pair_power_w": 2810.0,
+      "peak_all_three_power_w": 2810.0,
+      "window_id": "REFIT-H1-COACT-000010"
+    }
+  ],
+  "interpretation_limits": [
+    "A co-activity window is a same-row measured power overlap under a researcher-selected threshold.",
+    "Rows are temporally correlated and sensor channels are not synchronized; this is not a count of independent events.",
+    "The data contain no user task requests, deadlines, remote-start capability, circuit capacity, or agent actions.",
+    "REFIT cleaning may forward-fill short gaps or zero-fill longer gaps; zeros are not reliable off-state labels.",
+    "Do not use these windows as appliance cycles, task service durations, or conflict ground truth without separate review."
+  ],
+  "source_result_file": "refit_house1_coactivity_300W_20260929.json",
+  "review_filter": {
+    "minimum_duration_seconds": 300,
+    "meaning": "review subset only; 5 minutes is a convenience filter, not a task-cycle definition"
+  },
+  "review_window_count": 2
+}

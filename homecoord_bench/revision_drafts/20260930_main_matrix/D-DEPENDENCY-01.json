@@ -1,0 +1,84 @@
+{
+  "schema": "research-design-card-0.1",
+  "status": "author_design_not_runtime_episode",
+  "parameter_provenance": "E4 controlled logical service contract; no physical calibration",
+  "execution": "noninterruptible; half-open resource intervals; dependencies on completion",
+  "independent_review": "pending",
+  "model_tested": false,
+  "runtime_integrated": false,
+  "card_id": "D-DEPENDENCY-01",
+  "family": "logical_shared_service_dependency",
+  "agent_count": 3,
+  "resource_capacity_units": 3,
+  "story": "Gateway service must complete before network-dependent media playback. Backup is independent. Costs are abstract admission units, not measured network or power costs.",
+  "tasks": [
+    {
+      "task_id": "gateway",
+      "agent_id": "GatewayAgent",
+      "release_ms": 0,
+      "deadline_ms": 240000,
+      "predecessors": [],
+      "acceptable_modes": [
+        {
+          "mode": "prepare",
+          "duration_ms": 180000,
+          "resource_units": 1
+        }
+      ]
+    },
+    {
+      "task_id": "media",
+      "agent_id": "MediaAgent",
+      "release_ms": 0,
+      "deadline_ms": 360000,
+      "predecessors": [
+        "gateway"
+      ],
+      "acceptable_modes": [
+        {
+          "mode": "play",
+          "duration_ms": 120000,
+          "resource_units": 1
+        }
+      ]
+    },
+    {
+      "task_id": "backup",
+      "agent_id": "BackupAgent",
+      "release_ms": 0,
+      "deadline_ms": 480000,
+      "predecessors": [],
+      "acceptable_modes": [
+        {
+          "mode": "backup",
+          "duration_ms": 240000,
+          "resource_units": 2
+        }
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "gateway": {
+        "mode": "prepare",
+        "start_ms": 0
+      },
+      "media": {
+        "mode": "play",
+        "start_ms": 180000
+      },
+      "backup": {
+        "mode": "backup",
+        "start_ms": 0
+      }
+    }
+  ],
+  "required_baseline": "dependency-ready queue plus capacity/deadline scheduler; cannot compare only rules lacking dependency support",
+  "implementation_gaps": [
+    "released public predecessor contract",
+    "retry on predecessor completion",
+    "dependency-aware feasibility oracle",
+    "proposal/precondition timing controls"
+  ],
+  "claim_limit": "early dependent proposal rejection alone is not an algorithm gap"
+}

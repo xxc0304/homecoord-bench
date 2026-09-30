@@ -1,0 +1,2588 @@
+{
+  "schema_version": "c3-laundry-real-model-pilot-0.1",
+  "status": "post_feasibility_repair_exploratory_not_frozen_benchmark",
+  "model": "deepseek-flash",
+  "preregistered_input_sha256": {
+    "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8.json": "E2554202519ADAB805B3A0A96F0EBB5F69EA0D8329037315EE9F09220069051D",
+    "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2.json": "4A023AB00EE21BF736811D4BDA352AE7177F29AA79DD217FC07894246CDBDF2F",
+    "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6.json": "0271687AD0385F5B150F5371E44B2A9A7A5FDF5425D798A028012727063BA4A0"
+  },
+  "batches": [
+    {
+      "repetition": 1,
+      "sample": {
+        "records": {
+          "wash_new_load": {
+            "request": {
+              "request_id": "HC-C3-LAUNDRY_HEAT_V02:1:wash_new_load",
+              "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+              "base_episode_id": "HC-C3-LAUNDRY_HEAT_V02",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "washer": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "WasherAgent",
+                "role": "wash_new_load",
+                "tools": [
+                  "start_washer"
+                ],
+                "observable_state": [
+                  "devices.washer"
+                ],
+                "writable_resources": [
+                  "devices.washer"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "wash_new_load",
+                "agent_id": "WasherAgent",
+                "release_at_ms": 0,
+                "goal": "Wash a new laundry load within 120 minutes.",
+                "priority": 100,
+                "completion_deadline_ms": 7200000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_washer"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WasherAgent",
+                  "tool_name": "start_washer",
+                  "target": "washer",
+                  "operation": "wash",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.washer",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 60-minute cycle at nominal 2.0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-LAUNDRY_HEAT_V02:1:wash_new_load:start_washer",
+                  "target": "washer",
+                  "operation": "wash",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.washer",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3600000,
+                  "estimated_power_kw": 2.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1269,
+            "logical_latency_ms": 1270
+          },
+          "heat_room": {
+            "request": {
+              "request_id": "HC-C3-LAUNDRY_HEAT_V02:1:heat_room",
+              "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+              "base_episode_id": "HC-C3-LAUNDRY_HEAT_V02",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "heat_pump": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "ClimateAgent",
+                "role": "heat_room",
+                "tools": [
+                  "start_heat_pump"
+                ],
+                "observable_state": [
+                  "devices.heat_pump"
+                ],
+                "writable_resources": [
+                  "devices.heat_pump"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "heat_room",
+                "agent_id": "ClimateAgent",
+                "release_at_ms": 0,
+                "goal": "Complete a room-heating service cycle within 240 minutes.",
+                "priority": 40,
+                "completion_deadline_ms": 14400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_heat_pump"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "ClimateAgent",
+                  "tool_name": "start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 90-minute cycle at nominal 1.5 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-LAUNDRY_HEAT_V02:1:heat_room:start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 1.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1323,
+            "logical_latency_ms": 1325
+          },
+          "dry_prior_load": {
+            "request": {
+              "request_id": "HC-C3-LAUNDRY_HEAT_V02:1:dry_prior_load",
+              "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+              "base_episode_id": "HC-C3-LAUNDRY_HEAT_V02",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dryer": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "DryerAgent",
+                "role": "dry_prior_load",
+                "tools": [
+                  "start_dryer"
+                ],
+                "observable_state": [
+                  "devices.dryer"
+                ],
+                "writable_resources": [
+                  "devices.dryer"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "dry_prior_load",
+                "agent_id": "DryerAgent",
+                "release_at_ms": 0,
+                "goal": "Dry a previously washed, already-ready load within 130 minutes.",
+                "priority": 90,
+                "completion_deadline_ms": 7800000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_dryer"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DryerAgent",
+                  "tool_name": "start_dryer",
+                  "target": "dryer",
+                  "operation": "dry",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dryer",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 65-minute cycle at nominal 2.5 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "dry_prior_load-1",
+                  "target": "dryer",
+                  "operation": "dry",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dryer",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3900000,
+                  "estimated_power_kw": 2.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1674,
+            "logical_latency_ms": 1676
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1676,
+        "completion_order": [
+          "wash_new_load",
+          "heat_room",
+          "dry_prior_load"
+        ]
+      },
+      "prior_failed_samples": [
+        {
+          "records": {},
+          "errors": {
+            "heat_room": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "dry_prior_load": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "wash_new_load": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            }
+          },
+          "parallel_batch_wall_ms": 92,
+          "completion_order": []
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "sample": {
+        "records": {
+          "heat_room": {
+            "request": {
+              "request_id": "HC-C3-LAUNDRY_HEAT_V02:2:heat_room",
+              "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+              "base_episode_id": "HC-C3-LAUNDRY_HEAT_V02",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "heat_pump": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "ClimateAgent",
+                "role": "heat_room",
+                "tools": [
+                  "start_heat_pump"
+                ],
+                "observable_state": [
+                  "devices.heat_pump"
+                ],
+                "writable_resources": [
+                  "devices.heat_pump"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "heat_room",
+                "agent_id": "ClimateAgent",
+                "release_at_ms": 0,
+                "goal": "Complete a room-heating service cycle within 240 minutes.",
+                "priority": 40,
+                "completion_deadline_ms": 14400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_heat_pump"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "ClimateAgent",
+                  "tool_name": "start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 90-minute cycle at nominal 1.5 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-LAUNDRY_HEAT_V02:2:heat_room:start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 1.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1219,
+            "logical_latency_ms": 1220
+          },
+          "dry_prior_load": {
+            "request": {
+              "request_id": "HC-C3-LAUNDRY_HEAT_V02:2:dry_prior_load",
+              "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+              "base_episode_id": "HC-C3-LAUNDRY_HEAT_V02",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dryer": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "DryerAgent",
+                "role": "dry_prior_load",
+                "tools": [
+                  "start_dryer"
+                ],
+                "observable_state": [
+                  "devices.dryer"
+                ],
+                "writable_resources": [
+                  "devices.dryer"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "dry_prior_load",
+                "agent_id": "DryerAgent",
+                "release_at_ms": 0,
+                "goal": "Dry a previously washed, already-ready load within 130 minutes.",
+                "priority": 90,
+                "completion_deadline_ms": 7800000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_dryer"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DryerAgent",
+                  "tool_name": "start_dryer",
+                  "target": "dryer",
+                  "operation": "dry",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dryer",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 65-minute cycle at nominal 2.5 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "dry-prior-load-1",
+                  "target": "dryer",
+                  "operation": "dry",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dryer",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3900000,
+                  "estimated_power_kw": 2.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1373,
+            "logical_latency_ms": 1374
+          },
+          "wash_new_load": {
+            "request": {
+              "request_id": "HC-C3-LAUNDRY_HEAT_V02:2:wash_new_load",
+              "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+              "base_episode_id": "HC-C3-LAUNDRY_HEAT_V02",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "washer": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "WasherAgent",
+                "role": "wash_new_load",
+                "tools": [
+                  "start_washer"
+                ],
+                "observable_state": [
+                  "devices.washer"
+                ],
+                "writable_resources": [
+                  "devices.washer"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "wash_new_load",
+                "agent_id": "WasherAgent",
+                "release_at_ms": 0,
+                "goal": "Wash a new laundry load within 120 minutes.",
+                "priority": 100,
+                "completion_deadline_ms": 7200000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_washer"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WasherAgent",
+                  "tool_name": "start_washer",
+                  "target": "washer",
+                  "operation": "wash",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.washer",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 60-minute cycle at nominal 2.0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-LAUNDRY_HEAT_V02:2:wash_new_load:start_washer",
+                  "target": "washer",
+                  "operation": "wash",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.washer",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3600000,
+                  "estimated_power_kw": 2.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1448,
+            "logical_latency_ms": 1448
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1448,
+        "completion_order": [
+          "heat_room",
+          "dry_prior_load",
+          "wash_new_load"
+        ]
+      },
+      "prior_failed_samples": [
+        {
+          "records": {},
+          "errors": {
+            "wash_new_load": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "dry_prior_load": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "heat_room": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            }
+          },
+          "parallel_batch_wall_ms": 8,
+          "completion_order": []
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "sample": {
+        "records": {
+          "dry_prior_load": {
+            "request": {
+              "request_id": "HC-C3-LAUNDRY_HEAT_V02:3:dry_prior_load",
+              "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+              "base_episode_id": "HC-C3-LAUNDRY_HEAT_V02",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dryer": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "DryerAgent",
+                "role": "dry_prior_load",
+                "tools": [
+                  "start_dryer"
+                ],
+                "observable_state": [
+                  "devices.dryer"
+                ],
+                "writable_resources": [
+                  "devices.dryer"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "dry_prior_load",
+                "agent_id": "DryerAgent",
+                "release_at_ms": 0,
+                "goal": "Dry a previously washed, already-ready load within 130 minutes.",
+                "priority": 90,
+                "completion_deadline_ms": 7800000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_dryer"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DryerAgent",
+                  "tool_name": "start_dryer",
+                  "target": "dryer",
+                  "operation": "dry",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dryer",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 65-minute cycle at nominal 2.5 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "p1",
+                  "target": "dryer",
+                  "operation": "dry",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dryer",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3900000,
+                  "estimated_power_kw": 2.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1047,
+            "logical_latency_ms": 1048
+          },
+          "heat_room": {
+            "request": {
+              "request_id": "HC-C3-LAUNDRY_HEAT_V02:3:heat_room",
+              "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+              "base_episode_id": "HC-C3-LAUNDRY_HEAT_V02",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "heat_pump": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "ClimateAgent",
+                "role": "heat_room",
+                "tools": [
+                  "start_heat_pump"
+                ],
+                "observable_state": [
+                  "devices.heat_pump"
+                ],
+                "writable_resources": [
+                  "devices.heat_pump"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "heat_room",
+                "agent_id": "ClimateAgent",
+                "release_at_ms": 0,
+                "goal": "Complete a room-heating service cycle within 240 minutes.",
+                "priority": 40,
+                "completion_deadline_ms": 14400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_heat_pump"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "ClimateAgent",
+                  "tool_name": "start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 90-minute cycle at nominal 1.5 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-LAUNDRY_HEAT_V02:3:heat_room:start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 1.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1403,
+            "logical_latency_ms": 1404
+          },
+          "wash_new_load": {
+            "request": {
+              "request_id": "HC-C3-LAUNDRY_HEAT_V02:3:wash_new_load",
+              "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+              "base_episode_id": "HC-C3-LAUNDRY_HEAT_V02",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "washer": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "WasherAgent",
+                "role": "wash_new_load",
+                "tools": [
+                  "start_washer"
+                ],
+                "observable_state": [
+                  "devices.washer"
+                ],
+                "writable_resources": [
+                  "devices.washer"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "wash_new_load",
+                "agent_id": "WasherAgent",
+                "release_at_ms": 0,
+                "goal": "Wash a new laundry load within 120 minutes.",
+                "priority": 100,
+                "completion_deadline_ms": 7200000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_washer"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WasherAgent",
+                  "tool_name": "start_washer",
+                  "target": "washer",
+                  "operation": "wash",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.washer",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 60-minute cycle at nominal 2.0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-LAUNDRY_HEAT_V02:3:wash_new_load:start_washer",
+                  "target": "washer",
+                  "operation": "wash",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.washer",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3600000,
+                  "estimated_power_kw": 2.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1451,
+            "logical_latency_ms": 1451
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1451,
+        "completion_order": [
+          "dry_prior_load",
+          "heat_room",
+          "wash_new_load"
+        ]
+      },
+      "prior_failed_samples": [
+        {
+          "records": {},
+          "errors": {
+            "wash_new_load": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "dry_prior_load": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "heat_room": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            }
+          },
+          "parallel_batch_wall_ms": 6,
+          "completion_order": []
+        }
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-1",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 3901776,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 5401425,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-1",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 3901776,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 5401425,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-1",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 3901776,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 5401425,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-1",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 3901776,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 5401425,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-1",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601776,
+        "dry_prior_load": 3901776,
+        "heat_room": 5401776
+      },
+      "all_tasks_finished_ms": 5401776,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1776,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-1",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 3901776,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 5401425,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-1",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": false,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": null,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-1",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": false,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": null,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-1",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 7501470,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 7501470,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-1",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 7501370,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 7501370,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-1",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601776,
+        "dry_prior_load": 3901776,
+        "heat_room": 9001776
+      },
+      "all_tasks_finished_ms": 9001776,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1776,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-1",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 7501370,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 7501370,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-1",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": false,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": null,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-1",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": false,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": null,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-1",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 9301425,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 9301425,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-1",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 9301425,
+        "heat_room": 5401425
+      },
+      "all_tasks_finished_ms": 9301425,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-1",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601776,
+        "dry_prior_load": 7501776,
+        "heat_room": 12901776
+      },
+      "all_tasks_finished_ms": 12901776,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1776,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-1",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601370,
+        "dry_prior_load": 7501370,
+        "heat_room": 12901370
+      },
+      "all_tasks_finished_ms": 12901370,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1370,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-2",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": 5401320,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-2",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": 5401320,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-2",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": 5401320,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-2",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": 5401320,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-2",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 3901548,
+        "heat_room": 5401548
+      },
+      "all_tasks_finished_ms": 5401548,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1548,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-2",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": 5401320,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-2",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": false,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": null,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-2",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": false,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": null,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-2",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 7501574,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": 7501574,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-2",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 7501474,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": 7501474,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-2",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 3901548,
+        "heat_room": 9001548
+      },
+      "all_tasks_finished_ms": 9001548,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1548,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-2",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 7501474,
+        "dry_prior_load": 3901474,
+        "heat_room": 5401474
+      },
+      "all_tasks_finished_ms": 7501474,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1474,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-2",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": false,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": null,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-2",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": false,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": null,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-2",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 9301320,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": 9301320,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-2",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 9301320,
+        "heat_room": 5401320
+      },
+      "all_tasks_finished_ms": 9301320,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1320,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-2",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 7501548,
+        "heat_room": 12901548
+      },
+      "all_tasks_finished_ms": 12901548,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1548,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-2",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601548,
+        "dry_prior_load": 7501548,
+        "heat_room": 12901548
+      },
+      "all_tasks_finished_ms": 12901548,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1548,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-3",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601551,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": 5401504,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-3",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601551,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": 5401504,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-3",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601551,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": 5401504,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-3",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601551,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": 5401504,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-3",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601551,
+        "dry_prior_load": 3901551,
+        "heat_room": 5401551
+      },
+      "all_tasks_finished_ms": 5401551,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1551,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-0.8",
+      "condition": "rho=0.8",
+      "proposal_order": "parallel-model-3",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601551,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": 5401504,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-3",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": false,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": null,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-3",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": false,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": null,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-3",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 7501248,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": 7501248,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 1,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-3",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 7501148,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": 7501148,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-3",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601551,
+        "dry_prior_load": 3901551,
+        "heat_room": 9001551
+      },
+      "all_tasks_finished_ms": 9001551,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1551,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.2",
+      "condition": "rho=1.2",
+      "proposal_order": "parallel-model-3",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 7501148,
+        "dry_prior_load": 3901148,
+        "heat_room": 5401504
+      },
+      "all_tasks_finished_ms": 7501148,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-3",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": false,
+        "dry_prior_load": true,
+        "heat_room": false
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": null,
+        "dry_prior_load": 3901148,
+        "heat_room": null
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 2,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity",
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-3",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": false,
+        "dry_prior_load": true,
+        "heat_room": false
+      },
+      "all_tasks_served": false,
+      "task_action_finish_time_ms": {
+        "wash_new_load": null,
+        "dry_prior_load": 3901148,
+        "heat_room": null
+      },
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 2,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity",
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-3",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 7501248,
+        "dry_prior_load": 3901148,
+        "heat_room": 9301248
+      },
+      "all_tasks_finished_ms": 9301248,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 2,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity",
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-3",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 7501148,
+        "dry_prior_load": 3901148,
+        "heat_room": 9301148
+      },
+      "all_tasks_finished_ms": 9301148,
+      "all_deadlines_met": false,
+      "first_action_start_ms": 1148,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-3",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601551,
+        "dry_prior_load": 7501551,
+        "heat_room": 12901551
+      },
+      "all_tasks_finished_ms": 12901551,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1551,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "episode_id": "HC-C3-LAUNDRY_HEAT_V02-RHO-1.6",
+      "condition": "rho=1.6",
+      "proposal_order": "parallel-model-3",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "task_service": {
+        "wash_new_load": true,
+        "dry_prior_load": true,
+        "heat_room": true
+      },
+      "all_tasks_served": true,
+      "task_action_finish_time_ms": {
+        "wash_new_load": 3601551,
+        "dry_prior_load": 7501551,
+        "heat_room": 12901551
+      },
+      "all_tasks_finished_ms": 12901551,
+      "all_deadlines_met": true,
+      "first_action_start_ms": 1551,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "gate_rejections": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    }
+  ]
+}

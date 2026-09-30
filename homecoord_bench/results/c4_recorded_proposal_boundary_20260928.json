@@ -1,0 +1,3073 @@
+{
+  "status": "synthetic_robot_real_model_initial_proposals_no_cancellation",
+  "design": {
+    "model": "deepseek-flash",
+    "base_episode": "revision_drafts\\20260927\\HC-PAIR-C4-CLEAN-NO-EVENT.json",
+    "event_times_ms": {
+      "no_event": null,
+      "precommit": 500,
+      "inflight": 3000,
+      "postcomplete": 6000
+    },
+    "policies": [
+      "IndependentMultiAgent",
+      "RuleCoordinator",
+      "ConstraintCoordinator",
+      "DeadlineAwareCoordinator"
+    ],
+    "same_model_proposals_and_logical_latencies_across_conditions_and_policies": true,
+    "shared_safety_gate": true,
+    "robot_duration_ms": 3000,
+    "cancellation_available_in_core_simulator": false
+  },
+  "rows": [
+    {
+      "repetition": 1,
+      "model_records": {
+        "bedroom_clean": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:1:bedroom_clean",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "goal": "clean the bedroom",
+              "priority": 70,
+              "recovery": {
+                "wake_condition": {
+                  "path": "bedroom.occupied",
+                  "op": "eq",
+                  "value": false
+                }
+              }
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "description": "Start bedroom cleaning if the room is unoccupied.",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "p1",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1416
+        },
+        "bedroom_occupancy": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:1:bedroom_occupancy",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 300,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 300,
+              "goal": "observe bedroom occupancy",
+              "priority": 90
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "description": "Read the bedroom occupancy sensor.",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "noop",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 939
+        }
+      }
+    },
+    {
+      "repetition": 2,
+      "model_records": {
+        "bedroom_clean": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:2:bedroom_clean",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "goal": "clean the bedroom",
+              "priority": 70,
+              "recovery": {
+                "wake_condition": {
+                  "path": "bedroom.occupied",
+                  "op": "eq",
+                  "value": false
+                }
+              }
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "description": "Start bedroom cleaning if the room is unoccupied.",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C4-RECORDED-NO_EVENT:2:bedroom_clean:start_robot",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1800000,
+                "estimated_power_kw": 0.4
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1641
+        },
+        "bedroom_occupancy": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:2:bedroom_occupancy",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 300,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 300,
+              "goal": "observe bedroom occupancy",
+              "priority": 90
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "description": "Read the bedroom occupancy sensor.",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "noop",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 904
+        }
+      }
+    },
+    {
+      "repetition": 3,
+      "model_records": {
+        "bedroom_clean": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:3:bedroom_clean",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "goal": "clean the bedroom",
+              "priority": 70,
+              "recovery": {
+                "wake_condition": {
+                  "path": "bedroom.occupied",
+                  "op": "eq",
+                  "value": false
+                }
+              }
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "description": "Start bedroom cleaning if the room is unoccupied.",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "bedroom_clean-3-start",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 600000,
+                "estimated_power_kw": 0.05
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 4018
+        },
+        "bedroom_occupancy": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:3:bedroom_occupancy",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 300,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 300,
+              "goal": "observe bedroom occupancy",
+              "priority": 90
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "description": "Read the bedroom occupancy sensor.",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C4-RECORDED-NO_EVENT:3:bedroom_occupancy:observe",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1248
+        }
+      }
+    },
+    {
+      "repetition": 4,
+      "model_records": {
+        "bedroom_clean": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:4:bedroom_clean",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "goal": "clean the bedroom",
+              "priority": 70,
+              "recovery": {
+                "wake_condition": {
+                  "path": "bedroom.occupied",
+                  "op": "eq",
+                  "value": false
+                }
+              }
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "description": "Start bedroom cleaning if the room is unoccupied.",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "p1",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1057
+        },
+        "bedroom_occupancy": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:4:bedroom_occupancy",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 300,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 300,
+              "goal": "observe bedroom occupancy",
+              "priority": 90
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "description": "Read the bedroom occupancy sensor.",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C4-RECORDED-NO_EVENT:4:observe_occupancy",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [],
+                "estimated_duration_ms": 100,
+                "estimated_power_kw": 0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1297
+        }
+      }
+    },
+    {
+      "repetition": 5,
+      "model_records": {
+        "bedroom_clean": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:5:bedroom_clean",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "goal": "clean the bedroom",
+              "priority": 70,
+              "recovery": {
+                "wake_condition": {
+                  "path": "bedroom.occupied",
+                  "op": "eq",
+                  "value": false
+                }
+              }
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "description": "Start bedroom cleaning if the room is unoccupied.",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "p1",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1390
+        },
+        "bedroom_occupancy": {
+          "request": {
+            "request_id": "HC-C4-RECORDED-NO_EVENT:5:bedroom_occupancy",
+            "episode_id": "HC-C4-RECORDED-NO_EVENT",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 300,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ]
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 300,
+              "goal": "observe bedroom occupancy",
+              "priority": 90
+            },
+            "goals": [
+              {
+                "path": "bedroom.clean",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "devices.bedroom_robot",
+                    "op": "neq",
+                    "value": "running"
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "description": "Read the bedroom occupancy sensor.",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C4-RECORDED-NO_EVENT:5:bedroom_occupancy:observe",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [],
+                "estimated_duration_ms": 100,
+                "estimated_power_kw": 0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1217
+        }
+      }
+    }
+  ],
+  "replays": [
+    {
+      "repetition": 1,
+      "condition": "no_event",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "no_event",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "no_event",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "no_event",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "precommit",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "precommit",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "precommit",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "precommit",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "inflight",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1516,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "inflight",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1516,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "inflight",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1516,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "inflight",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1516,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "postcomplete",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "postcomplete",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "postcomplete",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 1,
+      "condition": "postcomplete",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1416,
+        "bedroom_occupancy": 939
+      },
+      "clean_action_started_at_ms": 1516,
+      "clean_action_completed_at_ms": 4516,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "no_event",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "no_event",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "no_event",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "no_event",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "precommit",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "precommit",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "precommit",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "precommit",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "inflight",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1741,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "inflight",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1741,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "inflight",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1741,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "inflight",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1741,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "postcomplete",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "postcomplete",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "postcomplete",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 2,
+      "condition": "postcomplete",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1641,
+        "bedroom_occupancy": 904
+      },
+      "clean_action_started_at_ms": 1741,
+      "clean_action_completed_at_ms": 4741,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 3,
+      "condition": "no_event",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": 4118,
+      "clean_action_completed_at_ms": 7118,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 3,
+      "condition": "no_event",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": 4118,
+      "clean_action_completed_at_ms": 7118,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 3,
+      "condition": "no_event",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": 4118,
+      "clean_action_completed_at_ms": 7118,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 3,
+      "condition": "no_event",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": 4118,
+      "clean_action_completed_at_ms": 7118,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 3,
+      "condition": "precommit",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "precommit",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "precommit",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "precommit",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "inflight",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "inflight",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "inflight",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "inflight",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "postcomplete",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": 4118,
+      "clean_action_completed_at_ms": 7118,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1118,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 3,
+      "condition": "postcomplete",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": 4118,
+      "clean_action_completed_at_ms": 7118,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1118,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 3,
+      "condition": "postcomplete",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": 4118,
+      "clean_action_completed_at_ms": 7118,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1118,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 3,
+      "condition": "postcomplete",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 4018,
+        "bedroom_occupancy": 1248
+      },
+      "clean_action_started_at_ms": 4118,
+      "clean_action_completed_at_ms": 7118,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1118,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "no_event",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1157,
+      "clean_action_completed_at_ms": 4157,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "no_event",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1157,
+      "clean_action_completed_at_ms": 4157,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "no_event",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1157,
+      "clean_action_completed_at_ms": 4157,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "no_event",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1697,
+      "clean_action_completed_at_ms": 4697,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "precommit",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "precommit",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "precommit",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "precommit",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "inflight",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1157,
+      "clean_action_completed_at_ms": 4157,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1157,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "inflight",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1157,
+      "clean_action_completed_at_ms": 4157,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1157,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "inflight",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1157,
+      "clean_action_completed_at_ms": 4157,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1157,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "inflight",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1697,
+      "clean_action_completed_at_ms": 4697,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1697,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "postcomplete",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1157,
+      "clean_action_completed_at_ms": 4157,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "postcomplete",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1157,
+      "clean_action_completed_at_ms": 4157,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "postcomplete",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1157,
+      "clean_action_completed_at_ms": 4157,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 4,
+      "condition": "postcomplete",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1057,
+        "bedroom_occupancy": 1297
+      },
+      "clean_action_started_at_ms": 1697,
+      "clean_action_completed_at_ms": 4697,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "no_event",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1490,
+      "clean_action_completed_at_ms": 4490,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "no_event",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1490,
+      "clean_action_completed_at_ms": 4490,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "no_event",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1490,
+      "clean_action_completed_at_ms": 4490,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "no_event",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "no_event",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1617,
+      "clean_action_completed_at_ms": 4617,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "precommit",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "precommit",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "precommit",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "precommit",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "before_start",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": null,
+      "clean_action_completed_at_ms": null,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": [
+        "stale_state"
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "inflight",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1490,
+      "clean_action_completed_at_ms": 4490,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1490,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "inflight",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1490,
+      "clean_action_completed_at_ms": 4490,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1490,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "inflight",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1490,
+      "clean_action_completed_at_ms": 4490,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1490,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "inflight",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "in_flight",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1617,
+      "clean_action_completed_at_ms": 4617,
+      "final_goal_success": true,
+      "process_valid_success": false,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "state_constraint_violation_duration_ms": 1617,
+      "state_constraint_violation_episode_count": 1,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "postcomplete",
+      "policy": "IndependentMultiAgent",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1490,
+      "clean_action_completed_at_ms": 4490,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "postcomplete",
+      "policy": "RuleCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1490,
+      "clean_action_completed_at_ms": 4490,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "postcomplete",
+      "policy": "ConstraintCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1490,
+      "clean_action_completed_at_ms": 4490,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    },
+    {
+      "repetition": 5,
+      "condition": "postcomplete",
+      "policy": "DeadlineAwareCoordinator",
+      "actual_entry_phase": "after_completion",
+      "model_latency_by_task_ms": {
+        "bedroom_clean": 1390,
+        "bedroom_occupancy": 1217
+      },
+      "clean_action_started_at_ms": 1617,
+      "clean_action_completed_at_ms": 4617,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "state_constraint_violation_episode_count": 0,
+      "rejection_reasons": []
+    }
+  ]
+}

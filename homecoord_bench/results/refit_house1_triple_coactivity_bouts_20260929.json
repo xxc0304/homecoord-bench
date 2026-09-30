@@ -1,0 +1,28 @@
+{
+  "schema_version": "refit-triple-coactivity-bouts-0.2",
+  "house_id": "REFIT-H1",
+  "source_dataset": "REFIT cleaned H1, Zenodo DOI 10.5281/zenodo.5063428",
+  "selection_scope": "Unique source rows inside the supplied pair-window review set; not a full-trace census.",
+  "channels": [
+    "Appliance4",
+    "Appliance5",
+    "Appliance6"
+  ],
+  "threshold_w_all_three_channels": 100.0,
+  "issues_one_rows_excluded": true,
+  "max_gap_seconds_within_bout": 16,
+  "unique_source_rows_in_bouts": 0,
+  "duplicate_window_row_occurrences_before_deduplication": 0,
+  "bout_count": 0,
+  "bouts_at_least_300_seconds": 0,
+  "episodes_csv": "homecoord_bench\\results\\refit_house1_triple_coactivity_bouts_20260929.csv",
+  "source_rows_csv": "homecoord_bench\\results\\refit_house1_triple_coactivity_source_rows_20260929.csv",
+  "bouts": [],
+  "interpretation_limits": [
+    "These are same-row measured co-activity bouts across three monitored channels, deduplicated by source CSV line.",
+    "The search is limited to source rows covered by the supplied pair-window review set; it is not a full-trace census.",
+    "A bout does not identify user tasks, deadlines, appliance cycles, circuit capacity conflicts, or agent requests.",
+    "REFIT sensors are not synchronized; publisher cleaning may include forward-filled or zero-filled intervals.",
+    "A bout touching an Issues row at its boundary has uncertain exact onset/offset even when all rows inside the bout have Issues=0."
+  ]
+}

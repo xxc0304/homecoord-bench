@@ -129,7 +129,7 @@ class ClosedLoopTests(unittest.TestCase):
         self.assertTrue(coordinated_local["process_valid_success"])
         self.assertEqual(0, coordinated_local["conflict_counts"]["C1"])
 
-    def test_rule_coordinator_holds_low_priority_action_for_pending_high_priority_task(self):
+    def test_rule_coordinator_does_not_read_a_future_proposal(self):
         class EnergyReturnsFirstClient(DryRunClient):
             def decide(self, agent_request, instructions=""):
                 decision = super().decide(agent_request, instructions)
@@ -152,8 +152,22 @@ class ClosedLoopTests(unittest.TestCase):
 
         self.assertEqual(1, independent["conflict_counts"]["C1"])
         self.assertEqual(0, coordinated["conflict_counts"]["C1"])
+        self.assertTrue(coordinated["process_valid_success"])
         self.assertTrue(any(
-            event.get("reason") == "priority_resolution"
+            event.get("reason") == "constraint_violation"
+            for event in trace["events"] if event["type"] == "coordination_decision"
+        ))
+
+        # Without a current policy constraint the coordinator cannot reject
+        # the first proposal based on the content of a later model response.
+        episode["constraints"] = []
+        trace, coordinated = run_closed_loop_episode(
+            episode, EnergyReturnsFirstClient(), "RuleCoordinator", INSTRUCTIONS, synthetic_latency=False
+        )
+        self.assertFalse(coordinated["process_valid_success"])
+        self.assertEqual({"comfort": False, "energy": True}, coordinated["task_service"])
+        self.assertTrue(any(
+            event.get("reason") == "active_direct_conflict"
             for event in trace["events"] if event["type"] == "coordination_decision"
         ))
 
@@ -169,7 +183,7 @@ class ClosedLoopTests(unittest.TestCase):
         _, coordinated_after = self.run_variant(after_effect, "RuleCoordinator")
 
         self.assertFalse(independent_before["process_valid_success"])
-        self.assertEqual(1, independent_before["conflict_counts"]["C4"])
+        self.assertEqual(0, independent_before["conflict_counts"]["C4"])
         self.assertTrue(coordinated_before["process_valid_success"])
         self.assertTrue(independent_after["process_valid_success"])
         self.assertTrue(coordinated_after["process_valid_success"])
@@ -280,8 +294,11 @@ class ClosedLoopTests(unittest.TestCase):
                 _, constrained = run_closed_loop_episode(
                     episode, DryRunClient(), "ConstraintCoordinator", INSTRUCTIONS, synthetic_latency=True
                 )
-                self.assertEqual(1, independent["conflict_counts"]["C4"])
-                self.assertFalse(independent["process_valid_success"])
+                # These candidates' exogenous event already satisfies the
+                # household goal. The unsafe task is rejected by both sides.
+                self.assertEqual(0, independent["conflict_counts"]["C4"])
+                self.assertEqual(0.5, independent["task_service_rate"])
+                self.assertTrue(independent["process_valid_success"])
                 self.assertEqual(0, sum(constrained["conflict_counts"].values()))
                 self.assertTrue(constrained["process_valid_success"])
 

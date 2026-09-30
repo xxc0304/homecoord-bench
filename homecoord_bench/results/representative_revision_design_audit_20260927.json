@@ -1,0 +1,992 @@
+{
+  "schema_version": "representative-design-audit-0.1",
+  "status": "author_side_machine_audit_not_independent_review",
+  "draft_hashes_sha256": {
+    "HC-PAIR-C1-HVAC-CONFLICT": "fa9b75366ad0eb8c27dc1cd2cadfbfd8a819e1d31f581c9ff799e81c75bb8d5a",
+    "HC-PAIR-C1-HVAC-SAFE": "67dbe9645b652ff1e207e43495abfc12c9d0a3d8f31031996e24862277e306af",
+    "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT": "ff154f7fe8bff6651a39cc2731cb022c38d922f9086b23eefa1fa37b7fad432c",
+    "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY": "3aad46f20749aba6a9be391b9ab7b93890d659dbe98e38f000aff4f469871a6b",
+    "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL": "aaffbf251e3cbe9446cdbd9e9dcc40033f79b23a95d72f9e452512d6a10e3674",
+    "HC-PAIR-C4-CLEAN-INFLIGHT": "f5c9d0c0ab1ca12c06131e83d0eb61e33eac1919c96a80246affb53d8beb77e1",
+    "HC-PAIR-C4-CLEAN-NO-EVENT": "952e53cda9a277c420df60f8a7b409862d83bfae707f357475ad62d33ddd14ff",
+    "HC-PAIR-C4-CLEAN-POSTCOMPLETE": "77251a093cd54d32d87ff961bd5562d215cc2a0c86e1fee3cd5cdf3d1e49dccf",
+    "HC-PAIR-C4-CLEAN-PRECOMMIT": "305f705d1cbca82351a58c2b1c6f74dd6c43cd960b0e98a557c6691206899e30"
+  },
+  "checks": [
+    {
+      "code": "DRAFT_SET",
+      "pass": true,
+      "evidence": {
+        "expected_event_drafts": [
+          "HC-PAIR-C1-HVAC-CONFLICT",
+          "HC-PAIR-C1-HVAC-SAFE",
+          "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+          "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+          "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+          "HC-PAIR-C4-CLEAN-INFLIGHT",
+          "HC-PAIR-C4-CLEAN-NO-EVENT",
+          "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+          "HC-PAIR-C4-CLEAN-PRECOMMIT"
+        ],
+        "persisted_event_drafts": [
+          "HC-PAIR-C1-HVAC-CONFLICT",
+          "HC-PAIR-C1-HVAC-SAFE",
+          "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+          "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+          "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+          "HC-PAIR-C4-CLEAN-INFLIGHT",
+          "HC-PAIR-C4-CLEAN-NO-EVENT",
+          "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+          "HC-PAIR-C4-CLEAN-PRECOMMIT"
+        ],
+        "other_review_material": [
+          "HC-PAIR-C2-VENT-HEAT-REVIEW"
+        ]
+      }
+    },
+    {
+      "code": "C2_SEPARATE_REVIEW_SCOPE",
+      "pass": true,
+      "evidence": {
+        "exists": true,
+        "scenario_type": "standalone_continuous_physics_probe",
+        "review_status": "proposed_revision_not_scored",
+        "conflict_family": "C2_indirect_environmental_interference",
+        "provenance_and_limits": {
+          "status": "synthetic_uncalibrated_parameters_not_physical_ground_truth",
+          "simulator_entrypoint": "homecoord_bench/probe_ventilation_heating_tradeoff.py",
+          "existing_result": "homecoord_bench/results/ventilation_heating_tradeoff_20260927.json",
+          "has_real_device_data": false,
+          "has_simuhome_window_co2_thermal_trace": false,
+          "has_real_model_proposals": false,
+          "has_action_cancellation_or_recovery": false,
+          "review_needed": [
+            "confirm this is a meaningful C2 environmental interaction rather than a policy preference",
+            "confirm the matched control changes only the need for ventilation",
+            "validate heat and ventilation equations and parameter ranges against domain evidence",
+            "confirm service deadlines are feasible and independently meaningful",
+            "review whether the listed metrics separate safety, service, energy and elapsed time"
+          ]
+        }
+      }
+    },
+    {
+      "code": "PERSISTED:HC-PAIR-C1-HVAC-CONFLICT",
+      "pass": true,
+      "evidence": "fa9b75366ad0eb8c27dc1cd2cadfbfd8a819e1d31f581c9ff799e81c75bb8d5a"
+    },
+    {
+      "code": "SCHEMA:HC-PAIR-C1-HVAC-CONFLICT",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "code": "STATUS:HC-PAIR-C1-HVAC-CONFLICT",
+      "pass": true,
+      "evidence": "proposed_revision_not_scored"
+    },
+    {
+      "code": "STRICT_CONTRACT:HC-PAIR-C1-HVAC-CONFLICT",
+      "pass": true,
+      "evidence": "strict-v1"
+    },
+    {
+      "code": "TOOL:HC-PAIR-C1-HVAC-CONFLICT:comfort_cool",
+      "pass": true,
+      "evidence": [
+        [
+          "living_hvac",
+          "cool"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C1-HVAC-CONFLICT:comfort_cool",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C1-HVAC-CONFLICT:comfort_cool",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "TOOL:HC-PAIR-C1-HVAC-CONFLICT:peak_off",
+      "pass": true,
+      "evidence": [
+        [
+          "living_hvac",
+          "off"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C1-HVAC-CONFLICT:peak_off",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C1-HVAC-CONFLICT:peak_off",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "PERSISTED:HC-PAIR-C1-HVAC-SAFE",
+      "pass": true,
+      "evidence": "67dbe9645b652ff1e207e43495abfc12c9d0a3d8f31031996e24862277e306af"
+    },
+    {
+      "code": "SCHEMA:HC-PAIR-C1-HVAC-SAFE",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "code": "STATUS:HC-PAIR-C1-HVAC-SAFE",
+      "pass": true,
+      "evidence": "proposed_revision_not_scored"
+    },
+    {
+      "code": "STRICT_CONTRACT:HC-PAIR-C1-HVAC-SAFE",
+      "pass": true,
+      "evidence": "strict-v1"
+    },
+    {
+      "code": "TOOL:HC-PAIR-C1-HVAC-SAFE:comfort_cool",
+      "pass": true,
+      "evidence": [
+        [
+          "living_hvac",
+          "cool"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C1-HVAC-SAFE:comfort_cool",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C1-HVAC-SAFE:comfort_cool",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "TOOL:HC-PAIR-C1-HVAC-SAFE:peak_off",
+      "pass": true,
+      "evidence": [
+        [
+          "living_hvac",
+          "off"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C1-HVAC-SAFE:peak_off",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C1-HVAC-SAFE:peak_off",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "PERSISTED:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "pass": true,
+      "evidence": "3aad46f20749aba6a9be391b9ab7b93890d659dbe98e38f000aff4f469871a6b"
+    },
+    {
+      "code": "SCHEMA:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "code": "STATUS:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "pass": true,
+      "evidence": "proposed_revision_not_scored"
+    },
+    {
+      "code": "STRICT_CONTRACT:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "pass": true,
+      "evidence": "strict-v1"
+    },
+    {
+      "code": "TOOL:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY:study_light",
+      "pass": true,
+      "evidence": [
+        [
+          "study_light",
+          "set_reading"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY:study_light",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY:study_light",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "TOOL:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY:bedroom_cool",
+      "pass": true,
+      "evidence": [
+        [
+          "bedroom_hvac",
+          "cool"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY:bedroom_cool",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C3-HOME-POWER-OVER-CAPACITY:bedroom_cool",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "PERSISTED:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "pass": true,
+      "evidence": "ff154f7fe8bff6651a39cc2731cb022c38d922f9086b23eefa1fa37b7fad432c"
+    },
+    {
+      "code": "SCHEMA:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "code": "STATUS:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "pass": true,
+      "evidence": "proposed_revision_not_scored"
+    },
+    {
+      "code": "STRICT_CONTRACT:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "pass": true,
+      "evidence": "strict-v1"
+    },
+    {
+      "code": "TOOL:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT:study_light",
+      "pass": true,
+      "evidence": [
+        [
+          "study_light",
+          "set_reading"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT:study_light",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT:study_light",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "TOOL:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT:bedroom_cool",
+      "pass": true,
+      "evidence": [
+        [
+          "bedroom_hvac",
+          "cool"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT:bedroom_cool",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT:bedroom_cool",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "PERSISTED:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "pass": true,
+      "evidence": "aaffbf251e3cbe9446cdbd9e9dcc40033f79b23a95d72f9e452512d6a10e3674"
+    },
+    {
+      "code": "SCHEMA:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "code": "STATUS:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "pass": true,
+      "evidence": "proposed_revision_not_scored"
+    },
+    {
+      "code": "STRICT_CONTRACT:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "pass": true,
+      "evidence": "strict-v1"
+    },
+    {
+      "code": "TOOL:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL:study_light",
+      "pass": true,
+      "evidence": [
+        [
+          "study_light",
+          "set_reading"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL:study_light",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL:study_light",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "TOOL:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL:bedroom_cool",
+      "pass": true,
+      "evidence": [
+        [
+          "bedroom_hvac",
+          "cool"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL:bedroom_cool",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL:bedroom_cool",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "PERSISTED:HC-PAIR-C4-CLEAN-NO-EVENT",
+      "pass": true,
+      "evidence": "952e53cda9a277c420df60f8a7b409862d83bfae707f357475ad62d33ddd14ff"
+    },
+    {
+      "code": "SCHEMA:HC-PAIR-C4-CLEAN-NO-EVENT",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "code": "STATUS:HC-PAIR-C4-CLEAN-NO-EVENT",
+      "pass": true,
+      "evidence": "proposed_revision_not_scored"
+    },
+    {
+      "code": "STRICT_CONTRACT:HC-PAIR-C4-CLEAN-NO-EVENT",
+      "pass": true,
+      "evidence": "strict-v1"
+    },
+    {
+      "code": "TOOL:HC-PAIR-C4-CLEAN-NO-EVENT:bedroom_clean",
+      "pass": true,
+      "evidence": [
+        [
+          "bedroom_robot",
+          "clean"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C4-CLEAN-NO-EVENT:bedroom_clean",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "recovery",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C4-CLEAN-NO-EVENT:bedroom_clean",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "TOOL:HC-PAIR-C4-CLEAN-NO-EVENT:bedroom_occupancy",
+      "pass": true,
+      "evidence": [
+        [
+          "occupancy_sensor",
+          "observe"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C4-CLEAN-NO-EVENT:bedroom_occupancy",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C4-CLEAN-NO-EVENT:bedroom_occupancy",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "PERSISTED:HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "pass": true,
+      "evidence": "305f705d1cbca82351a58c2b1c6f74dd6c43cd960b0e98a557c6691206899e30"
+    },
+    {
+      "code": "SCHEMA:HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "code": "STATUS:HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "pass": true,
+      "evidence": "proposed_revision_not_scored"
+    },
+    {
+      "code": "STRICT_CONTRACT:HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "pass": true,
+      "evidence": "strict-v1"
+    },
+    {
+      "code": "TOOL:HC-PAIR-C4-CLEAN-PRECOMMIT:bedroom_clean",
+      "pass": true,
+      "evidence": [
+        [
+          "bedroom_robot",
+          "clean"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C4-CLEAN-PRECOMMIT:bedroom_clean",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "recovery",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C4-CLEAN-PRECOMMIT:bedroom_clean",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "TOOL:HC-PAIR-C4-CLEAN-PRECOMMIT:bedroom_occupancy",
+      "pass": true,
+      "evidence": [
+        [
+          "occupancy_sensor",
+          "observe"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C4-CLEAN-PRECOMMIT:bedroom_occupancy",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C4-CLEAN-PRECOMMIT:bedroom_occupancy",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "PERSISTED:HC-PAIR-C4-CLEAN-INFLIGHT",
+      "pass": true,
+      "evidence": "f5c9d0c0ab1ca12c06131e83d0eb61e33eac1919c96a80246affb53d8beb77e1"
+    },
+    {
+      "code": "SCHEMA:HC-PAIR-C4-CLEAN-INFLIGHT",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "code": "STATUS:HC-PAIR-C4-CLEAN-INFLIGHT",
+      "pass": true,
+      "evidence": "proposed_revision_not_scored"
+    },
+    {
+      "code": "STRICT_CONTRACT:HC-PAIR-C4-CLEAN-INFLIGHT",
+      "pass": true,
+      "evidence": "strict-v1"
+    },
+    {
+      "code": "TOOL:HC-PAIR-C4-CLEAN-INFLIGHT:bedroom_clean",
+      "pass": true,
+      "evidence": [
+        [
+          "bedroom_robot",
+          "clean"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C4-CLEAN-INFLIGHT:bedroom_clean",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "recovery",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C4-CLEAN-INFLIGHT:bedroom_clean",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "TOOL:HC-PAIR-C4-CLEAN-INFLIGHT:bedroom_occupancy",
+      "pass": true,
+      "evidence": [
+        [
+          "occupancy_sensor",
+          "observe"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C4-CLEAN-INFLIGHT:bedroom_occupancy",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C4-CLEAN-INFLIGHT:bedroom_occupancy",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "PERSISTED:HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "pass": true,
+      "evidence": "77251a093cd54d32d87ff961bd5562d215cc2a0c86e1fee3cd5cdf3d1e49dccf"
+    },
+    {
+      "code": "SCHEMA:HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "code": "STATUS:HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "pass": true,
+      "evidence": "proposed_revision_not_scored"
+    },
+    {
+      "code": "STRICT_CONTRACT:HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "pass": true,
+      "evidence": "strict-v1"
+    },
+    {
+      "code": "TOOL:HC-PAIR-C4-CLEAN-POSTCOMPLETE:bedroom_clean",
+      "pass": true,
+      "evidence": [
+        [
+          "bedroom_robot",
+          "clean"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C4-CLEAN-POSTCOMPLETE:bedroom_clean",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "recovery",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C4-CLEAN-POSTCOMPLETE:bedroom_clean",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "TOOL:HC-PAIR-C4-CLEAN-POSTCOMPLETE:bedroom_occupancy",
+      "pass": true,
+      "evidence": [
+        [
+          "occupancy_sensor",
+          "observe"
+        ]
+      ]
+    },
+    {
+      "code": "NO_TEMPLATE_LEAK:HC-PAIR-C4-CLEAN-POSTCOMPLETE:bedroom_occupancy",
+      "pass": true,
+      "evidence": [
+        "agent_id",
+        "goal",
+        "priority",
+        "release_at_ms",
+        "task_id"
+      ]
+    },
+    {
+      "code": "EXECUTABLE_TOOL:HC-PAIR-C4-CLEAN-POSTCOMPLETE:bedroom_occupancy",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "PAIR_ISOLATION:C1_CONFLICT_SAFE",
+      "pass": true,
+      "evidence": {
+        "changed_paths": [
+          "episode_id",
+          "task_stream[1].release_at_ms",
+          "variant.condition"
+        ],
+        "unexpected_paths": []
+      }
+    },
+    {
+      "code": "PAIR_ISOLATION:C3_LOW_EXACT",
+      "pass": true,
+      "evidence": {
+        "changed_paths": [
+          "conflict_rules[0].capacity",
+          "episode_id",
+          "home.resources.max_power_kw",
+          "variant.capacity_kw",
+          "variant.condition"
+        ],
+        "unexpected_paths": []
+      }
+    },
+    {
+      "code": "PAIR_ISOLATION:C3_LOW_HIGH",
+      "pass": true,
+      "evidence": {
+        "changed_paths": [
+          "conflict_rules[0].capacity",
+          "episode_id",
+          "home.resources.max_power_kw",
+          "variant.capacity_kw",
+          "variant.condition"
+        ],
+        "unexpected_paths": []
+      }
+    },
+    {
+      "code": "PAIR_ISOLATION:C4_PRE_INFLIGHT",
+      "pass": true,
+      "evidence": {
+        "changed_paths": [
+          "episode_id",
+          "exogenous_events[0].at_ms",
+          "exogenous_events[1].at_ms",
+          "variant.condition"
+        ],
+        "unexpected_paths": []
+      }
+    },
+    {
+      "code": "C4_SAME_PROPOSAL_LATENCY",
+      "pass": true,
+      "evidence": [
+        300
+      ]
+    },
+    {
+      "code": "SAME_INITIAL_PROMPTS:C3_LOW_EXACT",
+      "pass": true,
+      "evidence": [
+        [],
+        []
+      ]
+    },
+    {
+      "code": "SAME_INITIAL_PROMPTS:C3_LOW_HIGH",
+      "pass": true,
+      "evidence": [
+        [],
+        []
+      ]
+    },
+    {
+      "code": "SAME_INITIAL_PROMPTS:C4_PRE_INFLIGHT",
+      "pass": true,
+      "evidence": [
+        [],
+        []
+      ]
+    },
+    {
+      "code": "C3_CAPACITY_BOUNDARY",
+      "pass": true,
+      "evidence": {
+        "individual_kw": [
+          0.5,
+          1.0
+        ],
+        "combined_kw": 1.5,
+        "capacities_kw": [
+          1.2,
+          1.5,
+          1.7
+        ]
+      }
+    },
+    {
+      "code": "C3_EACH_ACTION_FEASIBLE",
+      "pass": true,
+      "evidence": 1.2
+    },
+    {
+      "code": "C4_NO_EVENT_GOAL_LEAK",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "code": "DEADLINE_SCOPE_DECLARED",
+      "pass": true,
+      "evidence": {
+        "event_draft_set": "C1_C3_C4_conflict_and_elapsed_time_only; hard_deadline_scheduling_not_claimed",
+        "separate_c2_probe": "synthetic_deadline_pressure_only; not_merged_into_event_matrix",
+        "event_draft_deadlines_ms": {
+          "HC-PAIR-C1-HVAC-CONFLICT": [
+            null,
+            null
+          ],
+          "HC-PAIR-C1-HVAC-SAFE": [
+            null,
+            null
+          ],
+          "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY": [
+            null,
+            null
+          ],
+          "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT": [
+            null,
+            null
+          ],
+          "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL": [
+            null,
+            null
+          ],
+          "HC-PAIR-C4-CLEAN-NO-EVENT": [
+            null,
+            null
+          ],
+          "HC-PAIR-C4-CLEAN-PRECOMMIT": [
+            null,
+            null
+          ],
+          "HC-PAIR-C4-CLEAN-INFLIGHT": [
+            null,
+            null
+          ],
+          "HC-PAIR-C4-CLEAN-POSTCOMPLETE": [
+            null,
+            null
+          ]
+        }
+      }
+    }
+  ],
+  "passed": 104,
+  "failed": 0,
+  "pair_differences": {
+    "C1_CONFLICT_SAFE": {
+      "changed_paths": [
+        "episode_id",
+        "task_stream[1].release_at_ms",
+        "variant.condition"
+      ],
+      "unexpected_paths": []
+    },
+    "C3_LOW_EXACT": {
+      "changed_paths": [
+        "conflict_rules[0].capacity",
+        "episode_id",
+        "home.resources.max_power_kw",
+        "variant.capacity_kw",
+        "variant.condition"
+      ],
+      "unexpected_paths": []
+    },
+    "C3_LOW_HIGH": {
+      "changed_paths": [
+        "conflict_rules[0].capacity",
+        "episode_id",
+        "home.resources.max_power_kw",
+        "variant.capacity_kw",
+        "variant.condition"
+      ],
+      "unexpected_paths": []
+    },
+    "C4_PRE_INFLIGHT": {
+      "changed_paths": [
+        "episode_id",
+        "exogenous_events[0].at_ms",
+        "exogenous_events[1].at_ms",
+        "variant.condition"
+      ],
+      "unexpected_paths": []
+    }
+  },
+  "deadline_scope": {
+    "event_draft_set": "C1_C3_C4_conflict_and_elapsed_time_only; hard_deadline_scheduling_not_claimed",
+    "separate_c2_probe": "synthetic_deadline_pressure_only; not_merged_into_event_matrix",
+    "event_draft_deadlines_ms": {
+      "HC-PAIR-C1-HVAC-CONFLICT": [
+        null,
+        null
+      ],
+      "HC-PAIR-C1-HVAC-SAFE": [
+        null,
+        null
+      ],
+      "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY": [
+        null,
+        null
+      ],
+      "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT": [
+        null,
+        null
+      ],
+      "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL": [
+        null,
+        null
+      ],
+      "HC-PAIR-C4-CLEAN-NO-EVENT": [
+        null,
+        null
+      ],
+      "HC-PAIR-C4-CLEAN-PRECOMMIT": [
+        null,
+        null
+      ],
+      "HC-PAIR-C4-CLEAN-INFLIGHT": [
+        null,
+        null
+      ],
+      "HC-PAIR-C4-CLEAN-POSTCOMPLETE": [
+        null,
+        null
+      ]
+    }
+  },
+  "findings": [
+    {
+      "id": "R2",
+      "severity": "scope_boundary",
+      "scope": "C1/C3/C4 event drafts",
+      "finding": "These drafts intentionally test conflict and elapsed-time effects, not hard-deadline scheduling. Synthetic C2 deadline results remain a separate probe and are not pooled with this matrix."
+    },
+    {
+      "id": "R3",
+      "severity": "requires_domain_review",
+      "scope": "C1",
+      "finding": "Cooling-to-24 effect, 6000 ms duration, and 1.4 kW are synthetic; the energy task has no explicit peak window or quantitative service goal. The safe arm changes task release time by design."
+    },
+    {
+      "id": "R4",
+      "severity": "requires_domain_review",
+      "scope": "C3",
+      "finding": "0.5 kW study light, 1.0 kW HVAC, action durations, and whether the limit is whole-home or circuit capacity lack physical sources. The capacity threshold is not visible in individual Agent requests, so model comparisons must disclose the information asymmetry."
+    },
+    {
+      "id": "R5",
+      "severity": "blocking_for_repair_claim",
+      "scope": "C4",
+      "finding": "No cancellation, stop latency, partial progress, or restart contract. This arm only tests detection and service/safety tradeoff, not repair. Occupancy event times remain synthetic."
+    }
+  ],
+  "release_decision": "hold_as_review_only_drafts"
+}

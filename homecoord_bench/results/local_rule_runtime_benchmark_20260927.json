@@ -1,0 +1,236 @@
+{
+  "schema_version": "local-rule-runtime-benchmark-0.1",
+  "status": "measured_local_simulator_wall_clock_not_deployment_latency",
+  "source": "results\\physical_capacity_v2.json",
+  "source_sha256": null,
+  "timer": "time.perf_counter_ns",
+  "timed_scope": "episode deepcopy + validation + scripted decisions + event coordination + safety gate + evaluation",
+  "excluded_costs": [
+    "LLM/API wall time",
+    "network",
+    "physical device command",
+    "device feedback"
+  ],
+  "virtual_proposal_latencies_are_waited_on": false,
+  "coordination_delay_ms": 0,
+  "new_api_calls": 0,
+  "real_devices": 0,
+  "groups": [
+    {
+      "condition": "conflict",
+      "capacity_kw": 6.0,
+      "proposal_order": "heat_water_first",
+      "policy": "ConstraintCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 1051.25,
+        "p95": 2001.6,
+        "p99": 3902.7,
+        "mean": 1174.338
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      }
+    },
+    {
+      "condition": "conflict",
+      "capacity_kw": 6.0,
+      "proposal_order": "heat_water_first",
+      "policy": "DeadlineAwareCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 1006.95,
+        "p95": 1598.4,
+        "p99": 2574.9,
+        "mean": 1062.26
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      }
+    },
+    {
+      "condition": "conflict",
+      "capacity_kw": 6.0,
+      "proposal_order": "heat_water_first",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 1006.4,
+        "p95": 1694.5,
+        "p99": 2832.0,
+        "mean": 1077.34
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      }
+    },
+    {
+      "condition": "conflict",
+      "capacity_kw": 6.0,
+      "proposal_order": "charge_ev_first",
+      "policy": "ConstraintCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 1018.6,
+        "p95": 1627.6,
+        "p99": 2546.1,
+        "mean": 1075.287
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      }
+    },
+    {
+      "condition": "conflict",
+      "capacity_kw": 6.0,
+      "proposal_order": "charge_ev_first",
+      "policy": "DeadlineAwareCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 1027.15,
+        "p95": 1692.0,
+        "p99": 2482.4,
+        "mean": 1092.106
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      }
+    },
+    {
+      "condition": "conflict",
+      "capacity_kw": 6.0,
+      "proposal_order": "charge_ev_first",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 1012.8,
+        "p95": 1642.9,
+        "p99": 3061.2,
+        "mean": 1075.108
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      }
+    },
+    {
+      "condition": "control",
+      "capacity_kw": 7.2,
+      "proposal_order": "heat_water_first",
+      "policy": "ConstraintCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 979.85,
+        "p95": 1553.4,
+        "p99": 2442.4,
+        "mean": 1043.35
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      }
+    },
+    {
+      "condition": "control",
+      "capacity_kw": 7.2,
+      "proposal_order": "heat_water_first",
+      "policy": "DeadlineAwareCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 1040.2,
+        "p95": 1550.8,
+        "p99": 2359.7,
+        "mean": 1077.327
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      }
+    },
+    {
+      "condition": "control",
+      "capacity_kw": 7.2,
+      "proposal_order": "heat_water_first",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 1015.05,
+        "p95": 1576.2,
+        "p99": 2222.5,
+        "mean": 1061.788
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1424,
+        "heat_water": 1144
+      }
+    },
+    {
+      "condition": "control",
+      "capacity_kw": 7.2,
+      "proposal_order": "charge_ev_first",
+      "policy": "ConstraintCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 942.55,
+        "p95": 1448.0,
+        "p99": 1978.5,
+        "mean": 979.288
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      }
+    },
+    {
+      "condition": "control",
+      "capacity_kw": 7.2,
+      "proposal_order": "charge_ev_first",
+      "policy": "DeadlineAwareCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 993.8,
+        "p95": 1592.9,
+        "p99": 2388.7,
+        "mean": 1037.314
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      }
+    },
+    {
+      "condition": "control",
+      "capacity_kw": 7.2,
+      "proposal_order": "charge_ev_first",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "warmup_runs": 300,
+      "sample_runs": 2000,
+      "python_runtime_us": {
+        "median": 955.0,
+        "p95": 1500.1,
+        "p99": 2061.2,
+        "mean": 995.355
+      },
+      "recorded_proposal_virtual_latency_ms": {
+        "charge_ev": 1384,
+        "heat_water": 1709
+      }
+    }
+  ]
+}

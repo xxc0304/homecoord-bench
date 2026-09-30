@@ -1,0 +1,1738 @@
+{
+  "experiment": "dynamic_partial_repair_hc_m07_design_pilot",
+  "status": "synthetic_unreviewed_design_experiment",
+  "assumptions": {
+    "co2_drop_open_ppm_per_s": 150,
+    "co2_drop_purifier_ppm_per_s": 250,
+    "cooling_rate_c_per_s": 2,
+    "rain_window_close_ms": 300,
+    "repair_decision_ms_all_fallbacks": 500,
+    "completion_deadline_ms": 10000,
+    "note": "SafetyController closes the window on rain for every policy. Both replan templates preserve ongoing cleaning and state-gated cooling. ReactiveFallback has an explicit rain-to-purifier rule."
+  },
+  "limitations": "GlobalReplanTemplate and LocalRepairTemplate are scripted idealized execution templates, not implemented planners. No model API, real-device dynamics, measured planning latency, or general task synthesis. Repair scope counts are structural proxies, not timing.",
+  "summary": {
+    "StateGate": {
+      "cases": 7,
+      "process_valid": 7,
+      "valid_on_time": 3,
+      "rain_cases_completed": 1,
+      "total_repair_scope_count": 0
+    },
+    "ReactiveFallback": {
+      "cases": 7,
+      "process_valid": 7,
+      "valid_on_time": 7,
+      "rain_cases_completed": 5,
+      "total_repair_scope_count": 0
+    },
+    "GlobalReplanTemplate": {
+      "cases": 7,
+      "process_valid": 7,
+      "valid_on_time": 7,
+      "rain_cases_completed": 5,
+      "total_repair_scope_count": 12
+    },
+    "LocalRepairTemplate": {
+      "cases": 7,
+      "process_valid": 7,
+      "valid_on_time": 7,
+      "rain_cases_completed": 5,
+      "total_repair_scope_count": 4
+    }
+  },
+  "rows": [
+    {
+      "scenario": "no_event",
+      "rain_at_ms": null,
+      "unrelated_at_ms": null,
+      "policy": "StateGate",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "no_event",
+      "rain_at_ms": null,
+      "unrelated_at_ms": null,
+      "policy": "ReactiveFallback",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "no_event",
+      "rain_at_ms": null,
+      "unrelated_at_ms": null,
+      "policy": "GlobalReplanTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "no_event",
+      "rain_at_ms": null,
+      "unrelated_at_ms": null,
+      "policy": "LocalRepairTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "unrelated_event",
+      "rain_at_ms": null,
+      "unrelated_at_ms": 3000,
+      "policy": "StateGate",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3000,
+          "type": "hallway_sensor_update",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "unrelated_event",
+      "rain_at_ms": null,
+      "unrelated_at_ms": 3000,
+      "policy": "ReactiveFallback",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3000,
+          "type": "hallway_sensor_update",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "unrelated_event",
+      "rain_at_ms": null,
+      "unrelated_at_ms": 3000,
+      "policy": "GlobalReplanTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3000,
+          "type": "hallway_sensor_update",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "unrelated_event",
+      "rain_at_ms": null,
+      "unrelated_at_ms": 3000,
+      "policy": "LocalRepairTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3000,
+          "type": "hallway_sensor_update",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_before_start",
+      "rain_at_ms": 0,
+      "unrelated_at_ms": null,
+      "policy": "StateGate",
+      "process_valid": true,
+      "goal_completion_ms": null,
+      "valid_on_time": false,
+      "cooling_start_ms": 800,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 1600.0,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 3800,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_before_start",
+      "rain_at_ms": 0,
+      "unrelated_at_ms": null,
+      "policy": "ReactiveFallback",
+      "process_valid": true,
+      "goal_completion_ms": 6600,
+      "valid_on_time": true,
+      "cooling_start_ms": 800,
+      "purifier_start_ms": 500,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 500,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 3300,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3800,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_before_start",
+      "rain_at_ms": 0,
+      "unrelated_at_ms": null,
+      "policy": "GlobalReplanTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 6600,
+      "valid_on_time": true,
+      "cooling_start_ms": 800,
+      "purifier_start_ms": 500,
+      "repair_scope_count": 3,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 500,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 3300,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3800,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_before_start",
+      "rain_at_ms": 0,
+      "unrelated_at_ms": null,
+      "policy": "LocalRepairTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 6600,
+      "valid_on_time": true,
+      "cooling_start_ms": 800,
+      "purifier_start_ms": 500,
+      "repair_scope_count": 1,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 500,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 3300,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3800,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_early",
+      "rain_at_ms": 1500,
+      "unrelated_at_ms": null,
+      "policy": "StateGate",
+      "process_valid": true,
+      "goal_completion_ms": null,
+      "valid_on_time": false,
+      "cooling_start_ms": 1800,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 1435.0,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 1500,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 1500,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 1800,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 1800,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 4800,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_early",
+      "rain_at_ms": 1500,
+      "unrelated_at_ms": null,
+      "policy": "ReactiveFallback",
+      "process_valid": true,
+      "goal_completion_ms": 6600,
+      "valid_on_time": true,
+      "cooling_start_ms": 1800,
+      "purifier_start_ms": 2000,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 1500,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 1500,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 1800,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 1800,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 2000,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 4200,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 4800,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_early",
+      "rain_at_ms": 1500,
+      "unrelated_at_ms": null,
+      "policy": "GlobalReplanTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 6600,
+      "valid_on_time": true,
+      "cooling_start_ms": 1800,
+      "purifier_start_ms": 2000,
+      "repair_scope_count": 3,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 1500,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 1500,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 1800,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 1800,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 2000,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 4200,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 4800,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_early",
+      "rain_at_ms": 1500,
+      "unrelated_at_ms": null,
+      "policy": "LocalRepairTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 6600,
+      "valid_on_time": true,
+      "cooling_start_ms": 1800,
+      "purifier_start_ms": 2000,
+      "repair_scope_count": 1,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 1500,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 1500,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 1800,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 1800,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 2000,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 4200,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 4800,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_mid",
+      "rain_at_ms": 3000,
+      "unrelated_at_ms": null,
+      "policy": "StateGate",
+      "process_valid": true,
+      "goal_completion_ms": null,
+      "valid_on_time": false,
+      "cooling_start_ms": 3300,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 1210.0,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3000,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 3000,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 3300,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3300,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6300,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_mid",
+      "rain_at_ms": 3000,
+      "unrelated_at_ms": null,
+      "policy": "ReactiveFallback",
+      "process_valid": true,
+      "goal_completion_ms": 6600,
+      "valid_on_time": true,
+      "cooling_start_ms": 3300,
+      "purifier_start_ms": 3500,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3000,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 3000,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 3300,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3300,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 3500,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 4800,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 6300,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_mid",
+      "rain_at_ms": 3000,
+      "unrelated_at_ms": null,
+      "policy": "GlobalReplanTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 6600,
+      "valid_on_time": true,
+      "cooling_start_ms": 3300,
+      "purifier_start_ms": 3500,
+      "repair_scope_count": 3,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3000,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 3000,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 3300,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3300,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 3500,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 4800,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 6300,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_mid",
+      "rain_at_ms": 3000,
+      "unrelated_at_ms": null,
+      "policy": "LocalRepairTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 6600,
+      "valid_on_time": true,
+      "cooling_start_ms": 3300,
+      "purifier_start_ms": 3500,
+      "repair_scope_count": 1,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3000,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 3000,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 3300,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3300,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 3500,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 4800,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 6300,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_near_target",
+      "rain_at_ms": 5000,
+      "unrelated_at_ms": null,
+      "policy": "StateGate",
+      "process_valid": true,
+      "goal_completion_ms": null,
+      "valid_on_time": false,
+      "cooling_start_ms": 5300,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 910.0,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5000,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 5000,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 5300,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5300,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8300,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_near_target",
+      "rain_at_ms": 5000,
+      "unrelated_at_ms": null,
+      "policy": "ReactiveFallback",
+      "process_valid": true,
+      "goal_completion_ms": 8300,
+      "valid_on_time": true,
+      "cooling_start_ms": 5300,
+      "purifier_start_ms": 5500,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5000,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 5000,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 5300,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5300,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 5500,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5600,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8300,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_near_target",
+      "rain_at_ms": 5000,
+      "unrelated_at_ms": null,
+      "policy": "GlobalReplanTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 8300,
+      "valid_on_time": true,
+      "cooling_start_ms": 5300,
+      "purifier_start_ms": 5500,
+      "repair_scope_count": 3,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5000,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 5000,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 5300,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5300,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 5500,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5600,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8300,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_near_target",
+      "rain_at_ms": 5000,
+      "unrelated_at_ms": null,
+      "policy": "LocalRepairTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 8300,
+      "valid_on_time": true,
+      "cooling_start_ms": 5300,
+      "purifier_start_ms": 5500,
+      "repair_scope_count": 1,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 300,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5000,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 5000,
+          "type": "close_window_command",
+          "agent": "SafetyController"
+        },
+        {
+          "at_ms": 5300,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5300,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 5500,
+          "type": "purifier_started",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5600,
+          "type": "purifier_stopped",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 8300,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_after_ventilation",
+      "rain_at_ms": 6500,
+      "unrelated_at_ms": null,
+      "policy": "StateGate",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_after_ventilation",
+      "rain_at_ms": 6500,
+      "unrelated_at_ms": null,
+      "policy": "ReactiveFallback",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_after_ventilation",
+      "rain_at_ms": 6500,
+      "unrelated_at_ms": null,
+      "policy": "GlobalReplanTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    },
+    {
+      "scenario": "rain_after_ventilation",
+      "rain_at_ms": 6500,
+      "unrelated_at_ms": null,
+      "policy": "LocalRepairTemplate",
+      "process_valid": true,
+      "goal_completion_ms": 8700,
+      "valid_on_time": true,
+      "cooling_start_ms": 5700,
+      "purifier_start_ms": null,
+      "repair_scope_count": 0,
+      "cooling_while_open_ms": 0,
+      "rain_window_exposure_ms": 0,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "cleaned": true,
+      "events": [
+        {
+          "at_ms": 500,
+          "type": "cleaning_started",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "ClimateAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "cleaning_completed",
+          "agent": "CleaningAgent"
+        },
+        {
+          "at_ms": 6500,
+          "type": "rain_started",
+          "agent": "Environment"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "ClimateAgent"
+        }
+      ]
+    }
+  ]
+}

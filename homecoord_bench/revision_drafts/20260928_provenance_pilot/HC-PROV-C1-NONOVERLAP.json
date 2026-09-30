@@ -1,0 +1,281 @@
+{
+  "episode_id": "HC-PROV-C1-NONOVERLAP",
+  "task_family": "direct_device_conflict",
+  "source_type": "controlled_simulation_from_existing_template",
+  "generator_version": "provenance-pilot-0.1",
+  "review_status": "provenance_pilot_unreviewed_not_scored",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 101,
+    "values": {
+      "living_room": {
+        "temperature_c": 29
+      },
+      "request": {
+        "comfort_active": true
+      },
+      "devices": {
+        "living_hvac": "off"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "ComfortAgent",
+      "role": "comfort",
+      "tools": [
+        "set_hvac"
+      ],
+      "observable_state": [
+        "living_room.temperature_c",
+        "request.comfort_active"
+      ],
+      "writable_resources": [
+        "devices.living_hvac"
+      ]
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "role": "energy",
+      "tools": [
+        "set_hvac"
+      ],
+      "observable_state": [
+        "devices.living_hvac"
+      ],
+      "writable_resources": [
+        "devices.living_hvac"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local",
+      "policy_constraints": []
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "comfort_cool",
+      "agent_id": "ComfortAgent",
+      "release_at_ms": 0,
+      "goal": "Set the living-room HVAC to cooling at a 24 C set point for the resident request.",
+      "priority": 100,
+      "required_action": {
+        "target": "living_hvac",
+        "operation": "cool"
+      },
+      "action_template": {
+        "target": "living_hvac",
+        "operation": "cool",
+        "parameters": {
+          "temperature_c": 24
+        },
+        "duration_ms": 6000,
+        "power_kw": 1.4,
+        "requires": []
+      }
+    },
+    {
+      "task_id": "peak_off",
+      "agent_id": "EnergyAgent",
+      "release_at_ms": 6200,
+      "goal": "Switch the living-room HVAC off for a separate energy-saving request.",
+      "priority": 20,
+      "required_action": {
+        "target": "living_hvac",
+        "operation": "off"
+      },
+      "action_template": {
+        "target": "living_hvac",
+        "operation": "off",
+        "parameters": {},
+        "duration_ms": 500,
+        "power_kw": 0.0,
+        "requires": []
+      }
+    }
+  ],
+  "exogenous_events": [
+    {
+      "at_ms": 6000,
+      "event": "cooling_request_window_ends",
+      "new_state_version": 102,
+      "patch": {
+        "request.comfort_active": false
+      }
+    }
+  ],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "request.comfort_active",
+      "op": "eq",
+      "value": false
+    },
+    {
+      "path": "devices.living_hvac",
+      "op": "eq",
+      "value": "forced_off"
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "request.comfort_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.living_hvac",
+          "op": "neq",
+          "value": "forced_off"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C1",
+      "a": {
+        "target": "living_hvac",
+        "operation": "cool"
+      },
+      "b": {
+        "target": "living_hvac",
+        "operation": "off"
+      },
+      "min_overlap_ms": 1
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "ComfortAgent",
+      "task_id": "comfort_cool",
+      "operation": "cool",
+      "target": "living_hvac",
+      "grounded_operation": "cool",
+      "start_effects": {
+        "devices.living_hvac": "cooling"
+      },
+      "completion_effects": {},
+      "effects": {
+        "devices.living_hvac": "cooling"
+      },
+      "duration_ms": 6000,
+      "power_kw": 1.4
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "task_id": "peak_off",
+      "operation": "off",
+      "target": "living_hvac",
+      "grounded_operation": "off",
+      "start_effects": {
+        "devices.living_hvac": "forced_off"
+      },
+      "completion_effects": {
+        "devices.living_hvac": "forced_off"
+      },
+      "effects": {
+        "devices.living_hvac": "forced_off"
+      },
+      "duration_ms": 500,
+      "power_kw": 0.0
+    }
+  ],
+  "calibration": {
+    "status": "synthetic_service_window",
+    "physical_parameters_verified": false,
+    "scored_claims": [
+      "command_order",
+      "process_constraint",
+      "required_command_issued"
+    ],
+    "excluded_claims": [
+      "room_temperature_change",
+      "comfort_delivered",
+      "real_device_latency",
+      "energy_saving"
+    ]
+  },
+  "base_episode_id": "HC-M01",
+  "tool_contract_version": "strict-v1",
+  "variant": {
+    "family": "C1",
+    "condition": "nonoverlap",
+    "changed_factor": "energy_task_release_at_ms"
+  },
+  "draft_notes": [
+    "Separate review-only candidate; the 2026-09-27 blind-review packet is unchanged.",
+    "The resident request ends after a synthetic 6 s window, not when a cooling command completes.",
+    "No room-temperature or real energy claim is scored.",
+    "EnergyAgent sees its own task and HVAC state, not the separate comfort request or global constraint.",
+    "Required-action service counts issued commands, not six seconds of delivered thermal comfort."
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "ComfortAgent",
+      "tool_name": "set_hvac",
+      "description": "Start cooling to the requested set point.",
+      "target": "living_hvac",
+      "operation": "cool",
+      "parameters": [
+        {
+          "name": "temperature_c",
+          "type": "number",
+          "minimum": 16,
+          "maximum": 30,
+          "required": true
+        }
+      ],
+      "preconditions": [],
+      "returns": {
+        "status": [
+          "accepted",
+          "rejected"
+        ],
+        "observed_state": "object"
+      }
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "tool_name": "set_hvac",
+      "description": "Switch the living-room HVAC off for the energy-saving request.",
+      "target": "living_hvac",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [],
+      "returns": {
+        "status": [
+          "accepted",
+          "rejected"
+        ],
+        "observed_state": "object"
+      }
+    }
+  ],
+  "data_tier": "mechanism_only",
+  "provenance_manifest": "manifest.json",
+  "parameter_provenance": {
+    "setpoint_c": {
+      "value": 24,
+      "class": "task_request_not_measured_temperature"
+    },
+    "cooling_request_window_ms": {
+      "value": 6000,
+      "class": "synthetic_exogenous_event"
+    },
+    "energy_task_release_at_ms": {
+      "value": 6200,
+      "class": "controlled_experimental_factor"
+    }
+  }
+}

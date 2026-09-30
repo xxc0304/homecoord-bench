@@ -1,0 +1,301 @@
+{
+  "schema_version": "refit-house5-source-audit-0.1",
+  "provenance": {
+    "dataset": "REFIT cleaned electrical load measurements",
+    "house": "House 5",
+    "source_url": "https://zenodo.org/records/5063428",
+    "doi": "10.5281/zenodo.5063428",
+    "license": "CC BY 4.0",
+    "filename": "CLEAN_House5.csv",
+    "size_bytes": 435272416,
+    "publisher_md5": "03938c844fdb09d787eb637bcf65f956",
+    "local_sha256": "897defbaeadb048ced0d7f6b0ba262a7fa701b7a6943b6a7ca8ad515d7fa3c50",
+    "five_saved_range_probes_match_verified_file": true
+  },
+  "full_trace_audit": {
+    "schema_version": "power-trace-source-audit-0.1",
+    "status": "observational_source_inspection_only",
+    "timestamp_column": "Unix",
+    "expected_interval_seconds": 8.0,
+    "rows": 7430755,
+    "first_unix_timestamp": 1380189369.0,
+    "last_unix_timestamp": 1436204935.0,
+    "timestamp_gap_count_over_2x_cadence": 57520,
+    "largest_timestamp_gap_seconds": 747249.0,
+    "devices": {
+      "dryer": {
+        "column": "Appliance2",
+        "valid_rows": 7430755,
+        "missing_or_nonfinite_rows": 0,
+        "negative_rows": 0,
+        "observed_min_w": 0.0,
+        "observed_max_w": 3922.0,
+        "valid_fraction": 1.0
+      },
+      "washer": {
+        "column": "Appliance3",
+        "valid_rows": 7430755,
+        "missing_or_nonfinite_rows": 0,
+        "negative_rows": 0,
+        "observed_min_w": 0.0,
+        "observed_max_w": 2437.0,
+        "valid_fraction": 1.0
+      },
+      "dishwasher": {
+        "column": "Appliance4",
+        "valid_rows": 7430755,
+        "missing_or_nonfinite_rows": 0,
+        "negative_rows": 0,
+        "observed_min_w": 0.0,
+        "observed_max_w": 2653.0,
+        "valid_fraction": 1.0
+      }
+    },
+    "not_inferred": [
+      "complete appliance cycles",
+      "Agent requests or return times",
+      "user deadlines or urgency",
+      "remote-control capability",
+      "counterfactual coordination effects"
+    ],
+    "quality_flags": {
+      "column": "Issues",
+      "clear_rows": 7004989,
+      "flagged_rows": 425766,
+      "invalid_or_missing_rows": 0,
+      "flagged_fraction": 0.05729781159518784,
+      "clear_fraction": 0.9427021884048121
+    }
+  },
+  "pre_dehumidifier_overlap_probe": {
+    "time_field": "Time",
+    "start_inclusive": "2013-09-26",
+    "end_exclusive": "2014-11-21",
+    "threshold_w": 100,
+    "issues_one_excluded": true,
+    "rows": 4985937,
+    "issues_one_rows": 331715,
+    "clear_rows": 4654222,
+    "clear_row_overlap_counts": {
+      "dryer_and_washer": 42891,
+      "dryer_and_dishwasher": 5023,
+      "washer_and_dishwasher": 1253,
+      "all_three": 452
+    },
+    "interpretation": "8-second sample rows under a researcher-selected exploratory threshold; correlated rows, not independent events or task conflicts."
+  },
+  "pre_dehumidifier_contiguous_power_run_probe": {
+    "method": {
+      "window_time_field": "Time",
+      "start_inclusive": "2013-09-26",
+      "end_exclusive": "2014-11-21",
+      "quality_rows_issues_1_excluded_and_break_bouts": 331715,
+      "activity_condition": "power >= threshold",
+      "thresholds_w": [
+        50,
+        100,
+        300,
+        500,
+        1000
+      ],
+      "gap_rule_seconds": 16,
+      "gap_over_rule": "break bout; do not bridge",
+      "duration_estimate": "last timestamp - first timestamp + 8 seconds",
+      "label": "exploratory power-active bouts, not appliance cycles or user tasks"
+    },
+    "rows_in_window": 4985937,
+    "results": {
+      "dryer_50W": {
+        "bout_count": 20773,
+        "median_duration_seconds": 37,
+        "p90_duration_seconds": 193,
+        "bouts_at_least_5min": 1079,
+        "bouts_at_least_30min": 32
+      },
+      "dryer_100W": {
+        "bout_count": 20672,
+        "median_duration_seconds": 38.0,
+        "p90_duration_seconds": 192,
+        "bouts_at_least_5min": 1072,
+        "bouts_at_least_30min": 32
+      },
+      "dryer_300W": {
+        "bout_count": 14627,
+        "median_duration_seconds": 47,
+        "p90_duration_seconds": 150,
+        "bouts_at_least_5min": 407,
+        "bouts_at_least_30min": 5
+      },
+      "dryer_500W": {
+        "bout_count": 14288,
+        "median_duration_seconds": 49.0,
+        "p90_duration_seconds": 152,
+        "bouts_at_least_5min": 404,
+        "bouts_at_least_30min": 5
+      },
+      "dryer_1000W": {
+        "bout_count": 9940,
+        "median_duration_seconds": 40.0,
+        "p90_duration_seconds": 101,
+        "bouts_at_least_5min": 153,
+        "bouts_at_least_30min": 0
+      },
+      "washer_50W": {
+        "bout_count": 14881,
+        "median_duration_seconds": 21,
+        "p90_duration_seconds": 151,
+        "bouts_at_least_5min": 560,
+        "bouts_at_least_30min": 66
+      },
+      "washer_100W": {
+        "bout_count": 9818,
+        "median_duration_seconds": 23.0,
+        "p90_duration_seconds": 161,
+        "bouts_at_least_5min": 376,
+        "bouts_at_least_30min": 35
+      },
+      "washer_300W": {
+        "bout_count": 2603,
+        "median_duration_seconds": 24,
+        "p90_duration_seconds": 176,
+        "bouts_at_least_5min": 106,
+        "bouts_at_least_30min": 2
+      },
+      "washer_500W": {
+        "bout_count": 1917,
+        "median_duration_seconds": 24,
+        "p90_duration_seconds": 177,
+        "bouts_at_least_5min": 83,
+        "bouts_at_least_30min": 1
+      },
+      "washer_1000W": {
+        "bout_count": 1784,
+        "median_duration_seconds": 24.0,
+        "p90_duration_seconds": 176,
+        "bouts_at_least_5min": 78,
+        "bouts_at_least_30min": 0
+      },
+      "dishwasher_50W": {
+        "bout_count": 10401,
+        "median_duration_seconds": 15,
+        "p90_duration_seconds": 259,
+        "bouts_at_least_5min": 927,
+        "bouts_at_least_30min": 49
+      },
+      "dishwasher_100W": {
+        "bout_count": 2034,
+        "median_duration_seconds": 15.0,
+        "p90_duration_seconds": 218,
+        "bouts_at_least_5min": 150,
+        "bouts_at_least_30min": 0
+      },
+      "dishwasher_300W": {
+        "bout_count": 2004,
+        "median_duration_seconds": 16.0,
+        "p90_duration_seconds": 222,
+        "bouts_at_least_5min": 150,
+        "bouts_at_least_30min": 0
+      },
+      "dishwasher_500W": {
+        "bout_count": 1994,
+        "median_duration_seconds": 16.0,
+        "p90_duration_seconds": 225,
+        "bouts_at_least_5min": 150,
+        "bouts_at_least_30min": 0
+      },
+      "dishwasher_1000W": {
+        "bout_count": 1980,
+        "median_duration_seconds": 16.0,
+        "p90_duration_seconds": 232,
+        "bouts_at_least_5min": 150,
+        "bouts_at_least_30min": 0
+      }
+    }
+  },
+  "evidence_limits": [
+    "The file is publisher-cleaned rather than raw sensor output.",
+    "Numeric completeness does not imply observed values; short gaps may be forward-filled and longer gaps zero-filled.",
+    "Power overlap does not establish simultaneous user tasks, controllability, deadlines, circuit capacity, or multi-agent conflict.",
+    "Contiguous threshold runs are power phases, not validated appliance cycles or task service durations."
+  ],
+  "coactivity_windows_probe": {
+    "threshold_sensitivity": {
+      "50": {
+        "by_pair": {
+          "dryer+washer": {"sample_rows": 59860, "windows": 8245, "at_least_5min": 126},
+          "dryer+dishwasher": {"sample_rows": 17340, "windows": 1943, "at_least_5min": 60},
+          "washer+dishwasher": {"sample_rows": 8753, "windows": 1098, "at_least_5min": 35}
+        },
+        "pair_window_total": 11286,
+        "pair_windows_at_least_5min_total": 221
+      },
+      "100": {
+        "by_pair": {
+          "dryer+washer": {"sample_rows": 42891, "windows": 5443, "at_least_5min": 87},
+          "dryer+dishwasher": {"sample_rows": 5023, "windows": 676, "at_least_5min": 14},
+          "washer+dishwasher": {"sample_rows": 1253, "windows": 155, "at_least_5min": 7}
+        },
+        "pair_window_total": 6274,
+        "pair_windows_at_least_5min_total": 108
+      },
+      "300": {
+        "by_pair": {
+          "dryer+washer": {"sample_rows": 7881, "windows": 1011, "at_least_5min": 14},
+          "dryer+dishwasher": {"sample_rows": 3342, "windows": 511, "at_least_5min": 6},
+          "washer+dishwasher": {"sample_rows": 533, "windows": 49, "at_least_5min": 5}
+        },
+        "pair_window_total": 1571,
+        "pair_windows_at_least_5min_total": 25
+      },
+      "interpretation": "Window counts change substantially with threshold; these exploratory summaries are not prevalence estimates or event labels."
+    },
+    "selection": {
+      "date_field": "Time",
+      "start_date_inclusive": "2013-09-26",
+      "end_date_exclusive": "2014-11-21",
+      "publisher_quality_flag": "Issues=1 rows excluded and break windows",
+      "threshold_w": 100,
+      "pair_active_when_both_channels_at_or_above_threshold": true,
+      "max_gap_seconds_within_window": 16,
+      "duration_estimate": "last timestamp - first timestamp + 8 seconds"
+    },
+    "counts": {
+      "rows_in_date_window": 4985937,
+      "clear_rows": 4654222,
+      "issues_1_rows_excluded": 331715,
+      "invalid_or_missing_quality_flags": 0
+    },
+    "by_pair": {
+      "dryer+washer": {
+        "qualifying_sample_rows": 42891,
+        "window_count": 5443,
+        "median_duration_seconds": 23,
+        "p90_duration_seconds": 118,
+        "windows_at_least_60_seconds": 1411,
+        "windows_at_least_300_seconds": 87,
+        "windows_at_least_1800_seconds": 1
+      },
+      "dryer+dishwasher": {
+        "qualifying_sample_rows": 5023,
+        "window_count": 676,
+        "median_duration_seconds": 18.0,
+        "p90_duration_seconds": 114,
+        "windows_at_least_60_seconds": 166,
+        "windows_at_least_300_seconds": 14,
+        "windows_at_least_1800_seconds": 0
+      },
+      "washer+dishwasher": {
+        "qualifying_sample_rows": 1253,
+        "window_count": 155,
+        "median_duration_seconds": 16,
+        "p90_duration_seconds": 119,
+        "windows_at_least_60_seconds": 35,
+        "windows_at_least_300_seconds": 7,
+        "windows_at_least_1800_seconds": 0
+      }
+    },
+    "triage_set": "homecoord_bench/results/refit_house5_coactivity_review_20260929.json",
+    "triage_windows_at_least_300_seconds": 108,
+    "triage_note": "The five-minute cut is for manual review volume only and is not a validated task/cycle duration."
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "homecoord-c3-normalized-capacity-batch-0.1",
+  "status": "proposed_revision_not_scored",
+  "base_template": "c3_three_load_v0.1",
+  "fixed_total_nominal_power_kw": 5.7,
+  "capacity_semantics": "managed_shared_power_budget",
+  "conditions": [
+    {
+      "capacity_semantics": "managed_shared_power_budget",
+      "capacity_kw": 7.125,
+      "sum_nominal_requested_power_kw": 5.7,
+      "load_to_capacity_ratio": 0.8,
+      "condition": "clear_margin",
+      "source": "controlled_benchmark_factor",
+      "population_representativeness": "not_claimed"
+    },
+    {
+      "capacity_semantics": "managed_shared_power_budget",
+      "capacity_kw": 5.7,
+      "sum_nominal_requested_power_kw": 5.7,
+      "load_to_capacity_ratio": 1.0,
+      "condition": "exact_boundary",
+      "source": "controlled_benchmark_factor",
+      "population_representativeness": "not_claimed"
+    },
+    {
+      "capacity_semantics": "managed_shared_power_budget",
+      "capacity_kw": 4.75,
+      "sum_nominal_requested_power_kw": 5.7,
+      "load_to_capacity_ratio": 1.2,
+      "condition": "moderate_overload",
+      "source": "controlled_benchmark_factor",
+      "population_representativeness": "not_claimed"
+    },
+    {
+      "capacity_semantics": "managed_shared_power_budget",
+      "capacity_kw": 3.5,
+      "sum_nominal_requested_power_kw": 5.7,
+      "load_to_capacity_ratio": 1.628571,
+      "condition": "severe_overload",
+      "source": "controlled_benchmark_factor",
+      "population_representativeness": "not_claimed"
+    }
+  ],
+  "files": [
+    "HC-PAIR-C3-NORMALIZED-CLEAR-MARGIN.json",
+    "HC-PAIR-C3-NORMALIZED-EXACT-BOUNDARY.json",
+    "HC-PAIR-C3-NORMALIZED-MODERATE-OVERLOAD.json",
+    "HC-PAIR-C3-NORMALIZED-SEVERE-OVERLOAD.json"
+  ],
+  "claims_allowed": [
+    "controlled effect of load-to-capacity pressure on coordination behavior",
+    "paired safety-service-deadline-latency comparison"
+  ],
+  "claims_not_allowed": [
+    "representative household capacity or conflict frequency",
+    "measured appliance cycle power or deadline distribution"
+  ],
+  "audit": {
+    "status": "pass",
+    "errors": []
+  }
+}

@@ -22,5 +22,9 @@
     {"path": "bedroom.temperature_c", "op": "between", "value": [24, 26]}
   ],
   "constraints": [],
+  "action_grounding": [
+    {"agent_id": "LightingAgent", "task_id": "light", "operation": "set_reading", "target": "study_light", "grounded_operation": "set_reading", "duration_ms": 1000, "power_kw": 0.02, "effects": {"devices.study_light": "reading", "study.lux": 500}, "start_effects": {}, "completion_effects": {"devices.study_light": "reading", "study.lux": 500}},
+    {"agent_id": "ClimateAgent", "task_id": "climate", "operation": "cool", "target": "bedroom_hvac", "grounded_operation": "cool", "duration_ms": 3000, "power_kw": 1.2, "effects": {"devices.bedroom_hvac": "cool_25", "bedroom.temperature_c": 25}, "start_effects": {}, "completion_effects": {"devices.bedroom_hvac": "cool_25", "bedroom.temperature_c": 25}}
+  ],
   "conflict_rules": [{"type": "C3", "capacity": 8.0}]
 }

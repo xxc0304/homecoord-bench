@@ -24,5 +24,9 @@
   "constraints": [
     {"when": [{"path": "living_room.mobility_limited_person_present", "op": "eq", "value": true}], "must": [{"path": "devices.robot", "op": "neq", "value": "running"}]}
   ],
+  "action_grounding": [
+    {"agent_id": "CleaningAgent", "task_id": "clean", "operation": "clean", "target": "robot", "grounded_operation": "clean", "duration_ms": 3000, "power_kw": 0.2, "effects": {"devices.robot": "complete", "living_room.clean": true}, "start_effects": {}, "completion_effects": {"devices.robot": "complete", "living_room.clean": true}},
+    {"agent_id": "CareAgent", "task_id": "care", "operation": "update_occupancy", "target": "living_room", "grounded_operation": "observe", "duration_ms": 100, "power_kw": 0.0, "effects": {}, "start_effects": {}, "completion_effects": {}}
+  ],
   "conflict_rules": [{"type": "C3", "capacity": 8.0}]
 }

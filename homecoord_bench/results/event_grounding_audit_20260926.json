@@ -1,0 +1,987 @@
+{
+  "schema_version": "event-grounding-audit-0.2",
+  "created_at_utc": "2026-09-27T06:01:15.206888+00:00",
+  "groups": {
+    "seeds": {
+      "episode_count": 4,
+      "grounding_count": 9,
+      "explicit_phase_count": 9,
+      "long_action_count_ge_1000ms": 8,
+      "long_action_explicit_phase_count": 8,
+      "active_like_unphased_count": 0,
+      "active_like_unphased": [],
+      "task_count": 8,
+      "completion_deadline_task_count": 0,
+      "dry_run_proposal_count": 8,
+      "grounded_dry_run_proposal_count": 8,
+      "ungrounded_dry_run_proposal_count": 0,
+      "ungrounded_dry_run_proposals": [],
+      "episodes": [
+        {
+          "episode_id": "HC-SEED-001",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "light",
+              "operation": "set_reading",
+              "duration_ms": 1000,
+              "explicit_effect_phases": true,
+              "active_like_values": []
+            },
+            {
+              "task_id": "climate",
+              "operation": "cool",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-SEED-002",
+          "exogenous_event_count": 0,
+          "grounding_count": 3,
+          "actions": [
+            {
+              "task_id": "comfort",
+              "operation": "cool",
+              "duration_ms": 10000,
+              "explicit_effect_phases": true,
+              "active_like_values": []
+            },
+            {
+              "task_id": "energy",
+              "operation": "cool",
+              "duration_ms": 10000,
+              "explicit_effect_phases": true,
+              "active_like_values": []
+            },
+            {
+              "task_id": "energy",
+              "operation": "off",
+              "duration_ms": 1000,
+              "explicit_effect_phases": true,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-SEED-003",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "air",
+              "operation": "open",
+              "duration_ms": 2000,
+              "explicit_effect_phases": true,
+              "active_like_values": []
+            },
+            {
+              "task_id": "heat",
+              "operation": "heat_high",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "high"
+              ]
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-SEED-004",
+          "exogenous_event_count": 2,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "clean",
+              "operation": "clean",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": []
+            },
+            {
+              "task_id": "care",
+              "operation": "update_occupancy",
+              "duration_ms": 100,
+              "explicit_effect_phases": true,
+              "active_like_values": []
+            }
+          ]
+        }
+      ]
+    },
+    "pilot_pairs_v1": {
+      "episode_count": 8,
+      "grounding_count": 32,
+      "explicit_phase_count": 4,
+      "long_action_count_ge_1000ms": 12,
+      "long_action_explicit_phase_count": 4,
+      "active_like_unphased_count": 0,
+      "active_like_unphased": [],
+      "task_count": 16,
+      "completion_deadline_task_count": 0,
+      "dry_run_proposal_count": 16,
+      "grounded_dry_run_proposal_count": 16,
+      "ungrounded_dry_run_proposal_count": 0,
+      "ungrounded_dry_run_proposals": [],
+      "episodes": [
+        {
+          "episode_id": "HC-PAIR-C1-BLINDS-CONFLICT",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "privacy_close",
+              "operation": "close",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "daylight_open",
+              "operation": "open",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "daylight_open",
+              "operation": "close",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "privacy_close",
+              "operation": "open",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-PAIR-C1-BLINDS-CONTROL",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "privacy_close",
+              "operation": "close",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "daylight_open",
+              "operation": "open",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "daylight_open",
+              "operation": "close",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "privacy_close",
+              "operation": "open",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "comfort_cool",
+              "operation": "cool",
+              "duration_ms": 6000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "peak_off",
+              "operation": "off",
+              "duration_ms": 500,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "peak_off",
+              "operation": "cool",
+              "duration_ms": 6000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "comfort_cool",
+              "operation": "off",
+              "duration_ms": 500,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-PAIR-C1-HVAC-CONTROL",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "comfort_cool",
+              "operation": "cool",
+              "duration_ms": 6000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "peak_off",
+              "operation": "off",
+              "duration_ms": 500,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "peak_off",
+              "operation": "cool",
+              "duration_ms": 6000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "comfort_cool",
+              "operation": "off",
+              "duration_ms": 500,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-PAIR-C3-EV-WATER-CONFLICT",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "charge_ev",
+              "operation": "charge",
+              "duration_ms": 6000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "charging"
+              ]
+            },
+            {
+              "task_id": "heat_water",
+              "operation": "heat",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "heating"
+              ]
+            },
+            {
+              "task_id": "charge_ev",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "heat_water",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-PAIR-C3-EV-WATER-CONTROL",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "charge_ev",
+              "operation": "charge",
+              "duration_ms": 6000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "charging"
+              ]
+            },
+            {
+              "task_id": "heat_water",
+              "operation": "heat",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "heating"
+              ]
+            },
+            {
+              "task_id": "charge_ev",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "heat_water",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-PAIR-C3-LIGHT-HVAC-CONFLICT",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "study_light",
+              "operation": "set_reading",
+              "duration_ms": 1000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "bedroom_cool",
+              "operation": "cool",
+              "duration_ms": 3000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "study_light",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "bedroom_cool",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-PAIR-C3-LIGHT-HVAC-CONTROL",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "study_light",
+              "operation": "set_reading",
+              "duration_ms": 1000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "bedroom_cool",
+              "operation": "cool",
+              "duration_ms": 3000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "study_light",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "bedroom_cool",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        }
+      ]
+    },
+    "pilot_physical_v2": {
+      "episode_count": 2,
+      "grounding_count": 8,
+      "explicit_phase_count": 4,
+      "long_action_count_ge_1000ms": 4,
+      "long_action_explicit_phase_count": 4,
+      "active_like_unphased_count": 0,
+      "active_like_unphased": [],
+      "task_count": 4,
+      "completion_deadline_task_count": 4,
+      "dry_run_proposal_count": 4,
+      "grounded_dry_run_proposal_count": 4,
+      "ungrounded_dry_run_proposal_count": 0,
+      "ungrounded_dry_run_proposals": [],
+      "episodes": [
+        {
+          "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONFLICT",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "charge_ev",
+              "operation": "charge",
+              "duration_ms": 18000000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "charging"
+              ]
+            },
+            {
+              "task_id": "heat_water",
+              "operation": "heat",
+              "duration_ms": 2325556,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "heating"
+              ]
+            },
+            {
+              "task_id": "charge_ev",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "heat_water",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-PHYSICAL-V2-EV-WATER-CONTROL",
+          "exogenous_event_count": 0,
+          "grounding_count": 4,
+          "actions": [
+            {
+              "task_id": "charge_ev",
+              "operation": "charge",
+              "duration_ms": 18000000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "charging"
+              ]
+            },
+            {
+              "task_id": "heat_water",
+              "operation": "heat",
+              "duration_ms": 2325556,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "heating"
+              ]
+            },
+            {
+              "task_id": "charge_ev",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "heat_water",
+              "operation": "off",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        }
+      ]
+    },
+    "candidates": {
+      "episode_count": 20,
+      "grounding_count": 40,
+      "explicit_phase_count": 9,
+      "long_action_count_ge_1000ms": 27,
+      "long_action_explicit_phase_count": 9,
+      "active_like_unphased_count": 0,
+      "active_like_unphased": [],
+      "task_count": 40,
+      "completion_deadline_task_count": 0,
+      "dry_run_proposal_count": 40,
+      "grounded_dry_run_proposal_count": 40,
+      "ungrounded_dry_run_proposal_count": 0,
+      "ungrounded_dry_run_proposals": [],
+      "episodes": [
+        {
+          "episode_id": "HC-M01",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "comfort_cool",
+              "operation": "cool",
+              "duration_ms": 6000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "peak_off",
+              "operation": "off",
+              "duration_ms": 500,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M02",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "reading_light",
+              "operation": "set_reading",
+              "duration_ms": 800,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "energy_light",
+              "operation": "off",
+              "duration_ms": 500,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M03",
+          "exogenous_event_count": 1,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "privacy_close",
+              "operation": "close",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "daylight_open",
+              "operation": "open",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M04",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "secure_door",
+              "operation": "lock",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "arrival_unlock",
+              "operation": "unlock",
+              "duration_ms": 700,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M05",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "heat_water",
+              "operation": "heat",
+              "duration_ms": 5000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "heating"
+              ]
+            },
+            {
+              "task_id": "peak_water_off",
+              "operation": "off",
+              "duration_ms": 500,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M06",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "bedroom_air",
+              "operation": "open",
+              "duration_ms": 2000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "bedroom_heat",
+              "operation": "heat_high",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "high"
+              ]
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M07",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "air_exchange",
+              "operation": "open",
+              "duration_ms": 2000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "cool_room",
+              "operation": "cool",
+              "duration_ms": 10000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M08",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "humidify",
+              "operation": "humidify",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "on"
+              ]
+            },
+            {
+              "task_id": "dehumidify",
+              "operation": "dehumidify",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "on"
+              ]
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M09",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "warm_floor",
+              "operation": "heat",
+              "duration_ms": 4000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "on"
+              ]
+            },
+            {
+              "task_id": "ventilate_balcony",
+              "operation": "open",
+              "duration_ms": 1500,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M10",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "dry_laundry",
+              "operation": "dry",
+              "duration_ms": 5000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "peak_limit",
+              "operation": "limit",
+              "duration_ms": 2000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M11",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "study_light",
+              "operation": "set_reading",
+              "duration_ms": 1000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "bedroom_cool",
+              "operation": "cool",
+              "duration_ms": 3000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M12",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "wash",
+              "operation": "wash",
+              "duration_ms": 4000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "dry",
+              "operation": "dry",
+              "duration_ms": 4000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M13",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "charge_ev",
+              "operation": "charge",
+              "duration_ms": 6000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "charging"
+              ]
+            },
+            {
+              "task_id": "heat_water",
+              "operation": "heat",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "heating"
+              ]
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M14",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "bake_meal",
+              "operation": "bake",
+              "duration_ms": 3000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "heat_snack",
+              "operation": "reheat",
+              "duration_ms": 1000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M15",
+          "exogenous_event_count": 0,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "cool_master",
+              "operation": "cool",
+              "duration_ms": 5000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "cool_guest",
+              "operation": "cool",
+              "duration_ms": 5000,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M16",
+          "exogenous_event_count": 2,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "bedroom_clean",
+              "operation": "clean",
+              "duration_ms": 3000,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "running"
+              ]
+            },
+            {
+              "task_id": "bedroom_occupancy",
+              "operation": "observe",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M17",
+          "exogenous_event_count": 1,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "water_garden",
+              "operation": "water",
+              "duration_ms": 2500,
+              "explicit_effect_phases": true,
+              "active_like_values": [
+                "on"
+              ]
+            },
+            {
+              "task_id": "observe_rain",
+              "operation": "observe",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M18",
+          "exogenous_event_count": 1,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "lock_entry",
+              "operation": "lock",
+              "duration_ms": 1800,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "observe_arrival",
+              "operation": "observe",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M19",
+          "exogenous_event_count": 1,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "close_sleep_blinds",
+              "operation": "close",
+              "duration_ms": 1200,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "observe_activity",
+              "operation": "observe",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        },
+        {
+          "episode_id": "HC-M20",
+          "exogenous_event_count": 1,
+          "grounding_count": 2,
+          "actions": [
+            {
+              "task_id": "arm_home",
+              "operation": "arm",
+              "duration_ms": 1800,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            },
+            {
+              "task_id": "observe_return",
+              "operation": "observe",
+              "duration_ms": 100,
+              "explicit_effect_phases": false,
+              "active_like_values": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "totals": {
+    "episode_count": 34,
+    "task_count": 68,
+    "completion_deadline_task_count": 4,
+    "grounding_count": 89,
+    "long_action_count_ge_1000ms": 51,
+    "long_action_explicit_phase_count": 25,
+    "active_like_unphased_count": 0,
+    "dry_run_proposal_count": 68,
+    "grounded_dry_run_proposal_count": 68,
+    "ungrounded_dry_run_proposal_count": 0,
+    "episode_with_exogenous_events_count": 7,
+    "exogenous_event_count": 9,
+    "long_action_missing_explicit_phase_count": 26
+  },
+  "interpretation": "Audit checks dry-run operation coverage and flags missing temporal annotations or active-like status strings. It does not establish that a device physically exposes an intermediate state or that any assumed parameter is calibrated."
+}

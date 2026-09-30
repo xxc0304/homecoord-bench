@@ -1,0 +1,267 @@
+{
+  "experiment": "capacity_deadline_design_probe",
+  "status": "synthetic_unreviewed_feasibility_witness",
+  "source_episode": "HC-M13",
+  "changes": {
+    "water_task_release_ms": 0,
+    "charging_task_release_ms": 100,
+    "charging_deadline_ms": 9000,
+    "safe_capacity_kw": 7.1,
+    "relaxed_deadline_ms": 10000,
+    "deadline_semantics": "required charging action effective_at + duration_ms <= deadline_ms"
+  },
+  "caveats": [
+    "Action duration, power and model latency are synthetic placeholders.",
+    "The priority-first witness reorders known proposals; it is a feasibility witness, not an implemented agent baseline.",
+    "The existing evaluator does not enforce deadline_ms; deadline_met is calculated explicitly in this probe."
+  ],
+  "rows": [
+    {
+      "scenario": "tight_conflicting",
+      "architecture": "IndependentMultiAgent",
+      "process_valid_success": false,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 700,
+      "legacy_first_goal_satisfaction_ms": 800,
+      "all_executed_actions_finished_ms": 6800,
+      "charge_ev_finished_ms": 6800,
+      "charge_ev_deadline_ms": 9000,
+      "charge_ev_deadline_met": true
+    },
+    {
+      "scenario": "tight_conflicting",
+      "architecture": "CentralSingleAgent",
+      "process_valid_success": true,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 1000,
+      "legacy_first_goal_satisfaction_ms": 4100,
+      "all_executed_actions_finished_ms": 10100,
+      "charge_ev_finished_ms": 10100,
+      "charge_ev_deadline_ms": 9000,
+      "charge_ev_deadline_met": false
+    },
+    {
+      "scenario": "tight_conflicting",
+      "architecture": "RuleCoordinator",
+      "process_valid_success": false,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 700,
+      "legacy_first_goal_satisfaction_ms": 800,
+      "all_executed_actions_finished_ms": 6800,
+      "charge_ev_finished_ms": 6800,
+      "charge_ev_deadline_ms": 9000,
+      "charge_ev_deadline_met": true
+    },
+    {
+      "scenario": "tight_conflicting",
+      "architecture": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 700,
+      "legacy_first_goal_satisfaction_ms": 3700,
+      "all_executed_actions_finished_ms": 9700,
+      "charge_ev_finished_ms": 9700,
+      "charge_ev_deadline_ms": 9000,
+      "charge_ev_deadline_met": false
+    },
+    {
+      "scenario": "tight_conflicting",
+      "architecture": "PriorityFirstFeasibilityWitness",
+      "process_valid_success": true,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 800,
+      "legacy_first_goal_satisfaction_ms": 6800,
+      "all_executed_actions_finished_ms": 9800,
+      "charge_ev_finished_ms": 6800,
+      "charge_ev_deadline_ms": 9000,
+      "charge_ev_deadline_met": true
+    },
+    {
+      "scenario": "capacity_safe_control",
+      "architecture": "IndependentMultiAgent",
+      "process_valid_success": true,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 700,
+      "legacy_first_goal_satisfaction_ms": 800,
+      "all_executed_actions_finished_ms": 6800,
+      "charge_ev_finished_ms": 6800,
+      "charge_ev_deadline_ms": 9000,
+      "charge_ev_deadline_met": true
+    },
+    {
+      "scenario": "capacity_safe_control",
+      "architecture": "CentralSingleAgent",
+      "process_valid_success": true,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 1000,
+      "legacy_first_goal_satisfaction_ms": 4100,
+      "all_executed_actions_finished_ms": 10100,
+      "charge_ev_finished_ms": 10100,
+      "charge_ev_deadline_ms": 9000,
+      "charge_ev_deadline_met": false
+    },
+    {
+      "scenario": "capacity_safe_control",
+      "architecture": "RuleCoordinator",
+      "process_valid_success": true,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 700,
+      "legacy_first_goal_satisfaction_ms": 800,
+      "all_executed_actions_finished_ms": 6800,
+      "charge_ev_finished_ms": 6800,
+      "charge_ev_deadline_ms": 9000,
+      "charge_ev_deadline_met": true
+    },
+    {
+      "scenario": "capacity_safe_control",
+      "architecture": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 700,
+      "legacy_first_goal_satisfaction_ms": 800,
+      "all_executed_actions_finished_ms": 6800,
+      "charge_ev_finished_ms": 6800,
+      "charge_ev_deadline_ms": 9000,
+      "charge_ev_deadline_met": true
+    },
+    {
+      "scenario": "relaxed_deadline_control",
+      "architecture": "IndependentMultiAgent",
+      "process_valid_success": false,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 700,
+      "legacy_first_goal_satisfaction_ms": 800,
+      "all_executed_actions_finished_ms": 6800,
+      "charge_ev_finished_ms": 6800,
+      "charge_ev_deadline_ms": 10000,
+      "charge_ev_deadline_met": true
+    },
+    {
+      "scenario": "relaxed_deadline_control",
+      "architecture": "CentralSingleAgent",
+      "process_valid_success": true,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 1000,
+      "legacy_first_goal_satisfaction_ms": 4100,
+      "all_executed_actions_finished_ms": 10100,
+      "charge_ev_finished_ms": 10100,
+      "charge_ev_deadline_ms": 10000,
+      "charge_ev_deadline_met": false
+    },
+    {
+      "scenario": "relaxed_deadline_control",
+      "architecture": "RuleCoordinator",
+      "process_valid_success": false,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 700,
+      "legacy_first_goal_satisfaction_ms": 800,
+      "all_executed_actions_finished_ms": 6800,
+      "charge_ev_finished_ms": 6800,
+      "charge_ev_deadline_ms": 10000,
+      "charge_ev_deadline_met": true
+    },
+    {
+      "scenario": "relaxed_deadline_control",
+      "architecture": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "final_goal_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service_rate": 1.0,
+      "first_effective_action_ms": 700,
+      "legacy_first_goal_satisfaction_ms": 3700,
+      "all_executed_actions_finished_ms": 9700,
+      "charge_ev_finished_ms": 9700,
+      "charge_ev_deadline_ms": 10000,
+      "charge_ev_deadline_met": true
+    }
+  ]
+}

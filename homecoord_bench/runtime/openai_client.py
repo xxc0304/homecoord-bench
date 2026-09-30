@@ -85,6 +85,10 @@ class OpenAIResponsesClient:
                     return content["text"]
         raise RuntimeError("response did not contain output_text")
 
+    def validate_decision(self, decision: dict[str, Any], agent_request: dict[str, Any]) -> None:
+        """Overridable protocol hook; ordinary providers keep single-task semantics."""
+        assert_agent_decision(decision)
+
     def decide(self, agent_request: dict[str, Any], instructions: str) -> dict[str, Any]:
         if not self.api_key:
             raise RuntimeError(f"{self.api_key_env} is not configured")
@@ -113,7 +117,7 @@ class OpenAIResponsesClient:
                 response = self.transport(payload, headers, self.timeout_seconds)
                 raw_output = self._extract_output_text(response)
                 decision = json.loads(raw_output)
-                assert_agent_decision(decision)
+                self.validate_decision(decision, agent_request)
             except Exception as exc:
                 last_error = exc
                 usage = response.get("usage", {}) if response else {}

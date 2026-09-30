@@ -1,0 +1,3296 @@
+{
+  "schema_version": "agent-caused-inflight-probe-0.1",
+  "date": "2026-09-27",
+  "source_draft_sha256": {
+    "conflict": "b6fceaeafbb814ea685e1ed4722c1c7855dc7b2920ac888b479782684aebad59",
+    "safe": "4cb503cf708e7cc5d1f3690d4742290403fba684f2ac06f529f34f26666f80c6"
+  },
+  "review_status": "isolated_draft_mechanism_check",
+  "proposal_latency_ms": 300,
+  "repeats_per_configuration": 3,
+  "configuration_count": 20,
+  "run_count": 60,
+  "all_repeated_runs_exactly_equal": true,
+  "api_calls": 0,
+  "real_device_runs": 0,
+  "summary": {
+    "conflict": {
+      "action_started": {
+        "IndependentMultiAgent": {
+          "trace_result_sha256": "222673ff82605647de8c36b66fb69213eecd45b36210e8aec5995c11e706f189",
+          "cross_agent_invalidation_count": 1,
+          "invalidation_count": 1,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 1,
+            "action_completed": 0
+          },
+          "invalidation_records": [
+            {
+              "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-AGENT-ACTION_STARTED:IndependentMultiAgent:comfort_cool:0",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 600,
+              "trigger_kind": "action_started",
+              "trigger_event": "action_started",
+              "trigger_task_id": "peak_off",
+              "trigger_agent_id": "EnergyAgent",
+              "cross_agent": true,
+              "failed_requirements": [
+                {
+                  "path": "devices.living_hvac",
+                  "op": "neq",
+                  "value": "forced_off"
+                }
+              ]
+            }
+          ],
+          "c1_conflict_count": 1,
+          "process_valid_success": false,
+          "state_constraint_violation_duration_ms": 5800,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 1100
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            }
+          ]
+        },
+        "RuleCoordinator": {
+          "trace_result_sha256": "0e38298bbe29f43f42968d6cdafaa0d045498fba03e1aa107a9e577aa63f1789",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 6900
+            }
+          ]
+        },
+        "ConstraintCoordinator": {
+          "trace_result_sha256": "a7d71cd65f9627d7ccba59f5756256a04c77c241e3c789fb64ac76a018bf188f",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 6900
+            }
+          ]
+        },
+        "DeadlineAwareCoordinator": {
+          "trace_result_sha256": "9675d6b8bc542f0534c690236594669dfc32a75a7114d472f7cfce6717d7c51c",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "CentralSingleAgent": {
+          "trace_result_sha256": "c8058c6ffbf3cfee2c8d20bc5031b492c5f69e155a4887005648cdfc1b0024d4",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 6900
+            }
+          ]
+        }
+      },
+      "action_completed": {
+        "IndependentMultiAgent": {
+          "trace_result_sha256": "8e7789eb5ac037db94c669fcd0f33279ed228a09d93d1fb0cfc70505f91d9d33",
+          "cross_agent_invalidation_count": 1,
+          "invalidation_count": 1,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 1
+          },
+          "invalidation_records": [
+            {
+              "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-AGENT-ACTION_COMPLETED:IndependentMultiAgent:comfort_cool:0",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 1100,
+              "trigger_kind": "action_completed",
+              "trigger_event": "action_completed",
+              "trigger_task_id": "peak_off",
+              "trigger_agent_id": "EnergyAgent",
+              "cross_agent": true,
+              "failed_requirements": [
+                {
+                  "path": "devices.living_hvac",
+                  "op": "neq",
+                  "value": "forced_off"
+                }
+              ]
+            }
+          ],
+          "c1_conflict_count": 1,
+          "process_valid_success": false,
+          "state_constraint_violation_duration_ms": 5300,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 1100
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            }
+          ]
+        },
+        "RuleCoordinator": {
+          "trace_result_sha256": "748df30e1ff2ee200d0c98dbd05e1e09e6f8378f06a5df78214206b629b8c52e",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 6900
+            }
+          ]
+        },
+        "ConstraintCoordinator": {
+          "trace_result_sha256": "63322a9cfaf4cf04e839c599d7f62a7ccf3624bbf2687a1123e22d82004c83f0",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 6900
+            }
+          ]
+        },
+        "DeadlineAwareCoordinator": {
+          "trace_result_sha256": "347e6b4a02b6d7c08f5f5cefa97af67e7da453f9b6da563cd530813e6523c144",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "CentralSingleAgent": {
+          "trace_result_sha256": "8d3d857e83006c2ba82f3d8a776ce06ac19f44cbee5f76f078433ed9a49fe39f",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 6900
+            }
+          ]
+        }
+      }
+    },
+    "safe": {
+      "action_started": {
+        "IndependentMultiAgent": {
+          "trace_result_sha256": "c95cfec29e8fbad2f3b1fddf9555c279733207d1937b1fc8bea3875a213e4558",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "RuleCoordinator": {
+          "trace_result_sha256": "0b3ad7f3b8588525abfeee26fdf64495c363c17f80f2f0c1f5f0d070367809d5",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "ConstraintCoordinator": {
+          "trace_result_sha256": "53a794d04878c536708c7c6059bea564cac54d3e8500b84ab3f4928dec1b425e",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "DeadlineAwareCoordinator": {
+          "trace_result_sha256": "0dafe6dabe7c4eecc13dd072c84a5ffc375beb4718b7c36625045059f8d49c25",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "CentralSingleAgent": {
+          "trace_result_sha256": "67faf0d6bfe5d70af69c593e176ec44c05097adea57b4904cfd4c812236b65a2",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        }
+      },
+      "action_completed": {
+        "IndependentMultiAgent": {
+          "trace_result_sha256": "592787754f6670102c4ed33f0627caf115d27d0992afca60cb3cfa094aed273d",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "RuleCoordinator": {
+          "trace_result_sha256": "fe1f93cd7ce8887041b1fe80d43757e4a5e47e4e117a8f493e05dce936bcfb4b",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "ConstraintCoordinator": {
+          "trace_result_sha256": "dab0295830a037f334285cb850fc677acc1102cd1ea145e1d631fb7415eaf031",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "DeadlineAwareCoordinator": {
+          "trace_result_sha256": "4902fbbbec765915ac0561732e960add7a67be29c72a1b2399e4fe59e5cf147a",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        },
+        "CentralSingleAgent": {
+          "trace_result_sha256": "082c9d79305a5e90be3a49fdd5afd0ecd5a2c6d4ddb9674dc1ccc49a2ececa37",
+          "cross_agent_invalidation_count": 0,
+          "invalidation_count": 0,
+          "invalidation_source_counts": {
+            "exogenous_update": 0,
+            "action_started": 0,
+            "action_completed": 0
+          },
+          "invalidation_records": [],
+          "c1_conflict_count": 0,
+          "process_valid_success": true,
+          "state_constraint_violation_duration_ms": 0,
+          "action_events": [
+            {
+              "type": "action_started",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 400
+            },
+            {
+              "type": "action_completed",
+              "task_id": "comfort_cool",
+              "timestamp_ms": 6400
+            },
+            {
+              "type": "action_started",
+              "task_id": "peak_off",
+              "timestamp_ms": 6600
+            },
+            {
+              "type": "action_completed",
+              "task_id": "peak_off",
+              "timestamp_ms": 7100
+            }
+          ]
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "trace_result_sha256": "222673ff82605647de8c36b66fb69213eecd45b36210e8aec5995c11e706f189",
+      "cross_agent_invalidation_count": 1,
+      "invalidation_count": 1,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 1,
+        "action_completed": 0
+      },
+      "invalidation_records": [
+        {
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-AGENT-ACTION_STARTED:IndependentMultiAgent:comfort_cool:0",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 600,
+          "trigger_kind": "action_started",
+          "trigger_event": "action_started",
+          "trigger_task_id": "peak_off",
+          "trigger_agent_id": "EnergyAgent",
+          "cross_agent": true,
+          "failed_requirements": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "c1_conflict_count": 1,
+      "process_valid_success": false,
+      "state_constraint_violation_duration_ms": 5800,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 1100
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "trace_result_sha256": "222673ff82605647de8c36b66fb69213eecd45b36210e8aec5995c11e706f189",
+      "cross_agent_invalidation_count": 1,
+      "invalidation_count": 1,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 1,
+        "action_completed": 0
+      },
+      "invalidation_records": [
+        {
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-AGENT-ACTION_STARTED:IndependentMultiAgent:comfort_cool:0",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 600,
+          "trigger_kind": "action_started",
+          "trigger_event": "action_started",
+          "trigger_task_id": "peak_off",
+          "trigger_agent_id": "EnergyAgent",
+          "cross_agent": true,
+          "failed_requirements": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "c1_conflict_count": 1,
+      "process_valid_success": false,
+      "state_constraint_violation_duration_ms": 5800,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 1100
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "trace_result_sha256": "222673ff82605647de8c36b66fb69213eecd45b36210e8aec5995c11e706f189",
+      "cross_agent_invalidation_count": 1,
+      "invalidation_count": 1,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 1,
+        "action_completed": 0
+      },
+      "invalidation_records": [
+        {
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-AGENT-ACTION_STARTED:IndependentMultiAgent:comfort_cool:0",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 600,
+          "trigger_kind": "action_started",
+          "trigger_event": "action_started",
+          "trigger_task_id": "peak_off",
+          "trigger_agent_id": "EnergyAgent",
+          "cross_agent": true,
+          "failed_requirements": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "c1_conflict_count": 1,
+      "process_valid_success": false,
+      "state_constraint_violation_duration_ms": 5800,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 1100
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "0e38298bbe29f43f42968d6cdafaa0d045498fba03e1aa107a9e577aa63f1789",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "0e38298bbe29f43f42968d6cdafaa0d045498fba03e1aa107a9e577aa63f1789",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "0e38298bbe29f43f42968d6cdafaa0d045498fba03e1aa107a9e577aa63f1789",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "a7d71cd65f9627d7ccba59f5756256a04c77c241e3c789fb64ac76a018bf188f",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "a7d71cd65f9627d7ccba59f5756256a04c77c241e3c789fb64ac76a018bf188f",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "a7d71cd65f9627d7ccba59f5756256a04c77c241e3c789fb64ac76a018bf188f",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "9675d6b8bc542f0534c690236594669dfc32a75a7114d472f7cfce6717d7c51c",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "9675d6b8bc542f0534c690236594669dfc32a75a7114d472f7cfce6717d7c51c",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "9675d6b8bc542f0534c690236594669dfc32a75a7114d472f7cfce6717d7c51c",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "trace_result_sha256": "c8058c6ffbf3cfee2c8d20bc5031b492c5f69e155a4887005648cdfc1b0024d4",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "trace_result_sha256": "c8058c6ffbf3cfee2c8d20bc5031b492c5f69e155a4887005648cdfc1b0024d4",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_started",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "trace_result_sha256": "c8058c6ffbf3cfee2c8d20bc5031b492c5f69e155a4887005648cdfc1b0024d4",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "trace_result_sha256": "8e7789eb5ac037db94c669fcd0f33279ed228a09d93d1fb0cfc70505f91d9d33",
+      "cross_agent_invalidation_count": 1,
+      "invalidation_count": 1,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 1
+      },
+      "invalidation_records": [
+        {
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-AGENT-ACTION_COMPLETED:IndependentMultiAgent:comfort_cool:0",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 1100,
+          "trigger_kind": "action_completed",
+          "trigger_event": "action_completed",
+          "trigger_task_id": "peak_off",
+          "trigger_agent_id": "EnergyAgent",
+          "cross_agent": true,
+          "failed_requirements": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "c1_conflict_count": 1,
+      "process_valid_success": false,
+      "state_constraint_violation_duration_ms": 5300,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 1100
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "trace_result_sha256": "8e7789eb5ac037db94c669fcd0f33279ed228a09d93d1fb0cfc70505f91d9d33",
+      "cross_agent_invalidation_count": 1,
+      "invalidation_count": 1,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 1
+      },
+      "invalidation_records": [
+        {
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-AGENT-ACTION_COMPLETED:IndependentMultiAgent:comfort_cool:0",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 1100,
+          "trigger_kind": "action_completed",
+          "trigger_event": "action_completed",
+          "trigger_task_id": "peak_off",
+          "trigger_agent_id": "EnergyAgent",
+          "cross_agent": true,
+          "failed_requirements": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "c1_conflict_count": 1,
+      "process_valid_success": false,
+      "state_constraint_violation_duration_ms": 5300,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 1100
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "trace_result_sha256": "8e7789eb5ac037db94c669fcd0f33279ed228a09d93d1fb0cfc70505f91d9d33",
+      "cross_agent_invalidation_count": 1,
+      "invalidation_count": 1,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 1
+      },
+      "invalidation_records": [
+        {
+          "proposal_id": "HC-PAIR-C1-HVAC-CONFLICT-AGENT-ACTION_COMPLETED:IndependentMultiAgent:comfort_cool:0",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 1100,
+          "trigger_kind": "action_completed",
+          "trigger_event": "action_completed",
+          "trigger_task_id": "peak_off",
+          "trigger_agent_id": "EnergyAgent",
+          "cross_agent": true,
+          "failed_requirements": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "c1_conflict_count": 1,
+      "process_valid_success": false,
+      "state_constraint_violation_duration_ms": 5300,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 1100
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "748df30e1ff2ee200d0c98dbd05e1e09e6f8378f06a5df78214206b629b8c52e",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "748df30e1ff2ee200d0c98dbd05e1e09e6f8378f06a5df78214206b629b8c52e",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "748df30e1ff2ee200d0c98dbd05e1e09e6f8378f06a5df78214206b629b8c52e",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "63322a9cfaf4cf04e839c599d7f62a7ccf3624bbf2687a1123e22d82004c83f0",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "63322a9cfaf4cf04e839c599d7f62a7ccf3624bbf2687a1123e22d82004c83f0",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "63322a9cfaf4cf04e839c599d7f62a7ccf3624bbf2687a1123e22d82004c83f0",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "347e6b4a02b6d7c08f5f5cefa97af67e7da453f9b6da563cd530813e6523c144",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "347e6b4a02b6d7c08f5f5cefa97af67e7da453f9b6da563cd530813e6523c144",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "347e6b4a02b6d7c08f5f5cefa97af67e7da453f9b6da563cd530813e6523c144",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "trace_result_sha256": "8d3d857e83006c2ba82f3d8a776ce06ac19f44cbee5f76f078433ed9a49fe39f",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "trace_result_sha256": "8d3d857e83006c2ba82f3d8a776ce06ac19f44cbee5f76f078433ed9a49fe39f",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "conflict",
+      "phase": "action_completed",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "trace_result_sha256": "8d3d857e83006c2ba82f3d8a776ce06ac19f44cbee5f76f078433ed9a49fe39f",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 6900
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "trace_result_sha256": "c95cfec29e8fbad2f3b1fddf9555c279733207d1937b1fc8bea3875a213e4558",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "trace_result_sha256": "c95cfec29e8fbad2f3b1fddf9555c279733207d1937b1fc8bea3875a213e4558",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "trace_result_sha256": "c95cfec29e8fbad2f3b1fddf9555c279733207d1937b1fc8bea3875a213e4558",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "0b3ad7f3b8588525abfeee26fdf64495c363c17f80f2f0c1f5f0d070367809d5",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "0b3ad7f3b8588525abfeee26fdf64495c363c17f80f2f0c1f5f0d070367809d5",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "0b3ad7f3b8588525abfeee26fdf64495c363c17f80f2f0c1f5f0d070367809d5",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "53a794d04878c536708c7c6059bea564cac54d3e8500b84ab3f4928dec1b425e",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "53a794d04878c536708c7c6059bea564cac54d3e8500b84ab3f4928dec1b425e",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "53a794d04878c536708c7c6059bea564cac54d3e8500b84ab3f4928dec1b425e",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "0dafe6dabe7c4eecc13dd072c84a5ffc375beb4718b7c36625045059f8d49c25",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "0dafe6dabe7c4eecc13dd072c84a5ffc375beb4718b7c36625045059f8d49c25",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "0dafe6dabe7c4eecc13dd072c84a5ffc375beb4718b7c36625045059f8d49c25",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "trace_result_sha256": "67faf0d6bfe5d70af69c593e176ec44c05097adea57b4904cfd4c812236b65a2",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "trace_result_sha256": "67faf0d6bfe5d70af69c593e176ec44c05097adea57b4904cfd4c812236b65a2",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_started",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "trace_result_sha256": "67faf0d6bfe5d70af69c593e176ec44c05097adea57b4904cfd4c812236b65a2",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "trace_result_sha256": "592787754f6670102c4ed33f0627caf115d27d0992afca60cb3cfa094aed273d",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "trace_result_sha256": "592787754f6670102c4ed33f0627caf115d27d0992afca60cb3cfa094aed273d",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "trace_result_sha256": "592787754f6670102c4ed33f0627caf115d27d0992afca60cb3cfa094aed273d",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "fe1f93cd7ce8887041b1fe80d43757e4a5e47e4e117a8f493e05dce936bcfb4b",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "fe1f93cd7ce8887041b1fe80d43757e4a5e47e4e117a8f493e05dce936bcfb4b",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "fe1f93cd7ce8887041b1fe80d43757e4a5e47e4e117a8f493e05dce936bcfb4b",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "dab0295830a037f334285cb850fc677acc1102cd1ea145e1d631fb7415eaf031",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "dab0295830a037f334285cb850fc677acc1102cd1ea145e1d631fb7415eaf031",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "dab0295830a037f334285cb850fc677acc1102cd1ea145e1d631fb7415eaf031",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "trace_result_sha256": "4902fbbbec765915ac0561732e960add7a67be29c72a1b2399e4fe59e5cf147a",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "trace_result_sha256": "4902fbbbec765915ac0561732e960add7a67be29c72a1b2399e4fe59e5cf147a",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "trace_result_sha256": "4902fbbbec765915ac0561732e960add7a67be29c72a1b2399e4fe59e5cf147a",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "trace_result_sha256": "082c9d79305a5e90be3a49fdd5afd0ecd5a2c6d4ddb9674dc1ccc49a2ececa37",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "trace_result_sha256": "082c9d79305a5e90be3a49fdd5afd0ecd5a2c6d4ddb9674dc1ccc49a2ececa37",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    },
+    {
+      "condition": "safe",
+      "phase": "action_completed",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "trace_result_sha256": "082c9d79305a5e90be3a49fdd5afd0ecd5a2c6d4ddb9674dc1ccc49a2ececa37",
+      "cross_agent_invalidation_count": 0,
+      "invalidation_count": 0,
+      "invalidation_source_counts": {
+        "exogenous_update": 0,
+        "action_started": 0,
+        "action_completed": 0
+      },
+      "invalidation_records": [],
+      "c1_conflict_count": 0,
+      "process_valid_success": true,
+      "state_constraint_violation_duration_ms": 0,
+      "action_events": [
+        {
+          "type": "action_started",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 400
+        },
+        {
+          "type": "action_completed",
+          "task_id": "comfort_cool",
+          "timestamp_ms": 6400
+        },
+        {
+          "type": "action_started",
+          "task_id": "peak_off",
+          "timestamp_ms": 6600
+        },
+        {
+          "type": "action_completed",
+          "task_id": "peak_off",
+          "timestamp_ms": 7100
+        }
+      ]
+    }
+  ]
+}

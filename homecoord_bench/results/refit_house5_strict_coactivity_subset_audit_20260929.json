@@ -1,0 +1,58 @@
+{
+  "schema_version": "refit-house5-strict-coactivity-subset-audit-0.1",
+  "source_dataset": "REFIT cleaned House 5, Zenodo DOI 10.5281/zenodo.5063428",
+  "source_files": {
+    "summary_csv": "homecoord_bench\\results\\refit_house5_coactivity_review_summary_20260929.csv",
+    "context_csv": "homecoord_bench\\results\\refit_house5_coactivity_review_rows_20260929.csv"
+  },
+  "selection": "strict_clean_boundary_pair=true from the 100 W, Issues=0, max-gap-16-second review set",
+  "strict_boundary_windows": 20,
+  "windows_by_pair": {
+    "washer+dishwasher": 1,
+    "dryer+washer": 17,
+    "dryer+dishwasher": 2
+  },
+  "candidate_rows": 1421,
+  "triple_active_candidate_row_occurrences_all_three_channels_ge_100w": 0,
+  "triple_active_candidate_row_occurrence_fraction_ge_100w": 0.0,
+  "windows_with_any_triple_active_row": 0,
+  "triple_active_bouts_inside_candidate_windows": 0,
+  "all_three_channel_threshold_sensitivity_across_review_windows": {
+    "50": {
+      "all_review_window_row_occurrences": 647,
+      "all_unique_source_csv_rows": 559,
+      "all_review_windows_with_activity": 20,
+      "strict_subset_window_row_occurrences": 16,
+      "strict_subset_unique_source_csv_rows": 16,
+      "strict_subset_windows_with_activity": 1
+    },
+    "100": {
+      "all_review_window_row_occurrences": 179,
+      "all_unique_source_csv_rows": 91,
+      "all_review_windows_with_activity": 7,
+      "strict_subset_window_row_occurrences": 0,
+      "strict_subset_unique_source_csv_rows": 0,
+      "strict_subset_windows_with_activity": 0
+    },
+    "300": {
+      "all_review_window_row_occurrences": 132,
+      "all_unique_source_csv_rows": 44,
+      "all_review_windows_with_activity": 3,
+      "strict_subset_window_row_occurrences": 0,
+      "strict_subset_unique_source_csv_rows": 0,
+      "strict_subset_windows_with_activity": 0
+    }
+  },
+  "candidate_duration_seconds_min_median_max": [
+    301,
+    431.5,
+    807
+  ],
+  "per_window_csv": "homecoord_bench\\results\\refit_house5_strict_coactivity_subset_audit_20260929.csv",
+  "interpretation_limits": [
+    "This audit describes measured power co-activity in publisher-cleaned data; it does not label tasks, appliance cycles, circuit conflicts, or agent actions.",
+    "REFIT channels are not synchronized and may include publisher-applied forward filling or zero filling.",
+    "Threshold counts across review windows can repeat the same source CSV row when device-pair windows overlap; unique source-row counts are reported separately.",
+    "All-three-channel activity is a thresholded same-row observation, not evidence that three independent user tasks were requested."
+  ]
+}

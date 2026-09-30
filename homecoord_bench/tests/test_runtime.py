@@ -72,6 +72,34 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual({"study": {"lux": 80}, "devices": {"study_light": "off"}}, request["state"])
         self.assertNotIn("bedroom", request["state"])
 
+    def test_live_request_hides_answer_keys_but_scripted_request_can_use_template(self):
+        episode = load_json(BENCH_ROOT / "data" / "candidates" / "HC-M11.json")
+        args = (episode, episode["agents"][0], episode["task_stream"][0])
+        live = build_agent_request(*args, architecture="IndependentMultiAgent", current_time_ms=0)
+        scripted = build_agent_request(*args, architecture="IndependentMultiAgent", current_time_ms=0,
+                                       include_evaluation_hints=True)
+        self.assertNotIn("required_action", live["task"])
+        self.assertNotIn("action_template", live["task"])
+        self.assertIn("action_template", scripted["task"])
+
+    def test_local_goal_visibility_does_not_leak_global_home_goals(self):
+        episode = load_json(BENCH_ROOT / "data" / "seeds" / "HC-SEED-002.json")
+        agent = dict(episode["agents"][1], goal_visibility="local")
+        request = build_agent_request(episode, agent, episode["task_stream"][1],
+                                      architecture="IndependentMultiAgent", current_time_ms=300)
+        self.assertEqual([], request["goals"])
+        self.assertIn("reduce peak usage", request["task"]["goal"])
+
+    def test_action_catalog_is_filtered_to_specialist(self):
+        episode = load_json(BENCH_ROOT / "data" / "seeds" / "HC-SEED-001.json")
+        episode["tool_catalog"] = [
+            {"agent_id": "LightingAgent", "target": "study_light", "operation": "set_reading"},
+            {"agent_id": "ClimateAgent", "target": "bedroom_hvac", "operation": "cool"},
+        ]
+        request = build_agent_request(episode, episode["agents"][0], episode["task_stream"][0],
+                                      architecture="IndependentMultiAgent", current_time_ms=0)
+        self.assertEqual([episode["tool_catalog"][0]], request["available_actions"])
+
     def test_responses_adapter_parses_and_logs_structured_decision(self):
         captured = {}
 

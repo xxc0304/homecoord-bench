@@ -1,0 +1,670 @@
+{
+  "episode_id": "HC-SCALE-N4-2-loose-urgent_first-0.8",
+  "base_episode_id": "HC-PUBLIC-R46",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "controlled_scale_release_deadline_candidate",
+  "review_status": "author_only_not_frozen",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 11.625,
+      "task_power_bounds_kw": {
+        "task01": 2.0,
+        "task02": 3.0,
+        "task03": 1.8,
+        "task04": 2.5
+      }
+    }
+  },
+  "initial_state": {
+    "version": 1,
+    "values": {
+      "devices": {
+        "cooktop": "idle",
+        "oven": "idle",
+        "kettle": "idle",
+        "heat_pump": "idle"
+      },
+      "services": {
+        "cooktop": "none",
+        "oven": "none",
+        "kettle": "none",
+        "heat_pump": "none"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "CookingAgent",
+      "role": "Operate the cooktop service interface.",
+      "tools": [
+        "cooktop_preset_1",
+        "cooktop_preset_2",
+        "cooktop_off"
+      ],
+      "observable_state": [
+        "devices.cooktop",
+        "services.cooktop"
+      ],
+      "writable_resources": [
+        "devices.cooktop"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "BakingAgent",
+      "role": "Operate the oven service interface.",
+      "tools": [
+        "oven_preset_1",
+        "oven_preset_2",
+        "oven_off"
+      ],
+      "observable_state": [
+        "devices.oven",
+        "services.oven"
+      ],
+      "writable_resources": [
+        "devices.oven"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "role": "Operate the kettle service interface.",
+      "tools": [
+        "kettle_preset_1",
+        "kettle_preset_2",
+        "kettle_off"
+      ],
+      "observable_state": [
+        "devices.kettle",
+        "services.kettle"
+      ],
+      "writable_resources": [
+        "devices.kettle"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "role": "Operate the heat_pump service interface.",
+      "tools": [
+        "heat_pump_preset_1",
+        "heat_pump_preset_2",
+        "heat_pump_off"
+      ],
+      "observable_state": [
+        "devices.heat_pump",
+        "services.heat_pump"
+      ],
+      "writable_resources": [
+        "devices.heat_pump"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "task01",
+      "agent_id": "CookingAgent",
+      "release_at_ms": 60000,
+      "goal": "Reheat the meal that has already been cooked. Finish within 170 minutes after this request arrives.",
+      "priority": 80,
+      "completion_deadline_ms": 10260000,
+      "required_action": {
+        "target": "cooktop",
+        "operation": "preset_2"
+      },
+      "action_template": {
+        "target": "cooktop",
+        "operation": "preset_2",
+        "parameters": {},
+        "duration_ms": 1500000,
+        "power_kw": 2.0,
+        "requires": [
+          {
+            "path": "devices.cooktop",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "task02",
+      "agent_id": "BakingAgent",
+      "release_at_ms": 60000,
+      "goal": "Bake the cake using the enclosed convection programme. Finish within 190 minutes after this request arrives.",
+      "priority": 90,
+      "completion_deadline_ms": 11460000,
+      "required_action": {
+        "target": "oven",
+        "operation": "preset_1"
+      },
+      "action_template": {
+        "target": "oven",
+        "operation": "preset_1",
+        "parameters": {},
+        "duration_ms": 2700000,
+        "power_kw": 3.0,
+        "requires": [
+          {
+            "path": "devices.oven",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "task03",
+      "agent_id": "BeverageAgent",
+      "release_at_ms": 0,
+      "goal": "Keep the already prepared water ready with a warming service. Finish within 150 minutes after this request arrives.",
+      "priority": 100,
+      "completion_deadline_ms": 9000000,
+      "required_action": {
+        "target": "kettle",
+        "operation": "preset_2"
+      },
+      "action_template": {
+        "target": "kettle",
+        "operation": "preset_2",
+        "parameters": {},
+        "duration_ms": 300000,
+        "power_kw": 1.8,
+        "requires": [
+          {
+            "path": "devices.kettle",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "task04",
+      "agent_id": "HeatingAgent",
+      "release_at_ms": 60000,
+      "goal": "Deliver a warming service for this room. Finish within 205 minutes after this request arrives.",
+      "priority": 70,
+      "completion_deadline_ms": 12360000,
+      "required_action": {
+        "target": "heat_pump",
+        "operation": "preset_1"
+      },
+      "action_template": {
+        "target": "heat_pump",
+        "operation": "preset_1",
+        "parameters": {},
+        "duration_ms": 3600000,
+        "power_kw": 2.5,
+        "requires": [
+          {
+            "path": "devices.heat_pump",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "goals": [
+    {
+      "path": "services.cooktop",
+      "op": "eq",
+      "value": "reheated"
+    },
+    {
+      "path": "services.oven",
+      "op": "eq",
+      "value": "baking"
+    },
+    {
+      "path": "services.kettle",
+      "op": "eq",
+      "value": "kept_warm"
+    },
+    {
+      "path": "services.heat_pump",
+      "op": "eq",
+      "value": "warming"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 11.625
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "CookingAgent",
+      "task_id": "task01",
+      "target": "cooktop",
+      "operation": "preset_1",
+      "grounded_operation": "preset_1",
+      "duration_ms": 1500000,
+      "power_kw": 2.0,
+      "start_effects": {
+        "devices.cooktop": "running"
+      },
+      "completion_effects": {
+        "devices.cooktop": "complete",
+        "services.cooktop": "cooked"
+      },
+      "effects": {
+        "devices.cooktop": "complete",
+        "services.cooktop": "cooked"
+      }
+    },
+    {
+      "agent_id": "CookingAgent",
+      "task_id": "task01",
+      "target": "cooktop",
+      "operation": "preset_2",
+      "grounded_operation": "preset_2",
+      "duration_ms": 1500000,
+      "power_kw": 2.0,
+      "start_effects": {
+        "devices.cooktop": "running"
+      },
+      "completion_effects": {
+        "devices.cooktop": "complete",
+        "services.cooktop": "reheated"
+      },
+      "effects": {
+        "devices.cooktop": "complete",
+        "services.cooktop": "reheated"
+      }
+    },
+    {
+      "agent_id": "CookingAgent",
+      "task_id": "task01",
+      "target": "cooktop",
+      "operation": "off",
+      "grounded_operation": "off",
+      "duration_ms": 100,
+      "power_kw": 0.0,
+      "effects": {
+        "devices.cooktop": "idle",
+        "services.cooktop": "none"
+      }
+    },
+    {
+      "agent_id": "BakingAgent",
+      "task_id": "task02",
+      "target": "oven",
+      "operation": "preset_1",
+      "grounded_operation": "preset_1",
+      "duration_ms": 2700000,
+      "power_kw": 3.0,
+      "start_effects": {
+        "devices.oven": "running"
+      },
+      "completion_effects": {
+        "devices.oven": "complete",
+        "services.oven": "baking"
+      },
+      "effects": {
+        "devices.oven": "complete",
+        "services.oven": "baking"
+      }
+    },
+    {
+      "agent_id": "BakingAgent",
+      "task_id": "task02",
+      "target": "oven",
+      "operation": "preset_2",
+      "grounded_operation": "preset_2",
+      "duration_ms": 2700000,
+      "power_kw": 3.0,
+      "start_effects": {
+        "devices.oven": "running"
+      },
+      "completion_effects": {
+        "devices.oven": "complete",
+        "services.oven": "grilling"
+      },
+      "effects": {
+        "devices.oven": "complete",
+        "services.oven": "grilling"
+      }
+    },
+    {
+      "agent_id": "BakingAgent",
+      "task_id": "task02",
+      "target": "oven",
+      "operation": "off",
+      "grounded_operation": "off",
+      "duration_ms": 100,
+      "power_kw": 0.0,
+      "effects": {
+        "devices.oven": "idle",
+        "services.oven": "none"
+      }
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "task_id": "task03",
+      "target": "kettle",
+      "operation": "preset_1",
+      "grounded_operation": "preset_1",
+      "duration_ms": 300000,
+      "power_kw": 1.8,
+      "start_effects": {
+        "devices.kettle": "running"
+      },
+      "completion_effects": {
+        "devices.kettle": "complete",
+        "services.kettle": "boiled"
+      },
+      "effects": {
+        "devices.kettle": "complete",
+        "services.kettle": "boiled"
+      }
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "task_id": "task03",
+      "target": "kettle",
+      "operation": "preset_2",
+      "grounded_operation": "preset_2",
+      "duration_ms": 300000,
+      "power_kw": 1.8,
+      "start_effects": {
+        "devices.kettle": "running"
+      },
+      "completion_effects": {
+        "devices.kettle": "complete",
+        "services.kettle": "kept_warm"
+      },
+      "effects": {
+        "devices.kettle": "complete",
+        "services.kettle": "kept_warm"
+      }
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "task_id": "task03",
+      "target": "kettle",
+      "operation": "off",
+      "grounded_operation": "off",
+      "duration_ms": 100,
+      "power_kw": 0.0,
+      "effects": {
+        "devices.kettle": "idle",
+        "services.kettle": "none"
+      }
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "task_id": "task04",
+      "target": "heat_pump",
+      "operation": "preset_1",
+      "grounded_operation": "preset_1",
+      "duration_ms": 3600000,
+      "power_kw": 2.5,
+      "start_effects": {
+        "devices.heat_pump": "running"
+      },
+      "completion_effects": {
+        "devices.heat_pump": "complete",
+        "services.heat_pump": "warming"
+      },
+      "effects": {
+        "devices.heat_pump": "complete",
+        "services.heat_pump": "warming"
+      }
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "task_id": "task04",
+      "target": "heat_pump",
+      "operation": "preset_2",
+      "grounded_operation": "preset_2",
+      "duration_ms": 3600000,
+      "power_kw": 2.5,
+      "start_effects": {
+        "devices.heat_pump": "running"
+      },
+      "completion_effects": {
+        "devices.heat_pump": "complete",
+        "services.heat_pump": "cooling"
+      },
+      "effects": {
+        "devices.heat_pump": "complete",
+        "services.heat_pump": "cooling"
+      }
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "task_id": "task04",
+      "target": "heat_pump",
+      "operation": "off",
+      "grounded_operation": "off",
+      "duration_ms": 100,
+      "power_kw": 0.0,
+      "effects": {
+        "devices.heat_pump": "idle",
+        "services.heat_pump": "none"
+      }
+    }
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "CookingAgent",
+      "tool_name": "cooktop_preset_1",
+      "target": "cooktop",
+      "operation": "preset_1",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.cooktop",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide full cooking service for uncooked food. Controlled costs: 1500000 ms, 2.0 kW."
+    },
+    {
+      "agent_id": "CookingAgent",
+      "tool_name": "cooktop_off",
+      "target": "cooktop",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.cooktop",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave the device idle and provide no service. Cost: 100 ms, 0 kW."
+    },
+    {
+      "agent_id": "CookingAgent",
+      "tool_name": "cooktop_preset_2",
+      "target": "cooktop",
+      "operation": "preset_2",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.cooktop",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide reheating service for cooked food. Controlled costs: 1500000 ms, 2.0 kW."
+    },
+    {
+      "agent_id": "BakingAgent",
+      "tool_name": "oven_preset_2",
+      "target": "oven",
+      "operation": "preset_2",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.oven",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide upper radiant grilling. Controlled costs: 2700000 ms, 3.0 kW."
+    },
+    {
+      "agent_id": "BakingAgent",
+      "tool_name": "oven_preset_1",
+      "target": "oven",
+      "operation": "preset_1",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.oven",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide convection baking. Controlled costs: 2700000 ms, 3.0 kW."
+    },
+    {
+      "agent_id": "BakingAgent",
+      "tool_name": "oven_off",
+      "target": "oven",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.oven",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave the device idle and provide no service. Cost: 100 ms, 0 kW."
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "tool_name": "kettle_preset_1",
+      "target": "kettle",
+      "operation": "preset_1",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.kettle",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide freshly boiled water service. Controlled costs: 300000 ms, 1.8 kW."
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "tool_name": "kettle_preset_2",
+      "target": "kettle",
+      "operation": "preset_2",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.kettle",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide water warming service without a new boil. Controlled costs: 300000 ms, 1.8 kW."
+    },
+    {
+      "agent_id": "BeverageAgent",
+      "tool_name": "kettle_off",
+      "target": "kettle",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.kettle",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave the device idle and provide no service. Cost: 100 ms, 0 kW."
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "tool_name": "heat_pump_preset_1",
+      "target": "heat_pump",
+      "operation": "preset_1",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.heat_pump",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide warming-service. Controlled costs: 3600000 ms, 2.5 kW."
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "tool_name": "heat_pump_preset_2",
+      "target": "heat_pump",
+      "operation": "preset_2",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.heat_pump",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provide cooling-service. Controlled costs: 3600000 ms, 2.5 kW."
+    },
+    {
+      "agent_id": "HeatingAgent",
+      "tool_name": "heat_pump_off",
+      "target": "heat_pump",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.heat_pump",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave the device idle and provide no service. Cost: 100 ms, 0 kW."
+    }
+  ],
+  "tool_contract_version": "strict-v1",
+  "simulation": {
+    "command_latency_ms": 100,
+    "blind_future_task_arrivals": true
+  },
+  "resource_pressure": {
+    "load_to_capacity_ratio": 0.8,
+    "sum_nominal_requested_power_kw": 9.3,
+    "capacity_kw": 11.625,
+    "source": "controlled_benchmark_factor"
+  },
+  "scenario_assumptions": {
+    "power_semantics": "constant nominal load during a fixed noninterruptible cycle",
+    "physical_calibration": "none",
+    "purpose": "mechanism isolation and structural generalization only",
+    "release_delay_ms": 60000,
+    "deadline_semantics": "window relative to each task's release; late tasks retain their own window",
+    "service_semantics": "controlled categorical service contracts; equal preset costs; no calibrated physics",
+    "cross_task_dependencies": "none; independent requests",
+    "policy_information": "released task metadata and public bounds only; future release events hidden"
+  },
+  "design_factors": {
+    "template": "N4-2",
+    "agent_count": 4,
+    "deadline": "loose",
+    "release": "urgent_first",
+    "pressure": 0.8
+  }
+}

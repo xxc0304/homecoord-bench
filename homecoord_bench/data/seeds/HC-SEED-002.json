@@ -24,6 +24,11 @@
   "constraints": [
     {"when": [{"path": "request.comfort_active", "op": "eq", "value": true}], "must": [{"path": "devices.living_hvac", "op": "neq", "value": "forced_off"}]}
   ],
+  "action_grounding": [
+    {"agent_id": "ComfortAgent", "task_id": "comfort", "operation": "cool", "target": "living_hvac", "grounded_operation": "cool", "duration_ms": 10000, "power_kw": 1.4, "effects": {"devices.living_hvac": "cool_24", "living_room.temperature_c": 24}, "start_effects": {}, "completion_effects": {"devices.living_hvac": "cool_24", "living_room.temperature_c": 24}},
+    {"agent_id": "EnergyAgent", "task_id": "energy", "operation": "cool", "target": "living_hvac", "grounded_operation": "cool", "duration_ms": 10000, "power_kw": 1.2, "effects": {"devices.living_hvac": "cool_24", "living_room.temperature_c": 24}, "start_effects": {}, "completion_effects": {"devices.living_hvac": "cool_24", "living_room.temperature_c": 24}},
+    {"agent_id": "EnergyAgent", "task_id": "energy", "operation": "off", "target": "living_hvac", "grounded_operation": "off", "duration_ms": 1000, "power_kw": 0.0, "effects": {"devices.living_hvac": "forced_off"}, "start_effects": {}, "completion_effects": {"devices.living_hvac": "forced_off"}}
+  ],
   "conflict_rules": [
     {"type": "C1", "a": {"target": "living_hvac", "operation": "cool"}, "b": {"target": "living_hvac", "operation": "off"}, "min_overlap_ms": 1},
     {"type": "C3", "capacity": 8.0}

@@ -1,0 +1,301 @@
+{
+  "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1",
+  "base_episode_id": "HC-C3-KITCHEN_CIRCUIT",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "controlled_review_candidate_e2_ratings_e4_workloads",
+  "review_status": "proposed_revision_not_scored",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 7.2,
+      "task_power_bounds_kw": {
+        "boil_water": 1.8,
+        "bake_meal": 3.0,
+        "wash_dishes": 2.4
+      }
+    }
+  },
+  "initial_state": {
+    "version": 1,
+    "values": {
+      "devices": {
+        "kettle": "idle",
+        "oven": "idle",
+        "dishwasher": "idle"
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "BeverageAgent",
+      "role": "boil_water",
+      "tools": [
+        "start_kettle"
+      ],
+      "observable_state": [
+        "devices.kettle"
+      ],
+      "writable_resources": [
+        "devices.kettle"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "CookingAgent",
+      "role": "bake_meal",
+      "tools": [
+        "start_oven"
+      ],
+      "observable_state": [
+        "devices.oven"
+      ],
+      "writable_resources": [
+        "devices.oven"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "role": "wash_dishes",
+      "tools": [
+        "start_dishwasher"
+      ],
+      "observable_state": [
+        "devices.dishwasher"
+      ],
+      "writable_resources": [
+        "devices.dishwasher"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "boil_water",
+      "agent_id": "BeverageAgent",
+      "release_at_ms": 0,
+      "goal": "Complete boil_water within 10 minutes.",
+      "priority": 100,
+      "completion_deadline_ms": 600000,
+      "required_action": {
+        "target": "kettle",
+        "operation": "boil"
+      },
+      "action_template": {
+        "target": "kettle",
+        "operation": "boil",
+        "parameters": {},
+        "duration_ms": 300000,
+        "power_kw": 1.8,
+        "requires": [
+          {
+            "path": "devices.kettle",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "bake_meal",
+      "agent_id": "CookingAgent",
+      "release_at_ms": 0,
+      "goal": "Complete bake_meal within 60 minutes.",
+      "priority": 80,
+      "completion_deadline_ms": 3600000,
+      "required_action": {
+        "target": "oven",
+        "operation": "bake"
+      },
+      "action_template": {
+        "target": "oven",
+        "operation": "bake",
+        "parameters": {},
+        "duration_ms": 2700000,
+        "power_kw": 3.0,
+        "requires": [
+          {
+            "path": "devices.oven",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "wash_dishes",
+      "agent_id": "DishwashingAgent",
+      "release_at_ms": 0,
+      "goal": "Complete wash_dishes within 180 minutes.",
+      "priority": 50,
+      "completion_deadline_ms": 10800000,
+      "required_action": {
+        "target": "dishwasher",
+        "operation": "wash"
+      },
+      "action_template": {
+        "target": "dishwasher",
+        "operation": "wash",
+        "parameters": {},
+        "duration_ms": 5400000,
+        "power_kw": 2.4,
+        "requires": [
+          {
+            "path": "devices.dishwasher",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      }
+    }
+  ],
+  "exogenous_events": [],
+  "goals": [
+    {
+      "path": "devices.kettle",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.oven",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.dishwasher",
+      "op": "eq",
+      "value": "complete"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 7.2
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "BeverageAgent",
+      "task_id": "boil_water",
+      "target": "kettle",
+      "operation": "boil",
+      "grounded_operation": "boil",
+      "start_effects": {
+        "devices.kettle": "running"
+      },
+      "completion_effects": {
+        "devices.kettle": "complete"
+      },
+      "effects": {
+        "devices.kettle": "complete"
+      },
+      "duration_ms": 300000,
+      "power_kw": 1.8
+    },
+    {
+      "agent_id": "CookingAgent",
+      "task_id": "bake_meal",
+      "target": "oven",
+      "operation": "bake",
+      "grounded_operation": "bake",
+      "start_effects": {
+        "devices.oven": "running"
+      },
+      "completion_effects": {
+        "devices.oven": "complete"
+      },
+      "effects": {
+        "devices.oven": "complete"
+      },
+      "duration_ms": 2700000,
+      "power_kw": 3.0
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "task_id": "wash_dishes",
+      "target": "dishwasher",
+      "operation": "wash",
+      "grounded_operation": "wash",
+      "start_effects": {
+        "devices.dishwasher": "running"
+      },
+      "completion_effects": {
+        "devices.dishwasher": "complete"
+      },
+      "effects": {
+        "devices.dishwasher": "complete"
+      },
+      "duration_ms": 5400000,
+      "power_kw": 2.4
+    }
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "BeverageAgent",
+      "tool_name": "start_kettle",
+      "target": "kettle",
+      "operation": "boil",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.kettle",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 5-minute cycle at nominal 1.8 kW."
+    },
+    {
+      "agent_id": "CookingAgent",
+      "tool_name": "start_oven",
+      "target": "oven",
+      "operation": "bake",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.oven",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 45-minute cycle at nominal 3.0 kW."
+    },
+    {
+      "agent_id": "DishwashingAgent",
+      "tool_name": "start_dishwasher",
+      "target": "dishwasher",
+      "operation": "wash",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.dishwasher",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Start a fixed 90-minute cycle at nominal 2.4 kW."
+    }
+  ],
+  "tool_contract_version": "strict-v1",
+  "simulation": {
+    "command_latency_ms": 100
+  },
+  "resource_pressure": {
+    "load_to_capacity_ratio": 1.0,
+    "sum_nominal_requested_power_kw": 7.2,
+    "capacity_kw": 7.2,
+    "source": "controlled_benchmark_factor",
+    "interpretation": "sum of nameplate or connection ratings divided by a controlled managed power budget"
+  },
+  "scenario_assumptions": {
+    "power_semantics": "conservative rated-power reservation for full configured cycle; not measured instantaneous consumption",
+    "physical_calibration": "rated-power envelope only; time-varying load unavailable",
+    "purpose": "mechanism isolation and structural generalization only",
+    "capacity_semantics": "controlled managed-load budget, not an asserted household service or circuit rating",
+    "review_gate": "requires two independent blinded reviewers before freeze"
+  }
+}

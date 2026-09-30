@@ -1,0 +1,472 @@
+{
+  "episode_id": "HC-DEV-P02",
+  "base_episode_id": "HC-DEV-P02",
+  "task_family": "resource_capacity_conflict",
+  "source_type": "prospective_task_family_synthetic_contract",
+  "review_status": "author_candidate_not_independently_reviewed",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 4,
+      "task_power_bounds_kw": {
+        "laundry": 2,
+        "meal": 1,
+        "dishes": 1
+      }
+    }
+  },
+  "initial_state": {
+    "version": 1,
+    "values": {
+      "devices": {
+        "laundry_device": "idle",
+        "meal_device": "idle",
+        "dishes_device": "idle"
+      },
+      "coordination_context": {
+        "resource_capacity_units": 4,
+        "objective": "all services/deadlines then earlier whole-house completion",
+        "requests": [
+          {
+            "task_id": "laundry",
+            "deadline_ms": 1200000,
+            "release_at_ms": 0,
+            "requested_service": "laundry_completed",
+            "modes": [
+              {
+                "operation": "prepare",
+                "duration_ms": 480000,
+                "resource_units": 2
+              }
+            ]
+          },
+          {
+            "task_id": "meal",
+            "deadline_ms": 420000,
+            "release_at_ms": 0,
+            "requested_service": "meal_completed",
+            "modes": [
+              {
+                "operation": "prepare",
+                "duration_ms": 180000,
+                "resource_units": 1
+              }
+            ]
+          },
+          {
+            "task_id": "dishes",
+            "deadline_ms": 900000,
+            "release_at_ms": 0,
+            "requested_service": "dishes_completed",
+            "modes": [
+              {
+                "operation": "prepare",
+                "duration_ms": 300000,
+                "resource_units": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "LaundryAgent",
+      "role": "laundry",
+      "tools": [
+        "laundry_prepare",
+        "laundry_off"
+      ],
+      "observable_state": [
+        "devices.laundry_device",
+        "coordination_context"
+      ],
+      "writable_resources": [
+        "devices.laundry_device"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "MealAgent",
+      "role": "meal",
+      "tools": [
+        "meal_prepare",
+        "meal_off"
+      ],
+      "observable_state": [
+        "devices.meal_device",
+        "coordination_context"
+      ],
+      "writable_resources": [
+        "devices.meal_device"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    },
+    {
+      "agent_id": "DishesAgent",
+      "role": "dishes",
+      "tools": [
+        "dishes_prepare",
+        "dishes_off"
+      ],
+      "observable_state": [
+        "devices.dishes_device",
+        "coordination_context"
+      ],
+      "writable_resources": [
+        "devices.dishes_device"
+      ],
+      "goal_visibility": "local",
+      "constraint_visibility": "local"
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "laundry",
+      "agent_id": "LaundryAgent",
+      "release_at_ms": 0,
+      "goal": "Provide laundry service. Acceptable modes: prepare. Complete within 1200000 ms of this task release. Use only your own authorized tools. All services and deadlines first; prefer earlier whole-house completion when feasible.",
+      "priority": 100,
+      "completion_deadline_ms": 1200000,
+      "action_template": {
+        "target": "laundry_device",
+        "operation": "prepare",
+        "parameters": {},
+        "duration_ms": 480000,
+        "power_kw": 2,
+        "requires": [
+          {
+            "path": "devices.laundry_device",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      },
+      "requested_service": "laundry_completed",
+      "acceptable_actions": [
+        {
+          "target": "laundry_device",
+          "operation": "prepare"
+        }
+      ]
+    },
+    {
+      "task_id": "meal",
+      "agent_id": "MealAgent",
+      "release_at_ms": 0,
+      "goal": "Provide meal service. Acceptable modes: prepare. Complete within 420000 ms of this task release. Use only your own authorized tools. All services and deadlines first; prefer earlier whole-house completion when feasible.",
+      "priority": 95,
+      "completion_deadline_ms": 420000,
+      "action_template": {
+        "target": "meal_device",
+        "operation": "prepare",
+        "parameters": {},
+        "duration_ms": 180000,
+        "power_kw": 1,
+        "requires": [
+          {
+            "path": "devices.meal_device",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      },
+      "requested_service": "meal_completed",
+      "acceptable_actions": [
+        {
+          "target": "meal_device",
+          "operation": "prepare"
+        }
+      ]
+    },
+    {
+      "task_id": "dishes",
+      "agent_id": "DishesAgent",
+      "release_at_ms": 0,
+      "goal": "Provide dishes service. Acceptable modes: prepare. Complete within 900000 ms of this task release. Use only your own authorized tools. All services and deadlines first; prefer earlier whole-house completion when feasible.",
+      "priority": 90,
+      "completion_deadline_ms": 900000,
+      "action_template": {
+        "target": "dishes_device",
+        "operation": "prepare",
+        "parameters": {},
+        "duration_ms": 300000,
+        "power_kw": 1,
+        "requires": [
+          {
+            "path": "devices.dishes_device",
+            "op": "eq",
+            "value": "idle"
+          }
+        ]
+      },
+      "requested_service": "dishes_completed",
+      "acceptable_actions": [
+        {
+          "target": "dishes_device",
+          "operation": "prepare"
+        }
+      ]
+    }
+  ],
+  "exogenous_events": [],
+  "goals": [
+    {
+      "path": "devices.laundry_device",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.meal_device",
+      "op": "eq",
+      "value": "complete"
+    },
+    {
+      "path": "devices.dishes_device",
+      "op": "eq",
+      "value": "complete"
+    }
+  ],
+  "constraints": [],
+  "conflict_rules": [
+    {
+      "type": "C3",
+      "capacity": 4
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "LaundryAgent",
+      "task_id": "laundry",
+      "target": "laundry_device",
+      "operation": "prepare",
+      "grounded_operation": "prepare",
+      "start_effects": {
+        "devices.laundry_device": "running"
+      },
+      "completion_effects": {
+        "devices.laundry_device": "complete"
+      },
+      "effects": {
+        "devices.laundry_device": "complete"
+      },
+      "duration_ms": 480000,
+      "power_kw": 2
+    },
+    {
+      "agent_id": "MealAgent",
+      "task_id": "meal",
+      "target": "meal_device",
+      "operation": "prepare",
+      "grounded_operation": "prepare",
+      "start_effects": {
+        "devices.meal_device": "running"
+      },
+      "completion_effects": {
+        "devices.meal_device": "complete"
+      },
+      "effects": {
+        "devices.meal_device": "complete"
+      },
+      "duration_ms": 180000,
+      "power_kw": 1
+    },
+    {
+      "agent_id": "DishesAgent",
+      "task_id": "dishes",
+      "target": "dishes_device",
+      "operation": "prepare",
+      "grounded_operation": "prepare",
+      "start_effects": {
+        "devices.dishes_device": "running"
+      },
+      "completion_effects": {
+        "devices.dishes_device": "complete"
+      },
+      "effects": {
+        "devices.dishes_device": "complete"
+      },
+      "duration_ms": 300000,
+      "power_kw": 1
+    },
+    {
+      "agent_id": "LaundryAgent",
+      "task_id": "laundry",
+      "target": "laundry_device",
+      "operation": "off",
+      "grounded_operation": "off",
+      "start_effects": {},
+      "completion_effects": {},
+      "effects": {},
+      "duration_ms": 100,
+      "power_kw": 0
+    },
+    {
+      "agent_id": "MealAgent",
+      "task_id": "meal",
+      "target": "meal_device",
+      "operation": "off",
+      "grounded_operation": "off",
+      "start_effects": {},
+      "completion_effects": {},
+      "effects": {},
+      "duration_ms": 100,
+      "power_kw": 0
+    },
+    {
+      "agent_id": "DishesAgent",
+      "task_id": "dishes",
+      "target": "dishes_device",
+      "operation": "off",
+      "grounded_operation": "off",
+      "start_effects": {},
+      "completion_effects": {},
+      "effects": {},
+      "duration_ms": 100,
+      "power_kw": 0
+    }
+  ],
+  "tool_catalog": [
+    {
+      "agent_id": "LaundryAgent",
+      "tool_name": "laundry_prepare",
+      "target": "laundry_device",
+      "operation": "prepare",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.laundry_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provides laundry_completed; synthetic contract 480000ms/2 admission units.",
+      "provides_service": "laundry_completed",
+      "cost_contract": {
+        "duration_ms": 480000,
+        "resource_units": 2
+      }
+    },
+    {
+      "agent_id": "MealAgent",
+      "tool_name": "meal_prepare",
+      "target": "meal_device",
+      "operation": "prepare",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.meal_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provides meal_completed; synthetic contract 180000ms/1 admission units.",
+      "provides_service": "meal_completed",
+      "cost_contract": {
+        "duration_ms": 180000,
+        "resource_units": 1
+      }
+    },
+    {
+      "agent_id": "DishesAgent",
+      "tool_name": "dishes_prepare",
+      "target": "dishes_device",
+      "operation": "prepare",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.dishes_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Provides dishes_completed; synthetic contract 300000ms/1 admission units.",
+      "provides_service": "dishes_completed",
+      "cost_contract": {
+        "duration_ms": 300000,
+        "resource_units": 1
+      }
+    },
+    {
+      "agent_id": "LaundryAgent",
+      "tool_name": "laundry_off",
+      "target": "laundry_device",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.laundry_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave idle; does not provide requested service.",
+      "provides_service": "none",
+      "cost_contract": {
+        "duration_ms": 100,
+        "resource_units": 0
+      }
+    },
+    {
+      "agent_id": "MealAgent",
+      "tool_name": "meal_off",
+      "target": "meal_device",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.meal_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave idle; does not provide requested service.",
+      "provides_service": "none",
+      "cost_contract": {
+        "duration_ms": 100,
+        "resource_units": 0
+      }
+    },
+    {
+      "agent_id": "DishesAgent",
+      "tool_name": "dishes_off",
+      "target": "dishes_device",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "devices.dishes_device",
+          "op": "eq",
+          "value": "idle"
+        }
+      ],
+      "description": "Leave idle; does not provide requested service.",
+      "provides_service": "none",
+      "cost_contract": {
+        "duration_ms": 100,
+        "resource_units": 0
+      }
+    }
+  ],
+  "tool_contract_version": "strict-v1",
+  "simulation": {
+    "command_latency_ms": 100
+  },
+  "scenario_assumptions": {
+    "physical_calibration": "none",
+    "resource_semantics": "abstract admission units in legacy power_kw fields",
+    "execution": "constant load, noninterruptible, public declared costs",
+    "future_information": "not given to online policy"
+  },
+  "split": "development",
+  "family_block": "F1",
+  "pairing": {
+    "resource_arm": "no_competition",
+    "temporal_arm": "base"
+  },
+  "resource_unit": "abstract_admission_unit",
+  "source_development_episode_id": "D-F1-01-no_competition-base"
+}

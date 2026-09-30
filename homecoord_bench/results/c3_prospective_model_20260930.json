@@ -1,0 +1,2832 @@
+{
+  "schema_version": "c3-prospective-model-0.1",
+  "status": "controlled_prospective_model_probe_not_external_holdout",
+  "manifest_sha256": "5DA3553A11ED5774447A8E5D95886AC95D999876AF6669472144C9A9F6F8EDAC",
+  "model": "deepseek-flash",
+  "templates": [
+    "P1",
+    "P2"
+  ],
+  "repetitions_target": 2,
+  "model_requests_planned": 12,
+  "batches": [
+    {
+      "template": "P1",
+      "repetition": 1,
+      "sample": {
+        "records": {
+          "wash_dishes": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P1:1:wash_dishes",
+              "episode_id": "HC-C3-PUBLIC-P1",
+              "base_episode_id": "HC-C3-PUBLIC-P1",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dishwasher": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "DishwashingAgent",
+                "role": "wash_dishes",
+                "tools": [
+                  "start_dishwasher"
+                ],
+                "observable_state": [
+                  "devices.dishwasher"
+                ],
+                "writable_resources": [
+                  "devices.dishwasher"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "wash_dishes",
+                "agent_id": "DishwashingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete wash_dishes within 190 minutes.",
+                "priority": 50,
+                "completion_deadline_ms": 11400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_dishwasher"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "start_dishwasher",
+                  "target": "dishwasher",
+                  "operation": "wash",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 90-minute cycle at nominal 2.4 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-PUBLIC-P1:1:wash_dishes:start_dishwasher",
+                  "target": "dishwasher",
+                  "operation": "wash",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 2.4
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1412,
+            "logical_latency_ms": 1413
+          },
+          "heat_water": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P1:1:heat_water",
+              "episode_id": "HC-C3-PUBLIC-P1",
+              "base_episode_id": "HC-C3-PUBLIC-P1",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "water_heater": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "WaterHeatingAgent",
+                "role": "heat_water",
+                "tools": [
+                  "start_water_heater"
+                ],
+                "observable_state": [
+                  "devices.water_heater"
+                ],
+                "writable_resources": [
+                  "devices.water_heater"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "heat_water",
+                "agent_id": "WaterHeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete heat_water within 105 minutes.",
+                "priority": 95,
+                "completion_deadline_ms": 6300000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_water_heater"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "start_water_heater",
+                  "target": "water_heater",
+                  "operation": "heat",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 45-minute cycle at nominal 3.0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-PUBLIC-P1:1:heat_water:start",
+                  "target": "water_heater",
+                  "operation": "heat",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1415,
+            "logical_latency_ms": 1417
+          },
+          "heat_home": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P1:1:heat_home",
+              "episode_id": "HC-C3-PUBLIC-P1",
+              "base_episode_id": "HC-C3-PUBLIC-P1",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "heat_pump": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "HeatingAgent",
+                "role": "heat_home",
+                "tools": [
+                  "start_heat_pump"
+                ],
+                "observable_state": [
+                  "devices.heat_pump"
+                ],
+                "writable_resources": [
+                  "devices.heat_pump"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "heat_home",
+                "agent_id": "HeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete heat_home within 180 minutes.",
+                "priority": 70,
+                "completion_deadline_ms": 10800000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_heat_pump"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "HeatingAgent",
+                  "tool_name": "start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 60-minute cycle at nominal 2.5 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-PUBLIC-P1:1:heat_home:start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3600000,
+                  "estimated_power_kw": 2.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1433,
+            "logical_latency_ms": 1433
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1433,
+        "completion_order": [
+          "wash_dishes",
+          "heat_water",
+          "heat_home"
+        ]
+      },
+      "prior_transport_blocked_samples": [
+        {
+          "records": {},
+          "errors": {
+            "heat_water": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "wash_dishes": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "heat_home": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            }
+          },
+          "parallel_batch_wall_ms": 68,
+          "completion_order": []
+        }
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "sample": {
+        "records": {
+          "wash_dishes": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P1:2:wash_dishes",
+              "episode_id": "HC-C3-PUBLIC-P1",
+              "base_episode_id": "HC-C3-PUBLIC-P1",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dishwasher": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "DishwashingAgent",
+                "role": "wash_dishes",
+                "tools": [
+                  "start_dishwasher"
+                ],
+                "observable_state": [
+                  "devices.dishwasher"
+                ],
+                "writable_resources": [
+                  "devices.dishwasher"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "wash_dishes",
+                "agent_id": "DishwashingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete wash_dishes within 190 minutes.",
+                "priority": 50,
+                "completion_deadline_ms": 11400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_dishwasher"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "start_dishwasher",
+                  "target": "dishwasher",
+                  "operation": "wash",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 90-minute cycle at nominal 2.4 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-PUBLIC-P1:2:wash_dishes:start_dishwasher",
+                  "target": "dishwasher",
+                  "operation": "wash",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 2.4
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1163,
+            "logical_latency_ms": 1164
+          },
+          "heat_water": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P1:2:heat_water",
+              "episode_id": "HC-C3-PUBLIC-P1",
+              "base_episode_id": "HC-C3-PUBLIC-P1",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "water_heater": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "WaterHeatingAgent",
+                "role": "heat_water",
+                "tools": [
+                  "start_water_heater"
+                ],
+                "observable_state": [
+                  "devices.water_heater"
+                ],
+                "writable_resources": [
+                  "devices.water_heater"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "heat_water",
+                "agent_id": "WaterHeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete heat_water within 105 minutes.",
+                "priority": 95,
+                "completion_deadline_ms": 6300000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_water_heater"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "start_water_heater",
+                  "target": "water_heater",
+                  "operation": "heat",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 45-minute cycle at nominal 3.0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "WH-1",
+                  "target": "water_heater",
+                  "operation": "heat",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1263,
+            "logical_latency_ms": 1264
+          },
+          "heat_home": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P1:2:heat_home",
+              "episode_id": "HC-C3-PUBLIC-P1",
+              "base_episode_id": "HC-C3-PUBLIC-P1",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "heat_pump": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "HeatingAgent",
+                "role": "heat_home",
+                "tools": [
+                  "start_heat_pump"
+                ],
+                "observable_state": [
+                  "devices.heat_pump"
+                ],
+                "writable_resources": [
+                  "devices.heat_pump"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "heat_home",
+                "agent_id": "HeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete heat_home within 180 minutes.",
+                "priority": 70,
+                "completion_deadline_ms": 10800000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_heat_pump"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "HeatingAgent",
+                  "tool_name": "start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 60-minute cycle at nominal 2.5 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-PUBLIC-P1:2:heat_home:start_heat_pump",
+                  "target": "heat_pump",
+                  "operation": "heat",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.heat_pump",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 3600000,
+                  "estimated_power_kw": 2.5
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1363,
+            "logical_latency_ms": 1364
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1364,
+        "completion_order": [
+          "wash_dishes",
+          "heat_water",
+          "heat_home"
+        ]
+      },
+      "prior_transport_blocked_samples": [
+        {
+          "records": {},
+          "errors": {
+            "heat_home": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "wash_dishes": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "heat_water": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            }
+          },
+          "parallel_batch_wall_ms": 5,
+          "completion_order": []
+        }
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "sample": {
+        "records": {
+          "bake_meal": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P2:1:bake_meal",
+              "episode_id": "HC-C3-PUBLIC-P2",
+              "base_episode_id": "HC-C3-PUBLIC-P2",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "oven": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "BakingAgent",
+                "role": "bake_meal",
+                "tools": [
+                  "start_oven"
+                ],
+                "observable_state": [
+                  "devices.oven"
+                ],
+                "writable_resources": [
+                  "devices.oven"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "bake_meal",
+                "agent_id": "BakingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete bake_meal within 85 minutes.",
+                "priority": 90,
+                "completion_deadline_ms": 5100000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_oven"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "BakingAgent",
+                  "tool_name": "start_oven",
+                  "target": "oven",
+                  "operation": "bake",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 45-minute cycle at nominal 3.0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "start-oven-1",
+                  "target": "oven",
+                  "operation": "bake",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1122,
+            "logical_latency_ms": 1122
+          },
+          "heat_water": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P2:1:heat_water",
+              "episode_id": "HC-C3-PUBLIC-P2",
+              "base_episode_id": "HC-C3-PUBLIC-P2",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "water_heater": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "WaterHeatingAgent",
+                "role": "heat_water",
+                "tools": [
+                  "start_water_heater"
+                ],
+                "observable_state": [
+                  "devices.water_heater"
+                ],
+                "writable_resources": [
+                  "devices.water_heater"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "heat_water",
+                "agent_id": "WaterHeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete heat_water within 105 minutes.",
+                "priority": 95,
+                "completion_deadline_ms": 6300000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_water_heater"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "start_water_heater",
+                  "target": "water_heater",
+                  "operation": "heat",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 45-minute cycle at nominal 3.0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-PUBLIC-P2:1:heat_water:start_water_heater",
+                  "target": "water_heater",
+                  "operation": "heat",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1275,
+            "logical_latency_ms": 1275
+          },
+          "wash_dishes": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P2:1:wash_dishes",
+              "episode_id": "HC-C3-PUBLIC-P2",
+              "base_episode_id": "HC-C3-PUBLIC-P2",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dishwasher": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "DishwashingAgent",
+                "role": "wash_dishes",
+                "tools": [
+                  "start_dishwasher"
+                ],
+                "observable_state": [
+                  "devices.dishwasher"
+                ],
+                "writable_resources": [
+                  "devices.dishwasher"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "wash_dishes",
+                "agent_id": "DishwashingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete wash_dishes within 190 minutes.",
+                "priority": 50,
+                "completion_deadline_ms": 11400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_dishwasher"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "start_dishwasher",
+                  "target": "dishwasher",
+                  "operation": "wash",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 90-minute cycle at nominal 2.4 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "dishwashing-1",
+                  "target": "dishwasher",
+                  "operation": "wash",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 2.4
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1357,
+            "logical_latency_ms": 1357
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 1357,
+        "completion_order": [
+          "bake_meal",
+          "heat_water",
+          "wash_dishes"
+        ]
+      },
+      "prior_transport_blocked_samples": [
+        {
+          "records": {},
+          "errors": {
+            "wash_dishes": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "heat_water": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "bake_meal": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            }
+          },
+          "parallel_batch_wall_ms": 5,
+          "completion_order": []
+        }
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "sample": {
+        "records": {
+          "wash_dishes": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P2:2:wash_dishes",
+              "episode_id": "HC-C3-PUBLIC-P2",
+              "base_episode_id": "HC-C3-PUBLIC-P2",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "dishwasher": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "DishwashingAgent",
+                "role": "wash_dishes",
+                "tools": [
+                  "start_dishwasher"
+                ],
+                "observable_state": [
+                  "devices.dishwasher"
+                ],
+                "writable_resources": [
+                  "devices.dishwasher"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "wash_dishes",
+                "agent_id": "DishwashingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete wash_dishes within 190 minutes.",
+                "priority": 50,
+                "completion_deadline_ms": 11400000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_dishwasher"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "DishwashingAgent",
+                  "tool_name": "start_dishwasher",
+                  "target": "dishwasher",
+                  "operation": "wash",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 90-minute cycle at nominal 2.4 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-PUBLIC-P2:2:wash_dishes:start_dishwasher",
+                  "target": "dishwasher",
+                  "operation": "wash",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.dishwasher",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 5400000,
+                  "estimated_power_kw": 2.4
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1075,
+            "logical_latency_ms": 1076
+          },
+          "bake_meal": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P2:2:bake_meal",
+              "episode_id": "HC-C3-PUBLIC-P2",
+              "base_episode_id": "HC-C3-PUBLIC-P2",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "oven": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "BakingAgent",
+                "role": "bake_meal",
+                "tools": [
+                  "start_oven"
+                ],
+                "observable_state": [
+                  "devices.oven"
+                ],
+                "writable_resources": [
+                  "devices.oven"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "bake_meal",
+                "agent_id": "BakingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete bake_meal within 85 minutes.",
+                "priority": 90,
+                "completion_deadline_ms": 5100000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_oven"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "BakingAgent",
+                  "tool_name": "start_oven",
+                  "target": "oven",
+                  "operation": "bake",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 45-minute cycle at nominal 3.0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-PUBLIC-P2:2:bake_meal:start_oven",
+                  "target": "oven",
+                  "operation": "bake",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.oven",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 1168,
+            "logical_latency_ms": 1169
+          },
+          "heat_water": {
+            "request": {
+              "request_id": "HC-C3-PUBLIC-P2:2:heat_water",
+              "episode_id": "HC-C3-PUBLIC-P2",
+              "base_episode_id": "HC-C3-PUBLIC-P2",
+              "architecture": "IndependentMultiAgent",
+              "current_time_ms": 0,
+              "state_version": 1,
+              "state": {
+                "devices": {
+                  "water_heater": "idle"
+                }
+              },
+              "agent": {
+                "agent_id": "WaterHeatingAgent",
+                "role": "heat_water",
+                "tools": [
+                  "start_water_heater"
+                ],
+                "observable_state": [
+                  "devices.water_heater"
+                ],
+                "writable_resources": [
+                  "devices.water_heater"
+                ],
+                "goal_visibility": "local",
+                "constraint_visibility": "local"
+              },
+              "task": {
+                "task_id": "heat_water",
+                "agent_id": "WaterHeatingAgent",
+                "release_at_ms": 0,
+                "goal": "Complete heat_water within 105 minutes.",
+                "priority": 95,
+                "completion_deadline_ms": 6300000
+              },
+              "goals": [],
+              "constraints": [],
+              "allowed_tools": [
+                "start_water_heater"
+              ],
+              "available_actions": [
+                {
+                  "agent_id": "WaterHeatingAgent",
+                  "tool_name": "start_water_heater",
+                  "target": "water_heater",
+                  "operation": "heat",
+                  "parameters": [],
+                  "preconditions": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle"
+                    }
+                  ],
+                  "description": "Start a fixed 45-minute cycle at nominal 3.0 kW."
+                }
+              ],
+              "pending_proposals": []
+            },
+            "decision": {
+              "response_type": "action_proposal",
+              "actions": [
+                {
+                  "proposal_id": "HC-C3-PUBLIC-P2:2:heat_water:start_water_heater",
+                  "target": "water_heater",
+                  "operation": "heat",
+                  "parameters": [],
+                  "based_on_state_version": 1,
+                  "requires": [
+                    {
+                      "path": "devices.water_heater",
+                      "op": "eq",
+                      "value": "idle",
+                      "range_min": null,
+                      "range_max": null
+                    }
+                  ],
+                  "estimated_duration_ms": 2700000,
+                  "estimated_power_kw": 3.0
+                }
+              ],
+              "accepted_proposal_ids": [],
+              "rejected_proposal_ids": [],
+              "defer_until_ms": null,
+              "reason_code": "goal_progress"
+            },
+            "call_duration_ms": 2338,
+            "logical_latency_ms": 2338
+          }
+        },
+        "errors": {},
+        "parallel_batch_wall_ms": 2338,
+        "completion_order": [
+          "wash_dishes",
+          "bake_meal",
+          "heat_water"
+        ]
+      },
+      "prior_transport_blocked_samples": [
+        {
+          "records": {},
+          "errors": {
+            "wash_dishes": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "heat_water": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            },
+            "bake_meal": {
+              "error_type": "URLError",
+              "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>"
+            }
+          },
+          "parallel_batch_wall_ms": 6,
+          "completion_order": []
+        }
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 0.8,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1513,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_water",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 0.8,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1513,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_water",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 0.8,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 1533,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "heat_home",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 0.8,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1513,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_water",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 1.2,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1513,
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "heat_home": false,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": false,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "wash_dishes",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 1.2,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1513,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_water",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 1.2,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 1533,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "heat_home",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 1.2,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1517,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "wash_dishes",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 1.6,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1513,
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": false
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": false
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "wash_dishes",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 1.6,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1513,
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": false
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_home",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 1.6,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 1533,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "heat_home",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 1,
+      "pressure": 1.6,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1517,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1433,
+        "wash_dishes": 1413,
+        "heat_water": 1417
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "wash_dishes",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 0.8,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1264,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_water",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 0.8,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1264,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_water",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 0.8,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 1464,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "heat_home",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 0.8,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1264,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_water",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 1.2,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1264,
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "heat_home": false,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": false,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "wash_dishes",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 1.2,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1264,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_water",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 1.2,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 1464,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "heat_home",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 1.2,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1364,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "wash_dishes",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 1.6,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1264,
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": false
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": false
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "wash_dishes",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 1.6,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1264,
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": false
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "heat_home",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 1.6,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 1464,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "heat_home",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P1",
+      "repetition": 2,
+      "pressure": 1.6,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1364,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "task_deadline_met": {
+        "heat_home": true,
+        "wash_dishes": true,
+        "heat_water": true
+      },
+      "model_latency_by_task_ms": {
+        "heat_home": 1364,
+        "wash_dishes": 1164,
+        "heat_water": 1264
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "heat_water",
+        "wash_dishes",
+        "heat_home"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 0.8,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1222,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 0.8,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1222,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 0.8,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 1457,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 0.8,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1222,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 1.2,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1222,
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "wash_dishes": false,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": false,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "bake_meal",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 1.2,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1222,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 1.2,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 1457,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 1.2,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1222,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 1.6,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1222,
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "wash_dishes": false,
+        "heat_water": false,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": false,
+        "heat_water": false,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 2,
+      "start_order": [
+        "bake_meal"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 1.6,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1222,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 1.6,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 1457,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 1,
+      "pressure": 1.6,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1222,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1357,
+        "heat_water": 1275,
+        "bake_meal": 1122
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 0.8,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1176,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "bake_meal",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 0.8,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1176,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "bake_meal",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 0.8,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 2438,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 0.8,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1176,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "bake_meal",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 1.2,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1176,
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": false,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": false,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 1,
+      "start_order": [
+        "wash_dishes",
+        "bake_meal"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 1.2,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1176,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "bake_meal",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 1.2,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 2438,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 1.2,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1269,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "wash_dishes",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 1.6,
+      "policy": "IndependentMultiAgent",
+      "first_safe_action_ms": 1176,
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": false,
+        "bake_meal": false
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": false,
+        "bake_meal": false
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 2,
+      "start_order": [
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 1.6,
+      "policy": "ConstraintCoordinator",
+      "first_safe_action_ms": 1176,
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": false,
+        "bake_meal": false
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "wash_dishes",
+        "bake_meal",
+        "heat_water"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 1.6,
+      "policy": "DeadlineAwareCoordinator",
+      "first_safe_action_ms": 2438,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    },
+    {
+      "template": "P2",
+      "repetition": 2,
+      "pressure": 1.6,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "first_safe_action_ms": 1269,
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "task_service": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "task_deadline_met": {
+        "wash_dishes": true,
+        "heat_water": true,
+        "bake_meal": true
+      },
+      "model_latency_by_task_ms": {
+        "wash_dishes": 1076,
+        "heat_water": 2338,
+        "bake_meal": 1169
+      },
+      "shared_gate_rejections": 0,
+      "start_order": [
+        "bake_meal",
+        "heat_water",
+        "wash_dishes"
+      ]
+    }
+  ],
+  "summary": {
+    "P1": {
+      "0.8": {
+        "IndependentMultiAgent": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1388.5
+        },
+        "ConstraintCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1388.5
+        },
+        "DeadlineAwareCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1498.5
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1388.5
+        }
+      },
+      "1.2": {
+        "IndependentMultiAgent": {
+          "complete_batches": 2,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1388.5
+        },
+        "ConstraintCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1388.5
+        },
+        "DeadlineAwareCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1498.5
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1440.5
+        }
+      },
+      "1.6": {
+        "IndependentMultiAgent": {
+          "complete_batches": 2,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1388.5
+        },
+        "ConstraintCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1388.5
+        },
+        "DeadlineAwareCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1498.5
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1440.5
+        }
+      }
+    },
+    "P2": {
+      "0.8": {
+        "IndependentMultiAgent": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1199.0
+        },
+        "ConstraintCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1199.0
+        },
+        "DeadlineAwareCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1947.5
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1199.0
+        }
+      },
+      "1.2": {
+        "IndependentMultiAgent": {
+          "complete_batches": 2,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1199.0
+        },
+        "ConstraintCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1199.0
+        },
+        "DeadlineAwareCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1947.5
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1245.5
+        }
+      },
+      "1.6": {
+        "IndependentMultiAgent": {
+          "complete_batches": 2,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1199.0
+        },
+        "ConstraintCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 1,
+          "median_first_safe_action_ms": 1199.0
+        },
+        "DeadlineAwareCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1947.5
+        },
+        "CapacityAwareDeadlineCoordinator": {
+          "complete_batches": 2,
+          "all_tasks_served": 2,
+          "all_deadlines_met": 2,
+          "median_first_safe_action_ms": 1245.5
+        }
+      }
+    }
+  }
+}

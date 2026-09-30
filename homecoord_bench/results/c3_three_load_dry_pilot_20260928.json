@@ -1,0 +1,1073 @@
+{
+  "status": "synthetic_three_task_mechanism_check_scripted_proposals",
+  "scenarios": {
+    "conflict": {
+      "episode_id": "HC-C3-THREE-LOAD-CONFLICT",
+      "base_episode_id": "HC-C3-THREE-LOAD",
+      "task_family": "resource_capacity_conflict",
+      "source_type": "synthetic_fixed_appliance_cycle_pilot",
+      "review_status": "author_design_review_only",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 3.5,
+          "task_power_bounds_kw": {
+            "cook_dinner": 2.0,
+            "dry_laundry": 2.5,
+            "wash_dishes": 1.2
+          }
+        }
+      },
+      "initial_state": {
+        "version": 1,
+        "values": {
+          "devices": {
+            "cooktop": "idle",
+            "dryer": "idle",
+            "dishwasher": "idle"
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "CookingAgent",
+          "role": "cook_dinner",
+          "tools": [
+            "start_cooktop",
+            "stop_cooktop"
+          ],
+          "observable_state": [
+            "devices.cooktop"
+          ],
+          "writable_resources": [
+            "devices.cooktop"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "role": "dry_laundry",
+          "tools": [
+            "start_dryer",
+            "stop_dryer"
+          ],
+          "observable_state": [
+            "devices.dryer"
+          ],
+          "writable_resources": [
+            "devices.dryer"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "role": "wash_dishes",
+          "tools": [
+            "start_dishwasher",
+            "stop_dishwasher"
+          ],
+          "observable_state": [
+            "devices.dishwasher"
+          ],
+          "writable_resources": [
+            "devices.dishwasher"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "cook_dinner",
+          "agent_id": "CookingAgent",
+          "release_at_ms": 0,
+          "goal": "Complete the induction cooking cycle for dinner within 30 minutes.",
+          "priority": 100,
+          "completion_deadline_ms": 1800000,
+          "required_action": {
+            "target": "cooktop",
+            "operation": "cook"
+          },
+          "action_template": {
+            "target": "cooktop",
+            "operation": "cook",
+            "parameters": {},
+            "duration_ms": 1500000,
+            "power_kw": 2.0,
+            "requires": [
+              {
+                "path": "devices.cooktop",
+                "op": "eq",
+                "value": "idle"
+              }
+            ]
+          }
+        },
+        {
+          "task_id": "dry_laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "goal": "Finish drying laundry before the household leaves in two hours.",
+          "priority": 80,
+          "completion_deadline_ms": 7200000,
+          "required_action": {
+            "target": "dryer",
+            "operation": "dry"
+          },
+          "action_template": {
+            "target": "dryer",
+            "operation": "dry",
+            "parameters": {},
+            "duration_ms": 3600000,
+            "power_kw": 2.5,
+            "requires": [
+              {
+                "path": "devices.dryer",
+                "op": "eq",
+                "value": "idle"
+              }
+            ]
+          }
+        },
+        {
+          "task_id": "wash_dishes",
+          "agent_id": "DishwashingAgent",
+          "release_at_ms": 0,
+          "goal": "Finish washing dishes within three hours.",
+          "priority": 60,
+          "completion_deadline_ms": 10800000,
+          "required_action": {
+            "target": "dishwasher",
+            "operation": "wash"
+          },
+          "action_template": {
+            "target": "dishwasher",
+            "operation": "wash",
+            "parameters": {},
+            "duration_ms": 5400000,
+            "power_kw": 1.2,
+            "requires": [
+              {
+                "path": "devices.dishwasher",
+                "op": "eq",
+                "value": "idle"
+              }
+            ]
+          }
+        }
+      ],
+      "exogenous_events": [],
+      "goals": [
+        {
+          "path": "devices.cooktop",
+          "op": "eq",
+          "value": "complete"
+        },
+        {
+          "path": "devices.dryer",
+          "op": "eq",
+          "value": "complete"
+        },
+        {
+          "path": "devices.dishwasher",
+          "op": "eq",
+          "value": "complete"
+        }
+      ],
+      "constraints": [],
+      "conflict_rules": [
+        {
+          "type": "C3",
+          "capacity": 3.5
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "CookingAgent",
+          "task_id": "cook_dinner",
+          "target": "cooktop",
+          "operation": "cook",
+          "grounded_operation": "cook",
+          "start_effects": {
+            "devices.cooktop": "running"
+          },
+          "completion_effects": {
+            "devices.cooktop": "complete"
+          },
+          "effects": {
+            "devices.cooktop": "complete"
+          },
+          "duration_ms": 1500000,
+          "power_kw": 2.0
+        },
+        {
+          "agent_id": "CookingAgent",
+          "task_id": "cook_dinner",
+          "target": "cooktop",
+          "operation": "off",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.cooktop": "idle"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "task_id": "dry_laundry",
+          "target": "dryer",
+          "operation": "dry",
+          "grounded_operation": "dry",
+          "start_effects": {
+            "devices.dryer": "running"
+          },
+          "completion_effects": {
+            "devices.dryer": "complete"
+          },
+          "effects": {
+            "devices.dryer": "complete"
+          },
+          "duration_ms": 3600000,
+          "power_kw": 2.5
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "task_id": "dry_laundry",
+          "target": "dryer",
+          "operation": "off",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.dryer": "idle"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "task_id": "wash_dishes",
+          "target": "dishwasher",
+          "operation": "wash",
+          "grounded_operation": "wash",
+          "start_effects": {
+            "devices.dishwasher": "running"
+          },
+          "completion_effects": {
+            "devices.dishwasher": "complete"
+          },
+          "effects": {
+            "devices.dishwasher": "complete"
+          },
+          "duration_ms": 5400000,
+          "power_kw": 1.2
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "task_id": "wash_dishes",
+          "target": "dishwasher",
+          "operation": "off",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.dishwasher": "idle"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        }
+      ],
+      "tool_catalog": [
+        {
+          "agent_id": "CookingAgent",
+          "tool_name": "start_cooktop",
+          "target": "cooktop",
+          "operation": "cook",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "devices.cooktop",
+              "op": "eq",
+              "value": "idle"
+            }
+          ],
+          "description": "Start one fixed 25-minute cycle at nominal 2.0 kW."
+        },
+        {
+          "agent_id": "CookingAgent",
+          "tool_name": "stop_cooktop",
+          "target": "cooktop",
+          "operation": "off",
+          "parameters": [],
+          "description": "Leave this appliance off."
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "tool_name": "start_dryer",
+          "target": "dryer",
+          "operation": "dry",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "devices.dryer",
+              "op": "eq",
+              "value": "idle"
+            }
+          ],
+          "description": "Start one fixed 60-minute cycle at nominal 2.5 kW."
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "tool_name": "stop_dryer",
+          "target": "dryer",
+          "operation": "off",
+          "parameters": [],
+          "description": "Leave this appliance off."
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "tool_name": "start_dishwasher",
+          "target": "dishwasher",
+          "operation": "wash",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "devices.dishwasher",
+              "op": "eq",
+              "value": "idle"
+            }
+          ],
+          "description": "Start one fixed 90-minute cycle at nominal 1.2 kW."
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "tool_name": "stop_dishwasher",
+          "target": "dishwasher",
+          "operation": "off",
+          "parameters": [],
+          "description": "Leave this appliance off."
+        }
+      ],
+      "tool_contract_version": "strict-v1",
+      "simulation": {
+        "command_latency_ms": 100
+      },
+      "scenario_assumptions": {
+        "power_semantics": "constant nominal load throughout each fixed noninterruptible cycle",
+        "power_source": "assumed shared 3.5 kW backup limit versus 5.8 kW grid limit",
+        "deadline_source": "illustrative household requests, not observed timestamps",
+        "calibration_status": "none",
+        "same_tasks_proposals_and_device_cycles_across_conditions": true
+      }
+    },
+    "control": {
+      "episode_id": "HC-C3-THREE-LOAD-CONTROL",
+      "base_episode_id": "HC-C3-THREE-LOAD",
+      "task_family": "resource_capacity_conflict",
+      "source_type": "synthetic_fixed_appliance_cycle_pilot",
+      "review_status": "author_design_review_only",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 5.8,
+          "task_power_bounds_kw": {
+            "cook_dinner": 2.0,
+            "dry_laundry": 2.5,
+            "wash_dishes": 1.2
+          }
+        }
+      },
+      "initial_state": {
+        "version": 1,
+        "values": {
+          "devices": {
+            "cooktop": "idle",
+            "dryer": "idle",
+            "dishwasher": "idle"
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "CookingAgent",
+          "role": "cook_dinner",
+          "tools": [
+            "start_cooktop",
+            "stop_cooktop"
+          ],
+          "observable_state": [
+            "devices.cooktop"
+          ],
+          "writable_resources": [
+            "devices.cooktop"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "role": "dry_laundry",
+          "tools": [
+            "start_dryer",
+            "stop_dryer"
+          ],
+          "observable_state": [
+            "devices.dryer"
+          ],
+          "writable_resources": [
+            "devices.dryer"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "role": "wash_dishes",
+          "tools": [
+            "start_dishwasher",
+            "stop_dishwasher"
+          ],
+          "observable_state": [
+            "devices.dishwasher"
+          ],
+          "writable_resources": [
+            "devices.dishwasher"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "cook_dinner",
+          "agent_id": "CookingAgent",
+          "release_at_ms": 0,
+          "goal": "Complete the induction cooking cycle for dinner within 30 minutes.",
+          "priority": 100,
+          "completion_deadline_ms": 1800000,
+          "required_action": {
+            "target": "cooktop",
+            "operation": "cook"
+          },
+          "action_template": {
+            "target": "cooktop",
+            "operation": "cook",
+            "parameters": {},
+            "duration_ms": 1500000,
+            "power_kw": 2.0,
+            "requires": [
+              {
+                "path": "devices.cooktop",
+                "op": "eq",
+                "value": "idle"
+              }
+            ]
+          }
+        },
+        {
+          "task_id": "dry_laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "goal": "Finish drying laundry before the household leaves in two hours.",
+          "priority": 80,
+          "completion_deadline_ms": 7200000,
+          "required_action": {
+            "target": "dryer",
+            "operation": "dry"
+          },
+          "action_template": {
+            "target": "dryer",
+            "operation": "dry",
+            "parameters": {},
+            "duration_ms": 3600000,
+            "power_kw": 2.5,
+            "requires": [
+              {
+                "path": "devices.dryer",
+                "op": "eq",
+                "value": "idle"
+              }
+            ]
+          }
+        },
+        {
+          "task_id": "wash_dishes",
+          "agent_id": "DishwashingAgent",
+          "release_at_ms": 0,
+          "goal": "Finish washing dishes within three hours.",
+          "priority": 60,
+          "completion_deadline_ms": 10800000,
+          "required_action": {
+            "target": "dishwasher",
+            "operation": "wash"
+          },
+          "action_template": {
+            "target": "dishwasher",
+            "operation": "wash",
+            "parameters": {},
+            "duration_ms": 5400000,
+            "power_kw": 1.2,
+            "requires": [
+              {
+                "path": "devices.dishwasher",
+                "op": "eq",
+                "value": "idle"
+              }
+            ]
+          }
+        }
+      ],
+      "exogenous_events": [],
+      "goals": [
+        {
+          "path": "devices.cooktop",
+          "op": "eq",
+          "value": "complete"
+        },
+        {
+          "path": "devices.dryer",
+          "op": "eq",
+          "value": "complete"
+        },
+        {
+          "path": "devices.dishwasher",
+          "op": "eq",
+          "value": "complete"
+        }
+      ],
+      "constraints": [],
+      "conflict_rules": [
+        {
+          "type": "C3",
+          "capacity": 5.8
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "CookingAgent",
+          "task_id": "cook_dinner",
+          "target": "cooktop",
+          "operation": "cook",
+          "grounded_operation": "cook",
+          "start_effects": {
+            "devices.cooktop": "running"
+          },
+          "completion_effects": {
+            "devices.cooktop": "complete"
+          },
+          "effects": {
+            "devices.cooktop": "complete"
+          },
+          "duration_ms": 1500000,
+          "power_kw": 2.0
+        },
+        {
+          "agent_id": "CookingAgent",
+          "task_id": "cook_dinner",
+          "target": "cooktop",
+          "operation": "off",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.cooktop": "idle"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "task_id": "dry_laundry",
+          "target": "dryer",
+          "operation": "dry",
+          "grounded_operation": "dry",
+          "start_effects": {
+            "devices.dryer": "running"
+          },
+          "completion_effects": {
+            "devices.dryer": "complete"
+          },
+          "effects": {
+            "devices.dryer": "complete"
+          },
+          "duration_ms": 3600000,
+          "power_kw": 2.5
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "task_id": "dry_laundry",
+          "target": "dryer",
+          "operation": "off",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.dryer": "idle"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "task_id": "wash_dishes",
+          "target": "dishwasher",
+          "operation": "wash",
+          "grounded_operation": "wash",
+          "start_effects": {
+            "devices.dishwasher": "running"
+          },
+          "completion_effects": {
+            "devices.dishwasher": "complete"
+          },
+          "effects": {
+            "devices.dishwasher": "complete"
+          },
+          "duration_ms": 5400000,
+          "power_kw": 1.2
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "task_id": "wash_dishes",
+          "target": "dishwasher",
+          "operation": "off",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.dishwasher": "idle"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        }
+      ],
+      "tool_catalog": [
+        {
+          "agent_id": "CookingAgent",
+          "tool_name": "start_cooktop",
+          "target": "cooktop",
+          "operation": "cook",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "devices.cooktop",
+              "op": "eq",
+              "value": "idle"
+            }
+          ],
+          "description": "Start one fixed 25-minute cycle at nominal 2.0 kW."
+        },
+        {
+          "agent_id": "CookingAgent",
+          "tool_name": "stop_cooktop",
+          "target": "cooktop",
+          "operation": "off",
+          "parameters": [],
+          "description": "Leave this appliance off."
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "tool_name": "start_dryer",
+          "target": "dryer",
+          "operation": "dry",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "devices.dryer",
+              "op": "eq",
+              "value": "idle"
+            }
+          ],
+          "description": "Start one fixed 60-minute cycle at nominal 2.5 kW."
+        },
+        {
+          "agent_id": "LaundryAgent",
+          "tool_name": "stop_dryer",
+          "target": "dryer",
+          "operation": "off",
+          "parameters": [],
+          "description": "Leave this appliance off."
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "tool_name": "start_dishwasher",
+          "target": "dishwasher",
+          "operation": "wash",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "devices.dishwasher",
+              "op": "eq",
+              "value": "idle"
+            }
+          ],
+          "description": "Start one fixed 90-minute cycle at nominal 1.2 kW."
+        },
+        {
+          "agent_id": "DishwashingAgent",
+          "tool_name": "stop_dishwasher",
+          "target": "dishwasher",
+          "operation": "off",
+          "parameters": [],
+          "description": "Leave this appliance off."
+        }
+      ],
+      "tool_contract_version": "strict-v1",
+      "simulation": {
+        "command_latency_ms": 100
+      },
+      "scenario_assumptions": {
+        "power_semantics": "constant nominal load throughout each fixed noninterruptible cycle",
+        "power_source": "assumed shared 3.5 kW backup limit versus 5.8 kW grid limit",
+        "deadline_source": "illustrative household requests, not observed timestamps",
+        "calibration_status": "none",
+        "same_tasks_proposals_and_device_cycles_across_conditions": true
+      }
+    }
+  },
+  "rows": [
+    {
+      "condition": "conflict",
+      "policy": "IndependentMultiAgent",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1100,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": false,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": false,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": null,
+        "wash_dishes": 5401100
+      },
+      "all_deadlines_met": false,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ],
+      "start_order": [
+        "wash_dishes",
+        "cook_dinner"
+      ]
+    },
+    {
+      "condition": "conflict",
+      "policy": "RuleCoordinator",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1100,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": false,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": false,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": null,
+        "wash_dishes": 5401100
+      },
+      "all_deadlines_met": false,
+      "final_goal_success": false,
+      "process_valid_success": false,
+      "shared_safety_gate_rejection_count": 1,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ],
+      "start_order": [
+        "wash_dishes",
+        "cook_dinner"
+      ]
+    },
+    {
+      "condition": "conflict",
+      "policy": "ConstraintCoordinator",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1100,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": false,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": 9001100,
+        "wash_dishes": 5401100
+      },
+      "all_deadlines_met": false,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": [],
+      "start_order": [
+        "wash_dishes",
+        "cook_dinner",
+        "dry_laundry"
+      ]
+    },
+    {
+      "condition": "conflict",
+      "policy": "DeadlineAwareCoordinator",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1900,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": 5101900,
+        "wash_dishes": 10501900
+      },
+      "all_deadlines_met": true,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": [],
+      "start_order": [
+        "cook_dinner",
+        "dry_laundry",
+        "wash_dishes"
+      ]
+    },
+    {
+      "condition": "conflict",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1900,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": 5101900,
+        "wash_dishes": 10501900
+      },
+      "all_deadlines_met": true,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": [],
+      "start_order": [
+        "cook_dinner",
+        "dry_laundry",
+        "wash_dishes"
+      ]
+    },
+    {
+      "condition": "control",
+      "policy": "IndependentMultiAgent",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1100,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": 3601300,
+        "wash_dishes": 5401100
+      },
+      "all_deadlines_met": true,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": [],
+      "start_order": [
+        "wash_dishes",
+        "dry_laundry",
+        "cook_dinner"
+      ]
+    },
+    {
+      "condition": "control",
+      "policy": "RuleCoordinator",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1100,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": 3601300,
+        "wash_dishes": 5401100
+      },
+      "all_deadlines_met": true,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": [],
+      "start_order": [
+        "wash_dishes",
+        "dry_laundry",
+        "cook_dinner"
+      ]
+    },
+    {
+      "condition": "control",
+      "policy": "ConstraintCoordinator",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1100,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": 3601300,
+        "wash_dishes": 5401100
+      },
+      "all_deadlines_met": true,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": [],
+      "start_order": [
+        "wash_dishes",
+        "dry_laundry",
+        "cook_dinner"
+      ]
+    },
+    {
+      "condition": "control",
+      "policy": "DeadlineAwareCoordinator",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1900,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": 3601900,
+        "wash_dishes": 5401900
+      },
+      "all_deadlines_met": true,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": [],
+      "start_order": [
+        "cook_dinner",
+        "dry_laundry",
+        "wash_dishes"
+      ]
+    },
+    {
+      "condition": "control",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "latencies_ms": {
+        "cook_dinner": 1800,
+        "dry_laundry": 1200,
+        "wash_dishes": 1000
+      },
+      "first_action_start_latency_ms": 1100,
+      "task_service": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_deadline_met": {
+        "cook_dinner": true,
+        "dry_laundry": true,
+        "wash_dishes": true
+      },
+      "task_action_finish_time_ms": {
+        "cook_dinner": 1501900,
+        "dry_laundry": 3601300,
+        "wash_dishes": 5401100
+      },
+      "all_deadlines_met": true,
+      "final_goal_success": true,
+      "process_valid_success": true,
+      "shared_safety_gate_rejection_count": 0,
+      "rejection_reasons": [],
+      "start_order": [
+        "wash_dishes",
+        "dry_laundry",
+        "cook_dinner"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3145 @@
+{
+  "schema_version": "core-paired-baselines-0.1",
+  "status": "controlled_author_side_mechanism_probe_not_frozen_benchmark",
+  "new_api_calls": 0,
+  "physical_device_runs": 0,
+  "pair_input_sha256": {
+    "C1_HVAC": {
+      "HC-PAIR-C1-HVAC-CONFLICT.json": "bef8cc8403eb58c17bd2498008680f58f522059641b1899d47ed8dde61f25088",
+      "HC-PAIR-C1-HVAC-SAFE.json": "62ac9992444c4d47c60f46e6a50947cc821693293f56ce767380a99f77c9cc97"
+    },
+    "C3_EV_WATER": {
+      "HC-PAIR-C3-EV-WATER-CONFLICT.json": "075bd579cdb0b9f56a1589e5ef002ea7f197cda6ab8d93e6b8e52385db9ff1a1",
+      "HC-PAIR-C3-EV-WATER-CONTROL.json": "3ceb9bbbc1d153c727e808cb42c9128b16e915de362735996dba3efe3f991dd8"
+    },
+    "C3_KITCHEN": {
+      "HC-C3-KITCHEN_CIRCUIT-RHO-0.8.json": "d287a668c63097e1f07b9af6eb6baa013f5cd4410c93631f7a28c76c2ad34285",
+      "HC-C3-KITCHEN_CIRCUIT-RHO-1.2.json": "e3db065c595aad4d4884a2959b4e58c0a5b18aadc0fae24ee326ffaf59d99508",
+      "HC-C3-KITCHEN_CIRCUIT-RHO-1.6.json": "4f408b1007034f2145b791705d39f348fc029dff7e2ec26a7a59e0155986d70b"
+    }
+  },
+  "saved_model_source_sha256": "9815d84784f2fcf3b9f3b430cc8ba6c397abeffe9b05f790754be5cd7159ea62",
+  "assumptions": [
+    "C1 temperature-goal success is excluded from this analysis; action duration and end-of-comfort flag remain synthetic.",
+    "C3 EV/water durations and all capacities are controlled assumptions, not measured home limits.",
+    "Kitchen proposal batches are three samples of one task template, not three independent tasks.",
+    "A common start-time safety gate is applied to all deployable comparisons; ungated independent rows are diagnostics only.",
+    "No synthetic coordination overhead is added; all first-action latency is proposal and simulator time."
+  ],
+  "rows": [
+    {
+      "family": "C1_HVAC",
+      "condition": "overlap",
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": false
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": null
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_action_conflict"
+      ]
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "overlap",
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6900,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "overlap",
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7000
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 7000,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_action_conflict"
+      ]
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "overlap",
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6900,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "overlap",
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 600,
+      "first_action_start_ms": 600,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6600,
+        "peak_off": 7100
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 7100,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "overlap",
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 1100
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6400,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 1,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 5800,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "nonoverlap",
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "proposal_batch": "scripted-300ms",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 7100,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "nonoverlap",
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "proposal_batch": "scripted-300ms",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 7100,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "nonoverlap",
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "proposal_batch": "scripted-300ms",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 7100,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "nonoverlap",
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "proposal_batch": "scripted-300ms",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 7100,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "nonoverlap",
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "proposal_batch": "scripted-300ms",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 7100,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C1_HVAC",
+      "condition": "nonoverlap",
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "proposal_batch": "scripted-300ms",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_finish_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 7100,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_low",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": null
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_low",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": false
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": null
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_low",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": 9500
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 9500,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_low",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": 9400
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 9400,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_low",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 500,
+      "first_action_start_ms": 500,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6500,
+        "heat_water": 9500
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 9500,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_low",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONFLICT",
+      "proposal_batch": "scripted-300ms",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": 3500
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6400,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_high",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONTROL",
+      "proposal_batch": "scripted-300ms",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": 3500
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6400,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_high",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONTROL",
+      "proposal_batch": "scripted-300ms",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": 3500
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6400,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_high",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONTROL",
+      "proposal_batch": "scripted-300ms",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": 3500
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6400,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_high",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONTROL",
+      "proposal_batch": "scripted-300ms",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 400,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": 3500
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6400,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_high",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONTROL",
+      "proposal_batch": "scripted-300ms",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 500,
+      "first_action_start_ms": 500,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6500,
+        "heat_water": 3500
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6500,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_EV_WATER",
+      "condition": "capacity_high",
+      "episode_id": "HC-PAIR-C3-EV-WATER-CONTROL",
+      "proposal_batch": "scripted-300ms",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 400,
+      "task_service": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_finish_ms": {
+        "charge_ev": 6400,
+        "heat_water": 3500
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 6400,
+      "all_deadlines_met": null,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1807,
+      "first_action_start_ms": 1807,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301807,
+        "bake_meal": 2701807,
+        "wash_dishes": 5401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1118,
+      "first_action_start_ms": 1118,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701118,
+        "wash_dishes": 5401118
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401118,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1862,
+      "first_action_start_ms": 1862,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701862,
+        "wash_dishes": 5401862
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401862,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=0.8",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-0.8",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": false
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": null
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": false
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": null
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5701170
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5701170,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5701070
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5701070,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1807,
+      "first_action_start_ms": 1807,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301807,
+        "bake_meal": 2701807,
+        "wash_dishes": 5701807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5701807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5701070
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5701070,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": false,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": null,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": false,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": null,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001172,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001072,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1118,
+      "first_action_start_ms": 1118,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701118,
+        "wash_dishes": 5701118
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5701118,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1072,
+      "first_action_start_ms": 1072,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001072,
+        "bake_meal": 2701072,
+        "wash_dishes": 5401072
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401072,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": false,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": null,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": false,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": null,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001307,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001207,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1862,
+      "first_action_start_ms": 1862,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701862,
+        "wash_dishes": 5701862
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5701862,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001207,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.2",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.2",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": false,
+        "bake_meal": true,
+        "wash_dishes": false
+      },
+      "task_finish_ms": {
+        "boil_water": null,
+        "bake_meal": 2701063,
+        "wash_dishes": null
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 2,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity",
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": false,
+        "bake_meal": true,
+        "wash_dishes": false
+      },
+      "task_finish_ms": {
+        "boil_water": null,
+        "bake_meal": 2701063,
+        "wash_dishes": null
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 2,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity",
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001163,
+        "bake_meal": 2701063,
+        "wash_dishes": 8101163
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8101163,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 2,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity",
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1063,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001063,
+        "bake_meal": 2701063,
+        "wash_dishes": 8101063
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8101063,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1807,
+      "first_action_start_ms": 1807,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301807,
+        "bake_meal": 3001807,
+        "wash_dishes": 8401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1070,
+      "first_action_start_ms": 1070,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 3001070,
+        "wash_dishes": 8401070
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8401070,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-1",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 1063,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301070,
+        "bake_meal": 2701063,
+        "wash_dishes": 5401807
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401807,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": false,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": null,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": false,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": null,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 8100879,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8100879,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 1,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 879,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 8100879,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8100879,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1118,
+      "first_action_start_ms": 1118,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 3001118,
+        "wash_dishes": 8401118
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8401118,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1118,
+      "first_action_start_ms": 1118,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 3001118,
+        "wash_dishes": 8401118
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8401118,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-2",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 879,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301118,
+        "bake_meal": 2701072,
+        "wash_dishes": 5400879
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5400879,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": false,
+        "bake_meal": true,
+        "wash_dishes": false
+      },
+      "task_finish_ms": {
+        "boil_water": null,
+        "bake_meal": 2701207,
+        "wash_dishes": null
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 2,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity",
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "RuleCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": false,
+        "bake_meal": true,
+        "wash_dishes": false
+      },
+      "task_finish_ms": {
+        "boil_water": null,
+        "bake_meal": 2701207,
+        "wash_dishes": null
+      },
+      "all_tasks_served": false,
+      "all_tasks_finished_ms": null,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 2,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity",
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "GateRetryRule",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001307,
+        "bake_meal": 2701207,
+        "wash_dishes": 8101307
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8101307,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 2,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": [
+        "shared_gate_capacity",
+        "shared_gate_capacity"
+      ]
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "ConstraintCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1207,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 3001207,
+        "bake_meal": 2701207,
+        "wash_dishes": 8101207
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8101207,
+      "all_deadlines_met": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "DeadlineAwareCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1862,
+      "first_action_start_ms": 1862,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 3001862,
+        "wash_dishes": 8401862
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8401862,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "shared_safety_gate": true,
+      "first_safe_action_start_ms": 1862,
+      "first_action_start_ms": 1862,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 3001862,
+        "wash_dishes": 8401862
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 8401862,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    },
+    {
+      "family": "C3_KITCHEN",
+      "condition": "rho=1.6",
+      "episode_id": "HC-C3-KITCHEN_CIRCUIT-RHO-1.6",
+      "proposal_batch": "deepseek-flash-parallel-3",
+      "policy": "IndependentMultiAgent",
+      "shared_safety_gate": false,
+      "first_safe_action_start_ms": null,
+      "first_action_start_ms": 1207,
+      "task_service": {
+        "boil_water": true,
+        "bake_meal": true,
+        "wash_dishes": true
+      },
+      "task_finish_ms": {
+        "boil_water": 301862,
+        "bake_meal": 2701207,
+        "wash_dishes": 5401249
+      },
+      "all_tasks_served": true,
+      "all_tasks_finished_ms": 5401249,
+      "all_deadlines_met": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "shared_gate_rejections": 0,
+      "constraint_violation_duration_ms": 0,
+      "rejection_reasons": []
+    }
+  ],
+  "summary": {
+    "C1_HVAC": {
+      "nonoverlap": {
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 7100,
+          "gate_rejections": 0
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 7100,
+          "gate_rejections": 0
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 7100,
+          "gate_rejections": 0
+        },
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 7100,
+          "gate_rejections": 0
+        },
+        "RuleCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 7100,
+          "gate_rejections": 0
+        }
+      },
+      "overlap": {
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 6900,
+          "gate_rejections": 0
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 600,
+          "median_all_tasks_finished_ms": 7100,
+          "gate_rejections": 0
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 7000,
+          "gate_rejections": 1
+        },
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": null,
+          "gate_rejections": 1
+        },
+        "RuleCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 6900,
+          "gate_rejections": 0
+        }
+      }
+    },
+    "C3_EV_WATER": {
+      "capacity_high": {
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 6400,
+          "gate_rejections": 0
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 500,
+          "median_all_tasks_finished_ms": 6500,
+          "gate_rejections": 0
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 6400,
+          "gate_rejections": 0
+        },
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 6400,
+          "gate_rejections": 0
+        },
+        "RuleCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 6400,
+          "gate_rejections": 0
+        }
+      },
+      "capacity_low": {
+        "ConstraintCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 9400,
+          "gate_rejections": 0
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 500,
+          "median_all_tasks_finished_ms": 9500,
+          "gate_rejections": 0
+        },
+        "GateRetryRule": {
+          "runs": 1,
+          "all_tasks_served": 1,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": 9500,
+          "gate_rejections": 1
+        },
+        "IndependentMultiAgent": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": null,
+          "gate_rejections": 1
+        },
+        "RuleCoordinator": {
+          "runs": 1,
+          "all_tasks_served": 0,
+          "all_deadlines_met": null,
+          "median_first_safe_action_ms": 400,
+          "median_all_tasks_finished_ms": null,
+          "gate_rejections": 1
+        }
+      }
+    },
+    "C3_KITCHEN": {
+      "rho=0.8": {
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 3,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": 5401249,
+          "gate_rejections": 0
+        },
+        "ConstraintCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 3,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": 5401249,
+          "gate_rejections": 0
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 3,
+          "median_first_safe_action_ms": 1807,
+          "median_all_tasks_finished_ms": 5401807,
+          "gate_rejections": 0
+        },
+        "GateRetryRule": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 3,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": 5401249,
+          "gate_rejections": 0
+        },
+        "IndependentMultiAgent": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 3,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": 5401249,
+          "gate_rejections": 0
+        },
+        "RuleCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 3,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": 5401249,
+          "gate_rejections": 0
+        }
+      },
+      "rho=1.2": {
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 1,
+          "median_first_safe_action_ms": 1072,
+          "median_all_tasks_finished_ms": 5401249,
+          "gate_rejections": 0
+        },
+        "ConstraintCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 1,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": 5401249,
+          "gate_rejections": 0
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 3,
+          "median_first_safe_action_ms": 1807,
+          "median_all_tasks_finished_ms": 5701807,
+          "gate_rejections": 0
+        },
+        "GateRetryRule": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 1,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": 5401249,
+          "gate_rejections": 3
+        },
+        "IndependentMultiAgent": {
+          "runs": 3,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": null,
+          "gate_rejections": 3
+        },
+        "RuleCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": null,
+          "gate_rejections": 3
+        }
+      },
+      "rho=1.6": {
+        "CapacityAwareDeadlineCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 3,
+          "median_first_safe_action_ms": 1118,
+          "median_all_tasks_finished_ms": 8401118,
+          "gate_rejections": 0
+        },
+        "ConstraintCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": 8101063,
+          "gate_rejections": 0
+        },
+        "DeadlineAwareCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 3,
+          "median_first_safe_action_ms": 1807,
+          "median_all_tasks_finished_ms": 8401807,
+          "gate_rejections": 0
+        },
+        "GateRetryRule": {
+          "runs": 3,
+          "all_tasks_served": 3,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": 8101163,
+          "gate_rejections": 5
+        },
+        "IndependentMultiAgent": {
+          "runs": 3,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": null,
+          "gate_rejections": 5
+        },
+        "RuleCoordinator": {
+          "runs": 3,
+          "all_tasks_served": 0,
+          "all_deadlines_met": 0,
+          "median_first_safe_action_ms": 1063,
+          "median_all_tasks_finished_ms": null,
+          "gate_rejections": 5
+        }
+      }
+    }
+  }
+}

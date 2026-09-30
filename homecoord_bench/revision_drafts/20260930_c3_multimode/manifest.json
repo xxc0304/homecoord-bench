@@ -1,0 +1,35 @@
+{
+  "version": "multimode-runtime-0.1",
+  "candidate_sha256": {
+    "capacity-3.json": "E0E1E443FC8FEF3992F639338F0FF57B3E75B166465032C288737F40F60F3D15",
+    "capacity-4.json": "0D8224A20D279510244E7118067B8431E834E5E35F974BDA848F6CE24E0A5A5C",
+    "capacity-5.json": "9DF649D2C073951C1513D6C8F37CE9D233AFFD61B6193319BDCB3B7F3422B49A"
+  },
+  "capacities": [
+    3,
+    4,
+    5
+  ],
+  "scripted_modes": [
+    "eco",
+    "fast"
+  ],
+  "arrival_orders": "all six permutations of three tasks, 800/1000/1200ms",
+  "policies": [
+    "GateRetryRule",
+    "ConstraintCoordinator",
+    "DeadlineAwareCoordinator",
+    "FixedProposalExact",
+    "ReleasedModeEnumerationExact"
+  ],
+  "offline_runs": 180,
+  "planned_api_requests": 18,
+  "repetitions": 2,
+  "max_attempts": 1,
+  "mode_authority_groups": "first four fixed proposal; last can change publicly acceptable mode",
+  "objective": "all services and deadlines, then minimum makespan for exact baselines; waiting separately reported",
+  "information": "all tasks released; same public costs/deadlines/context; exact plans wait all returned proposals",
+  "timing": "plan wall cost separate, not injected; original response times preserved with fixed hold",
+  "limits": "single author-designed structure, synthetic abstract resource units; development not held-out data",
+  "status": "locked_before_multimode_experiments"
+}

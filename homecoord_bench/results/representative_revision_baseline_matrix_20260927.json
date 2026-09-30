@@ -1,0 +1,5763 @@
+{
+  "schema_version": "representative-revision-baseline-matrix-0.1",
+  "date": "2026-09-27",
+  "draft_count": 9,
+  "policy_count": 5,
+  "repeats_per_configuration": 3,
+  "run_count": 135,
+  "proposal_latency_ms": "300 ms in all arms; synthetic fixed delay",
+  "api_calls": 0,
+  "real_device_runs": 0,
+  "persisted_draft_generator_match": true,
+  "all_repeated_runs_exactly_equal": true,
+  "canonical_candidates_modified": false,
+  "draft_hashes_sha256": {
+    "HC-PAIR-C1-HVAC-CONFLICT": "fa9b75366ad0eb8c27dc1cd2cadfbfd8a819e1d31f581c9ff799e81c75bb8d5a",
+    "HC-PAIR-C1-HVAC-SAFE": "67dbe9645b652ff1e207e43495abfc12c9d0a3d8f31031996e24862277e306af",
+    "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY": "3aad46f20749aba6a9be391b9ab7b93890d659dbe98e38f000aff4f469871a6b",
+    "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT": "ff154f7fe8bff6651a39cc2731cb022c38d922f9086b23eefa1fa37b7fad432c",
+    "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL": "aaffbf251e3cbe9446cdbd9e9dcc40033f79b23a95d72f9e452512d6a10e3674",
+    "HC-PAIR-C4-CLEAN-NO-EVENT": "952e53cda9a277c420df60f8a7b409862d83bfae707f357475ad62d33ddd14ff",
+    "HC-PAIR-C4-CLEAN-PRECOMMIT": "305f705d1cbca82351a58c2b1c6f74dd6c43cd960b0e98a557c6691206899e30",
+    "HC-PAIR-C4-CLEAN-INFLIGHT": "f5c9d0c0ab1ca12c06131e83d0eb61e33eac1919c96a80246affb53d8beb77e1",
+    "HC-PAIR-C4-CLEAN-POSTCOMPLETE": "77251a093cd54d32d87ff961bd5562d215cc2a0c86e1fee3cd5cdf3d1e49dccf"
+  },
+  "summary_by_episode_and_policy": {
+    "HC-PAIR-C1-HVAC-CONFLICT": {
+      "IndependentMultiAgent": {
+        "condition": "overlapping_cool_and_off",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 1,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6400,
+          "peak_off": 1100
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 6400,
+        "task_completion_time_ms": 6400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 5800,
+        "rejected_action_count": 0
+      },
+      "RuleCoordinator": {
+        "condition": "overlapping_cool_and_off",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6400,
+          "peak_off": 6900
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 6400,
+        "task_completion_time_ms": 6400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "ConstraintCoordinator": {
+        "condition": "overlapping_cool_and_off",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6400,
+          "peak_off": 6900
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 6400,
+        "task_completion_time_ms": 6400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "DeadlineAwareCoordinator": {
+        "condition": "overlapping_cool_and_off",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6600,
+          "peak_off": 7100
+        },
+        "first_action_start_latency_ms": 600,
+        "first_goal_progress_latency_ms": 6600,
+        "task_completion_time_ms": 6600,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "CentralSingleAgent": {
+        "condition": "overlapping_cool_and_off",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6400,
+          "peak_off": 6900
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 6400,
+        "task_completion_time_ms": 6400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      }
+    },
+    "HC-PAIR-C1-HVAC-SAFE": {
+      "IndependentMultiAgent": {
+        "condition": "energy_action_after_cooling_window",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6400,
+          "peak_off": 7100
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 6400,
+        "task_completion_time_ms": 6400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "RuleCoordinator": {
+        "condition": "energy_action_after_cooling_window",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6400,
+          "peak_off": 7100
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 6400,
+        "task_completion_time_ms": 6400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "ConstraintCoordinator": {
+        "condition": "energy_action_after_cooling_window",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6400,
+          "peak_off": 7100
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 6400,
+        "task_completion_time_ms": 6400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "DeadlineAwareCoordinator": {
+        "condition": "energy_action_after_cooling_window",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6400,
+          "peak_off": 7100
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 6400,
+        "task_completion_time_ms": 6400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "CentralSingleAgent": {
+        "condition": "energy_action_after_cooling_window",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "comfort_cool": true,
+          "peak_off": true
+        },
+        "task_action_finish_time_ms": {
+          "comfort_cool": 6400,
+          "peak_off": 7100
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 6400,
+        "task_completion_time_ms": 6400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      }
+    },
+    "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT": {
+      "IndependentMultiAgent": {
+        "condition": "exact_capacity_limit",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "RuleCoordinator": {
+        "condition": "exact_capacity_limit",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "ConstraintCoordinator": {
+        "condition": "exact_capacity_limit",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "DeadlineAwareCoordinator": {
+        "condition": "exact_capacity_limit",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1500,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 500,
+        "first_goal_progress_latency_ms": 1500,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "CentralSingleAgent": {
+        "condition": "exact_capacity_limit",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 4400
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 4400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      }
+    },
+    "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY": {
+      "IndependentMultiAgent": {
+        "condition": "over_capacity",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 1,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "RuleCoordinator": {
+        "condition": "over_capacity",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 1,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "ConstraintCoordinator": {
+        "condition": "over_capacity",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 4400
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 4400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "DeadlineAwareCoordinator": {
+        "condition": "over_capacity",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 4500,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 500,
+        "first_goal_progress_latency_ms": 3500,
+        "task_completion_time_ms": 4500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "CentralSingleAgent": {
+        "condition": "over_capacity",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 4400
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 4400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      }
+    },
+    "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL": {
+      "IndependentMultiAgent": {
+        "condition": "safe_parallel_control",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "RuleCoordinator": {
+        "condition": "safe_parallel_control",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "ConstraintCoordinator": {
+        "condition": "safe_parallel_control",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "DeadlineAwareCoordinator": {
+        "condition": "safe_parallel_control",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1500,
+          "bedroom_cool": 3500
+        },
+        "first_action_start_latency_ms": 500,
+        "first_goal_progress_latency_ms": 1500,
+        "task_completion_time_ms": 3500,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "CentralSingleAgent": {
+        "condition": "safe_parallel_control",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "study_light": true,
+          "bedroom_cool": true
+        },
+        "task_action_finish_time_ms": {
+          "study_light": 1400,
+          "bedroom_cool": 4400
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 1400,
+        "task_completion_time_ms": 4400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      }
+    },
+    "HC-PAIR-C4-CLEAN-INFLIGHT": {
+      "IndependentMultiAgent": {
+        "condition": "inflight",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 1,
+        "unsafe_state_onset_during_action_count": 1,
+        "state_constraint_violation_duration_ms": 2900,
+        "rejected_action_count": 0
+      },
+      "RuleCoordinator": {
+        "condition": "inflight",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": false
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": null
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 1,
+        "unsafe_state_onset_during_action_count": 1,
+        "state_constraint_violation_duration_ms": 2900,
+        "rejected_action_count": 1
+      },
+      "ConstraintCoordinator": {
+        "condition": "inflight",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": false
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": null
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 1,
+        "unsafe_state_onset_during_action_count": 1,
+        "state_constraint_violation_duration_ms": 2900,
+        "rejected_action_count": 1
+      },
+      "DeadlineAwareCoordinator": {
+        "condition": "inflight",
+        "proposal_latency_ms": 300,
+        "goal_success": false,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": false,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": null,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 700,
+        "first_goal_progress_latency_ms": null,
+        "task_completion_time_ms": null,
+        "stale_at_action_start_count": 1,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 1
+      },
+      "CentralSingleAgent": {
+        "condition": "inflight",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 1,
+        "unsafe_state_onset_during_action_count": 1,
+        "state_constraint_violation_duration_ms": 2900,
+        "rejected_action_count": 0
+      }
+    },
+    "HC-PAIR-C4-CLEAN-NO-EVENT": {
+      "IndependentMultiAgent": {
+        "condition": "no_event",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "RuleCoordinator": {
+        "condition": "no_event",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "ConstraintCoordinator": {
+        "condition": "no_event",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "DeadlineAwareCoordinator": {
+        "condition": "no_event",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3700,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 700,
+        "first_goal_progress_latency_ms": 3700,
+        "task_completion_time_ms": 3700,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "CentralSingleAgent": {
+        "condition": "no_event",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      }
+    },
+    "HC-PAIR-C4-CLEAN-POSTCOMPLETE": {
+      "IndependentMultiAgent": {
+        "condition": "postcomplete",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "RuleCoordinator": {
+        "condition": "postcomplete",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "ConstraintCoordinator": {
+        "condition": "postcomplete",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "DeadlineAwareCoordinator": {
+        "condition": "postcomplete",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3700,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 700,
+        "first_goal_progress_latency_ms": 3700,
+        "task_completion_time_ms": 3700,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      },
+      "CentralSingleAgent": {
+        "condition": "postcomplete",
+        "proposal_latency_ms": 300,
+        "goal_success": true,
+        "process_valid_success": true,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 3500
+        },
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 3400,
+        "task_completion_time_ms": 3400,
+        "stale_at_action_start_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 0
+      }
+    },
+    "HC-PAIR-C4-CLEAN-PRECOMMIT": {
+      "IndependentMultiAgent": {
+        "condition": "precommit",
+        "proposal_latency_ms": 300,
+        "goal_success": false,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": false,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": null,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 700,
+        "first_goal_progress_latency_ms": null,
+        "task_completion_time_ms": null,
+        "stale_at_action_start_count": 1,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 1
+      },
+      "RuleCoordinator": {
+        "condition": "precommit",
+        "proposal_latency_ms": 300,
+        "goal_success": false,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": false,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": null,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 700,
+        "first_goal_progress_latency_ms": null,
+        "task_completion_time_ms": null,
+        "stale_at_action_start_count": 1,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 1
+      },
+      "ConstraintCoordinator": {
+        "condition": "precommit",
+        "proposal_latency_ms": 300,
+        "goal_success": false,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": false,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": null,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 700,
+        "first_goal_progress_latency_ms": null,
+        "task_completion_time_ms": null,
+        "stale_at_action_start_count": 1,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 1
+      },
+      "DeadlineAwareCoordinator": {
+        "condition": "precommit",
+        "proposal_latency_ms": 300,
+        "goal_success": false,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": false,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": null,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 700,
+        "first_goal_progress_latency_ms": null,
+        "task_completion_time_ms": null,
+        "stale_at_action_start_count": 1,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 1
+      },
+      "CentralSingleAgent": {
+        "condition": "precommit",
+        "proposal_latency_ms": 300,
+        "goal_success": false,
+        "process_valid_success": false,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "task_service": {
+          "bedroom_clean": false,
+          "bedroom_occupancy": true
+        },
+        "task_action_finish_time_ms": {
+          "bedroom_clean": null,
+          "bedroom_occupancy": 800
+        },
+        "first_action_start_latency_ms": 700,
+        "first_goal_progress_latency_ms": null,
+        "task_completion_time_ms": null,
+        "stale_at_action_start_count": 1,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "rejected_action_count": 1
+      }
+    }
+  },
+  "runs": [
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 1,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 1100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 5800,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 1,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 1100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 5800,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 1,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 1100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 5800,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6600,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 600,
+      "first_goal_progress_latency_ms": 6600,
+      "task_completion_time_ms": 6600,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6600,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 600,
+      "first_goal_progress_latency_ms": 6600,
+      "task_completion_time_ms": 6600,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6600,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 600,
+      "first_goal_progress_latency_ms": 6600,
+      "task_completion_time_ms": 6600,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-CONFLICT",
+      "base_episode_id": "HC-M01",
+      "condition": "overlapping_cool_and_off",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 6900
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C1-HVAC-SAFE",
+      "base_episode_id": "HC-M01",
+      "condition": "energy_action_after_cooling_window",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true
+      },
+      "task_action_finish_time_ms": {
+        "comfort_cool": 6400,
+        "peak_off": 7100
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 6400,
+      "task_completion_time_ms": 6400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1500,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 500,
+      "first_goal_progress_latency_ms": 1500,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1500,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 500,
+      "first_goal_progress_latency_ms": 1500,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1500,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 500,
+      "first_goal_progress_latency_ms": 1500,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-EXACT-CAPACITY-LIMIT",
+      "base_episode_id": "HC-M11",
+      "condition": "exact_capacity_limit",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 4500,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 500,
+      "first_goal_progress_latency_ms": 3500,
+      "task_completion_time_ms": 4500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 4500,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 500,
+      "first_goal_progress_latency_ms": 3500,
+      "task_completion_time_ms": 4500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 4500,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 500,
+      "first_goal_progress_latency_ms": 3500,
+      "task_completion_time_ms": 4500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-OVER-CAPACITY",
+      "base_episode_id": "HC-M11",
+      "condition": "over_capacity",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1500,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 500,
+      "first_goal_progress_latency_ms": 1500,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1500,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 500,
+      "first_goal_progress_latency_ms": 1500,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1500,
+        "bedroom_cool": 3500
+      },
+      "first_action_start_latency_ms": 500,
+      "first_goal_progress_latency_ms": 1500,
+      "task_completion_time_ms": 3500,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C3-HOME-POWER-SAFE-PARALLEL-CONTROL",
+      "base_episode_id": "HC-M11",
+      "condition": "safe_parallel_control",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "study_light": true,
+        "bedroom_cool": true
+      },
+      "task_action_finish_time_ms": {
+        "study_light": 1400,
+        "bedroom_cool": 4400
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 1400,
+      "task_completion_time_ms": 4400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": null
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": null
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": null
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": null
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": null
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": false
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": null
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-INFLIGHT",
+      "base_episode_id": "HC-M16",
+      "condition": "inflight",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 1,
+      "unsafe_state_onset_during_action_count": 1,
+      "state_constraint_violation_duration_ms": 2900,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3700,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": 3700,
+      "task_completion_time_ms": 3700,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3700,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": 3700,
+      "task_completion_time_ms": 3700,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3700,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": 3700,
+      "task_completion_time_ms": 3700,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-NO-EVENT",
+      "base_episode_id": "HC-M16",
+      "condition": "no_event",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3700,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": 3700,
+      "task_completion_time_ms": 3700,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3700,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": 3700,
+      "task_completion_time_ms": 3700,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3700,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": 3700,
+      "task_completion_time_ms": 3700,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-POSTCOMPLETE",
+      "base_episode_id": "HC-M16",
+      "condition": "postcomplete",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": true,
+      "process_valid_success": true,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": true,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": 3400,
+        "bedroom_occupancy": 3500
+      },
+      "first_action_start_latency_ms": 400,
+      "first_goal_progress_latency_ms": 3400,
+      "task_completion_time_ms": 3400,
+      "stale_at_action_start_count": 0,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 0,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "IndependentMultiAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "IndependentMultiAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "IndependentMultiAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "RuleCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "RuleCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "RuleCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "ConstraintCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "ConstraintCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "ConstraintCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "DeadlineAwareCoordinator",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "CentralSingleAgent",
+      "repeat": 1,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "CentralSingleAgent",
+      "repeat": 2,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    },
+    {
+      "episode_id": "HC-PAIR-C4-CLEAN-PRECOMMIT",
+      "base_episode_id": "HC-M16",
+      "condition": "precommit",
+      "policy": "CentralSingleAgent",
+      "repeat": 3,
+      "proposal_latency_ms": 300,
+      "goal_success": false,
+      "process_valid_success": false,
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "task_service": {
+        "bedroom_clean": false,
+        "bedroom_occupancy": true
+      },
+      "task_action_finish_time_ms": {
+        "bedroom_clean": null,
+        "bedroom_occupancy": 800
+      },
+      "first_action_start_latency_ms": 700,
+      "first_goal_progress_latency_ms": null,
+      "task_completion_time_ms": null,
+      "stale_at_action_start_count": 1,
+      "in_flight_precondition_invalidated_action_count": 0,
+      "unsafe_state_onset_during_action_count": 0,
+      "state_constraint_violation_duration_ms": 0,
+      "rejected_action_count": 1,
+      "api_calls_concurrent": false
+    }
+  ],
+  "interpretation": "Fixed-proposal deterministic mechanism audit only; no calibrated physical claims, independent domain review, or new-algorithm evidence."
+}

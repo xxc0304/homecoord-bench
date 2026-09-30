@@ -12,7 +12,7 @@ from copy import deepcopy
 from time import perf_counter_ns
 from typing import Any
 
-from evaluate import evaluate, get_path, set_path
+from evaluate import constraints_hold, evaluate, get_path, set_path
 from runtime.protocol import build_agent_request
 
 
@@ -47,7 +47,7 @@ def materialize_action(
     action: dict[str, Any],
     effective_at_ms: int,
 ) -> dict[str, Any]:
-    """Ground a permitted proposal using episode capabilities or legacy seed rules."""
+    """Ground a proposal from episode data, retaining fallback for old records."""
     episode = episode_or_id if isinstance(episode_or_id, dict) else None
     episode_id = episode.get("base_episode_id", episode["episode_id"]) if episode else episode_or_id
     target = _target_name(action["target"])
@@ -76,6 +76,8 @@ def materialize_action(
         actual_duration = grounding["duration_ms"]
         actual_power = grounding["power_kw"]
     else:
+        # Backward compatibility only. Current seed, paired, physical, and
+        # candidate episodes should define their action grounding in data.
         key = (episode_id, agent_id, task_id)
         if key == ("HC-SEED-001", "LightingAgent", "light"):
             operation, effects = "set_reading", {"devices.study_light": "reading", "study.lux": 500}
@@ -256,6 +258,11 @@ def run_closed_loop_episode(
     *,
     synthetic_latency: bool,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Run the legacy proposal loop, which applies full effects at action start.
+
+    Long-action lifecycle experiments should use
+    ``runtime.event_simulator.run_event_simulation`` instead.
+    """
     if architecture not in {"CentralSingleAgent", "IndependentMultiAgent", "RuleCoordinator", "ConstraintCoordinator"}:
         raise ValueError(f"unsupported architecture: {architecture}")
 
@@ -292,6 +299,7 @@ def run_closed_loop_episode(
             current_time_ms=task["release_at_ms"],
             current_state=state,
             state_version=version,
+            include_evaluation_hints=getattr(client, "include_evaluation_hints", False),
         )
         decision, latency = _call_agent(client, request, instructions, synthetic_latency, architecture)
         for action in decision.get("actions", []):
@@ -310,7 +318,7 @@ def run_closed_loop_episode(
     rejected: list[dict[str, Any]] = []
     serial_cursor = 0
 
-    for proposal_index, proposal in enumerate(proposals):
+    for proposal in proposals:
         task, agent, action = proposal["task"], proposal["agent"], proposal["action"]
         effective_at = proposal["ready_at_ms"] + DEVICE_DELAY_MS
         if architecture == "CentralSingleAgent":
@@ -319,39 +327,28 @@ def run_closed_loop_episode(
         if architecture == "CentralSingleAgent":
             candidate["agent_id"] = "CentralAgent"
         state, current_version = _state_at(episode, events + accepted, effective_at)
-        stale = action["based_on_state_version"] < current_version and any(
+        invalid_precondition = any(
             not _condition_holds(state, requirement) for requirement in candidate["requires"]
         )
+        stale = invalid_precondition and action["based_on_state_version"] < current_version
+        projected_state = deepcopy(state)
+        _apply_patch(projected_state, candidate["effects"])
+        violates_policy = not constraints_hold(projected_state, episode.get("constraints", []))
         direct = next((
             old for old in accepted
             if _incompatible(old, candidate, episode)
             and (architecture == "CentralSingleAgent" or _overlap(old, candidate) > 0)
         ), None)
-        pending_higher_priority = None
-        if architecture != "IndependentMultiAgent":
-            for pending in proposals[proposal_index + 1:]:
-                if pending["task"].get("priority", 0) <= task.get("priority", 0):
-                    continue
-                pending_event = materialize_action(
-                    episode,
-                    pending["specialist_agent_id"],
-                    pending["task"]["task_id"],
-                    pending["action"],
-                    pending["ready_at_ms"] + DEVICE_DELAY_MS,
-                )
-                if _incompatible(candidate, pending_event, episode):
-                    pending_higher_priority = pending
-                    break
-
         reason = None
-        if architecture != "IndependentMultiAgent" and stale:
-            reason = "stale_state"
-        elif pending_higher_priority:
-            reason = "priority_resolution"
+        # Every architecture enforces device preconditions. A coordinator sees
+        # only accepted actions and proposals that have already arrived.
+        if invalid_precondition:
+            reason = "stale_state" if stale else "unsafe_precondition"
+        elif architecture != "IndependentMultiAgent" and violates_policy:
+            reason = "constraint_violation"
         elif architecture != "IndependentMultiAgent" and direct:
-            old_priority = next((p["task"].get("priority", 0) for p in proposals if p["action"]["proposal_id"] == direct["proposal_id"]), 0)
-            if task.get("priority", 0) <= old_priority:
-                reason = "priority_resolution"
+            # An earlier physical action cannot be undone retroactively.
+            reason = "active_direct_conflict"
         elif architecture == "CentralSingleAgent" and any(_indirect_conflict(old, candidate, episode) for old in accepted):
             latest_end = max(
                 old["timestamp_ms"] + old["duration_ms"]
@@ -393,7 +390,9 @@ def run_closed_loop_episode(
     # A stale proposal can opt into a local recovery wake-up. One explicit defer
     # is followed so that a valid recovery is not lost merely because the first
     # retry asks for a later wake-up. The legacy cleaning seed keeps its default.
-    for rejected_item in list(rejected):
+    # A standalone agent is not given the coordinator's recovery wake-up.
+    recovery_candidates = [] if architecture == "IndependentMultiAgent" else list(rejected)
+    for rejected_item in recovery_candidates:
         if rejected_item["reason"] != "stale_state":
             continue
         future = _recovery_event(episode, rejected_item)
@@ -410,6 +409,7 @@ def run_closed_loop_episode(
                 current_time_ms=retry_at,
                 current_state=state,
                 state_version=version,
+                include_evaluation_hints=getattr(client, "include_evaluation_hints", False),
             )
             decision, latency = _call_agent(client, request, instructions, synthetic_latency, architecture)
             decision_at = retry_at + latency
@@ -421,6 +421,19 @@ def run_closed_loop_episode(
                 )
                 if architecture == "CentralSingleAgent":
                     event["agent_id"] = "CentralAgent"
+                current_state, _ = _state_at(episode, events + accepted, event["timestamp_ms"])
+                if any(not _condition_holds(current_state, requirement) for requirement in event["requires"]):
+                    events.append({"type": "coordination_decision", "timestamp_ms": decision_at,
+                                   "decision": "reject_retry", "proposal_id": action["proposal_id"],
+                                   "reason": "unsafe_precondition"})
+                    break
+                projected_state = deepcopy(current_state)
+                _apply_patch(projected_state, event["effects"])
+                if not constraints_hold(projected_state, episode.get("constraints", [])):
+                    events.append({"type": "coordination_decision", "timestamp_ms": decision_at,
+                                   "decision": "reject_retry", "proposal_id": action["proposal_id"],
+                                   "reason": "constraint_violation"})
+                    break
                 events.append({"type": "coordination_decision", "timestamp_ms": decision_at, "decision": "accept_retry", "proposal_id": action["proposal_id"]})
                 accepted.append(event)
                 break

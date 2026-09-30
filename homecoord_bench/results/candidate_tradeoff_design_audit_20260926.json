@@ -1,0 +1,2342 @@
+{
+  "experiment": "candidate_tradeoff_design_audit",
+  "status": "candidate_synthetic_deterministic_only",
+  "definitions": {
+    "strong_baseline": "ConstraintCoordinator",
+    "safe_frontier": "Two process-valid baselines each outperform the other on at least one of service rate, first action latency, and completion time; cases with missing latency are excluded.",
+    "control_overhead": "Any difference in first action, completion, or service rate between the strong baseline and independent agents on a matched safe control."
+  },
+  "summary": {
+    "original_candidate_count": 20,
+    "family_counts": {
+      "direct_device_conflict": 5,
+      "indirect_environment_conflict": 5,
+      "resource_capacity_conflict": 5,
+      "stale_state_action": 5
+    },
+    "matched_safe_control_count": 10,
+    "strong_process_valid": 20,
+    "central_process_valid": 20,
+    "independent_process_valid": 0,
+    "strong_service_loss_vs_independent": 9,
+    "strong_completion_slower_vs_independent": 10,
+    "strong_first_action_slower_vs_independent": 0,
+    "originals_with_nontrivial_safe_frontier": 0,
+    "controls_independent_process_valid": 10,
+    "controls_with_strong_overhead": 0,
+    "originals_with_environment_only_goal_success": [
+      "HC-M17",
+      "HC-M18",
+      "HC-M19",
+      "HC-M20"
+    ],
+    "originals_with_no_strong_first_effective_action": [
+      "HC-M17",
+      "HC-M18",
+      "HC-M19",
+      "HC-M20"
+    ]
+  },
+  "cases": [
+    {
+      "episode_id": "HC-M01",
+      "task_family": "direct_device_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 1000,
+          "completion_ms": 1000,
+          "last_executed_action_end_ms": 7000,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": false,
+          "conflict_counts": {
+            "C1": 1,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M02",
+      "task_family": "direct_device_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 1000,
+          "completion_ms": 1000,
+          "last_executed_action_end_ms": 1800,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": false,
+          "conflict_counts": {
+            "C1": 1,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 1500,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 1500,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 1500,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M03",
+      "task_family": "direct_device_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 1000,
+          "completion_ms": 1000,
+          "last_executed_action_end_ms": 1700,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": false,
+          "conflict_counts": {
+            "C1": 1,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 1600,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 1400,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 1400,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M04",
+      "task_family": "direct_device_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 1000,
+          "completion_ms": 1000,
+          "last_executed_action_end_ms": 1700,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": false,
+          "conflict_counts": {
+            "C1": 1,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 1600,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 1400,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 1400,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M05",
+      "task_family": "direct_device_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 1000,
+          "completion_ms": 1000,
+          "last_executed_action_end_ms": 6000,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": false,
+          "conflict_counts": {
+            "C1": 1,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 5700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 5700,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 5700,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M06",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 3100,
+          "last_executed_action_end_ms": 6100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 2700,
+          "last_executed_action_end_ms": 5700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M06.matched_safe",
+      "base_episode_id": "HC-M06",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "task_stream.bedroom_heat.release_at_ms",
+        "before": 100,
+        "after": 3000
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 4000,
+          "last_executed_action_end_ms": 7000,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 3700,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 3700,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 3700,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M07",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 3100,
+          "last_executed_action_end_ms": 13100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 10800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 10800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 2700,
+          "last_executed_action_end_ms": 12700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M07.matched_safe",
+      "base_episode_id": "HC-M07",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "task_stream.cool_room.release_at_ms",
+        "before": 100,
+        "after": 3000
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 4000,
+          "last_executed_action_end_ms": 14000,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 3700,
+          "last_executed_action_end_ms": 13700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 3700,
+          "last_executed_action_end_ms": 13700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 3700,
+          "last_executed_action_end_ms": 13700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M08",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 1000,
+          "last_executed_action_end_ms": 7100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 3800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 3800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M08.matched_safe",
+      "base_episode_id": "HC-M08",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "task_stream.dehumidify.release_at_ms",
+        "before": 100,
+        "after": 4000
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 1000,
+          "last_executed_action_end_ms": 8000,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 7700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 7700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 7700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M09",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 5100,
+          "last_executed_action_end_ms": 6600,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 4700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 4700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 4700,
+          "last_executed_action_end_ms": 6200,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M09.matched_safe",
+      "base_episode_id": "HC-M09",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "task_stream.ventilate_balcony.release_at_ms",
+        "before": 100,
+        "after": 5000
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 6000,
+          "last_executed_action_end_ms": 7500,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 5700,
+          "last_executed_action_end_ms": 7200,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 5700,
+          "last_executed_action_end_ms": 7200,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 5700,
+          "last_executed_action_end_ms": 7200,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M10",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 6100,
+          "last_executed_action_end_ms": 8100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 5700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 1,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 5700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 5700,
+          "last_executed_action_end_ms": 7700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M10.matched_safe",
+      "base_episode_id": "HC-M10",
+      "task_family": "indirect_environment_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "task_stream.peak_limit.release_at_ms",
+        "before": 100,
+        "after": 6000
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 7000,
+          "last_executed_action_end_ms": 9000,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 6700,
+          "last_executed_action_end_ms": 8700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 6700,
+          "last_executed_action_end_ms": 8700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 6700,
+          "last_executed_action_end_ms": 8700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M11",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 2100,
+          "last_executed_action_end_ms": 5100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 1700,
+          "last_executed_action_end_ms": 4700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M11.matched_safe",
+      "base_episode_id": "HC-M11",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "home.resources.max_power_kw and C3 rule capacity",
+        "before": 1.2,
+        "after": 1.6
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 2100,
+          "last_executed_action_end_ms": 5100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M12",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 5100,
+          "last_executed_action_end_ms": 9100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 4800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 4800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 4700,
+          "last_executed_action_end_ms": 8700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M12.matched_safe",
+      "base_episode_id": "HC-M12",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "home.resources.max_power_kw and C3 rule capacity",
+        "before": 3.0,
+        "after": 3.6
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 5100,
+          "last_executed_action_end_ms": 9100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 4800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 4800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 4800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M13",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 7100,
+          "last_executed_action_end_ms": 10100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 6700,
+          "last_executed_action_end_ms": 9700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M13.matched_safe",
+      "base_episode_id": "HC-M13",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "home.resources.max_power_kw and C3 rule capacity",
+        "before": 6.0,
+        "after": 7.1
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 7100,
+          "last_executed_action_end_ms": 10100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 6700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M14",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 4100,
+          "last_executed_action_end_ms": 5100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 3700,
+          "last_executed_action_end_ms": 4700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M14.matched_safe",
+      "base_episode_id": "HC-M14",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "home.resources.max_power_kw and C3 rule capacity",
+        "before": 3.0,
+        "after": 3.6
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 4100,
+          "last_executed_action_end_ms": 5100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 3700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M15",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 6100,
+          "last_executed_action_end_ms": 11100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 5800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 1,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 5800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 5700,
+          "last_executed_action_end_ms": 10700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M15.matched_safe",
+      "base_episode_id": "HC-M15",
+      "task_family": "resource_capacity_conflict",
+      "case_type": "matched_safe_control",
+      "review_status": "generated_control_unreviewed",
+      "calibration_status": "synthetic_range",
+      "change": {
+        "field": "home.resources.max_power_kw and C3 rule capacity",
+        "before": 2.0,
+        "after": 2.9
+      },
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 1000,
+          "completion_ms": 6100,
+          "last_executed_action_end_ms": 11100,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 5800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 5800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 700,
+          "completion_ms": 800,
+          "last_executed_action_end_ms": 5800,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M16",
+      "task_family": "stale_state_action",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": false,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 6000,
+          "completion_ms": 6000,
+          "last_executed_action_end_ms": 9000,
+          "accepted_action_count": 2,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 1
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": null,
+          "completion_ms": 700,
+          "last_executed_action_end_ms": 3700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 5700,
+          "completion_ms": 5700,
+          "last_executed_action_end_ms": 8700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": 5700,
+          "completion_ms": 5700,
+          "last_executed_action_end_ms": 8700,
+          "accepted_action_count": 2,
+          "rejected_action_count": 1
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M17",
+      "task_family": "stale_state_action",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": true,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1500,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 1
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 3200,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1200,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1200,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M18",
+      "task_family": "stale_state_action",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": true,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1400,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 1
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 2500,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1100,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1100,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M19",
+      "task_family": "stale_state_action",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": true,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1400,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 1
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1900,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1100,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1100,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M20",
+      "task_family": "stale_state_action",
+      "case_type": "candidate_original",
+      "review_status": "candidate_dry_run",
+      "calibration_status": "synthetic_range",
+      "change": null,
+      "environment_only_goal_success": true,
+      "outcomes": {
+        "CentralSingleAgent": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1400,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "IndependentMultiAgent": {
+          "process_valid_success": false,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 1
+          },
+          "task_service_rate": 1.0,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 2500,
+          "accepted_action_count": 2,
+          "rejected_action_count": 0
+        },
+        "RuleCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1100,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        },
+        "ConstraintCoordinator": {
+          "process_valid_success": true,
+          "final_goal_success": true,
+          "conflict_counts": {
+            "C1": 0,
+            "C2": 0,
+            "C3": 0,
+            "C4": 0
+          },
+          "task_service_rate": 0.5,
+          "first_action_ms": null,
+          "completion_ms": 500,
+          "last_executed_action_end_ms": 1100,
+          "accepted_action_count": 1,
+          "rejected_action_count": 1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,6240 @@
+{
+  "schema_version": "event-deadline-sensitivity-0.1",
+  "created_at_utc": "2026-09-27T06:01:15.144703+00:00",
+  "source": "saved DeepSeek v2 proposal records; no new API requests",
+  "network_calls": 0,
+  "proposal_replay": "same decisions and measured logical latencies across conditions and policies",
+  "physical_assumptions": {
+    "battery_capacity_kwh": 60.0,
+    "charger_input_kw": 4.0,
+    "water_heater_input_kw": 3.0,
+    "efficiency": 0.9,
+    "tank_liters": 100.0,
+    "water_density_kg_per_liter": 1.0,
+    "water_specific_heat_kj_per_kg_c": 4.186,
+    "status": "assumed_not_measured",
+    "effect_phase": "physical_completion"
+  },
+  "deadline_sweep_ms": [
+    18000000,
+    18600000,
+    19200000,
+    20400000,
+    21600000
+  ],
+  "policies": [
+    "IndependentMultiAgent",
+    "RuleCoordinator",
+    "ConstraintCoordinator",
+    "DeadlineAwareCoordinator"
+  ],
+  "policy_descriptions": {
+    "IndependentMultiAgent": "specialists act without conflict or capacity coordination",
+    "RuleCoordinator": "specialists with declared device locks and action-conflict rules",
+    "ConstraintCoordinator": "specialists with declared state, conflict, and resource-capacity checks",
+    "DeadlineAwareCoordinator": "wait for responses from currently released tasks, order by earliest completion deadline then priority, and apply the same constraint and capacity checks"
+  },
+  "run_count": 200,
+  "rows": [
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 20326900,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 20327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 18001524,
+      "first_effective_action_latency_ms": 18001524,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 20326900,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 20327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 18001524,
+      "first_effective_action_latency_ms": 18001524,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 20326900,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 20327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 18001524,
+      "first_effective_action_latency_ms": 18001524,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 20326900,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 20327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 18001524,
+      "first_effective_action_latency_ms": 18001524,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 20326900,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 20327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 18001524,
+      "first_effective_action_latency_ms": 18001524,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 2327080,
+      "first_effective_action_latency_ms": 2327080,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 2327080,
+      "first_effective_action_latency_ms": 2327080,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 2327080,
+      "first_effective_action_latency_ms": 2327080,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 2327080,
+      "first_effective_action_latency_ms": 2327080,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2326900
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1344,
+      "first_goal_progress_latency_ms": 2326900,
+      "first_effective_action_latency_ms": 2326900,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "heat_water",
+        "charge_ev"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001524,
+        "heat_water": 2327080
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1524,
+      "first_goal_progress_latency_ms": 2327080,
+      "first_effective_action_latency_ms": 2327080,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 20327040
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 18001484,
+      "first_effective_action_latency_ms": 18001484,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 20327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 18001909,
+      "first_effective_action_latency_ms": 18001909,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 20327040
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 18001484,
+      "first_effective_action_latency_ms": 18001484,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 20327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 18001909,
+      "first_effective_action_latency_ms": 18001909,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 20327040
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 18001484,
+      "first_effective_action_latency_ms": 18001484,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 20327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 18001909,
+      "first_effective_action_latency_ms": 18001909,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 20327040
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 18001484,
+      "first_effective_action_latency_ms": 18001484,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 20327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 18001909,
+      "first_effective_action_latency_ms": 18001909,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 20327040
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 18001484,
+      "first_effective_action_latency_ms": 18001484,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 20327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 18001909,
+      "first_effective_action_latency_ms": 18001909,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001484,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1484,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001909,
+        "heat_water": 2327465
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1909,
+      "first_goal_progress_latency_ms": 2327465,
+      "first_effective_action_latency_ms": 2327465,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 20327242
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 18001686,
+      "first_effective_action_latency_ms": 18001686,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 20327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 18001695,
+      "first_effective_action_latency_ms": 18001695,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 20327242
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 18001686,
+      "first_effective_action_latency_ms": 18001686,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 20327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 18001695,
+      "first_effective_action_latency_ms": 18001695,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 20327242
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 18001686,
+      "first_effective_action_latency_ms": 18001686,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 20327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 18001695,
+      "first_effective_action_latency_ms": 18001695,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 20327242
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 18001686,
+      "first_effective_action_latency_ms": 18001686,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 20327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 18001695,
+      "first_effective_action_latency_ms": 18001695,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 20327242
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 18001686,
+      "first_effective_action_latency_ms": 18001686,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 20327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 18001695,
+      "first_effective_action_latency_ms": 18001695,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001686,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1686,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001695,
+        "heat_water": 2327251
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1695,
+      "first_goal_progress_latency_ms": 2327251,
+      "first_effective_action_latency_ms": 2327251,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 20327151
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 18001595,
+      "first_effective_action_latency_ms": 18001595,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 20327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 18001948,
+      "first_effective_action_latency_ms": 18001948,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 20327151
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 18001595,
+      "first_effective_action_latency_ms": 18001595,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 20327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 18001948,
+      "first_effective_action_latency_ms": 18001948,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 20327151
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 18001595,
+      "first_effective_action_latency_ms": 18001595,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 20327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 18001948,
+      "first_effective_action_latency_ms": 18001948,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 20327151
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 18001595,
+      "first_effective_action_latency_ms": 18001595,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 20327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 18001948,
+      "first_effective_action_latency_ms": 18001948,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 20327151
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 18001595,
+      "first_effective_action_latency_ms": 18001595,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 20327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 18001948,
+      "first_effective_action_latency_ms": 18001948,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001595,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1595,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001948,
+        "heat_water": 2327504
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1948,
+      "first_goal_progress_latency_ms": 2327504,
+      "first_effective_action_latency_ms": 2327504,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 20327302
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 18001746,
+      "first_effective_action_latency_ms": 18001746,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 20327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 18001823,
+      "first_effective_action_latency_ms": 18001823,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 20327302
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 18001746,
+      "first_effective_action_latency_ms": 18001746,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 20327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 18001823,
+      "first_effective_action_latency_ms": 18001823,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 20327302
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 18001746,
+      "first_effective_action_latency_ms": 18001746,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 20327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 18001823,
+      "first_effective_action_latency_ms": 18001823,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 20327302
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 18001746,
+      "first_effective_action_latency_ms": 18001746,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 20327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 18001823,
+      "first_effective_action_latency_ms": 18001823,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": false,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 1,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 20327302
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 18001746,
+      "first_effective_action_latency_ms": 18001746,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 20327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 18001823,
+      "first_effective_action_latency_ms": 18001823,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 18000000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": false,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": false,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 18600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 19200000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 20400000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "IndependentMultiAgent",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "RuleCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "ConstraintCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001746,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1746,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ev_deadline_ms": 21600000,
+      "policy": "DeadlineAwareCoordinator",
+      "proposal_return_order": [
+        "charge_ev",
+        "heat_water"
+      ],
+      "process_valid_success": true,
+      "timely_process_valid_success": true,
+      "task_service_rate": 1.0,
+      "task_deadline_met": {
+        "charge_ev": true,
+        "heat_water": true
+      },
+      "task_action_finish_time_ms": {
+        "charge_ev": 18001823,
+        "heat_water": 2327379
+      },
+      "conflict_counts": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0
+      },
+      "first_action_start_latency_ms": 1823,
+      "first_goal_progress_latency_ms": 2327379,
+      "first_effective_action_latency_ms": 2327379,
+      "completion_constraint_violation_count": 0
+    }
+  ]
+}

@@ -87,6 +87,23 @@ def action_matches(event: dict[str, Any], spec: dict[str, Any]) -> bool:
     return all(event.get(key) == value for key, value in spec.items())
 
 
+def task_action_specs(task: dict[str, Any]) -> list[dict[str, Any]]:
+    """Explicit alternative service actions; preserve legacy single-action scoring."""
+    if "acceptable_actions" in task:
+        specs = task["acceptable_actions"]
+        if not isinstance(specs, list) or not specs or any(
+            not isinstance(s, dict) or not all(isinstance(s.get(k), str) and s[k] for k in ("target", "operation"))
+            for s in specs
+        ):
+            raise ValueError("acceptable_actions must explicitly name target and operation")
+        return specs
+    return [task["required_action"]] if task.get("required_action") else []
+
+
+def task_accepts_action(event: dict[str, Any], task: dict[str, Any]) -> bool:
+    return any(action_matches(event, spec) for spec in task_action_specs(task))
+
+
 def constraints_hold(state: dict[str, Any], constraints: list[dict[str, Any]]) -> bool:
     for rule in constraints:
         when = rule.get("when", [])
@@ -132,6 +149,7 @@ def evaluate(episode: dict[str, Any], trace: dict[str, Any]) -> dict[str, Any]:
     events = sorted(trace["events"], key=lambda item: (item["timestamp_ms"], item.get("sequence", 0)))
     actions: list[dict[str, Any]] = []
     violations = 0
+    precondition_violations = 0
     stale_actions = 0
     first_effective: int | None = None
     completion: int | None = release if goals_satisfied(state, goals) else None
@@ -149,9 +167,10 @@ def evaluate(episode: dict[str, Any], trace: dict[str, Any]) -> dict[str, Any]:
             version = event.get("new_state_version", version + 1)
         elif kind == "action_effective":
             before = goal_distance(state, goals)
-            stale = False
-            if event.get("based_on_state_version", version) < version:
-                stale = any(not condition_holds(state, req) for req in event.get("requires", []))
+            invalid_precondition = any(not condition_holds(state, req) for req in event.get("requires", []))
+            if invalid_precondition:
+                precondition_violations += 1
+            stale = event.get("based_on_state_version", version) < version and invalid_precondition
             if stale:
                 stale_actions += 1
             for path, value in event.get("effects", {}).items():
@@ -202,19 +221,42 @@ def evaluate(episode: dict[str, Any], trace: dict[str, Any]) -> dict[str, Any]:
                     break
 
     final_success = goals_satisfied(state, goals)
-    process_valid = final_success and violations == 0 and sum(counts.values()) == 0
-    serviceable_tasks = [task for task in episode["task_stream"] if task.get("required_action")]
+    process_valid = final_success and violations == 0 and precondition_violations == 0 and sum(counts.values()) == 0
+    serviceable_tasks = [task for task in episode["task_stream"] if task_action_specs(task)]
     task_service = {
         task["task_id"]: any(
             (
                 event.get("task_id") == task["task_id"]
                 or (event.get("task_id") is None and event.get("agent_id") == task["agent_id"])
             )
-            and action_matches(event, task["required_action"])
+            and task_accepts_action(event, task)
             for event in actions
         )
         for task in serviceable_tasks
     }
+    task_action_finish_time_ms = {
+        task["task_id"]: min(
+            (
+                event["timestamp_ms"] + event.get("duration_ms", 0) - release
+                for event in actions
+                if (
+                    event.get("task_id") == task["task_id"]
+                    or (event.get("task_id") is None and event.get("agent_id") == task["agent_id"])
+                ) and task_accepts_action(event, task)
+            ),
+            default=None,
+        )
+        for task in serviceable_tasks
+    }
+    task_deadline_met = {
+        task["task_id"]: (
+            task_action_finish_time_ms[task["task_id"]] is not None
+            and task_action_finish_time_ms[task["task_id"]]
+            <= task["completion_deadline_ms"] - release
+        )
+        for task in serviceable_tasks if task.get("completion_deadline_ms") is not None
+    }
+    all_deadlines_met = all(task_deadline_met.values())
     served_task_count = sum(task_service.values())
     return {
         "episode_id": episode["episode_id"],
@@ -222,10 +264,15 @@ def evaluate(episode: dict[str, Any], trace: dict[str, Any]) -> dict[str, Any]:
         "final_goal_success": final_success,
         "process_valid_success": process_valid,
         "constraint_violation_count": violations,
+        "precondition_violation_count": precondition_violations,
         "conflict_counts": counts,
         "stale_action_count": stale_actions,
         "first_effective_action_latency_ms": None if first_effective is None else first_effective - release,
         "task_completion_time_ms": None if completion is None else completion - release,
+        "task_action_finish_time_ms": task_action_finish_time_ms,
+        "task_deadline_met": task_deadline_met,
+        "all_deadlines_met": all_deadlines_met if task_deadline_met else None,
+        "timely_process_valid_success": process_valid and all_deadlines_met,
         "coordination_decision_latency_ms": None if first_coordination is None else first_coordination - release,
         "task_service": task_service,
         "served_task_count": served_task_count,

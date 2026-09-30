@@ -1,0 +1,130 @@
+{
+  "status": "audited",
+  "source_sha256": "09CA4CAE68ED92DB08C6A174F6B0DE828C123E81595BBFEBE5DC9CBB956AD4E6",
+  "new_api_calls": 0,
+  "calibration_runs": 48,
+  "paired_runs": 32,
+  "control_runs": 2,
+  "historical_zero_metric_checks": 15,
+  "profiles": {
+    "GateRetryRule": {
+      "dispatch_ms": 1,
+      "retry_batch_ms": 1
+    },
+    "ConstraintCoordinator": {
+      "dispatch_ms": 1,
+      "retry_batch_ms": 0
+    },
+    "DeadlineAwareCoordinator": {
+      "dispatch_ms": 1,
+      "retry_batch_ms": 0
+    }
+  },
+  "summaries": [
+    {
+      "policy": "GateRetryRule",
+      "paired_batches": 5,
+      "zero_all_deadlines": 5,
+      "timed_all_deadlines": 5,
+      "whole_completion_delta_ms": [
+        1,
+        2,
+        2,
+        1,
+        1
+      ],
+      "retry_batch_jobs": 3
+    },
+    {
+      "policy": "ConstraintCoordinator",
+      "paired_batches": 5,
+      "zero_all_deadlines": 5,
+      "timed_all_deadlines": 5,
+      "whole_completion_delta_ms": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "retry_batch_jobs": 0
+    },
+    {
+      "policy": "DeadlineAwareCoordinator",
+      "paired_batches": 5,
+      "zero_all_deadlines": 5,
+      "timed_all_deadlines": 5,
+      "whole_completion_delta_ms": [
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "retry_batch_jobs": 0
+    }
+  ],
+  "stats": [
+    {
+      "policy": "GateRetryRule",
+      "stage": "dispatch",
+      "observations": 54,
+      "median_wall_ms": 0.0224,
+      "min_wall_ms": 0.0189,
+      "max_wall_ms": 0.038,
+      "charged_ms": 1,
+      "measurement_status": "measured"
+    },
+    {
+      "policy": "GateRetryRule",
+      "stage": "retry_batch",
+      "observations": 12,
+      "median_wall_ms": 0.015,
+      "min_wall_ms": 0.0122,
+      "max_wall_ms": 0.0286,
+      "charged_ms": 1,
+      "measurement_status": "measured"
+    },
+    {
+      "policy": "ConstraintCoordinator",
+      "stage": "dispatch",
+      "observations": 45,
+      "median_wall_ms": 0.0297,
+      "min_wall_ms": 0.0265,
+      "max_wall_ms": 0.0455,
+      "charged_ms": 1,
+      "measurement_status": "measured"
+    },
+    {
+      "policy": "ConstraintCoordinator",
+      "stage": "retry_batch",
+      "observations": 0,
+      "median_wall_ms": null,
+      "min_wall_ms": null,
+      "max_wall_ms": null,
+      "charged_ms": 0,
+      "measurement_status": "not_observed"
+    },
+    {
+      "policy": "DeadlineAwareCoordinator",
+      "stage": "dispatch",
+      "observations": 45,
+      "median_wall_ms": 0.0295,
+      "min_wall_ms": 0.0268,
+      "max_wall_ms": 0.0582,
+      "charged_ms": 1,
+      "measurement_status": "measured"
+    },
+    {
+      "policy": "DeadlineAwareCoordinator",
+      "stage": "retry_batch",
+      "observations": 0,
+      "median_wall_ms": null,
+      "min_wall_ms": null,
+      "max_wall_ms": null,
+      "charged_ms": 0,
+      "measurement_status": "not_observed"
+    }
+  ],
+  "limits": "calibrated callback costs; development data; single FIFO worker; excludes EDF front-end, safety gate, network; not total algorithm latency ranking"
+}

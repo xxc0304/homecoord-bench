@@ -1,0 +1,681 @@
+{
+  "experiment": "persistent_state_hc_m07_design_pilot",
+  "status": "synthetic_unreviewed_design_experiment",
+  "source_episode": "HC-M07",
+  "legacy": {
+    "process_valid_success": true,
+    "conflict_counts": {
+      "C1": 0,
+      "C2": 0,
+      "C3": 0,
+      "C4": 0
+    },
+    "window_state_at_cooling_start": "open",
+    "actions": [
+      {
+        "at_ms": 700,
+        "target": "window",
+        "operation": "open",
+        "duration_ms": 2000
+      },
+      {
+        "at_ms": 2700,
+        "target": "living_hvac",
+        "operation": "cool",
+        "duration_ms": 10000
+      }
+    ]
+  },
+  "assumptions": {
+    "open_action_start_ms": 700,
+    "open_action_end_ms": 2700,
+    "cooling_ready_ms": 800,
+    "close_actuation_ms": 300,
+    "co2_target_ppm": 900,
+    "temperature_target_c": 24.0,
+    "cooling_deadline_ms": 10000,
+    "cooling_rate_closed_c_per_s": 2.0,
+    "cooling_rate_open_c_per_s": 0.5
+  },
+  "limitations": "Synthetic rates and deadline; the old episode has instant effects and no close action. New rules are only a pilot, not integrated into the benchmark evaluator.",
+  "summary": {
+    "Independent": {
+      "cases": 4,
+      "state_invariant_valid": 1,
+      "valid_on_time": 1,
+      "completion_by_deadline": 4
+    },
+    "ActionOverlapLock": {
+      "cases": 4,
+      "state_invariant_valid": 1,
+      "valid_on_time": 1,
+      "completion_by_deadline": 4
+    },
+    "StateGate": {
+      "cases": 4,
+      "state_invariant_valid": 4,
+      "valid_on_time": 3,
+      "completion_by_deadline": 3
+    },
+    "FullSequence": {
+      "cases": 4,
+      "state_invariant_valid": 4,
+      "valid_on_time": 3,
+      "completion_by_deadline": 3
+    }
+  },
+  "rows": [
+    {
+      "initial_co2_ppm": 850,
+      "co2_drop_ppm_per_s": 150,
+      "policy": "Independent",
+      "window_close_ms": null,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 800,
+      "goal_completion_ms": 3800,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": true,
+      "valid_on_time": true,
+      "final_co2_ppm": 850.0,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 3800,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "co2_drop_ppm_per_s": 150,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": null,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 800,
+      "goal_completion_ms": 3800,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": true,
+      "valid_on_time": true,
+      "final_co2_ppm": 850.0,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 3800,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "co2_drop_ppm_per_s": 150,
+      "policy": "StateGate",
+      "window_close_ms": null,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 800,
+      "goal_completion_ms": 3800,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": true,
+      "valid_on_time": true,
+      "final_co2_ppm": 850.0,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 3800,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 850,
+      "co2_drop_ppm_per_s": 150,
+      "policy": "FullSequence",
+      "window_close_ms": null,
+      "planned_cooling_start_ms": 800,
+      "cooling_start_ms": 800,
+      "goal_completion_ms": 3800,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": true,
+      "valid_on_time": true,
+      "final_co2_ppm": 850.0,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 3800,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 100,
+      "policy": "Independent",
+      "window_close_ms": 8000,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 800,
+      "goal_completion_ms": 9200,
+      "open_window_cooling_ms": 7200,
+      "state_invariant_valid": false,
+      "deadline_met": true,
+      "valid_on_time": false,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 7700,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 8000,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 9200,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 100,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 8000,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 2700,
+      "goal_completion_ms": 9700,
+      "open_window_cooling_ms": 5300,
+      "state_invariant_valid": false,
+      "deadline_met": true,
+      "valid_on_time": false,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 2700,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 7700,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 8000,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 9700,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 100,
+      "policy": "StateGate",
+      "window_close_ms": 8000,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 8000,
+      "goal_completion_ms": 11000,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": false,
+      "valid_on_time": false,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 7700,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 8000,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 8000,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 11000,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 100,
+      "policy": "FullSequence",
+      "window_close_ms": 8000,
+      "planned_cooling_start_ms": 8000,
+      "cooling_start_ms": 8000,
+      "goal_completion_ms": 11000,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": false,
+      "valid_on_time": false,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 7700,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 8000,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 8000,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 11000,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 150,
+      "policy": "Independent",
+      "window_close_ms": 5700,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 800,
+      "goal_completion_ms": 7500,
+      "open_window_cooling_ms": 4900,
+      "state_invariant_valid": false,
+      "deadline_met": true,
+      "valid_on_time": false,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 7500,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 150,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 5700,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 2700,
+      "goal_completion_ms": 8000,
+      "open_window_cooling_ms": 3000,
+      "state_invariant_valid": false,
+      "deadline_met": true,
+      "valid_on_time": false,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 2700,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 8000,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 150,
+      "policy": "StateGate",
+      "window_close_ms": 5700,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 5700,
+      "goal_completion_ms": 8700,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": true,
+      "valid_on_time": true,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 150,
+      "policy": "FullSequence",
+      "window_close_ms": 5700,
+      "planned_cooling_start_ms": 5700,
+      "cooling_start_ms": 5700,
+      "goal_completion_ms": 8700,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": true,
+      "valid_on_time": true,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5400,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5700,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 8700,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 300,
+      "policy": "Independent",
+      "window_close_ms": 3400,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 800,
+      "goal_completion_ms": 5800,
+      "open_window_cooling_ms": 2600,
+      "state_invariant_valid": false,
+      "deadline_met": true,
+      "valid_on_time": false,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 800,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 3100,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3400,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 5800,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 300,
+      "policy": "ActionOverlapLock",
+      "window_close_ms": 3400,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 2700,
+      "goal_completion_ms": 6300,
+      "open_window_cooling_ms": 700,
+      "state_invariant_valid": false,
+      "deadline_met": true,
+      "valid_on_time": false,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 2700,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 3100,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3400,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 6300,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 300,
+      "policy": "StateGate",
+      "window_close_ms": 3400,
+      "planned_cooling_start_ms": null,
+      "cooling_start_ms": 3400,
+      "goal_completion_ms": 6400,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": true,
+      "valid_on_time": true,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3100,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3400,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3400,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 6400,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    },
+    {
+      "initial_co2_ppm": 1600,
+      "co2_drop_ppm_per_s": 300,
+      "policy": "FullSequence",
+      "window_close_ms": 3400,
+      "planned_cooling_start_ms": 3400,
+      "cooling_start_ms": 3400,
+      "goal_completion_ms": 6400,
+      "open_window_cooling_ms": 0,
+      "state_invariant_valid": true,
+      "deadline_met": true,
+      "valid_on_time": true,
+      "final_co2_ppm": 900,
+      "final_temperature_c": 24.0,
+      "events": [
+        {
+          "at_ms": 700,
+          "type": "window_opened",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3100,
+          "type": "close_window_command",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3400,
+          "type": "window_closed",
+          "agent": "AirQualityAgent"
+        },
+        {
+          "at_ms": 3400,
+          "type": "cooling_started",
+          "agent": "CoolingAgent"
+        },
+        {
+          "at_ms": 6400,
+          "type": "cooling_target_reached",
+          "agent": "CoolingAgent"
+        }
+      ]
+    }
+  ]
+}

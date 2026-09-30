@@ -1,0 +1,1771 @@
+{
+  "schema_version": "c3-evening-chores-control-0.1",
+  "status": "exploratory_author_composition_not_independent_household_or_frozen_data",
+  "new_api_calls": 0,
+  "base_template_count": 1,
+  "task_ids": [
+    "wash_dishes",
+    "wash_clothes",
+    "charge_ev"
+  ],
+  "pressure_levels": [
+    0.8,
+    1.0,
+    1.2
+  ],
+  "pair_variable": "managed shared power budget only",
+  "ideal_feasible_schedules": {
+    "0.8": [
+      {
+        "task_id": "wash_dishes",
+        "start_ms": 0,
+        "finish_ms": 5400000
+      },
+      {
+        "task_id": "wash_clothes",
+        "start_ms": 0,
+        "finish_ms": 3600000
+      },
+      {
+        "task_id": "charge_ev",
+        "start_ms": 0,
+        "finish_ms": 7200000
+      }
+    ],
+    "1": [
+      {
+        "task_id": "wash_dishes",
+        "start_ms": 0,
+        "finish_ms": 5400000
+      },
+      {
+        "task_id": "wash_clothes",
+        "start_ms": 0,
+        "finish_ms": 3600000
+      },
+      {
+        "task_id": "charge_ev",
+        "start_ms": 0,
+        "finish_ms": 7200000
+      }
+    ],
+    "1.2": [
+      {
+        "task_id": "wash_dishes",
+        "start_ms": 0,
+        "finish_ms": 5400000
+      },
+      {
+        "task_id": "wash_clothes",
+        "start_ms": 0,
+        "finish_ms": 3600000
+      },
+      {
+        "task_id": "charge_ev",
+        "start_ms": 3600000,
+        "finish_ms": 10800000
+      }
+    ]
+  },
+  "source_records": {
+    "wash_dishes": {
+      "template_id": "KITCHEN_CIRCUIT",
+      "task_id": "wash_dishes",
+      "device": "dishwasher",
+      "configured": {
+        "power_kw": 2.4,
+        "duration_min": 90,
+        "deadline_min": 180
+      },
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact_connection_rating",
+        "value_kw": 2.4,
+        "source_title": "Bosch SMV4HTX27G product specification",
+        "url": "https://media3.bosch-home.com/Documents/specsheet/en-IE/SMV4HTX27G.pdf"
+      },
+      "duration_evidence": {
+        "level": "E4",
+        "status": "controlled_cycle_not_program_matched"
+      },
+      "deadline_evidence": {
+        "level": "E4",
+        "status": "researcher_defined_service_deadline"
+      }
+    },
+    "wash_clothes": {
+      "template_id": "MORNING_DEPARTURE",
+      "task_id": "wash_clothes",
+      "device": "washer",
+      "configured": {
+        "power_kw": 2.0,
+        "duration_min": 60,
+        "deadline_min": 150
+      },
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact_connection_rating",
+        "value_kw": 2.0,
+        "source_title": "Bosch WAB28161GB product specification",
+        "url": "https://media3.bosch-home.com/Documents/specsheet/en-IE/WAB28161GB.pdf"
+      },
+      "duration_evidence": {
+        "level": "E4",
+        "status": "controlled_cycle_not_program_matched"
+      },
+      "deadline_evidence": {
+        "level": "E4",
+        "status": "researcher_defined_service_deadline"
+      }
+    },
+    "charge_ev": {
+      "template_id": "MORNING_DEPARTURE",
+      "task_id": "charge_ev",
+      "device": "ev_charger",
+      "configured": {
+        "power_kw": 3.3,
+        "duration_min": 120,
+        "deadline_min": 210
+      },
+      "power_evidence": {
+        "level": "E2",
+        "match": "exact_output_rating",
+        "value_kw": 3.3,
+        "source_title": "Bolt.Earth Pro 3.3kW Smart EV Charging Socket",
+        "url": "https://bolt.earth/ev-charging-products/smart-sockets-for-all-evs/pro"
+      },
+      "duration_evidence": {
+        "level": "E4",
+        "status": "controlled_energy_workload_not_vehicle_matched"
+      },
+      "deadline_evidence": {
+        "level": "E4",
+        "status": "researcher_defined_departure_deadline"
+      }
+    }
+  },
+  "summary": {
+    "0.8": {
+      "IndependentMultiAgent": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      },
+      "ConstraintCoordinator": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      },
+      "GateRetryRule": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      },
+      "DeadlineAwareCoordinator": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 1300.0
+      },
+      "ObservedTaskFeasibilityCoordinator": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      }
+    },
+    "1": {
+      "IndependentMultiAgent": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      },
+      "ConstraintCoordinator": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      },
+      "GateRetryRule": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      },
+      "DeadlineAwareCoordinator": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 1300.0
+      },
+      "ObservedTaskFeasibilityCoordinator": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      }
+    },
+    "1.2": {
+      "IndependentMultiAgent": {
+        "runs": 6,
+        "all_deadlines_met": 0,
+        "all_tasks_served": 0,
+        "median_first_action_ms": 900.0
+      },
+      "ConstraintCoordinator": {
+        "runs": 6,
+        "all_deadlines_met": 4,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      },
+      "GateRetryRule": {
+        "runs": 6,
+        "all_deadlines_met": 4,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      },
+      "DeadlineAwareCoordinator": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 1300.0
+      },
+      "ObservedTaskFeasibilityCoordinator": {
+        "runs": 6,
+        "all_deadlines_met": 6,
+        "all_tasks_served": 6,
+        "median_first_action_ms": 900.0
+      }
+    }
+  },
+  "rows": [
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 0.8,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.0,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_dishes",
+        "charge_ev",
+        "wash_clothes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_dishes",
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "wash_clothes",
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_dishes",
+        "wash_clothes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "IndependentMultiAgent",
+      "all_tasks_served": false,
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "ConstraintCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "GateRetryRule",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "DeadlineAwareCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 1300,
+      "start_order": [
+        "wash_clothes",
+        "wash_dishes",
+        "charge_ev"
+      ]
+    },
+    {
+      "nominal_pressure": 1.2,
+      "return_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ],
+      "policy": "ObservedTaskFeasibilityCoordinator",
+      "all_tasks_served": true,
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 900,
+      "start_order": [
+        "charge_ev",
+        "wash_clothes",
+        "wash_dishes"
+      ]
+    }
+  ]
+}

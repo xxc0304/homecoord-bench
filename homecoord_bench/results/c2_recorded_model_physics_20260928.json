@@ -1,0 +1,5686 @@
+{
+  "status": "uncalibrated_synthetic_room_real_model_initial_proposals",
+  "model": "deepseek-flash",
+  "design": {
+    "conditions": {
+      "conflict_initial_co2_ppm": 1600,
+      "control_initial_co2_ppm": 850
+    },
+    "single_changed_factor": "initial_co2_ppm",
+    "model_requests": "air in each condition, one shared heating request per repetition",
+    "task_release_ms": {
+      "air": 7000,
+      "heat": 8000
+    },
+    "deadline_ms": 360000,
+    "ventilation_rate_ppm_s": [
+      2.5,
+      5.0
+    ],
+    "open_exchange_per_s": 0.0015,
+    "policies": [
+      "Independent",
+      "DeviceLock",
+      "ActionOverlapLock",
+      "StateGate",
+      "OracleSwitch"
+    ],
+    "physical_time_step_ms": 1000,
+    "action_semantics": "model chooses initial command; window controller closes at CO2 target; thermostat heats to 21 C",
+    "oracle_status": "unfair_exact_model_reference",
+    "calibration_status": "none"
+  },
+  "rows": [
+    {
+      "repetition": 1,
+      "model_records": {
+        "air_conflict": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-01:air",
+            "episode_id": "HC-C2-MODEL-conflict-01",
+            "base_episode_id": "HC-C2-MODEL-conflict-01",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 1600
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C2-MODEL-conflict-01:air:open-window",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.co2_ppm",
+                    "op": "gt",
+                    "value": 900,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.window",
+                    "op": "eq",
+                    "value": "closed",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 2137
+        },
+        "air_control": {
+          "request": {
+            "request_id": "HC-C2-MODEL-control-01:air",
+            "episode_id": "HC-C2-MODEL-control-01",
+            "base_episode_id": "HC-C2-MODEL-control-01",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 850
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "noop",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 831
+        },
+        "heat_shared": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-01:heat",
+            "episode_id": "HC-C2-MODEL-conflict-01",
+            "base_episode_id": "HC-C2-MODEL-conflict-01",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 8000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "temperature_c": 17
+              },
+              "devices": {
+                "heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "HeatingAgent",
+              "role": "heating",
+              "tools": [
+                "set_heater"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.heater"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "restore_comfort_temperature",
+              "agent_id": "HeatingAgent",
+              "release_at_ms": 8000,
+              "goal": "Heat the bedroom from 17 C to 21 C. A thermostat will maintain the target.",
+              "priority": 80
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_heater"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "description": "Enable bedroom heating to 21 C."
+              },
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Leave heating off."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C2-MODEL-conflict-01:heat:heater:heat_high",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "lt",
+                    "value": 21,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.heater",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1364
+        }
+      }
+    },
+    {
+      "repetition": 2,
+      "model_records": {
+        "air_conflict": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-02:air",
+            "episode_id": "HC-C2-MODEL-conflict-02",
+            "base_episode_id": "HC-C2-MODEL-conflict-02",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 1600
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C2-MODEL-conflict-02:air:open-window",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.co2_ppm",
+                    "op": "gt",
+                    "value": 900,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.window",
+                    "op": "eq",
+                    "value": "closed",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1149
+        },
+        "air_control": {
+          "request": {
+            "request_id": "HC-C2-MODEL-control-02:air",
+            "episode_id": "HC-C2-MODEL-control-02",
+            "base_episode_id": "HC-C2-MODEL-control-02",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 850
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "noop",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 807
+        },
+        "heat_shared": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-02:heat",
+            "episode_id": "HC-C2-MODEL-conflict-02",
+            "base_episode_id": "HC-C2-MODEL-conflict-02",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 8000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "temperature_c": 17
+              },
+              "devices": {
+                "heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "HeatingAgent",
+              "role": "heating",
+              "tools": [
+                "set_heater"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.heater"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "restore_comfort_temperature",
+              "agent_id": "HeatingAgent",
+              "release_at_ms": 8000,
+              "goal": "Heat the bedroom from 17 C to 21 C. A thermostat will maintain the target.",
+              "priority": 80
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_heater"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "description": "Enable bedroom heating to 21 C."
+              },
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Leave heating off."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C2-MODEL-conflict-02:heat:proposal",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "lt",
+                    "value": 21,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.heater",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1289
+        }
+      }
+    },
+    {
+      "repetition": 3,
+      "model_records": {
+        "air_conflict": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-03:air",
+            "episode_id": "HC-C2-MODEL-conflict-03",
+            "base_episode_id": "HC-C2-MODEL-conflict-03",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 1600
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C2-MODEL-conflict-03:air:open-window",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.co2_ppm",
+                    "op": "gt",
+                    "value": 900,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.window",
+                    "op": "eq",
+                    "value": "closed",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1283
+        },
+        "air_control": {
+          "request": {
+            "request_id": "HC-C2-MODEL-control-03:air",
+            "episode_id": "HC-C2-MODEL-control-03",
+            "base_episode_id": "HC-C2-MODEL-control-03",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 850
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "noop",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 1119
+        },
+        "heat_shared": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-03:heat",
+            "episode_id": "HC-C2-MODEL-conflict-03",
+            "base_episode_id": "HC-C2-MODEL-conflict-03",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 8000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "temperature_c": 17
+              },
+              "devices": {
+                "heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "HeatingAgent",
+              "role": "heating",
+              "tools": [
+                "set_heater"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.heater"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "restore_comfort_temperature",
+              "agent_id": "HeatingAgent",
+              "release_at_ms": 8000,
+              "goal": "Heat the bedroom from 17 C to 21 C. A thermostat will maintain the target.",
+              "priority": 80
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_heater"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "description": "Enable bedroom heating to 21 C."
+              },
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Leave heating off."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C2-MODEL-conflict-03:heat:proposal",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "lt",
+                    "value": 21,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.heater",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1450
+        }
+      }
+    },
+    {
+      "repetition": 4,
+      "model_records": {
+        "air_conflict": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-04:air",
+            "episode_id": "HC-C2-MODEL-conflict-04",
+            "base_episode_id": "HC-C2-MODEL-conflict-04",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 1600
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C2-MODEL-conflict-04:air:open_window",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.co2_ppm",
+                    "op": "gt",
+                    "value": 900,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1171
+        },
+        "air_control": {
+          "request": {
+            "request_id": "HC-C2-MODEL-control-04:air",
+            "episode_id": "HC-C2-MODEL-control-04",
+            "base_episode_id": "HC-C2-MODEL-control-04",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 850
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "noop",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 1097
+        },
+        "heat_shared": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-04:heat",
+            "episode_id": "HC-C2-MODEL-conflict-04",
+            "base_episode_id": "HC-C2-MODEL-conflict-04",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 8000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "temperature_c": 17
+              },
+              "devices": {
+                "heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "HeatingAgent",
+              "role": "heating",
+              "tools": [
+                "set_heater"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.heater"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "restore_comfort_temperature",
+              "agent_id": "HeatingAgent",
+              "release_at_ms": 8000,
+              "goal": "Heat the bedroom from 17 C to 21 C. A thermostat will maintain the target.",
+              "priority": 80
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_heater"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "description": "Enable bedroom heating to 21 C."
+              },
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Leave heating off."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C2-MODEL-conflict-04:heat:proposal",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "lt",
+                    "value": 21,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 1800000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1203
+        }
+      }
+    },
+    {
+      "repetition": 5,
+      "model_records": {
+        "air_conflict": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-05:air",
+            "episode_id": "HC-C2-MODEL-conflict-05",
+            "base_episode_id": "HC-C2-MODEL-conflict-05",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 1600
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "open-window-co2-106",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.co2_ppm",
+                    "op": "gt",
+                    "value": 900,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1184
+        },
+        "air_control": {
+          "request": {
+            "request_id": "HC-C2-MODEL-control-05:air",
+            "episode_id": "HC-C2-MODEL-control-05",
+            "base_episode_id": "HC-C2-MODEL-control-05",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 7000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "co2_ppm": 850
+              },
+              "devices": {
+                "window": "closed"
+              }
+            },
+            "agent": {
+              "agent_id": "AirQualityAgent",
+              "role": "air_quality",
+              "tools": [
+                "set_window"
+              ],
+              "observable_state": [
+                "bedroom.co2_ppm"
+              ],
+              "writable_resources": [
+                "devices.window"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "ventilate_if_needed",
+              "agent_id": "AirQualityAgent",
+              "release_at_ms": 7000,
+              "goal": "If bedroom CO2 is above 900 ppm, open the window to ventilate. A separate device controller will close it after CO2 reaches 900 ppm; if CO2 is already at or below 900 ppm, take no action.",
+              "priority": 60
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_window"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "open",
+                "parameters": [],
+                "description": "Open the bedroom window; controller closes at CO2 target."
+              },
+              {
+                "agent_id": "AirQualityAgent",
+                "target": "window",
+                "operation": "close",
+                "parameters": [],
+                "description": "Close the bedroom window."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "noop",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 1222
+        },
+        "heat_shared": {
+          "request": {
+            "request_id": "HC-C2-MODEL-conflict-05:heat",
+            "episode_id": "HC-C2-MODEL-conflict-05",
+            "base_episode_id": "HC-C2-MODEL-conflict-05",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 8000,
+            "state_version": 106,
+            "state": {
+              "bedroom": {
+                "temperature_c": 17
+              },
+              "devices": {
+                "heater": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "HeatingAgent",
+              "role": "heating",
+              "tools": [
+                "set_heater"
+              ],
+              "observable_state": [
+                "bedroom.temperature_c"
+              ],
+              "writable_resources": [
+                "devices.heater"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "restore_comfort_temperature",
+              "agent_id": "HeatingAgent",
+              "release_at_ms": 8000,
+              "goal": "Heat the bedroom from 17 C to 21 C. A thermostat will maintain the target.",
+              "priority": 80
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "set_heater"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "description": "Enable bedroom heating to 21 C."
+              },
+              {
+                "agent_id": "HeatingAgent",
+                "target": "heater",
+                "operation": "off",
+                "parameters": [],
+                "description": "Leave heating off."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C2-MODEL-conflict-05:heat:1",
+                "target": "heater",
+                "operation": "heat_high",
+                "parameters": [],
+                "based_on_state_version": 106,
+                "requires": [
+                  {
+                    "path": "bedroom.temperature_c",
+                    "op": "lt",
+                    "value": 21,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "devices.heater",
+                    "op": "eq",
+                    "value": "off",
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1364
+        }
+      }
+    }
+  ],
+  "replays": [
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 293000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 293000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 283000,
+      "window_open_heater_wh": 157.2222,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4215,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 290000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 293000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 293000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 293000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 283000,
+      "window_open_heater_wh": 157.2222,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4215,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 290000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 293000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 293000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 293000,
+      "heater_first_start_ms": 12000,
+      "goal_completion_ms": 349000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4042,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 12000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 290000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 293000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 293000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 293000,
+      "heater_first_start_ms": 293000,
+      "goal_completion_ms": 578000,
+      "deadline_met": false,
+      "heater_on_ms": 285000,
+      "heater_energy_wh": 158.3333,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.115,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 290000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 293000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 293000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 293000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 293000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 283000,
+      "window_open_heater_wh": 157.2222,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4215,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 290000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 293000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 153000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 143000,
+      "window_open_heater_wh": 79.4444,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0939,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 150000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 153000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 153000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 143000,
+      "window_open_heater_wh": 79.4444,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0939,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 150000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 153000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 153000,
+      "heater_first_start_ms": 12000,
+      "goal_completion_ms": 256000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0843,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 12000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 150000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 153000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 153000,
+      "heater_first_start_ms": 153000,
+      "goal_completion_ms": 383000,
+      "deadline_met": false,
+      "heater_on_ms": 230000,
+      "heater_energy_wh": 127.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.7387,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 150000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 153000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 153000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 2137,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 9137,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 10000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 153000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 143000,
+      "window_open_heater_wh": 79.4444,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0939,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 150000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 153000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 831,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7831,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 11000,
+      "goal_completion_ms": 348000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4042,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 11000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 292000,
+      "goal_completion_ms": 577000,
+      "deadline_met": false,
+      "heater_on_ms": 285000,
+      "heater_energy_wh": 158.3333,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.115,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 292000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 11000,
+      "goal_completion_ms": 255000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0843,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 11000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 152000,
+      "goal_completion_ms": 382000,
+      "deadline_met": false,
+      "heater_on_ms": 230000,
+      "heater_energy_wh": 127.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.7387,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 152000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1149,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8149,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 807,
+      "heat_model_latency_ms": 1289,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 7807,
+      "heat_proposal_ready_ms": 9289,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 11000,
+      "goal_completion_ms": 348000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4042,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 11000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 292000,
+      "goal_completion_ms": 577000,
+      "deadline_met": false,
+      "heater_on_ms": 285000,
+      "heater_energy_wh": 158.3333,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.115,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 292000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 11000,
+      "goal_completion_ms": 255000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0843,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 11000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 152000,
+      "goal_completion_ms": 382000,
+      "deadline_met": false,
+      "heater_on_ms": 230000,
+      "heater_energy_wh": 127.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.7387,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 152000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1283,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8283,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1119,
+      "heat_model_latency_ms": 1450,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8119,
+      "heat_proposal_ready_ms": 9450,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 11000,
+      "goal_completion_ms": 348000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4042,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 11000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 292000,
+      "goal_completion_ms": 577000,
+      "deadline_met": false,
+      "heater_on_ms": 285000,
+      "heater_energy_wh": 158.3333,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.115,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 292000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 11000,
+      "goal_completion_ms": 255000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0843,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 11000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 152000,
+      "goal_completion_ms": 382000,
+      "deadline_met": false,
+      "heater_on_ms": 230000,
+      "heater_energy_wh": 127.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.7387,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 152000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1171,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8171,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1097,
+      "heat_model_latency_ms": 1203,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8097,
+      "heat_proposal_ready_ms": 9203,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 11000,
+      "goal_completion_ms": 348000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 281000,
+      "window_open_heater_wh": 156.1111,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4042,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 11000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 292000,
+      "goal_completion_ms": 577000,
+      "deadline_met": false,
+      "heater_on_ms": 285000,
+      "heater_energy_wh": 158.3333,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 3.115,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 292000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 292000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 292000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 347000,
+      "deadline_met": true,
+      "heater_on_ms": 337000,
+      "heater_energy_wh": 187.2222,
+      "window_open_heater_ms": 282000,
+      "window_open_heater_wh": 156.6667,
+      "gross_ventilation_heat_loss_degree_seconds": 4.4128,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 289000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 292000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 11000,
+      "goal_completion_ms": 255000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 141000,
+      "window_open_heater_wh": 78.3333,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0843,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 11000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 152000,
+      "goal_completion_ms": 382000,
+      "deadline_met": false,
+      "heater_on_ms": 230000,
+      "heater_energy_wh": 127.7778,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 1.7387,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        },
+        {
+          "at_ms": 152000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "expected_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1184,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 1600,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8184,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": true,
+      "heat_action_proposed": true,
+      "window_open_command_ms": 9000,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": 152000,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 254000,
+      "deadline_met": true,
+      "heater_on_ms": 244000,
+      "heater_energy_wh": 135.5556,
+      "window_open_heater_ms": 142000,
+      "window_open_heater_wh": 78.8889,
+      "gross_ventilation_heat_loss_degree_seconds": 2.0891,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 900.0,
+      "events": [
+        {
+          "at_ms": 9000,
+          "type": "window_opened"
+        },
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        },
+        {
+          "at_ms": 149000,
+          "type": "close_window_command"
+        },
+        {
+          "at_ms": 152000,
+          "type": "window_closed"
+        }
+      ],
+      "selected_policy": "Independent"
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 2.5,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "Independent",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "DeviceLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "ActionOverlapLock",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "StateGate",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ]
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "ventilation_rate_ppm_s": 5.0,
+      "policy": "OracleSwitch",
+      "air_decision_class": "no_action",
+      "heat_decision_class": "expected_action",
+      "air_model_latency_ms": 1222,
+      "heat_model_latency_ms": 1364,
+      "initial_co2_ppm": 850,
+      "open_exchange_per_s": 0.0015,
+      "deadline_ms": 360000,
+      "air_proposal_ready_ms": 8222,
+      "heat_proposal_ready_ms": 9364,
+      "air_action_proposed": false,
+      "heat_action_proposed": true,
+      "window_open_command_ms": null,
+      "optimistic_completion_lower_bound_ms": 170000,
+      "deadline_not_ruled_out_by_lower_bound": true,
+      "window_close_ms": null,
+      "heater_first_start_ms": 10000,
+      "goal_completion_ms": 170000,
+      "deadline_met": true,
+      "heater_on_ms": 160000,
+      "heater_energy_wh": 88.8889,
+      "window_open_heater_ms": 0,
+      "window_open_heater_wh": 0.0,
+      "gross_ventilation_heat_loss_degree_seconds": 0.0,
+      "final_temp_c": 21.0,
+      "final_co2_ppm": 850.0,
+      "events": [
+        {
+          "at_ms": 10000,
+          "type": "heater_enabled"
+        }
+      ],
+      "selected_policy": "StateGate"
+    }
+  ]
+}

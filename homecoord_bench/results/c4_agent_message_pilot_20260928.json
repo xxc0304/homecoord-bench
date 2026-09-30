@@ -1,0 +1,1975 @@
+{
+  "status": "synthetic_message_and_robot_timing_real_model_reports",
+  "clean_source_sha256": "52800343a12047cf87f821b5ad68f25a385c77940b4de1075c955e96c27a174c",
+  "design": {
+    "model": "deepseek-flash",
+    "clean_proposals_source": "results\\c4_recorded_proposal_boundary_20260928.json",
+    "conditions": [
+      "conflict",
+      "control"
+    ],
+    "policies": [
+      "NoCoordination",
+      "AgentMessageStopOnly",
+      "AgentMessageStopRestart",
+      "DirectSensorStopRestart"
+    ],
+    "event_alignment": "resident entry at cleaning start plus 1500 ms; control sensor check at same time without entry",
+    "robot_duration_ms": 3000,
+    "command_delay_ms": 100,
+    "message_transport_ms": 100,
+    "stop_ack_delay_ms": 200,
+    "resident_stay_ms": 2000,
+    "retry_semantics": "after clear report, issue command and restart full 3000 ms cycle",
+    "direct_sensor_baseline": "same stop/restart contract with zero model/message latency",
+    "same_clean_proposal_across_conditions_and_policies": true,
+    "source_type": "synthetic_timing_assumptions_real_model_report_proposals"
+  },
+  "rows": [
+    {
+      "repetition": 1,
+      "model_records": {
+        "entry_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-entry_conflict-01:report_entry_conflict",
+            "episode_id": "HC-C4-REPORT-entry_conflict-01",
+            "base_episode_id": "HC-C4-REPORT-entry_conflict-01",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": true,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_entry_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C4-REPORT-entry_conflict-01:report_occupied",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [
+                  {
+                    "path": "bedroom.actual_occupied",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "bedroom.reported_occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 100,
+                "estimated_power_kw": 0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1483
+        },
+        "exit_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-exit_conflict-01:report_exit_conflict",
+            "episode_id": "HC-C4-REPORT-exit_conflict-01",
+            "base_episode_id": "HC-C4-REPORT-exit_conflict-01",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": true
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_exit_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C4-REPORT-exit_conflict-01:report_clear",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1317
+        },
+        "check_control": {
+          "request": {
+            "request_id": "HC-C4-REPORT-check_control-01:report_check_control",
+            "episode_id": "HC-C4-REPORT-check_control-01",
+            "base_episode_id": "HC-C4-REPORT-check_control-01",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_check_control",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "report-clear-1",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [
+                  {
+                    "path": "bedroom.actual_occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1375
+        }
+      }
+    },
+    {
+      "repetition": 2,
+      "model_records": {
+        "entry_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-entry_conflict-02:report_entry_conflict",
+            "episode_id": "HC-C4-REPORT-entry_conflict-02",
+            "base_episode_id": "HC-C4-REPORT-entry_conflict-02",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": true,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_entry_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "report-occupied-1",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [
+                  {
+                    "path": "bedroom.actual_occupied",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1397
+        },
+        "exit_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-exit_conflict-02:report_exit_conflict",
+            "episode_id": "HC-C4-REPORT-exit_conflict-02",
+            "base_episode_id": "HC-C4-REPORT-exit_conflict-02",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": true
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_exit_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "prop-report-clear-1",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1265
+        },
+        "check_control": {
+          "request": {
+            "request_id": "HC-C4-REPORT-check_control-02:report_check_control",
+            "episode_id": "HC-C4-REPORT-check_control-02",
+            "base_episode_id": "HC-C4-REPORT-check_control-02",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_check_control",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "defer",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 1239
+        }
+      }
+    },
+    {
+      "repetition": 3,
+      "model_records": {
+        "entry_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-entry_conflict-03:report_entry_conflict",
+            "episode_id": "HC-C4-REPORT-entry_conflict-03",
+            "base_episode_id": "HC-C4-REPORT-entry_conflict-03",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": true,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_entry_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C4-REPORT-entry_conflict-03-publish-occupied",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [
+                  {
+                    "path": "bedroom.actual_occupied",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1223
+        },
+        "exit_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-exit_conflict-03:report_exit_conflict",
+            "episode_id": "HC-C4-REPORT-exit_conflict-03",
+            "base_episode_id": "HC-C4-REPORT-exit_conflict-03",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": true
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_exit_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "proposal-report-clear-1",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [
+                  {
+                    "path": "bedroom.actual_occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1307
+        },
+        "check_control": {
+          "request": {
+            "request_id": "HC-C4-REPORT-check_control-03:report_check_control",
+            "episode_id": "HC-C4-REPORT-check_control-03",
+            "base_episode_id": "HC-C4-REPORT-check_control-03",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_check_control",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "noop",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 894
+        }
+      }
+    },
+    {
+      "repetition": 4,
+      "model_records": {
+        "entry_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-entry_conflict-04:report_entry_conflict",
+            "episode_id": "HC-C4-REPORT-entry_conflict-04",
+            "base_episode_id": "HC-C4-REPORT-entry_conflict-04",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": true,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_entry_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "proposal-report-occupied-1",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [
+                  {
+                    "path": "bedroom.actual_occupied",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "bedroom.reported_occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1164
+        },
+        "exit_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-exit_conflict-04:report_exit_conflict",
+            "episode_id": "HC-C4-REPORT-exit_conflict-04",
+            "base_episode_id": "HC-C4-REPORT-exit_conflict-04",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": true
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_exit_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "exit_conflict-04-report-clear",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [
+                  {
+                    "path": "bedroom.actual_occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "bedroom.reported_occupied",
+                    "op": "neq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1377
+        },
+        "check_control": {
+          "request": {
+            "request_id": "HC-C4-REPORT-check_control-04:report_check_control",
+            "episode_id": "HC-C4-REPORT-check_control-04",
+            "base_episode_id": "HC-C4-REPORT-check_control-04",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_check_control",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "noop",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 998
+        }
+      }
+    },
+    {
+      "repetition": 5,
+      "model_records": {
+        "entry_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-entry_conflict-05:report_entry_conflict",
+            "episode_id": "HC-C4-REPORT-entry_conflict-05",
+            "base_episode_id": "HC-C4-REPORT-entry_conflict-05",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": true,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_entry_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C4-REPORT-entry_conflict-05-report-occupied",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [
+                  {
+                    "path": "bedroom.actual_occupied",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "bedroom.reported_occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": null,
+                "estimated_power_kw": null
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 1260
+        },
+        "exit_conflict": {
+          "request": {
+            "request_id": "HC-C4-REPORT-exit_conflict-05:report_exit_conflict",
+            "episode_id": "HC-C4-REPORT-exit_conflict-05",
+            "base_episode_id": "HC-C4-REPORT-exit_conflict-05",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": true
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_exit_conflict",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-C4-REPORT-exit_conflict-05:publish_clear",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "based_on_state_version": 1,
+                "requires": [
+                  {
+                    "path": "bedroom.actual_occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  },
+                  {
+                    "path": "bedroom.reported_occupied",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 100,
+                "estimated_power_kw": 0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 2529
+        },
+        "check_control": {
+          "request": {
+            "request_id": "HC-C4-REPORT-check_control-05:report_check_control",
+            "episode_id": "HC-C4-REPORT-check_control-05",
+            "base_episode_id": "HC-C4-REPORT-check_control-05",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 1,
+            "state": {
+              "bedroom": {
+                "actual_occupied": false,
+                "reported_occupied": false
+              }
+            },
+            "agent": {
+              "agent_id": "OccupancyReportAgent",
+              "role": "occupancy_reporting",
+              "tools": [
+                "publish_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.actual_occupied",
+                "bedroom.reported_occupied"
+              ],
+              "writable_resources": [
+                "messages.occupancy"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local"
+            },
+            "task": {
+              "task_id": "report_check_control",
+              "agent_id": "OccupancyReportAgent",
+              "release_at_ms": 0,
+              "goal": "Publish the current actual bedroom occupancy to the cleaning coordinator if it differs from the last published status; otherwise take no action.",
+              "priority": 90
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "publish_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_occupied",
+                "parameters": [],
+                "description": "Publish that the bedroom is occupied."
+              },
+              {
+                "agent_id": "OccupancyReportAgent",
+                "target": "occupancy_channel",
+                "operation": "report_clear",
+                "parameters": [],
+                "description": "Publish that the bedroom is unoccupied."
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "defer",
+            "actions": [],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "no_applicable_action"
+          },
+          "logical_latency_ms": 838
+        }
+      }
+    }
+  ],
+  "replays": [
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 1416,
+      "clean_first_start_ms": 1516,
+      "resident_entry_ms": 3016,
+      "resident_leave_ms": 5016,
+      "occupied_report_at_ms": 4599,
+      "clear_report_at_ms": 6433,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4516,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 1416,
+      "clean_first_start_ms": 1516,
+      "resident_entry_ms": 3016,
+      "resident_leave_ms": 5016,
+      "occupied_report_at_ms": 4599,
+      "clear_report_at_ms": 6433,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4516,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 1416,
+      "clean_first_start_ms": 1516,
+      "resident_entry_ms": 3016,
+      "resident_leave_ms": 5016,
+      "occupied_report_at_ms": 4599,
+      "clear_report_at_ms": 6433,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4516,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 1,
+      "condition": "conflict",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 1416,
+      "clean_first_start_ms": 1516,
+      "resident_entry_ms": 3016,
+      "resident_leave_ms": 5016,
+      "occupied_report_at_ms": 3016,
+      "clear_report_at_ms": 5016,
+      "stop_ack_at_ms": 3216,
+      "retry_start_at_ms": 5116,
+      "clean_completion_ms": 8116,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 200
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 1416,
+      "clean_first_start_ms": 1516,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4516,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 1416,
+      "clean_first_start_ms": 1516,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4516,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 1416,
+      "clean_first_start_ms": 1516,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4516,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 1,
+      "condition": "control",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 1416,
+      "clean_first_start_ms": 1516,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4516,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 1641,
+      "clean_first_start_ms": 1741,
+      "resident_entry_ms": 3241,
+      "resident_leave_ms": 5241,
+      "occupied_report_at_ms": 4738,
+      "clear_report_at_ms": 6606,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4741,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 1641,
+      "clean_first_start_ms": 1741,
+      "resident_entry_ms": 3241,
+      "resident_leave_ms": 5241,
+      "occupied_report_at_ms": 4738,
+      "clear_report_at_ms": 6606,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4741,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 1641,
+      "clean_first_start_ms": 1741,
+      "resident_entry_ms": 3241,
+      "resident_leave_ms": 5241,
+      "occupied_report_at_ms": 4738,
+      "clear_report_at_ms": 6606,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4741,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 2,
+      "condition": "conflict",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 1641,
+      "clean_first_start_ms": 1741,
+      "resident_entry_ms": 3241,
+      "resident_leave_ms": 5241,
+      "occupied_report_at_ms": 3241,
+      "clear_report_at_ms": 5241,
+      "stop_ack_at_ms": 3441,
+      "retry_start_at_ms": 5341,
+      "clean_completion_ms": 8341,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 200
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 1641,
+      "clean_first_start_ms": 1741,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4741,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 1641,
+      "clean_first_start_ms": 1741,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4741,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 1641,
+      "clean_first_start_ms": 1741,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4741,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 2,
+      "condition": "control",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 1641,
+      "clean_first_start_ms": 1741,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4741,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 4018,
+      "clean_first_start_ms": 4118,
+      "resident_entry_ms": 5618,
+      "resident_leave_ms": 7618,
+      "occupied_report_at_ms": 6941,
+      "clear_report_at_ms": 9025,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 7118,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 4018,
+      "clean_first_start_ms": 4118,
+      "resident_entry_ms": 5618,
+      "resident_leave_ms": 7618,
+      "occupied_report_at_ms": 6941,
+      "clear_report_at_ms": 9025,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 7118,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 4018,
+      "clean_first_start_ms": 4118,
+      "resident_entry_ms": 5618,
+      "resident_leave_ms": 7618,
+      "occupied_report_at_ms": 6941,
+      "clear_report_at_ms": 9025,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 7118,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 3,
+      "condition": "conflict",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 4018,
+      "clean_first_start_ms": 4118,
+      "resident_entry_ms": 5618,
+      "resident_leave_ms": 7618,
+      "occupied_report_at_ms": 5618,
+      "clear_report_at_ms": 7618,
+      "stop_ack_at_ms": 5818,
+      "retry_start_at_ms": 7718,
+      "clean_completion_ms": 10718,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 200
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 4018,
+      "clean_first_start_ms": 4118,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 7118,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 4018,
+      "clean_first_start_ms": 4118,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 7118,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 4018,
+      "clean_first_start_ms": 4118,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 7118,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 3,
+      "condition": "control",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 4018,
+      "clean_first_start_ms": 4118,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 7118,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 1057,
+      "clean_first_start_ms": 1157,
+      "resident_entry_ms": 2657,
+      "resident_leave_ms": 4657,
+      "occupied_report_at_ms": 3921,
+      "clear_report_at_ms": 6134,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4157,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 1057,
+      "clean_first_start_ms": 1157,
+      "resident_entry_ms": 2657,
+      "resident_leave_ms": 4657,
+      "occupied_report_at_ms": 3921,
+      "clear_report_at_ms": 6134,
+      "stop_ack_at_ms": 4121,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": null,
+      "clean_task_served": false,
+      "unsafe_overlap_duration_ms": 1464
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 1057,
+      "clean_first_start_ms": 1157,
+      "resident_entry_ms": 2657,
+      "resident_leave_ms": 4657,
+      "occupied_report_at_ms": 3921,
+      "clear_report_at_ms": 6134,
+      "stop_ack_at_ms": 4121,
+      "retry_start_at_ms": 6234,
+      "clean_completion_ms": 9234,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1464
+    },
+    {
+      "repetition": 4,
+      "condition": "conflict",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 1057,
+      "clean_first_start_ms": 1157,
+      "resident_entry_ms": 2657,
+      "resident_leave_ms": 4657,
+      "occupied_report_at_ms": 2657,
+      "clear_report_at_ms": 4657,
+      "stop_ack_at_ms": 2857,
+      "retry_start_at_ms": 4757,
+      "clean_completion_ms": 7757,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 200
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 1057,
+      "clean_first_start_ms": 1157,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4157,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 1057,
+      "clean_first_start_ms": 1157,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4157,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 1057,
+      "clean_first_start_ms": 1157,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4157,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 4,
+      "condition": "control",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 1057,
+      "clean_first_start_ms": 1157,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4157,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 1390,
+      "clean_first_start_ms": 1490,
+      "resident_entry_ms": 2990,
+      "resident_leave_ms": 4990,
+      "occupied_report_at_ms": 4350,
+      "clear_report_at_ms": 7619,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4490,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 1390,
+      "clean_first_start_ms": 1490,
+      "resident_entry_ms": 2990,
+      "resident_leave_ms": 4990,
+      "occupied_report_at_ms": 4350,
+      "clear_report_at_ms": 7619,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4490,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 1390,
+      "clean_first_start_ms": 1490,
+      "resident_entry_ms": 2990,
+      "resident_leave_ms": 4990,
+      "occupied_report_at_ms": 4350,
+      "clear_report_at_ms": 7619,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4490,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 1500
+    },
+    {
+      "repetition": 5,
+      "condition": "conflict",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 1390,
+      "clean_first_start_ms": 1490,
+      "resident_entry_ms": 2990,
+      "resident_leave_ms": 4990,
+      "occupied_report_at_ms": 2990,
+      "clear_report_at_ms": 4990,
+      "stop_ack_at_ms": 3190,
+      "retry_start_at_ms": 5090,
+      "clean_completion_ms": 8090,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 200
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "policy": "NoCoordination",
+      "clean_model_latency_ms": 1390,
+      "clean_first_start_ms": 1490,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4490,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "policy": "AgentMessageStopOnly",
+      "clean_model_latency_ms": 1390,
+      "clean_first_start_ms": 1490,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4490,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "policy": "AgentMessageStopRestart",
+      "clean_model_latency_ms": 1390,
+      "clean_first_start_ms": 1490,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4490,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    },
+    {
+      "repetition": 5,
+      "condition": "control",
+      "policy": "DirectSensorStopRestart",
+      "clean_model_latency_ms": 1390,
+      "clean_first_start_ms": 1490,
+      "resident_entry_ms": null,
+      "resident_leave_ms": null,
+      "occupied_report_at_ms": null,
+      "clear_report_at_ms": null,
+      "stop_ack_at_ms": null,
+      "retry_start_at_ms": null,
+      "clean_completion_ms": 4490,
+      "clean_task_served": true,
+      "unsafe_overlap_duration_ms": 0
+    }
+  ]
+}
