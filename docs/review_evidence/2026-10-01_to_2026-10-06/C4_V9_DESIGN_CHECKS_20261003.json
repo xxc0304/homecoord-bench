@@ -1,0 +1,990 @@
+{
+  "phase": "design_before_results",
+  "verdict": "接受",
+  "errors": [],
+  "configurations": [
+    {
+      "id": "C4R1-CLEAN-NOEVENT",
+      "scene": "CLEAN",
+      "window": "NOEVENT",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-EARLY",
+      "scene": "CLEAN",
+      "window": "EARLY",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 100,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "bedroom.occupied": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-MID",
+      "scene": "CLEAN",
+      "window": "MID",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "bedroom.occupied": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-LATE",
+      "scene": "CLEAN",
+      "window": "LATE",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 3000,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "bedroom.occupied": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-BOUNDARY",
+      "scene": "CLEAN",
+      "window": "BOUNDARY",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 3400,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "bedroom.occupied": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-POST",
+      "scene": "CLEAN",
+      "window": "POST",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 4000,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "bedroom.occupied": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-UNRELATED",
+      "scene": "CLEAN",
+      "window": "UNRELATED",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "challenge_unrelated",
+          "patch": {
+            "diagnostic.heartbeat": 1
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-NOEVENT",
+      "scene": "RAIN",
+      "window": "NOEVENT",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-EARLY",
+      "scene": "RAIN",
+      "window": "EARLY",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 100,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-MID",
+      "scene": "RAIN",
+      "window": "MID",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-LATE",
+      "scene": "RAIN",
+      "window": "LATE",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 3000,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-BOUNDARY",
+      "scene": "RAIN",
+      "window": "BOUNDARY",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 3400,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-POST",
+      "scene": "RAIN",
+      "window": "POST",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 4000,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-UNRELATED",
+      "scene": "RAIN",
+      "window": "UNRELATED",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "challenge_unrelated",
+          "patch": {
+            "diagnostic.heartbeat": 1
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-MID-slow_proposal",
+      "scene": "CLEAN",
+      "window": "MID",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "bedroom.occupied": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-MID-slow_ack",
+      "scene": "CLEAN",
+      "window": "MID",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 700,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "bedroom.occupied": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-LATE-late_natural_race",
+      "scene": "CLEAN",
+      "window": "LATE",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 1000,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 3000,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "bedroom.occupied": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-MID-local_only",
+      "scene": "CLEAN",
+      "window": "MID",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "bedroom.occupied": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-MID-slow_proposal",
+      "scene": "RAIN",
+      "window": "MID",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-MID-slow_ack",
+      "scene": "RAIN",
+      "window": "MID",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 700,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-LATE-late_natural_race",
+      "scene": "RAIN",
+      "window": "LATE",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 1000,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 3000,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-MID-local_only",
+      "scene": "RAIN",
+      "window": "MID",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-CLEAN-MID-never_restore",
+      "scene": "CLEAN",
+      "window": "MID",
+      "policy": {
+        "mode": "restart_from_zero",
+        "valid_when": [
+          {
+            "path": "bedroom.occupied",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.bedroom_robot": "idle"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "bedroom.occupied": true
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "C4R1-RAIN-MID-new_request",
+      "scene": "RAIN",
+      "window": "MID",
+      "policy": {
+        "mode": "withdraw",
+        "valid_when": [
+          {
+            "path": "weather.raining",
+            "op": "eq",
+            "value": false
+          }
+        ],
+        "stop_ack_delay_ms": 200,
+        "restart_delay_ms": 0,
+        "stop_effects": {
+          "devices.irrigation": "off"
+        }
+      },
+      "events": [
+        {
+          "at_ms": 1800,
+          "event": "validity_lost",
+          "patch": {
+            "weather.raining": true
+          }
+        },
+        {
+          "at_ms": 5000,
+          "event": "validity_restored",
+          "patch": {
+            "weather.raining": false
+          }
+        },
+        {
+          "at_ms": 10000,
+          "event": "observation_end",
+          "patch": {
+            "diagnostic.heartbeat": 2
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "episode_id": "REV-C1-BLINDS-CONFLICT",
+  "task_family": "direct_device_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "author_revised_not_independently_reviewed",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 130,
+    "values": {
+      "bedroom": {
+        "occupied": true,
+        "privacy_required": true,
+        "daylight_requested": true
+      },
+      "devices": {
+        "bedroom_blinds": "closed"
+      },
+      "service": {
+        "protected": false,
+        "lower": false
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "PrivacyAgent",
+      "role": "privacy",
+      "tools": [
+        "set_blinds"
+      ],
+      "observable_state": [
+        "bedroom.occupied",
+        "bedroom.privacy_required",
+        "devices.bedroom_blinds"
+      ],
+      "writable_resources": [
+        "devices.bedroom_blinds"
+      ]
+    },
+    {
+      "agent_id": "DaylightAgent",
+      "role": "daylight",
+      "tools": [
+        "set_blinds"
+      ],
+      "observable_state": [
+        "bedroom.daylight_requested",
+        "bedroom.privacy_required",
+        "devices.bedroom_blinds"
+      ],
+      "writable_resources": [
+        "devices.bedroom_blinds"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "privacy_close",
+      "agent_id": "PrivacyAgent",
+      "release_at_ms": 0,
+      "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+      "priority": 100,
+      "required_action": {
+        "target": "bedroom_blinds",
+        "operation": "close"
+      },
+      "action_template": {
+        "target": "bedroom_blinds",
+        "operation": "close",
+        "parameters": {},
+        "duration_ms": 500,
+        "power_kw": 0.01,
+        "requires": [
+          {
+            "path": "bedroom.privacy_required",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "completion_deadline_ms": 1100
+    },
+    {
+      "task_id": "daylight_open",
+      "agent_id": "DaylightAgent",
+      "release_at_ms": 1200,
+      "goal": "Execute the lower-priority request only when the protected request is inactive; otherwise reject it.",
+      "priority": 30,
+      "required_action": {
+        "target": "bedroom_blinds",
+        "operation": "open"
+      },
+      "action_template": {
+        "target": "bedroom_blinds",
+        "operation": "open",
+        "parameters": {},
+        "duration_ms": 500,
+        "power_kw": 0.01,
+        "requires": [
+          {
+            "path": "bedroom.privacy_required",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "completion_deadline_ms": 8000
+    }
+  ],
+  "exogenous_events": [
+    {
+      "at_ms": 6000,
+      "event": "protected_request_expires",
+      "patch": {
+        "bedroom.privacy_required": false
+      }
+    }
+  ],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "service.protected",
+      "op": "eq",
+      "value": true
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "bedroom.privacy_required",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.bedroom_blinds",
+          "op": "neq",
+          "value": "open"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C1",
+      "a": {
+        "target": "bedroom_blinds",
+        "operation": "close"
+      },
+      "b": {
+        "target": "bedroom_blinds",
+        "operation": "open"
+      },
+      "min_overlap_ms": 1
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "PrivacyAgent",
+      "task_id": "privacy_close",
+      "operation": "close",
+      "target": "bedroom_blinds",
+      "grounded_operation": "close",
+      "duration_ms": 500,
+      "power_kw": 0.01,
+      "start_effects": {},
+      "completion_effects": {
+        "devices.bedroom_blinds": "closed",
+        "service.protected": true
+      }
+    },
+    {
+      "agent_id": "DaylightAgent",
+      "task_id": "daylight_open",
+      "operation": "open",
+      "target": "bedroom_blinds",
+      "grounded_operation": "open",
+      "duration_ms": 500,
+      "power_kw": 0.01,
+      "start_effects": {},
+      "completion_effects": {
+        "devices.bedroom_blinds": "open",
+        "service.lower": true
+      }
+    }
+  ],
+  "calibration": {
+    "status": "abstract_action_contract",
+    "physical_parameters_verified": false,
+    "source": "author-defined synthetic duration, command and proposal latency"
+  },
+  "base_episode_id": "HC-M03",
+  "tool_contract_version": "strict-v1",
+  "variant": {
+    "structure": "C1-BLINDS",
+    "condition": "CONFLICT",
+    "split": "development"
+  },
+  "simulation": {
+    "command_latency_ms": 100
+  },
+  "task_card": {
+    "information": "observable_state is identical across paired conditions",
+    "tools": "strict-v1 tool_catalog; exact permitted target/operation/parameters",
+    "resources": "capacity nonbinding; not a C3 task",
+    "parameter_source": "abstract author contract, not device measurements",
+    "success": "completed service, disposition and process harm are separate",
+    "limitations": [
+      "not independently reviewed",
+      "not physical validation",
+      "fixed proposals use evaluation hints; no model evidence"
+    ],
+    "request": "Priority protects a state until time 6000, not merely during a command.",
+    "lifecycle": "reject the invalid lower request; do not mark rejection as its action service",
+    "matching_factor": "lower task release_at_ms only",
+    "resolution_contract": {
+      "lower_task_id": "daylight_open",
+      "expected": "rejected"
+    }
+  },
+  "tool_catalog": [
+    {
+      "agent_id": "PrivacyAgent",
+      "tool_name": "set_blinds",
+      "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+      "target": "bedroom_blinds",
+      "operation": "close",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "bedroom.privacy_required",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "returns": {
+        "status": [
+          "accepted",
+          "rejected"
+        ],
+        "observed_state": "object"
+      }
+    },
+    {
+      "agent_id": "DaylightAgent",
+      "tool_name": "set_blinds",
+      "description": "Execute the lower-priority request only when the protected request is inactive; otherwise reject it.",
+      "target": "bedroom_blinds",
+      "operation": "open",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "bedroom.privacy_required",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "returns": {
+        "status": [
+          "accepted",
+          "rejected"
+        ],
+        "observed_state": "object"
+      }
+    }
+  ]
+}

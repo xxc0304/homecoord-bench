@@ -1,0 +1,2861 @@
+{
+  "status": "pending_phase_A",
+  "episodes": [
+    {
+      "episode_id": "C1R2-LIGHT-legality-CONFLICT",
+      "task_family": "direct_device_conflict",
+      "source_type": "manual_template",
+      "generator_version": "0.3.0",
+      "review_status": "revised_author_draft_pending_phase_A",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 8.0
+        }
+      },
+      "initial_state": {
+        "version": 120,
+        "values": {
+          "study": {
+            "occupied": true,
+            "reading_active": true
+          },
+          "devices": {
+            "study_light": "reading"
+          },
+          "service": {
+            "protected": false,
+            "lower": false
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "ReadingAgent",
+          "role": "reading",
+          "tools": [
+            "set_light"
+          ],
+          "observable_state": [
+            "devices.study_light",
+            "study.reading_active"
+          ],
+          "writable_resources": [
+            "devices.study_light"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "study.reading_active",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.study_light",
+                  "op": "neq",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "energy",
+          "tools": [
+            "set_light"
+          ],
+          "observable_state": [
+            "devices.study_light",
+            "study.occupied",
+            "study.reading_active"
+          ],
+          "writable_resources": [
+            "devices.study_light"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "study.reading_active",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.study_light",
+                  "op": "neq",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "reading_light",
+          "agent_id": "ReadingAgent",
+          "release_at_ms": 0,
+          "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "priority": 100,
+          "required_action": {
+            "target": "study_light",
+            "operation": "set_reading"
+          },
+          "action_template": {
+            "target": "study_light",
+            "operation": "set_reading",
+            "parameters": {
+              "lux": 500
+            },
+            "duration_ms": 500,
+            "power_kw": 0.02,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 1100
+        },
+        {
+          "task_id": "energy_light",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 1200,
+          "goal": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "priority": 20,
+          "required_action": {
+            "target": "study_light",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "study_light",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.0,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          "completion_deadline_ms": 8000,
+          "request_contract": {
+            "policy_id": "user-protection-LIGHT",
+            "admit_when": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "protected_request_expires",
+          "patch": {
+            "study.reading_active": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "service.protected",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.study_light",
+              "op": "neq",
+              "value": "off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "study_light",
+            "operation": "set_reading"
+          },
+          "b": {
+            "target": "study_light",
+            "operation": "off"
+          },
+          "min_overlap_ms": 1
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "ReadingAgent",
+          "task_id": "reading_light",
+          "operation": "set_reading",
+          "target": "study_light",
+          "grounded_operation": "set_reading",
+          "duration_ms": 500,
+          "power_kw": 0.02,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.study_light": "reading",
+            "service.protected": true
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "energy_light",
+          "operation": "off",
+          "target": "study_light",
+          "grounded_operation": "off",
+          "duration_ms": 500,
+          "power_kw": 0.0,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.study_light": "off",
+            "service.lower": true
+          }
+        }
+      ],
+      "calibration": {
+        "status": "abstract_action_contract",
+        "physical_parameters_verified": false,
+        "source": "author-defined synthetic duration, command and proposal latency"
+      },
+      "base_episode_id": "HC-M02",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "structure": "persistent_protection",
+        "device_scene": "LIGHT",
+        "condition": "CONFLICT",
+        "budget": "legality",
+        "split": "development"
+      },
+      "simulation": {
+        "command_latency_ms": 100,
+        "request_disposition_contracts": {
+          "energy_light": {
+            "policy_id": "user-protection-LIGHT",
+            "admit_when": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      },
+      "task_card": {
+        "status": "pending design review, not acceptance",
+        "mechanism_count": 1,
+        "disposition": "trusted user policy, release-time terminal rejection; no agent reasoning claim",
+        "budget": "legality",
+        "legality": "fixed8000 deadline is not an equal response-budget contrast",
+        "equal_response": "deadline=own release+1500; rejection has no action completion time",
+        "information": "same current boolean and target; expiry event/time not included in decision inputs",
+        "limitations": [
+          "single protection request",
+          "no multiple-user arbitration",
+          "synthetic authority",
+          "device state only"
+        ]
+      },
+      "tool_catalog": [
+        {
+          "agent_id": "ReadingAgent",
+          "tool_name": "set_light",
+          "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "target": "study_light",
+          "operation": "set_reading",
+          "parameters": [
+            {
+              "name": "lux",
+              "type": "number",
+              "minimum": 300,
+              "maximum": 800,
+              "required": true
+            }
+          ],
+          "preconditions": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "set_light",
+          "description": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "target": "study_light",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        }
+      ],
+      "user_delegations": [
+        {
+          "policy_id": "user-protection-LIGHT",
+          "authority": "explicit_synthetic_user_delegation",
+          "principal": "SyntheticResident",
+          "target": "study_light",
+          "protected_path": "study.reading_active",
+          "scope": "maintain declared protected device state while current protection boolean is true; only one protection request",
+          "request_semantics": "reject_terminal_at_release_no_wait",
+          "expiry_visibility": "current_boolean_only",
+          "new_request_rule": "later action after expiry requires a new task_id; closed original request never revives",
+          "parameter_basis": "author-defined device-state contract, not measured illumination/privacy or real user study"
+        }
+      ]
+    },
+    {
+      "episode_id": "C1R2-LIGHT-legality-SAFE",
+      "task_family": "direct_device_conflict",
+      "source_type": "manual_template",
+      "generator_version": "0.3.0",
+      "review_status": "revised_author_draft_pending_phase_A",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 8.0
+        }
+      },
+      "initial_state": {
+        "version": 120,
+        "values": {
+          "study": {
+            "occupied": true,
+            "reading_active": true
+          },
+          "devices": {
+            "study_light": "reading"
+          },
+          "service": {
+            "protected": false,
+            "lower": false
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "ReadingAgent",
+          "role": "reading",
+          "tools": [
+            "set_light"
+          ],
+          "observable_state": [
+            "devices.study_light",
+            "study.reading_active"
+          ],
+          "writable_resources": [
+            "devices.study_light"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "study.reading_active",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.study_light",
+                  "op": "neq",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "energy",
+          "tools": [
+            "set_light"
+          ],
+          "observable_state": [
+            "devices.study_light",
+            "study.occupied",
+            "study.reading_active"
+          ],
+          "writable_resources": [
+            "devices.study_light"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "study.reading_active",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.study_light",
+                  "op": "neq",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "reading_light",
+          "agent_id": "ReadingAgent",
+          "release_at_ms": 0,
+          "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "priority": 100,
+          "required_action": {
+            "target": "study_light",
+            "operation": "set_reading"
+          },
+          "action_template": {
+            "target": "study_light",
+            "operation": "set_reading",
+            "parameters": {
+              "lux": 500
+            },
+            "duration_ms": 500,
+            "power_kw": 0.02,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 1100
+        },
+        {
+          "task_id": "energy_light",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 6500,
+          "goal": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "priority": 20,
+          "required_action": {
+            "target": "study_light",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "study_light",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.0,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          "completion_deadline_ms": 8000,
+          "request_contract": {
+            "policy_id": "user-protection-LIGHT",
+            "admit_when": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "protected_request_expires",
+          "patch": {
+            "study.reading_active": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "service.protected",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.study_light",
+              "op": "neq",
+              "value": "off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "study_light",
+            "operation": "set_reading"
+          },
+          "b": {
+            "target": "study_light",
+            "operation": "off"
+          },
+          "min_overlap_ms": 1
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "ReadingAgent",
+          "task_id": "reading_light",
+          "operation": "set_reading",
+          "target": "study_light",
+          "grounded_operation": "set_reading",
+          "duration_ms": 500,
+          "power_kw": 0.02,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.study_light": "reading",
+            "service.protected": true
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "energy_light",
+          "operation": "off",
+          "target": "study_light",
+          "grounded_operation": "off",
+          "duration_ms": 500,
+          "power_kw": 0.0,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.study_light": "off",
+            "service.lower": true
+          }
+        }
+      ],
+      "calibration": {
+        "status": "abstract_action_contract",
+        "physical_parameters_verified": false,
+        "source": "author-defined synthetic duration, command and proposal latency"
+      },
+      "base_episode_id": "HC-M02",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "structure": "persistent_protection",
+        "device_scene": "LIGHT",
+        "condition": "SAFE",
+        "budget": "legality",
+        "split": "development"
+      },
+      "simulation": {
+        "command_latency_ms": 100,
+        "request_disposition_contracts": {
+          "energy_light": {
+            "policy_id": "user-protection-LIGHT",
+            "admit_when": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      },
+      "task_card": {
+        "status": "pending design review, not acceptance",
+        "mechanism_count": 1,
+        "disposition": "trusted user policy, release-time terminal rejection; no agent reasoning claim",
+        "budget": "legality",
+        "legality": "fixed8000 deadline is not an equal response-budget contrast",
+        "equal_response": "deadline=own release+1500; rejection has no action completion time",
+        "information": "same current boolean and target; expiry event/time not included in decision inputs",
+        "limitations": [
+          "single protection request",
+          "no multiple-user arbitration",
+          "synthetic authority",
+          "device state only"
+        ]
+      },
+      "tool_catalog": [
+        {
+          "agent_id": "ReadingAgent",
+          "tool_name": "set_light",
+          "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "target": "study_light",
+          "operation": "set_reading",
+          "parameters": [
+            {
+              "name": "lux",
+              "type": "number",
+              "minimum": 300,
+              "maximum": 800,
+              "required": true
+            }
+          ],
+          "preconditions": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "set_light",
+          "description": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "target": "study_light",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        }
+      ],
+      "user_delegations": [
+        {
+          "policy_id": "user-protection-LIGHT",
+          "authority": "explicit_synthetic_user_delegation",
+          "principal": "SyntheticResident",
+          "target": "study_light",
+          "protected_path": "study.reading_active",
+          "scope": "maintain declared protected device state while current protection boolean is true; only one protection request",
+          "request_semantics": "reject_terminal_at_release_no_wait",
+          "expiry_visibility": "current_boolean_only",
+          "new_request_rule": "later action after expiry requires a new task_id; closed original request never revives",
+          "parameter_basis": "author-defined device-state contract, not measured illumination/privacy or real user study"
+        }
+      ]
+    },
+    {
+      "episode_id": "C1R2-LIGHT-equal_response-CONFLICT",
+      "task_family": "direct_device_conflict",
+      "source_type": "manual_template",
+      "generator_version": "0.3.0",
+      "review_status": "revised_author_draft_pending_phase_A",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 8.0
+        }
+      },
+      "initial_state": {
+        "version": 120,
+        "values": {
+          "study": {
+            "occupied": true,
+            "reading_active": true
+          },
+          "devices": {
+            "study_light": "reading"
+          },
+          "service": {
+            "protected": false,
+            "lower": false
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "ReadingAgent",
+          "role": "reading",
+          "tools": [
+            "set_light"
+          ],
+          "observable_state": [
+            "devices.study_light",
+            "study.reading_active"
+          ],
+          "writable_resources": [
+            "devices.study_light"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "study.reading_active",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.study_light",
+                  "op": "neq",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "energy",
+          "tools": [
+            "set_light"
+          ],
+          "observable_state": [
+            "devices.study_light",
+            "study.occupied",
+            "study.reading_active"
+          ],
+          "writable_resources": [
+            "devices.study_light"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "study.reading_active",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.study_light",
+                  "op": "neq",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "reading_light",
+          "agent_id": "ReadingAgent",
+          "release_at_ms": 0,
+          "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "priority": 100,
+          "required_action": {
+            "target": "study_light",
+            "operation": "set_reading"
+          },
+          "action_template": {
+            "target": "study_light",
+            "operation": "set_reading",
+            "parameters": {
+              "lux": 500
+            },
+            "duration_ms": 500,
+            "power_kw": 0.02,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 1100
+        },
+        {
+          "task_id": "energy_light",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 1200,
+          "goal": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "priority": 20,
+          "required_action": {
+            "target": "study_light",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "study_light",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.0,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          "completion_deadline_ms": 2700,
+          "request_contract": {
+            "policy_id": "user-protection-LIGHT",
+            "admit_when": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "protected_request_expires",
+          "patch": {
+            "study.reading_active": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "service.protected",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.study_light",
+              "op": "neq",
+              "value": "off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "study_light",
+            "operation": "set_reading"
+          },
+          "b": {
+            "target": "study_light",
+            "operation": "off"
+          },
+          "min_overlap_ms": 1
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "ReadingAgent",
+          "task_id": "reading_light",
+          "operation": "set_reading",
+          "target": "study_light",
+          "grounded_operation": "set_reading",
+          "duration_ms": 500,
+          "power_kw": 0.02,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.study_light": "reading",
+            "service.protected": true
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "energy_light",
+          "operation": "off",
+          "target": "study_light",
+          "grounded_operation": "off",
+          "duration_ms": 500,
+          "power_kw": 0.0,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.study_light": "off",
+            "service.lower": true
+          }
+        }
+      ],
+      "calibration": {
+        "status": "abstract_action_contract",
+        "physical_parameters_verified": false,
+        "source": "author-defined synthetic duration, command and proposal latency"
+      },
+      "base_episode_id": "HC-M02",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "structure": "persistent_protection",
+        "device_scene": "LIGHT",
+        "condition": "CONFLICT",
+        "budget": "equal_response",
+        "split": "development"
+      },
+      "simulation": {
+        "command_latency_ms": 100,
+        "request_disposition_contracts": {
+          "energy_light": {
+            "policy_id": "user-protection-LIGHT",
+            "admit_when": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      },
+      "task_card": {
+        "status": "pending design review, not acceptance",
+        "mechanism_count": 1,
+        "disposition": "trusted user policy, release-time terminal rejection; no agent reasoning claim",
+        "budget": "equal_response",
+        "legality": "fixed8000 deadline is not an equal response-budget contrast",
+        "equal_response": "deadline=own release+1500; rejection has no action completion time",
+        "information": "same current boolean and target; expiry event/time not included in decision inputs",
+        "limitations": [
+          "single protection request",
+          "no multiple-user arbitration",
+          "synthetic authority",
+          "device state only"
+        ]
+      },
+      "tool_catalog": [
+        {
+          "agent_id": "ReadingAgent",
+          "tool_name": "set_light",
+          "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "target": "study_light",
+          "operation": "set_reading",
+          "parameters": [
+            {
+              "name": "lux",
+              "type": "number",
+              "minimum": 300,
+              "maximum": 800,
+              "required": true
+            }
+          ],
+          "preconditions": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "set_light",
+          "description": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "target": "study_light",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        }
+      ],
+      "user_delegations": [
+        {
+          "policy_id": "user-protection-LIGHT",
+          "authority": "explicit_synthetic_user_delegation",
+          "principal": "SyntheticResident",
+          "target": "study_light",
+          "protected_path": "study.reading_active",
+          "scope": "maintain declared protected device state while current protection boolean is true; only one protection request",
+          "request_semantics": "reject_terminal_at_release_no_wait",
+          "expiry_visibility": "current_boolean_only",
+          "new_request_rule": "later action after expiry requires a new task_id; closed original request never revives",
+          "parameter_basis": "author-defined device-state contract, not measured illumination/privacy or real user study"
+        }
+      ]
+    },
+    {
+      "episode_id": "C1R2-LIGHT-equal_response-SAFE",
+      "task_family": "direct_device_conflict",
+      "source_type": "manual_template",
+      "generator_version": "0.3.0",
+      "review_status": "revised_author_draft_pending_phase_A",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 8.0
+        }
+      },
+      "initial_state": {
+        "version": 120,
+        "values": {
+          "study": {
+            "occupied": true,
+            "reading_active": true
+          },
+          "devices": {
+            "study_light": "reading"
+          },
+          "service": {
+            "protected": false,
+            "lower": false
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "ReadingAgent",
+          "role": "reading",
+          "tools": [
+            "set_light"
+          ],
+          "observable_state": [
+            "devices.study_light",
+            "study.reading_active"
+          ],
+          "writable_resources": [
+            "devices.study_light"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "study.reading_active",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.study_light",
+                  "op": "neq",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "energy",
+          "tools": [
+            "set_light"
+          ],
+          "observable_state": [
+            "devices.study_light",
+            "study.occupied",
+            "study.reading_active"
+          ],
+          "writable_resources": [
+            "devices.study_light"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "study.reading_active",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.study_light",
+                  "op": "neq",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "reading_light",
+          "agent_id": "ReadingAgent",
+          "release_at_ms": 0,
+          "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "priority": 100,
+          "required_action": {
+            "target": "study_light",
+            "operation": "set_reading"
+          },
+          "action_template": {
+            "target": "study_light",
+            "operation": "set_reading",
+            "parameters": {
+              "lux": 500
+            },
+            "duration_ms": 500,
+            "power_kw": 0.02,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 1100
+        },
+        {
+          "task_id": "energy_light",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 6500,
+          "goal": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "priority": 20,
+          "required_action": {
+            "target": "study_light",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "study_light",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.0,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          "completion_deadline_ms": 8000,
+          "request_contract": {
+            "policy_id": "user-protection-LIGHT",
+            "admit_when": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "protected_request_expires",
+          "patch": {
+            "study.reading_active": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "service.protected",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.study_light",
+              "op": "neq",
+              "value": "off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "study_light",
+            "operation": "set_reading"
+          },
+          "b": {
+            "target": "study_light",
+            "operation": "off"
+          },
+          "min_overlap_ms": 1
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "ReadingAgent",
+          "task_id": "reading_light",
+          "operation": "set_reading",
+          "target": "study_light",
+          "grounded_operation": "set_reading",
+          "duration_ms": 500,
+          "power_kw": 0.02,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.study_light": "reading",
+            "service.protected": true
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "energy_light",
+          "operation": "off",
+          "target": "study_light",
+          "grounded_operation": "off",
+          "duration_ms": 500,
+          "power_kw": 0.0,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.study_light": "off",
+            "service.lower": true
+          }
+        }
+      ],
+      "calibration": {
+        "status": "abstract_action_contract",
+        "physical_parameters_verified": false,
+        "source": "author-defined synthetic duration, command and proposal latency"
+      },
+      "base_episode_id": "HC-M02",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "structure": "persistent_protection",
+        "device_scene": "LIGHT",
+        "condition": "SAFE",
+        "budget": "equal_response",
+        "split": "development"
+      },
+      "simulation": {
+        "command_latency_ms": 100,
+        "request_disposition_contracts": {
+          "energy_light": {
+            "policy_id": "user-protection-LIGHT",
+            "admit_when": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      },
+      "task_card": {
+        "status": "pending design review, not acceptance",
+        "mechanism_count": 1,
+        "disposition": "trusted user policy, release-time terminal rejection; no agent reasoning claim",
+        "budget": "equal_response",
+        "legality": "fixed8000 deadline is not an equal response-budget contrast",
+        "equal_response": "deadline=own release+1500; rejection has no action completion time",
+        "information": "same current boolean and target; expiry event/time not included in decision inputs",
+        "limitations": [
+          "single protection request",
+          "no multiple-user arbitration",
+          "synthetic authority",
+          "device state only"
+        ]
+      },
+      "tool_catalog": [
+        {
+          "agent_id": "ReadingAgent",
+          "tool_name": "set_light",
+          "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "target": "study_light",
+          "operation": "set_reading",
+          "parameters": [
+            {
+              "name": "lux",
+              "type": "number",
+              "minimum": 300,
+              "maximum": 800,
+              "required": true
+            }
+          ],
+          "preconditions": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "set_light",
+          "description": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "target": "study_light",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "study.reading_active",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        }
+      ],
+      "user_delegations": [
+        {
+          "policy_id": "user-protection-LIGHT",
+          "authority": "explicit_synthetic_user_delegation",
+          "principal": "SyntheticResident",
+          "target": "study_light",
+          "protected_path": "study.reading_active",
+          "scope": "maintain declared protected device state while current protection boolean is true; only one protection request",
+          "request_semantics": "reject_terminal_at_release_no_wait",
+          "expiry_visibility": "current_boolean_only",
+          "new_request_rule": "later action after expiry requires a new task_id; closed original request never revives",
+          "parameter_basis": "author-defined device-state contract, not measured illumination/privacy or real user study"
+        }
+      ]
+    },
+    {
+      "episode_id": "C1R2-BLINDS-legality-CONFLICT",
+      "task_family": "direct_device_conflict",
+      "source_type": "manual_template",
+      "generator_version": "0.3.0",
+      "review_status": "revised_author_draft_pending_phase_A",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 8.0
+        }
+      },
+      "initial_state": {
+        "version": 130,
+        "values": {
+          "bedroom": {
+            "occupied": true,
+            "privacy_required": true,
+            "daylight_requested": true
+          },
+          "devices": {
+            "bedroom_blinds": "closed"
+          },
+          "service": {
+            "protected": false,
+            "lower": false
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "PrivacyAgent",
+          "role": "privacy",
+          "tools": [
+            "set_blinds"
+          ],
+          "observable_state": [
+            "bedroom.occupied",
+            "bedroom.privacy_required",
+            "devices.bedroom_blinds"
+          ],
+          "writable_resources": [
+            "devices.bedroom_blinds"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "bedroom.privacy_required",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.bedroom_blinds",
+                  "op": "neq",
+                  "value": "open"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "role": "daylight",
+          "tools": [
+            "set_blinds"
+          ],
+          "observable_state": [
+            "bedroom.daylight_requested",
+            "bedroom.privacy_required",
+            "devices.bedroom_blinds"
+          ],
+          "writable_resources": [
+            "devices.bedroom_blinds"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "bedroom.privacy_required",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.bedroom_blinds",
+                  "op": "neq",
+                  "value": "open"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "privacy_close",
+          "agent_id": "PrivacyAgent",
+          "release_at_ms": 0,
+          "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "priority": 100,
+          "required_action": {
+            "target": "bedroom_blinds",
+            "operation": "close"
+          },
+          "action_template": {
+            "target": "bedroom_blinds",
+            "operation": "close",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 1100
+        },
+        {
+          "task_id": "daylight_open",
+          "agent_id": "DaylightAgent",
+          "release_at_ms": 1200,
+          "goal": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "priority": 30,
+          "required_action": {
+            "target": "bedroom_blinds",
+            "operation": "open"
+          },
+          "action_template": {
+            "target": "bedroom_blinds",
+            "operation": "open",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          "completion_deadline_ms": 8000,
+          "request_contract": {
+            "policy_id": "user-protection-BLINDS",
+            "admit_when": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "protected_request_expires",
+          "patch": {
+            "bedroom.privacy_required": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "service.protected",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.bedroom_blinds",
+              "op": "neq",
+              "value": "open"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "bedroom_blinds",
+            "operation": "close"
+          },
+          "b": {
+            "target": "bedroom_blinds",
+            "operation": "open"
+          },
+          "min_overlap_ms": 1
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "PrivacyAgent",
+          "task_id": "privacy_close",
+          "operation": "close",
+          "target": "bedroom_blinds",
+          "grounded_operation": "close",
+          "duration_ms": 500,
+          "power_kw": 0.01,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.bedroom_blinds": "closed",
+            "service.protected": true
+          }
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "task_id": "daylight_open",
+          "operation": "open",
+          "target": "bedroom_blinds",
+          "grounded_operation": "open",
+          "duration_ms": 500,
+          "power_kw": 0.01,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.bedroom_blinds": "open",
+            "service.lower": true
+          }
+        }
+      ],
+      "calibration": {
+        "status": "abstract_action_contract",
+        "physical_parameters_verified": false,
+        "source": "author-defined synthetic duration, command and proposal latency"
+      },
+      "base_episode_id": "HC-M03",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "structure": "persistent_protection",
+        "device_scene": "BLINDS",
+        "condition": "CONFLICT",
+        "budget": "legality",
+        "split": "development"
+      },
+      "simulation": {
+        "command_latency_ms": 100,
+        "request_disposition_contracts": {
+          "daylight_open": {
+            "policy_id": "user-protection-BLINDS",
+            "admit_when": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      },
+      "task_card": {
+        "status": "pending design review, not acceptance",
+        "mechanism_count": 1,
+        "disposition": "trusted user policy, release-time terminal rejection; no agent reasoning claim",
+        "budget": "legality",
+        "legality": "fixed8000 deadline is not an equal response-budget contrast",
+        "equal_response": "deadline=own release+1500; rejection has no action completion time",
+        "information": "same current boolean and target; expiry event/time not included in decision inputs",
+        "limitations": [
+          "single protection request",
+          "no multiple-user arbitration",
+          "synthetic authority",
+          "device state only"
+        ]
+      },
+      "tool_catalog": [
+        {
+          "agent_id": "PrivacyAgent",
+          "tool_name": "set_blinds",
+          "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "target": "bedroom_blinds",
+          "operation": "close",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "tool_name": "set_blinds",
+          "description": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "target": "bedroom_blinds",
+          "operation": "open",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        }
+      ],
+      "user_delegations": [
+        {
+          "policy_id": "user-protection-BLINDS",
+          "authority": "explicit_synthetic_user_delegation",
+          "principal": "SyntheticResident",
+          "target": "bedroom_blinds",
+          "protected_path": "bedroom.privacy_required",
+          "scope": "maintain declared protected device state while current protection boolean is true; only one protection request",
+          "request_semantics": "reject_terminal_at_release_no_wait",
+          "expiry_visibility": "current_boolean_only",
+          "new_request_rule": "later action after expiry requires a new task_id; closed original request never revives",
+          "parameter_basis": "author-defined device-state contract, not measured illumination/privacy or real user study"
+        }
+      ]
+    },
+    {
+      "episode_id": "C1R2-BLINDS-legality-SAFE",
+      "task_family": "direct_device_conflict",
+      "source_type": "manual_template",
+      "generator_version": "0.3.0",
+      "review_status": "revised_author_draft_pending_phase_A",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 8.0
+        }
+      },
+      "initial_state": {
+        "version": 130,
+        "values": {
+          "bedroom": {
+            "occupied": true,
+            "privacy_required": true,
+            "daylight_requested": true
+          },
+          "devices": {
+            "bedroom_blinds": "closed"
+          },
+          "service": {
+            "protected": false,
+            "lower": false
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "PrivacyAgent",
+          "role": "privacy",
+          "tools": [
+            "set_blinds"
+          ],
+          "observable_state": [
+            "bedroom.occupied",
+            "bedroom.privacy_required",
+            "devices.bedroom_blinds"
+          ],
+          "writable_resources": [
+            "devices.bedroom_blinds"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "bedroom.privacy_required",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.bedroom_blinds",
+                  "op": "neq",
+                  "value": "open"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "role": "daylight",
+          "tools": [
+            "set_blinds"
+          ],
+          "observable_state": [
+            "bedroom.daylight_requested",
+            "bedroom.privacy_required",
+            "devices.bedroom_blinds"
+          ],
+          "writable_resources": [
+            "devices.bedroom_blinds"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "bedroom.privacy_required",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.bedroom_blinds",
+                  "op": "neq",
+                  "value": "open"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "privacy_close",
+          "agent_id": "PrivacyAgent",
+          "release_at_ms": 0,
+          "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "priority": 100,
+          "required_action": {
+            "target": "bedroom_blinds",
+            "operation": "close"
+          },
+          "action_template": {
+            "target": "bedroom_blinds",
+            "operation": "close",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 1100
+        },
+        {
+          "task_id": "daylight_open",
+          "agent_id": "DaylightAgent",
+          "release_at_ms": 6500,
+          "goal": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "priority": 30,
+          "required_action": {
+            "target": "bedroom_blinds",
+            "operation": "open"
+          },
+          "action_template": {
+            "target": "bedroom_blinds",
+            "operation": "open",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          "completion_deadline_ms": 8000,
+          "request_contract": {
+            "policy_id": "user-protection-BLINDS",
+            "admit_when": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "protected_request_expires",
+          "patch": {
+            "bedroom.privacy_required": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "service.protected",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.bedroom_blinds",
+              "op": "neq",
+              "value": "open"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "bedroom_blinds",
+            "operation": "close"
+          },
+          "b": {
+            "target": "bedroom_blinds",
+            "operation": "open"
+          },
+          "min_overlap_ms": 1
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "PrivacyAgent",
+          "task_id": "privacy_close",
+          "operation": "close",
+          "target": "bedroom_blinds",
+          "grounded_operation": "close",
+          "duration_ms": 500,
+          "power_kw": 0.01,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.bedroom_blinds": "closed",
+            "service.protected": true
+          }
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "task_id": "daylight_open",
+          "operation": "open",
+          "target": "bedroom_blinds",
+          "grounded_operation": "open",
+          "duration_ms": 500,
+          "power_kw": 0.01,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.bedroom_blinds": "open",
+            "service.lower": true
+          }
+        }
+      ],
+      "calibration": {
+        "status": "abstract_action_contract",
+        "physical_parameters_verified": false,
+        "source": "author-defined synthetic duration, command and proposal latency"
+      },
+      "base_episode_id": "HC-M03",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "structure": "persistent_protection",
+        "device_scene": "BLINDS",
+        "condition": "SAFE",
+        "budget": "legality",
+        "split": "development"
+      },
+      "simulation": {
+        "command_latency_ms": 100,
+        "request_disposition_contracts": {
+          "daylight_open": {
+            "policy_id": "user-protection-BLINDS",
+            "admit_when": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      },
+      "task_card": {
+        "status": "pending design review, not acceptance",
+        "mechanism_count": 1,
+        "disposition": "trusted user policy, release-time terminal rejection; no agent reasoning claim",
+        "budget": "legality",
+        "legality": "fixed8000 deadline is not an equal response-budget contrast",
+        "equal_response": "deadline=own release+1500; rejection has no action completion time",
+        "information": "same current boolean and target; expiry event/time not included in decision inputs",
+        "limitations": [
+          "single protection request",
+          "no multiple-user arbitration",
+          "synthetic authority",
+          "device state only"
+        ]
+      },
+      "tool_catalog": [
+        {
+          "agent_id": "PrivacyAgent",
+          "tool_name": "set_blinds",
+          "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "target": "bedroom_blinds",
+          "operation": "close",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "tool_name": "set_blinds",
+          "description": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "target": "bedroom_blinds",
+          "operation": "open",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        }
+      ],
+      "user_delegations": [
+        {
+          "policy_id": "user-protection-BLINDS",
+          "authority": "explicit_synthetic_user_delegation",
+          "principal": "SyntheticResident",
+          "target": "bedroom_blinds",
+          "protected_path": "bedroom.privacy_required",
+          "scope": "maintain declared protected device state while current protection boolean is true; only one protection request",
+          "request_semantics": "reject_terminal_at_release_no_wait",
+          "expiry_visibility": "current_boolean_only",
+          "new_request_rule": "later action after expiry requires a new task_id; closed original request never revives",
+          "parameter_basis": "author-defined device-state contract, not measured illumination/privacy or real user study"
+        }
+      ]
+    },
+    {
+      "episode_id": "C1R2-BLINDS-equal_response-CONFLICT",
+      "task_family": "direct_device_conflict",
+      "source_type": "manual_template",
+      "generator_version": "0.3.0",
+      "review_status": "revised_author_draft_pending_phase_A",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 8.0
+        }
+      },
+      "initial_state": {
+        "version": 130,
+        "values": {
+          "bedroom": {
+            "occupied": true,
+            "privacy_required": true,
+            "daylight_requested": true
+          },
+          "devices": {
+            "bedroom_blinds": "closed"
+          },
+          "service": {
+            "protected": false,
+            "lower": false
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "PrivacyAgent",
+          "role": "privacy",
+          "tools": [
+            "set_blinds"
+          ],
+          "observable_state": [
+            "bedroom.occupied",
+            "bedroom.privacy_required",
+            "devices.bedroom_blinds"
+          ],
+          "writable_resources": [
+            "devices.bedroom_blinds"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "bedroom.privacy_required",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.bedroom_blinds",
+                  "op": "neq",
+                  "value": "open"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "role": "daylight",
+          "tools": [
+            "set_blinds"
+          ],
+          "observable_state": [
+            "bedroom.daylight_requested",
+            "bedroom.privacy_required",
+            "devices.bedroom_blinds"
+          ],
+          "writable_resources": [
+            "devices.bedroom_blinds"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "bedroom.privacy_required",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.bedroom_blinds",
+                  "op": "neq",
+                  "value": "open"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "privacy_close",
+          "agent_id": "PrivacyAgent",
+          "release_at_ms": 0,
+          "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "priority": 100,
+          "required_action": {
+            "target": "bedroom_blinds",
+            "operation": "close"
+          },
+          "action_template": {
+            "target": "bedroom_blinds",
+            "operation": "close",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 1100
+        },
+        {
+          "task_id": "daylight_open",
+          "agent_id": "DaylightAgent",
+          "release_at_ms": 1200,
+          "goal": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "priority": 30,
+          "required_action": {
+            "target": "bedroom_blinds",
+            "operation": "open"
+          },
+          "action_template": {
+            "target": "bedroom_blinds",
+            "operation": "open",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          "completion_deadline_ms": 2700,
+          "request_contract": {
+            "policy_id": "user-protection-BLINDS",
+            "admit_when": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "protected_request_expires",
+          "patch": {
+            "bedroom.privacy_required": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "service.protected",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.bedroom_blinds",
+              "op": "neq",
+              "value": "open"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "bedroom_blinds",
+            "operation": "close"
+          },
+          "b": {
+            "target": "bedroom_blinds",
+            "operation": "open"
+          },
+          "min_overlap_ms": 1
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "PrivacyAgent",
+          "task_id": "privacy_close",
+          "operation": "close",
+          "target": "bedroom_blinds",
+          "grounded_operation": "close",
+          "duration_ms": 500,
+          "power_kw": 0.01,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.bedroom_blinds": "closed",
+            "service.protected": true
+          }
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "task_id": "daylight_open",
+          "operation": "open",
+          "target": "bedroom_blinds",
+          "grounded_operation": "open",
+          "duration_ms": 500,
+          "power_kw": 0.01,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.bedroom_blinds": "open",
+            "service.lower": true
+          }
+        }
+      ],
+      "calibration": {
+        "status": "abstract_action_contract",
+        "physical_parameters_verified": false,
+        "source": "author-defined synthetic duration, command and proposal latency"
+      },
+      "base_episode_id": "HC-M03",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "structure": "persistent_protection",
+        "device_scene": "BLINDS",
+        "condition": "CONFLICT",
+        "budget": "equal_response",
+        "split": "development"
+      },
+      "simulation": {
+        "command_latency_ms": 100,
+        "request_disposition_contracts": {
+          "daylight_open": {
+            "policy_id": "user-protection-BLINDS",
+            "admit_when": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      },
+      "task_card": {
+        "status": "pending design review, not acceptance",
+        "mechanism_count": 1,
+        "disposition": "trusted user policy, release-time terminal rejection; no agent reasoning claim",
+        "budget": "equal_response",
+        "legality": "fixed8000 deadline is not an equal response-budget contrast",
+        "equal_response": "deadline=own release+1500; rejection has no action completion time",
+        "information": "same current boolean and target; expiry event/time not included in decision inputs",
+        "limitations": [
+          "single protection request",
+          "no multiple-user arbitration",
+          "synthetic authority",
+          "device state only"
+        ]
+      },
+      "tool_catalog": [
+        {
+          "agent_id": "PrivacyAgent",
+          "tool_name": "set_blinds",
+          "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "target": "bedroom_blinds",
+          "operation": "close",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "tool_name": "set_blinds",
+          "description": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "target": "bedroom_blinds",
+          "operation": "open",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        }
+      ],
+      "user_delegations": [
+        {
+          "policy_id": "user-protection-BLINDS",
+          "authority": "explicit_synthetic_user_delegation",
+          "principal": "SyntheticResident",
+          "target": "bedroom_blinds",
+          "protected_path": "bedroom.privacy_required",
+          "scope": "maintain declared protected device state while current protection boolean is true; only one protection request",
+          "request_semantics": "reject_terminal_at_release_no_wait",
+          "expiry_visibility": "current_boolean_only",
+          "new_request_rule": "later action after expiry requires a new task_id; closed original request never revives",
+          "parameter_basis": "author-defined device-state contract, not measured illumination/privacy or real user study"
+        }
+      ]
+    },
+    {
+      "episode_id": "C1R2-BLINDS-equal_response-SAFE",
+      "task_family": "direct_device_conflict",
+      "source_type": "manual_template",
+      "generator_version": "0.3.0",
+      "review_status": "revised_author_draft_pending_phase_A",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 8.0
+        }
+      },
+      "initial_state": {
+        "version": 130,
+        "values": {
+          "bedroom": {
+            "occupied": true,
+            "privacy_required": true,
+            "daylight_requested": true
+          },
+          "devices": {
+            "bedroom_blinds": "closed"
+          },
+          "service": {
+            "protected": false,
+            "lower": false
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "PrivacyAgent",
+          "role": "privacy",
+          "tools": [
+            "set_blinds"
+          ],
+          "observable_state": [
+            "bedroom.occupied",
+            "bedroom.privacy_required",
+            "devices.bedroom_blinds"
+          ],
+          "writable_resources": [
+            "devices.bedroom_blinds"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "bedroom.privacy_required",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.bedroom_blinds",
+                  "op": "neq",
+                  "value": "open"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "role": "daylight",
+          "tools": [
+            "set_blinds"
+          ],
+          "observable_state": [
+            "bedroom.daylight_requested",
+            "bedroom.privacy_required",
+            "devices.bedroom_blinds"
+          ],
+          "writable_resources": [
+            "devices.bedroom_blinds"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": [
+            {
+              "when": [
+                {
+                  "path": "bedroom.privacy_required",
+                  "op": "eq",
+                  "value": true
+                }
+              ],
+              "must": [
+                {
+                  "path": "devices.bedroom_blinds",
+                  "op": "neq",
+                  "value": "open"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "privacy_close",
+          "agent_id": "PrivacyAgent",
+          "release_at_ms": 0,
+          "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "priority": 100,
+          "required_action": {
+            "target": "bedroom_blinds",
+            "operation": "close"
+          },
+          "action_template": {
+            "target": "bedroom_blinds",
+            "operation": "close",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 1100
+        },
+        {
+          "task_id": "daylight_open",
+          "agent_id": "DaylightAgent",
+          "release_at_ms": 6500,
+          "goal": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "priority": 30,
+          "required_action": {
+            "target": "bedroom_blinds",
+            "operation": "open"
+          },
+          "action_template": {
+            "target": "bedroom_blinds",
+            "operation": "open",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          "completion_deadline_ms": 8000,
+          "request_contract": {
+            "policy_id": "user-protection-BLINDS",
+            "admit_when": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "protected_request_expires",
+          "patch": {
+            "bedroom.privacy_required": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "service.protected",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.bedroom_blinds",
+              "op": "neq",
+              "value": "open"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "bedroom_blinds",
+            "operation": "close"
+          },
+          "b": {
+            "target": "bedroom_blinds",
+            "operation": "open"
+          },
+          "min_overlap_ms": 1
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "PrivacyAgent",
+          "task_id": "privacy_close",
+          "operation": "close",
+          "target": "bedroom_blinds",
+          "grounded_operation": "close",
+          "duration_ms": 500,
+          "power_kw": 0.01,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.bedroom_blinds": "closed",
+            "service.protected": true
+          }
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "task_id": "daylight_open",
+          "operation": "open",
+          "target": "bedroom_blinds",
+          "grounded_operation": "open",
+          "duration_ms": 500,
+          "power_kw": 0.01,
+          "start_effects": {},
+          "completion_effects": {
+            "devices.bedroom_blinds": "open",
+            "service.lower": true
+          }
+        }
+      ],
+      "calibration": {
+        "status": "abstract_action_contract",
+        "physical_parameters_verified": false,
+        "source": "author-defined synthetic duration, command and proposal latency"
+      },
+      "base_episode_id": "HC-M03",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "structure": "persistent_protection",
+        "device_scene": "BLINDS",
+        "condition": "SAFE",
+        "budget": "equal_response",
+        "split": "development"
+      },
+      "simulation": {
+        "command_latency_ms": 100,
+        "request_disposition_contracts": {
+          "daylight_open": {
+            "policy_id": "user-protection-BLINDS",
+            "admit_when": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "rejection_terminal": true
+          }
+        }
+      },
+      "task_card": {
+        "status": "pending design review, not acceptance",
+        "mechanism_count": 1,
+        "disposition": "trusted user policy, release-time terminal rejection; no agent reasoning claim",
+        "budget": "equal_response",
+        "legality": "fixed8000 deadline is not an equal response-budget contrast",
+        "equal_response": "deadline=own release+1500; rejection has no action completion time",
+        "information": "same current boolean and target; expiry event/time not included in decision inputs",
+        "limitations": [
+          "single protection request",
+          "no multiple-user arbitration",
+          "synthetic authority",
+          "device state only"
+        ]
+      },
+      "tool_catalog": [
+        {
+          "agent_id": "PrivacyAgent",
+          "tool_name": "set_blinds",
+          "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+          "target": "bedroom_blinds",
+          "operation": "close",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "DaylightAgent",
+          "tool_name": "set_blinds",
+          "description": "Synthetic user policy: if protection is active at release, terminally reject this request; do not wait or revive it after expiry. Otherwise send the authorized action.",
+          "target": "bedroom_blinds",
+          "operation": "open",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "bedroom.privacy_required",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        }
+      ],
+      "user_delegations": [
+        {
+          "policy_id": "user-protection-BLINDS",
+          "authority": "explicit_synthetic_user_delegation",
+          "principal": "SyntheticResident",
+          "target": "bedroom_blinds",
+          "protected_path": "bedroom.privacy_required",
+          "scope": "maintain declared protected device state while current protection boolean is true; only one protection request",
+          "request_semantics": "reject_terminal_at_release_no_wait",
+          "expiry_visibility": "current_boolean_only",
+          "new_request_rule": "later action after expiry requires a new task_id; closed original request never revives",
+          "parameter_basis": "author-defined device-state contract, not measured illumination/privacy or real user study"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2761 @@
+{
+  "version": "F1-statistical-contract-v2-correction-draft",
+  "status": "pending_contract_review_not_frozen",
+  "scope": "8 configurations / 2 templates / 72 deterministic legacy replays",
+  "api_calls": 0,
+  "simulator_runs": 0,
+  "scores_computed": false,
+  "baseline": "GateRetryRule",
+  "delta_orientation": "right minus left",
+  "source_sha256": {
+    "docs/implementation_review_20261001/manifest.json": "af13e218609012115ddbc86cc0c79624047cf95d77afadccde455e5ebfe4fa02",
+    "docs/implementation_review_20261001/index.json": "53b4ae2bcda9b99f1e1b0d56fca605f92d19455463e9332b4a0d7fc2b5ecd933",
+    "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json": "c8abcdb5c4226d565b3478ea6bc02e09c64cc53b13255c6c17cf66b784a03392",
+    "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json": "258dbda06d0930768517aef7d80a8f04c0151751c6a025b08ebbf825ccbab22a",
+    "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json": "11168b1b59fd97e15029151a2b0db2e5d0af0a571d8644fc6af98305ed630154",
+    "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json": "f4422f12012c83535b2f6f7db141707c42a95c5ea123cf6acc5108477ed53fe7",
+    "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json": "bc1933c39e64684fb58961e0be7764199888c2dfd47991d748047e000d000143",
+    "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json": "80f4f2dde1300c555640a25338cdf8157767cfb8f82e34f68abe62ab449c7392",
+    "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json": "deaef91ec91f85ca7bbd9dbc78cdb9bc5ae5d5374ca805ab10d63c6a56765f7a",
+    "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json": "ec8719ebcbd08b52c0bfea5bf8feefa2b8574e2c58eb3e1d737be4a578c7792b"
+  },
+  "configurations": [
+    {
+      "episode_id": "D-F1-01-competition-base",
+      "base_episode_id": "D-F1-01",
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "pairing": {
+        "resource_arm": "competition",
+        "temporal_arm": "base"
+      },
+      "capacity_units": 3,
+      "required_requests": [
+        {
+          "task_id": "laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1200000,
+          "requested_service": "laundry_completed",
+          "acceptable_actions": [
+            {
+              "target": "laundry_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "meal",
+          "agent_id": "MealAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 420000,
+          "requested_service": "meal_completed",
+          "acceptable_actions": [
+            {
+              "target": "meal_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "dishes",
+          "agent_id": "DishesAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 900000,
+          "requested_service": "dishes_completed",
+          "acceptable_actions": [
+            {
+              "target": "dishes_device",
+              "operation": "prepare"
+            }
+          ]
+        }
+      ],
+      "proposal_return_orders": [
+        [
+          "laundry",
+          "meal",
+          "dishes"
+        ],
+        [
+          "dishes",
+          "meal",
+          "laundry"
+        ],
+        [
+          "meal",
+          "dishes",
+          "laundry"
+        ]
+      ],
+      "logical_return_offset_rule_ms": "800 + 200 * rank"
+    },
+    {
+      "episode_id": "D-F1-01-competition-loose",
+      "base_episode_id": "D-F1-01",
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "pairing": {
+        "resource_arm": "competition",
+        "temporal_arm": "loose"
+      },
+      "capacity_units": 3,
+      "required_requests": [
+        {
+          "task_id": "laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 2400000,
+          "requested_service": "laundry_completed",
+          "acceptable_actions": [
+            {
+              "target": "laundry_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "meal",
+          "agent_id": "MealAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1620000,
+          "requested_service": "meal_completed",
+          "acceptable_actions": [
+            {
+              "target": "meal_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "dishes",
+          "agent_id": "DishesAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 2100000,
+          "requested_service": "dishes_completed",
+          "acceptable_actions": [
+            {
+              "target": "dishes_device",
+              "operation": "prepare"
+            }
+          ]
+        }
+      ],
+      "proposal_return_orders": [
+        [
+          "laundry",
+          "meal",
+          "dishes"
+        ],
+        [
+          "dishes",
+          "meal",
+          "laundry"
+        ],
+        [
+          "meal",
+          "dishes",
+          "laundry"
+        ]
+      ],
+      "logical_return_offset_rule_ms": "800 + 200 * rank"
+    },
+    {
+      "episode_id": "D-F1-01-no_competition-base",
+      "base_episode_id": "D-F1-01",
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "pairing": {
+        "resource_arm": "no_competition",
+        "temporal_arm": "base"
+      },
+      "capacity_units": 4,
+      "required_requests": [
+        {
+          "task_id": "laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1200000,
+          "requested_service": "laundry_completed",
+          "acceptable_actions": [
+            {
+              "target": "laundry_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "meal",
+          "agent_id": "MealAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 420000,
+          "requested_service": "meal_completed",
+          "acceptable_actions": [
+            {
+              "target": "meal_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "dishes",
+          "agent_id": "DishesAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 900000,
+          "requested_service": "dishes_completed",
+          "acceptable_actions": [
+            {
+              "target": "dishes_device",
+              "operation": "prepare"
+            }
+          ]
+        }
+      ],
+      "proposal_return_orders": [
+        [
+          "laundry",
+          "meal",
+          "dishes"
+        ],
+        [
+          "dishes",
+          "meal",
+          "laundry"
+        ],
+        [
+          "meal",
+          "dishes",
+          "laundry"
+        ]
+      ],
+      "logical_return_offset_rule_ms": "800 + 200 * rank"
+    },
+    {
+      "episode_id": "D-F1-01-no_competition-loose",
+      "base_episode_id": "D-F1-01",
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "pairing": {
+        "resource_arm": "no_competition",
+        "temporal_arm": "loose"
+      },
+      "capacity_units": 4,
+      "required_requests": [
+        {
+          "task_id": "laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 2400000,
+          "requested_service": "laundry_completed",
+          "acceptable_actions": [
+            {
+              "target": "laundry_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "meal",
+          "agent_id": "MealAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1620000,
+          "requested_service": "meal_completed",
+          "acceptable_actions": [
+            {
+              "target": "meal_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "dishes",
+          "agent_id": "DishesAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 2100000,
+          "requested_service": "dishes_completed",
+          "acceptable_actions": [
+            {
+              "target": "dishes_device",
+              "operation": "prepare"
+            }
+          ]
+        }
+      ],
+      "proposal_return_orders": [
+        [
+          "laundry",
+          "meal",
+          "dishes"
+        ],
+        [
+          "dishes",
+          "meal",
+          "laundry"
+        ],
+        [
+          "meal",
+          "dishes",
+          "laundry"
+        ]
+      ],
+      "logical_return_offset_rule_ms": "800 + 200 * rank"
+    },
+    {
+      "episode_id": "D-F1-02-competition-base",
+      "base_episode_id": "D-F1-02",
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "pairing": {
+        "resource_arm": "competition",
+        "temporal_arm": "base"
+      },
+      "capacity_units": 4,
+      "required_requests": [
+        {
+          "task_id": "water",
+          "agent_id": "WaterAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 360000,
+          "requested_service": "water_completed",
+          "acceptable_actions": [
+            {
+              "target": "water_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1800000,
+          "requested_service": "laundry_completed",
+          "acceptable_actions": [
+            {
+              "target": "laundry_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "dishes",
+          "agent_id": "DishesAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1080000,
+          "requested_service": "dishes_completed",
+          "acceptable_actions": [
+            {
+              "target": "dishes_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "meal",
+          "agent_id": "MealAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 720000,
+          "requested_service": "meal_completed",
+          "acceptable_actions": [
+            {
+              "target": "meal_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "cleaning",
+          "agent_id": "CleaningAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1500000,
+          "requested_service": "cleaning_completed",
+          "acceptable_actions": [
+            {
+              "target": "cleaning_device",
+              "operation": "prepare"
+            }
+          ]
+        }
+      ],
+      "proposal_return_orders": [
+        [
+          "water",
+          "laundry",
+          "dishes",
+          "meal",
+          "cleaning"
+        ],
+        [
+          "cleaning",
+          "meal",
+          "dishes",
+          "laundry",
+          "water"
+        ],
+        [
+          "laundry",
+          "dishes",
+          "meal",
+          "cleaning",
+          "water"
+        ]
+      ],
+      "logical_return_offset_rule_ms": "800 + 200 * rank"
+    },
+    {
+      "episode_id": "D-F1-02-competition-loose",
+      "base_episode_id": "D-F1-02",
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "pairing": {
+        "resource_arm": "competition",
+        "temporal_arm": "loose"
+      },
+      "capacity_units": 4,
+      "required_requests": [
+        {
+          "task_id": "water",
+          "agent_id": "WaterAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1560000,
+          "requested_service": "water_completed",
+          "acceptable_actions": [
+            {
+              "target": "water_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 3000000,
+          "requested_service": "laundry_completed",
+          "acceptable_actions": [
+            {
+              "target": "laundry_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "dishes",
+          "agent_id": "DishesAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 2280000,
+          "requested_service": "dishes_completed",
+          "acceptable_actions": [
+            {
+              "target": "dishes_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "meal",
+          "agent_id": "MealAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1920000,
+          "requested_service": "meal_completed",
+          "acceptable_actions": [
+            {
+              "target": "meal_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "cleaning",
+          "agent_id": "CleaningAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 2700000,
+          "requested_service": "cleaning_completed",
+          "acceptable_actions": [
+            {
+              "target": "cleaning_device",
+              "operation": "prepare"
+            }
+          ]
+        }
+      ],
+      "proposal_return_orders": [
+        [
+          "water",
+          "laundry",
+          "dishes",
+          "meal",
+          "cleaning"
+        ],
+        [
+          "cleaning",
+          "meal",
+          "dishes",
+          "laundry",
+          "water"
+        ],
+        [
+          "laundry",
+          "dishes",
+          "meal",
+          "cleaning",
+          "water"
+        ]
+      ],
+      "logical_return_offset_rule_ms": "800 + 200 * rank"
+    },
+    {
+      "episode_id": "D-F1-02-no_competition-base",
+      "base_episode_id": "D-F1-02",
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "pairing": {
+        "resource_arm": "no_competition",
+        "temporal_arm": "base"
+      },
+      "capacity_units": 8,
+      "required_requests": [
+        {
+          "task_id": "water",
+          "agent_id": "WaterAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 360000,
+          "requested_service": "water_completed",
+          "acceptable_actions": [
+            {
+              "target": "water_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1800000,
+          "requested_service": "laundry_completed",
+          "acceptable_actions": [
+            {
+              "target": "laundry_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "dishes",
+          "agent_id": "DishesAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1080000,
+          "requested_service": "dishes_completed",
+          "acceptable_actions": [
+            {
+              "target": "dishes_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "meal",
+          "agent_id": "MealAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 720000,
+          "requested_service": "meal_completed",
+          "acceptable_actions": [
+            {
+              "target": "meal_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "cleaning",
+          "agent_id": "CleaningAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1500000,
+          "requested_service": "cleaning_completed",
+          "acceptable_actions": [
+            {
+              "target": "cleaning_device",
+              "operation": "prepare"
+            }
+          ]
+        }
+      ],
+      "proposal_return_orders": [
+        [
+          "water",
+          "laundry",
+          "dishes",
+          "meal",
+          "cleaning"
+        ],
+        [
+          "cleaning",
+          "meal",
+          "dishes",
+          "laundry",
+          "water"
+        ],
+        [
+          "laundry",
+          "dishes",
+          "meal",
+          "cleaning",
+          "water"
+        ]
+      ],
+      "logical_return_offset_rule_ms": "800 + 200 * rank"
+    },
+    {
+      "episode_id": "D-F1-02-no_competition-loose",
+      "base_episode_id": "D-F1-02",
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "pairing": {
+        "resource_arm": "no_competition",
+        "temporal_arm": "loose"
+      },
+      "capacity_units": 8,
+      "required_requests": [
+        {
+          "task_id": "water",
+          "agent_id": "WaterAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1560000,
+          "requested_service": "water_completed",
+          "acceptable_actions": [
+            {
+              "target": "water_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "laundry",
+          "agent_id": "LaundryAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 3000000,
+          "requested_service": "laundry_completed",
+          "acceptable_actions": [
+            {
+              "target": "laundry_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "dishes",
+          "agent_id": "DishesAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 2280000,
+          "requested_service": "dishes_completed",
+          "acceptable_actions": [
+            {
+              "target": "dishes_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "meal",
+          "agent_id": "MealAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 1920000,
+          "requested_service": "meal_completed",
+          "acceptable_actions": [
+            {
+              "target": "meal_device",
+              "operation": "prepare"
+            }
+          ]
+        },
+        {
+          "task_id": "cleaning",
+          "agent_id": "CleaningAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 2700000,
+          "requested_service": "cleaning_completed",
+          "acceptable_actions": [
+            {
+              "target": "cleaning_device",
+              "operation": "prepare"
+            }
+          ]
+        }
+      ],
+      "proposal_return_orders": [
+        [
+          "water",
+          "laundry",
+          "dishes",
+          "meal",
+          "cleaning"
+        ],
+        [
+          "cleaning",
+          "meal",
+          "dishes",
+          "laundry",
+          "water"
+        ],
+        [
+          "laundry",
+          "dishes",
+          "meal",
+          "cleaning",
+          "water"
+        ]
+      ],
+      "logical_return_offset_rule_ms": "800 + 200 * rank"
+    }
+  ],
+  "runs": [
+    {
+      "slot_id": "D-F1-01-competition-base|GateRetryRule|order0",
+      "episode_id": "D-F1-01-competition-base",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "source_pointer": "/runs/0",
+      "required_set_ref": "D-F1-01-competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-competition-base|ConstraintCoordinator|order0",
+      "episode_id": "D-F1-01-competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "source_pointer": "/runs/1",
+      "required_set_ref": "D-F1-01-competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-competition-base|DeadlineAwareCoordinator|order0",
+      "episode_id": "D-F1-01-competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "source_pointer": "/runs/2",
+      "required_set_ref": "D-F1-01-competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-competition-base|GateRetryRule|order1",
+      "episode_id": "D-F1-01-competition-base",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "source_pointer": "/runs/3",
+      "required_set_ref": "D-F1-01-competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-competition-base|ConstraintCoordinator|order1",
+      "episode_id": "D-F1-01-competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "source_pointer": "/runs/4",
+      "required_set_ref": "D-F1-01-competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-competition-base|DeadlineAwareCoordinator|order1",
+      "episode_id": "D-F1-01-competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "source_pointer": "/runs/5",
+      "required_set_ref": "D-F1-01-competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-competition-base|GateRetryRule|order2",
+      "episode_id": "D-F1-01-competition-base",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "source_pointer": "/runs/6",
+      "required_set_ref": "D-F1-01-competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-competition-base|ConstraintCoordinator|order2",
+      "episode_id": "D-F1-01-competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "source_pointer": "/runs/7",
+      "required_set_ref": "D-F1-01-competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-competition-base|DeadlineAwareCoordinator|order2",
+      "episode_id": "D-F1-01-competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-base.json",
+      "source_pointer": "/runs/8",
+      "required_set_ref": "D-F1-01-competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-competition-loose|GateRetryRule|order0",
+      "episode_id": "D-F1-01-competition-loose",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "source_pointer": "/runs/0",
+      "required_set_ref": "D-F1-01-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-competition-loose|ConstraintCoordinator|order0",
+      "episode_id": "D-F1-01-competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "source_pointer": "/runs/1",
+      "required_set_ref": "D-F1-01-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order0",
+      "episode_id": "D-F1-01-competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "source_pointer": "/runs/2",
+      "required_set_ref": "D-F1-01-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-competition-loose|GateRetryRule|order1",
+      "episode_id": "D-F1-01-competition-loose",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "source_pointer": "/runs/3",
+      "required_set_ref": "D-F1-01-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-competition-loose|ConstraintCoordinator|order1",
+      "episode_id": "D-F1-01-competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "source_pointer": "/runs/4",
+      "required_set_ref": "D-F1-01-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order1",
+      "episode_id": "D-F1-01-competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "source_pointer": "/runs/5",
+      "required_set_ref": "D-F1-01-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-competition-loose|GateRetryRule|order2",
+      "episode_id": "D-F1-01-competition-loose",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "source_pointer": "/runs/6",
+      "required_set_ref": "D-F1-01-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-competition-loose|ConstraintCoordinator|order2",
+      "episode_id": "D-F1-01-competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "source_pointer": "/runs/7",
+      "required_set_ref": "D-F1-01-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order2",
+      "episode_id": "D-F1-01-competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-competition-loose.json",
+      "source_pointer": "/runs/8",
+      "required_set_ref": "D-F1-01-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-base|GateRetryRule|order0",
+      "episode_id": "D-F1-01-no_competition-base",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "source_pointer": "/runs/0",
+      "required_set_ref": "D-F1-01-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-base|ConstraintCoordinator|order0",
+      "episode_id": "D-F1-01-no_competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "source_pointer": "/runs/1",
+      "required_set_ref": "D-F1-01-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order0",
+      "episode_id": "D-F1-01-no_competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "source_pointer": "/runs/2",
+      "required_set_ref": "D-F1-01-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-base|GateRetryRule|order1",
+      "episode_id": "D-F1-01-no_competition-base",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "source_pointer": "/runs/3",
+      "required_set_ref": "D-F1-01-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-base|ConstraintCoordinator|order1",
+      "episode_id": "D-F1-01-no_competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "source_pointer": "/runs/4",
+      "required_set_ref": "D-F1-01-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order1",
+      "episode_id": "D-F1-01-no_competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "source_pointer": "/runs/5",
+      "required_set_ref": "D-F1-01-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-base|GateRetryRule|order2",
+      "episode_id": "D-F1-01-no_competition-base",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "source_pointer": "/runs/6",
+      "required_set_ref": "D-F1-01-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-base|ConstraintCoordinator|order2",
+      "episode_id": "D-F1-01-no_competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "source_pointer": "/runs/7",
+      "required_set_ref": "D-F1-01-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order2",
+      "episode_id": "D-F1-01-no_competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-base.json",
+      "source_pointer": "/runs/8",
+      "required_set_ref": "D-F1-01-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-loose|GateRetryRule|order0",
+      "episode_id": "D-F1-01-no_competition-loose",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "source_pointer": "/runs/0",
+      "required_set_ref": "D-F1-01-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-loose|ConstraintCoordinator|order0",
+      "episode_id": "D-F1-01-no_competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "source_pointer": "/runs/1",
+      "required_set_ref": "D-F1-01-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order0",
+      "episode_id": "D-F1-01-no_competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "source_pointer": "/runs/2",
+      "required_set_ref": "D-F1-01-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-loose|GateRetryRule|order1",
+      "episode_id": "D-F1-01-no_competition-loose",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "source_pointer": "/runs/3",
+      "required_set_ref": "D-F1-01-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-loose|ConstraintCoordinator|order1",
+      "episode_id": "D-F1-01-no_competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "source_pointer": "/runs/4",
+      "required_set_ref": "D-F1-01-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order1",
+      "episode_id": "D-F1-01-no_competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "source_pointer": "/runs/5",
+      "required_set_ref": "D-F1-01-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-loose|GateRetryRule|order2",
+      "episode_id": "D-F1-01-no_competition-loose",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "source_pointer": "/runs/6",
+      "required_set_ref": "D-F1-01-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-loose|ConstraintCoordinator|order2",
+      "episode_id": "D-F1-01-no_competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "source_pointer": "/runs/7",
+      "required_set_ref": "D-F1-01-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order2",
+      "episode_id": "D-F1-01-no_competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-01-no_competition-loose.json",
+      "source_pointer": "/runs/8",
+      "required_set_ref": "D-F1-01-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-competition-base|GateRetryRule|order0",
+      "episode_id": "D-F1-02-competition-base",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "source_pointer": "/runs/0",
+      "required_set_ref": "D-F1-02-competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-competition-base|ConstraintCoordinator|order0",
+      "episode_id": "D-F1-02-competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "source_pointer": "/runs/1",
+      "required_set_ref": "D-F1-02-competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-competition-base|DeadlineAwareCoordinator|order0",
+      "episode_id": "D-F1-02-competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "source_pointer": "/runs/2",
+      "required_set_ref": "D-F1-02-competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-competition-base|GateRetryRule|order1",
+      "episode_id": "D-F1-02-competition-base",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "source_pointer": "/runs/3",
+      "required_set_ref": "D-F1-02-competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-competition-base|ConstraintCoordinator|order1",
+      "episode_id": "D-F1-02-competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "source_pointer": "/runs/4",
+      "required_set_ref": "D-F1-02-competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-competition-base|DeadlineAwareCoordinator|order1",
+      "episode_id": "D-F1-02-competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "source_pointer": "/runs/5",
+      "required_set_ref": "D-F1-02-competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-competition-base|GateRetryRule|order2",
+      "episode_id": "D-F1-02-competition-base",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "source_pointer": "/runs/6",
+      "required_set_ref": "D-F1-02-competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-competition-base|ConstraintCoordinator|order2",
+      "episode_id": "D-F1-02-competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "source_pointer": "/runs/7",
+      "required_set_ref": "D-F1-02-competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-competition-base|DeadlineAwareCoordinator|order2",
+      "episode_id": "D-F1-02-competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+      "source_pointer": "/runs/8",
+      "required_set_ref": "D-F1-02-competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-competition-loose|GateRetryRule|order0",
+      "episode_id": "D-F1-02-competition-loose",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "source_pointer": "/runs/0",
+      "required_set_ref": "D-F1-02-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-competition-loose|ConstraintCoordinator|order0",
+      "episode_id": "D-F1-02-competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "source_pointer": "/runs/1",
+      "required_set_ref": "D-F1-02-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order0",
+      "episode_id": "D-F1-02-competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "source_pointer": "/runs/2",
+      "required_set_ref": "D-F1-02-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-competition-loose|GateRetryRule|order1",
+      "episode_id": "D-F1-02-competition-loose",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "source_pointer": "/runs/3",
+      "required_set_ref": "D-F1-02-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-competition-loose|ConstraintCoordinator|order1",
+      "episode_id": "D-F1-02-competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "source_pointer": "/runs/4",
+      "required_set_ref": "D-F1-02-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order1",
+      "episode_id": "D-F1-02-competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "source_pointer": "/runs/5",
+      "required_set_ref": "D-F1-02-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-competition-loose|GateRetryRule|order2",
+      "episode_id": "D-F1-02-competition-loose",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "source_pointer": "/runs/6",
+      "required_set_ref": "D-F1-02-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-competition-loose|ConstraintCoordinator|order2",
+      "episode_id": "D-F1-02-competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "source_pointer": "/runs/7",
+      "required_set_ref": "D-F1-02-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order2",
+      "episode_id": "D-F1-02-competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-loose.json",
+      "source_pointer": "/runs/8",
+      "required_set_ref": "D-F1-02-competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-base|GateRetryRule|order0",
+      "episode_id": "D-F1-02-no_competition-base",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "source_pointer": "/runs/0",
+      "required_set_ref": "D-F1-02-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-base|ConstraintCoordinator|order0",
+      "episode_id": "D-F1-02-no_competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "source_pointer": "/runs/1",
+      "required_set_ref": "D-F1-02-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order0",
+      "episode_id": "D-F1-02-no_competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "source_pointer": "/runs/2",
+      "required_set_ref": "D-F1-02-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-base|GateRetryRule|order1",
+      "episode_id": "D-F1-02-no_competition-base",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "source_pointer": "/runs/3",
+      "required_set_ref": "D-F1-02-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-base|ConstraintCoordinator|order1",
+      "episode_id": "D-F1-02-no_competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "source_pointer": "/runs/4",
+      "required_set_ref": "D-F1-02-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order1",
+      "episode_id": "D-F1-02-no_competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "source_pointer": "/runs/5",
+      "required_set_ref": "D-F1-02-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-base|GateRetryRule|order2",
+      "episode_id": "D-F1-02-no_competition-base",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "source_pointer": "/runs/6",
+      "required_set_ref": "D-F1-02-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-base|ConstraintCoordinator|order2",
+      "episode_id": "D-F1-02-no_competition-base",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "source_pointer": "/runs/7",
+      "required_set_ref": "D-F1-02-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order2",
+      "episode_id": "D-F1-02-no_competition-base",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-base.json",
+      "source_pointer": "/runs/8",
+      "required_set_ref": "D-F1-02-no_competition-base"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-loose|GateRetryRule|order0",
+      "episode_id": "D-F1-02-no_competition-loose",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "source_pointer": "/runs/0",
+      "required_set_ref": "D-F1-02-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-loose|ConstraintCoordinator|order0",
+      "episode_id": "D-F1-02-no_competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "source_pointer": "/runs/1",
+      "required_set_ref": "D-F1-02-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order0",
+      "episode_id": "D-F1-02-no_competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "source_pointer": "/runs/2",
+      "required_set_ref": "D-F1-02-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-loose|GateRetryRule|order1",
+      "episode_id": "D-F1-02-no_competition-loose",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "source_pointer": "/runs/3",
+      "required_set_ref": "D-F1-02-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-loose|ConstraintCoordinator|order1",
+      "episode_id": "D-F1-02-no_competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "source_pointer": "/runs/4",
+      "required_set_ref": "D-F1-02-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order1",
+      "episode_id": "D-F1-02-no_competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "source_pointer": "/runs/5",
+      "required_set_ref": "D-F1-02-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-loose|GateRetryRule|order2",
+      "episode_id": "D-F1-02-no_competition-loose",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "source_pointer": "/runs/6",
+      "required_set_ref": "D-F1-02-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-loose|ConstraintCoordinator|order2",
+      "episode_id": "D-F1-02-no_competition-loose",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "source_pointer": "/runs/7",
+      "required_set_ref": "D-F1-02-no_competition-loose"
+    },
+    {
+      "slot_id": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order2",
+      "episode_id": "D-F1-02-no_competition-loose",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "source_path": "docs/implementation_review_20261001/traces/D-F1-02-no_competition-loose.json",
+      "source_pointer": "/runs/8",
+      "required_set_ref": "D-F1-02-no_competition-loose"
+    }
+  ],
+  "pairs": [
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-competition-base|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-competition-base|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-base|GateRetryRule|order1",
+      "right": "D-F1-01-competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-base|GateRetryRule|order1",
+      "right": "D-F1-01-competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-base|GateRetryRule|order2",
+      "right": "D-F1-01-competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-base|GateRetryRule|order2",
+      "right": "D-F1-01-competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-competition-base|GateRetryRule|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-competition-base|GateRetryRule|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-01-competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-01-competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-01-competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order1",
+      "right": "D-F1-01-competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order1",
+      "right": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order2",
+      "right": "D-F1-01-competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order2",
+      "right": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-01-competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-01-competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-01-competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-01-competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-base|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order1",
+      "right": "D-F1-01-no_competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order1",
+      "right": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order2",
+      "right": "D-F1-01-no_competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order2",
+      "right": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-base|GateRetryRule|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-base|GateRetryRule|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-01-no_competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-01-no_competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-loose|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-loose|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-loose|GateRetryRule|order1",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-loose|GateRetryRule|order1",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-loose|GateRetryRule|order2",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-01-no_competition-loose|GateRetryRule|order2",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-loose|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-loose|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-competition-base|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-competition-base|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-base|GateRetryRule|order1",
+      "right": "D-F1-02-competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-base|GateRetryRule|order1",
+      "right": "D-F1-02-competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-base|GateRetryRule|order2",
+      "right": "D-F1-02-competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-base|GateRetryRule|order2",
+      "right": "D-F1-02-competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-competition-base|GateRetryRule|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-competition-base|GateRetryRule|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-02-competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-02-competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-02-competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order1",
+      "right": "D-F1-02-competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order1",
+      "right": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order2",
+      "right": "D-F1-02-competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order2",
+      "right": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-02-competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-02-competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-02-competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-02-competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-base|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order1",
+      "right": "D-F1-02-no_competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order1",
+      "right": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order2",
+      "right": "D-F1-02-no_competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order2",
+      "right": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-base|GateRetryRule|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-base|GateRetryRule|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-02-no_competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-02-no_competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-loose|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-loose|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-loose|GateRetryRule|order1",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-loose|GateRetryRule|order1",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-loose|GateRetryRule|order2",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "policy",
+      "left": "D-F1-02-no_competition-loose|GateRetryRule|order2",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-loose|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-loose|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "return_order",
+      "left": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-base|GateRetryRule|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-base|GateRetryRule|order1",
+      "right": "D-F1-01-no_competition-base|GateRetryRule|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-base|GateRetryRule|order2",
+      "right": "D-F1-01-no_competition-base|GateRetryRule|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-01-no_competition-base|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-base|ConstraintCoordinator|order1",
+      "right": "D-F1-01-no_competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-base|ConstraintCoordinator|order2",
+      "right": "D-F1-01-no_competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-base|DeadlineAwareCoordinator|order1",
+      "right": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-base|DeadlineAwareCoordinator|order2",
+      "right": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-loose|GateRetryRule|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order1",
+      "right": "D-F1-01-no_competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-loose|GateRetryRule|order2",
+      "right": "D-F1-01-no_competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-loose|ConstraintCoordinator|order1",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-loose|ConstraintCoordinator|order2",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order1",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order2",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-competition-loose|GateRetryRule|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-competition-base|GateRetryRule|order1",
+      "right": "D-F1-01-competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-competition-base|GateRetryRule|order2",
+      "right": "D-F1-01-competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-01-competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-competition-base|ConstraintCoordinator|order1",
+      "right": "D-F1-01-competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-competition-base|ConstraintCoordinator|order2",
+      "right": "D-F1-01-competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-competition-base|DeadlineAwareCoordinator|order1",
+      "right": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-competition-base|DeadlineAwareCoordinator|order2",
+      "right": "D-F1-01-competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-01-no_competition-loose|GateRetryRule|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order1",
+      "right": "D-F1-01-no_competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-no_competition-base|GateRetryRule|order2",
+      "right": "D-F1-01-no_competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-no_competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-no_competition-base|ConstraintCoordinator|order1",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-no_competition-base|ConstraintCoordinator|order2",
+      "right": "D-F1-01-no_competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order1",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order2",
+      "right": "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-base|GateRetryRule|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-base|GateRetryRule|order1",
+      "right": "D-F1-02-no_competition-base|GateRetryRule|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-base|GateRetryRule|order2",
+      "right": "D-F1-02-no_competition-base|GateRetryRule|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-02-no_competition-base|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-base|ConstraintCoordinator|order1",
+      "right": "D-F1-02-no_competition-base|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-base|ConstraintCoordinator|order2",
+      "right": "D-F1-02-no_competition-base|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-base|DeadlineAwareCoordinator|order1",
+      "right": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-base|DeadlineAwareCoordinator|order2",
+      "right": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-loose|GateRetryRule|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order1",
+      "right": "D-F1-02-no_competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-loose|GateRetryRule|order2",
+      "right": "D-F1-02-no_competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-loose|ConstraintCoordinator|order0",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-loose|ConstraintCoordinator|order1",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-loose|ConstraintCoordinator|order2",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order1",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "capacity",
+      "left": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order2",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-competition-loose|GateRetryRule|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-competition-base|GateRetryRule|order1",
+      "right": "D-F1-02-competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-competition-base|GateRetryRule|order2",
+      "right": "D-F1-02-competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-02-competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-competition-base|ConstraintCoordinator|order1",
+      "right": "D-F1-02-competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-competition-base|ConstraintCoordinator|order2",
+      "right": "D-F1-02-competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-competition-base|DeadlineAwareCoordinator|order1",
+      "right": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-competition-base|DeadlineAwareCoordinator|order2",
+      "right": "D-F1-02-competition-loose|DeadlineAwareCoordinator|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order0",
+      "right": "D-F1-02-no_competition-loose|GateRetryRule|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order1",
+      "right": "D-F1-02-no_competition-loose|GateRetryRule|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-no_competition-base|GateRetryRule|order2",
+      "right": "D-F1-02-no_competition-loose|GateRetryRule|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-no_competition-base|ConstraintCoordinator|order0",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-no_competition-base|ConstraintCoordinator|order1",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-no_competition-base|ConstraintCoordinator|order2",
+      "right": "D-F1-02-no_competition-loose|ConstraintCoordinator|order2"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order0",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order0"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order1",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order1"
+    },
+    {
+      "kind": "deadline",
+      "left": "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order2",
+      "right": "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order2"
+    }
+  ],
+  "four_cells": [
+    {
+      "base_episode_id": "D-F1-01",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "slots": [
+        "D-F1-01-competition-base|GateRetryRule|order0",
+        "D-F1-01-competition-loose|GateRetryRule|order0",
+        "D-F1-01-no_competition-base|GateRetryRule|order0",
+        "D-F1-01-no_competition-loose|GateRetryRule|order0"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-01",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "slots": [
+        "D-F1-01-competition-base|GateRetryRule|order1",
+        "D-F1-01-competition-loose|GateRetryRule|order1",
+        "D-F1-01-no_competition-base|GateRetryRule|order1",
+        "D-F1-01-no_competition-loose|GateRetryRule|order1"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-01",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "slots": [
+        "D-F1-01-competition-base|GateRetryRule|order2",
+        "D-F1-01-competition-loose|GateRetryRule|order2",
+        "D-F1-01-no_competition-base|GateRetryRule|order2",
+        "D-F1-01-no_competition-loose|GateRetryRule|order2"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-01",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "slots": [
+        "D-F1-01-competition-base|ConstraintCoordinator|order0",
+        "D-F1-01-competition-loose|ConstraintCoordinator|order0",
+        "D-F1-01-no_competition-base|ConstraintCoordinator|order0",
+        "D-F1-01-no_competition-loose|ConstraintCoordinator|order0"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-01",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "slots": [
+        "D-F1-01-competition-base|ConstraintCoordinator|order1",
+        "D-F1-01-competition-loose|ConstraintCoordinator|order1",
+        "D-F1-01-no_competition-base|ConstraintCoordinator|order1",
+        "D-F1-01-no_competition-loose|ConstraintCoordinator|order1"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-01",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "slots": [
+        "D-F1-01-competition-base|ConstraintCoordinator|order2",
+        "D-F1-01-competition-loose|ConstraintCoordinator|order2",
+        "D-F1-01-no_competition-base|ConstraintCoordinator|order2",
+        "D-F1-01-no_competition-loose|ConstraintCoordinator|order2"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-01",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "slots": [
+        "D-F1-01-competition-base|DeadlineAwareCoordinator|order0",
+        "D-F1-01-competition-loose|DeadlineAwareCoordinator|order0",
+        "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order0",
+        "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order0"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-01",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "slots": [
+        "D-F1-01-competition-base|DeadlineAwareCoordinator|order1",
+        "D-F1-01-competition-loose|DeadlineAwareCoordinator|order1",
+        "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order1",
+        "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order1"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-01",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "slots": [
+        "D-F1-01-competition-base|DeadlineAwareCoordinator|order2",
+        "D-F1-01-competition-loose|DeadlineAwareCoordinator|order2",
+        "D-F1-01-no_competition-base|DeadlineAwareCoordinator|order2",
+        "D-F1-01-no_competition-loose|DeadlineAwareCoordinator|order2"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-02",
+      "policy": "GateRetryRule",
+      "order": 0,
+      "slots": [
+        "D-F1-02-competition-base|GateRetryRule|order0",
+        "D-F1-02-competition-loose|GateRetryRule|order0",
+        "D-F1-02-no_competition-base|GateRetryRule|order0",
+        "D-F1-02-no_competition-loose|GateRetryRule|order0"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-02",
+      "policy": "GateRetryRule",
+      "order": 1,
+      "slots": [
+        "D-F1-02-competition-base|GateRetryRule|order1",
+        "D-F1-02-competition-loose|GateRetryRule|order1",
+        "D-F1-02-no_competition-base|GateRetryRule|order1",
+        "D-F1-02-no_competition-loose|GateRetryRule|order1"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-02",
+      "policy": "GateRetryRule",
+      "order": 2,
+      "slots": [
+        "D-F1-02-competition-base|GateRetryRule|order2",
+        "D-F1-02-competition-loose|GateRetryRule|order2",
+        "D-F1-02-no_competition-base|GateRetryRule|order2",
+        "D-F1-02-no_competition-loose|GateRetryRule|order2"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-02",
+      "policy": "ConstraintCoordinator",
+      "order": 0,
+      "slots": [
+        "D-F1-02-competition-base|ConstraintCoordinator|order0",
+        "D-F1-02-competition-loose|ConstraintCoordinator|order0",
+        "D-F1-02-no_competition-base|ConstraintCoordinator|order0",
+        "D-F1-02-no_competition-loose|ConstraintCoordinator|order0"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-02",
+      "policy": "ConstraintCoordinator",
+      "order": 1,
+      "slots": [
+        "D-F1-02-competition-base|ConstraintCoordinator|order1",
+        "D-F1-02-competition-loose|ConstraintCoordinator|order1",
+        "D-F1-02-no_competition-base|ConstraintCoordinator|order1",
+        "D-F1-02-no_competition-loose|ConstraintCoordinator|order1"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-02",
+      "policy": "ConstraintCoordinator",
+      "order": 2,
+      "slots": [
+        "D-F1-02-competition-base|ConstraintCoordinator|order2",
+        "D-F1-02-competition-loose|ConstraintCoordinator|order2",
+        "D-F1-02-no_competition-base|ConstraintCoordinator|order2",
+        "D-F1-02-no_competition-loose|ConstraintCoordinator|order2"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-02",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 0,
+      "slots": [
+        "D-F1-02-competition-base|DeadlineAwareCoordinator|order0",
+        "D-F1-02-competition-loose|DeadlineAwareCoordinator|order0",
+        "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order0",
+        "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order0"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-02",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 1,
+      "slots": [
+        "D-F1-02-competition-base|DeadlineAwareCoordinator|order1",
+        "D-F1-02-competition-loose|DeadlineAwareCoordinator|order1",
+        "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order1",
+        "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order1"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    },
+    {
+      "base_episode_id": "D-F1-02",
+      "policy": "DeadlineAwareCoordinator",
+      "order": 2,
+      "slots": [
+        "D-F1-02-competition-base|DeadlineAwareCoordinator|order2",
+        "D-F1-02-competition-loose|DeadlineAwareCoordinator|order2",
+        "D-F1-02-no_competition-base|DeadlineAwareCoordinator|order2",
+        "D-F1-02-no_competition-loose|DeadlineAwareCoordinator|order2"
+      ],
+      "cell_order": [
+        "tight_base",
+        "tight_loose",
+        "adequate_base",
+        "adequate_loose"
+      ],
+      "metric_rules_ref": "/metric_rules",
+      "population_ref": "derive_identical_four_cell_K_from_valid_completion_receipts_after_adapter_review"
+    }
+  ],
+  "contrast_checks": [
+    {
+      "kind": "capacity",
+      "left_config": "D-F1-01-competition-base",
+      "right_config": "D-F1-01-no_competition-base",
+      "actual_changed_paths": [
+        "/conflict_rules/0/capacity",
+        "/episode_id",
+        "/home/resources/max_power_kw",
+        "/initial_state/values/coordination_context/resource_capacity_units",
+        "/pairing/resource_arm"
+      ]
+    },
+    {
+      "kind": "capacity",
+      "left_config": "D-F1-01-competition-loose",
+      "right_config": "D-F1-01-no_competition-loose",
+      "actual_changed_paths": [
+        "/conflict_rules/0/capacity",
+        "/episode_id",
+        "/home/resources/max_power_kw",
+        "/initial_state/values/coordination_context/resource_capacity_units",
+        "/pairing/resource_arm"
+      ]
+    },
+    {
+      "kind": "deadline",
+      "left_config": "D-F1-01-competition-base",
+      "right_config": "D-F1-01-competition-loose",
+      "actual_changed_paths": [
+        "/episode_id",
+        "/initial_state/values/coordination_context/requests/0/deadline_ms",
+        "/initial_state/values/coordination_context/requests/1/deadline_ms",
+        "/initial_state/values/coordination_context/requests/2/deadline_ms",
+        "/pairing/temporal_arm",
+        "/task_stream/0/completion_deadline_ms",
+        "/task_stream/0/goal",
+        "/task_stream/1/completion_deadline_ms",
+        "/task_stream/1/goal",
+        "/task_stream/2/completion_deadline_ms",
+        "/task_stream/2/goal"
+      ]
+    },
+    {
+      "kind": "deadline",
+      "left_config": "D-F1-01-no_competition-base",
+      "right_config": "D-F1-01-no_competition-loose",
+      "actual_changed_paths": [
+        "/episode_id",
+        "/initial_state/values/coordination_context/requests/0/deadline_ms",
+        "/initial_state/values/coordination_context/requests/1/deadline_ms",
+        "/initial_state/values/coordination_context/requests/2/deadline_ms",
+        "/pairing/temporal_arm",
+        "/task_stream/0/completion_deadline_ms",
+        "/task_stream/0/goal",
+        "/task_stream/1/completion_deadline_ms",
+        "/task_stream/1/goal",
+        "/task_stream/2/completion_deadline_ms",
+        "/task_stream/2/goal"
+      ]
+    },
+    {
+      "kind": "capacity",
+      "left_config": "D-F1-02-competition-base",
+      "right_config": "D-F1-02-no_competition-base",
+      "actual_changed_paths": [
+        "/conflict_rules/0/capacity",
+        "/episode_id",
+        "/home/resources/max_power_kw",
+        "/initial_state/values/coordination_context/resource_capacity_units",
+        "/pairing/resource_arm"
+      ]
+    },
+    {
+      "kind": "capacity",
+      "left_config": "D-F1-02-competition-loose",
+      "right_config": "D-F1-02-no_competition-loose",
+      "actual_changed_paths": [
+        "/conflict_rules/0/capacity",
+        "/episode_id",
+        "/home/resources/max_power_kw",
+        "/initial_state/values/coordination_context/resource_capacity_units",
+        "/pairing/resource_arm"
+      ]
+    },
+    {
+      "kind": "deadline",
+      "left_config": "D-F1-02-competition-base",
+      "right_config": "D-F1-02-competition-loose",
+      "actual_changed_paths": [
+        "/episode_id",
+        "/initial_state/values/coordination_context/requests/0/deadline_ms",
+        "/initial_state/values/coordination_context/requests/1/deadline_ms",
+        "/initial_state/values/coordination_context/requests/2/deadline_ms",
+        "/initial_state/values/coordination_context/requests/3/deadline_ms",
+        "/initial_state/values/coordination_context/requests/4/deadline_ms",
+        "/pairing/temporal_arm",
+        "/task_stream/0/completion_deadline_ms",
+        "/task_stream/0/goal",
+        "/task_stream/1/completion_deadline_ms",
+        "/task_stream/1/goal",
+        "/task_stream/2/completion_deadline_ms",
+        "/task_stream/2/goal",
+        "/task_stream/3/completion_deadline_ms",
+        "/task_stream/3/goal",
+        "/task_stream/4/completion_deadline_ms",
+        "/task_stream/4/goal"
+      ]
+    },
+    {
+      "kind": "deadline",
+      "left_config": "D-F1-02-no_competition-base",
+      "right_config": "D-F1-02-no_competition-loose",
+      "actual_changed_paths": [
+        "/episode_id",
+        "/initial_state/values/coordination_context/requests/0/deadline_ms",
+        "/initial_state/values/coordination_context/requests/1/deadline_ms",
+        "/initial_state/values/coordination_context/requests/2/deadline_ms",
+        "/initial_state/values/coordination_context/requests/3/deadline_ms",
+        "/initial_state/values/coordination_context/requests/4/deadline_ms",
+        "/pairing/temporal_arm",
+        "/task_stream/0/completion_deadline_ms",
+        "/task_stream/0/goal",
+        "/task_stream/1/completion_deadline_ms",
+        "/task_stream/1/goal",
+        "/task_stream/2/completion_deadline_ms",
+        "/task_stream/2/goal",
+        "/task_stream/3/completion_deadline_ms",
+        "/task_stream/3/goal",
+        "/task_stream/4/completion_deadline_ms",
+        "/task_stream/4/goal"
+      ]
+    }
+  ],
+  "metric_rules": {
+    "fixed_denominator": "E=all_predeclared_required_requests_never_K",
+    "cell_order": [
+      "tight_base",
+      "tight_loose",
+      "adequate_base",
+      "adequate_loose"
+    ],
+    "interaction_formula": "(adequate_loose-tight_loose)-(adequate_base-tight_base)",
+    "four_cell_allowlist": {
+      "fixed_E_rates": [
+        "service_rate",
+        "timely_service_rate"
+      ],
+      "run_event_or_process": [
+        "executed_capacity_violation_duration_ms",
+        "excess_resource_unit_ms",
+        "coordination_accept_count",
+        "coordination_defer_count",
+        "coordination_reject_count",
+        "action_rejected_count",
+        "retry_queued_count",
+        "retry_scheduled_count",
+        "reservation_count",
+        "actual_start_count"
+      ],
+      "same_four_cell_completed_population": [
+        "task_start_wait_ms",
+        "execution_ms",
+        "completion_latency_ms",
+        "tardiness_ms"
+      ],
+      "all_E_completed_in_all_four_cells": [
+        "whole_house_completion_ms"
+      ]
+    },
+    "cohort": {
+      "K": "intersection(C_tight_base,C_tight_loose,C_adequate_base,C_adequate_loose)",
+      "time_aggregation": "equal_task_mean_on_identical_K_in_each_cell_or_per_task_interaction",
+      "required_outputs": [
+        "required_task_ids",
+        "completed_task_ids_by_cell",
+        "common_task_ids",
+        "common_count",
+        "required_count",
+        "coverage",
+        "excluded_tasks",
+        "eligible",
+        "null_reason"
+      ],
+      "empty_K": "null: no_common_completed_requests",
+      "different_two_arm_intersections": "forbidden_as_four_cell_population",
+      "missing_metric_on_K": "data_error_not_drop_task_not_zero",
+      "missing_source_or_cell": "data_error_keep_expected_slot_not_score_as_normal_failure"
+    },
+    "conditional_timely_rate": {
+      "display": "per_run_auxiliary_only_with_completed_denominator",
+      "zero_completed": "null: no_completed_requests",
+      "four_cell_interaction": false,
+      "template_macro_aggregation": false
+    },
+    "completed_only_means_on_each_cells_own_C": {
+      "display": "per_run_auxiliary_only_with_ids_count_coverage",
+      "four_cell_interaction": false
+    },
+    "whole_house_completion": {
+      "requires": "C_cell=E_for_each_of_the_four_cells",
+      "otherwise": "null: not_all_required_completed_in_four_cells",
+      "never_use_K_as_E": true
+    },
+    "template_macro": {
+      "metrics": [
+        "service_rate",
+        "timely_service_rate"
+      ],
+      "slots_per_template_per_policy": 12,
+      "weight_each_slot": "1/12",
+      "weight_each_template": "1/2",
+      "skip_null_or_missing_slots": false
+    },
+    "unlisted_metrics": "not_eligible_for_four_cell_interaction_in_this_version"
+  },
+  "supersedes": {
+    "v1_plan_sha256": "d8fb7fc57aacc70caa441ffda66884d6ffa143e9390574d3aa51c17892809430",
+    "v1_contract_sha256": "23f302299922c3766bed9096f71680b2f80f91f82d408fdb21affffcf4841fb1",
+    "scope": "four_cell_metric_eligibility_and_main_rate_macro_scope_only"
+  }
+}

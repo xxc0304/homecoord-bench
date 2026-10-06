@@ -16,8 +16,8 @@
 生成的 5 条 episode 均通过现有事件运行时的数据契约检查。以同一固定提案和 `DryRunClient` 回放时，五条在 `ConstraintCoordinator` 下均可安全完成全部必要服务：这证明**试点样本不是先天无解，配对机制在代码中能执行**，不证明 Agent 模型已通过，也不证明现实家庭会如此运行。独立执行在 C1 重叠条件触发 C1，在 C3 低容量条件触发 C3；C1 非重叠和 C3 等于／高于容量条件不触发对应冲突。C3 三条任务除预先声明的容量因素外保持相同。测试命令：
 
 ```powershell
-& 'C:\Users\QVQ\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' homecoord_bench/generate_provenance_pilot.py
-& 'C:\Users\QVQ\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m unittest homecoord_bench.tests.test_provenance_pilot -v
+& 'python' homecoord_bench/generate_provenance_pilot.py
+& 'python' -m unittest homecoord_bench.tests.test_provenance_pilot -v
 ```
 
 同一任务模板的五种条件**不是五个独立家庭**，不得据此估计冲突发生率或置信区间。当前 C3 仅能作为部分规格锚定的容量机制测试，不能称为已校准的物理家庭样本。新版 C1 已完成 [SimuHome 设备命令状态交叉检查](C1_SIMUHOME_C3_SOURCE_AUDIT_2026-09-28.md)，8/8 条符号时序回放符合预期；这不校准室温或毫秒延迟。当前 `DryRunClient` 的提案时间亦非真实并发 API 时延。

@@ -1,0 +1,43 @@
+{
+  "configurations": 13,
+  "runs": 52,
+  "recovery_single_factor_pairs": [
+    {
+      "mode": "CANCEL",
+      "only_world_difference": [
+        {
+          "at_ms": 5000,
+          "event": "wash_authorization_restored",
+          "patch": {
+            "laundry.wash_authorized": true
+          }
+        }
+      ]
+    },
+    {
+      "mode": "RESTART",
+      "only_world_difference": [
+        {
+          "at_ms": 5000,
+          "event": "wash_authorization_restored",
+          "patch": {
+            "laundry.wash_authorized": true
+          }
+        }
+      ]
+    }
+  ],
+  "failure_injection": {
+    "target_task": "wash",
+    "field": "actions[0].operation",
+    "normal": "wash",
+    "injected": "unsupported",
+    "proposal_return_ms": 300,
+    "expected_rejection": "tool_not_authorized",
+    "dry_status": "waiting without valid receipt, not terminal execution failure",
+    "retry_model_calls": 0
+  },
+  "api_calls": 0,
+  "holdout_runs": 0,
+  "acceptance": null
+}

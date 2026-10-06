@@ -1,0 +1,2799 @@
+{
+  "status": "author_revised_not_independently_reviewed",
+  "api_calls": 0,
+  "scenario_templates": 4,
+  "mechanism_contracts": 3,
+  "configurations": 14,
+  "heldout_executions": 0,
+  "checks": [
+    {
+      "episode_id": "REV-C1-LIGHT-CONFLICT",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "reading_light": true,
+          "energy_light": false
+        },
+        "completion_latency_ms": {
+          "reading_light": 900,
+          "energy_light": null
+        },
+        "resolution_correct": true,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C1-LIGHT-CONFLICT",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "reading_light",
+            "agent_id": "ReadingAgent",
+            "state_version": 120,
+            "request_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:reading_light"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "reading_light",
+            "agent_id": "ReadingAgent",
+            "request_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:reading_light",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "reading_light",
+            "proposal_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:reading_light:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "reading_light",
+            "proposal_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:reading_light:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 500,
+            "power_kw": 0.02
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "ReadingAgent",
+            "task_id": "reading_light",
+            "proposal_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:reading_light:0",
+            "target": "study_light",
+            "operation": "set_reading",
+            "duration_ms": 500,
+            "power_kw": 0.02,
+            "based_on_state_version": 120,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {},
+            "completion_effects": {
+              "devices.study_light": "reading",
+              "service.protected": true
+            },
+            "state_version_at_start": 120
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 900,
+            "agent_id": "ReadingAgent",
+            "task_id": "reading_light",
+            "proposal_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:reading_light:0",
+            "target": "study_light",
+            "operation": "set_reading",
+            "effects": {
+              "devices.study_light": "reading",
+              "service.protected": true
+            },
+            "new_state_version": 121
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 1200,
+            "task_id": "energy_light",
+            "agent_id": "EnergyAgent",
+            "state_version": 121,
+            "request_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:energy_light"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 1500,
+            "task_id": "energy_light",
+            "agent_id": "EnergyAgent",
+            "request_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:energy_light",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1500,
+            "task_id": "energy_light",
+            "proposal_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:energy_light:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 1500,
+            "task_id": "energy_light",
+            "proposal_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:energy_light:0",
+            "scheduled_start_ms": 1600,
+            "duration_ms": 500,
+            "power_kw": 0.0
+          },
+          {
+            "type": "action_rejected",
+            "timestamp_ms": 1600,
+            "task_id": "energy_light",
+            "agent_id": "EnergyAgent",
+            "proposal_id": "REV-C1-LIGHT-CONFLICT:IndependentMultiAgent:energy_light:0",
+            "reason": "unsafe_precondition",
+            "failed_requirements": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "state_version": 121
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 6000,
+            "new_state_version": 122,
+            "patch": {
+              "study.reading_active": false
+            },
+            "source": "protected_request_expires"
+          }
+        ],
+        "final_state": {
+          "study": {
+            "occupied": true,
+            "reading_active": false
+          },
+          "devices": {
+            "study_light": "reading"
+          },
+          "service": {
+            "protected": true,
+            "lower": false
+          }
+        },
+        "final_state_version": 122
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C1-LIGHT-SAFE",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "reading_light": true,
+          "energy_light": true
+        },
+        "completion_latency_ms": {
+          "reading_light": 900,
+          "energy_light": 900
+        },
+        "resolution_correct": true,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C1-LIGHT-SAFE",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "reading_light",
+            "agent_id": "ReadingAgent",
+            "state_version": 120,
+            "request_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:reading_light"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "reading_light",
+            "agent_id": "ReadingAgent",
+            "request_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:reading_light",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "reading_light",
+            "proposal_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:reading_light:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "reading_light",
+            "proposal_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:reading_light:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 500,
+            "power_kw": 0.02
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "ReadingAgent",
+            "task_id": "reading_light",
+            "proposal_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:reading_light:0",
+            "target": "study_light",
+            "operation": "set_reading",
+            "duration_ms": 500,
+            "power_kw": 0.02,
+            "based_on_state_version": 120,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {},
+            "completion_effects": {
+              "devices.study_light": "reading",
+              "service.protected": true
+            },
+            "state_version_at_start": 120
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 900,
+            "agent_id": "ReadingAgent",
+            "task_id": "reading_light",
+            "proposal_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:reading_light:0",
+            "target": "study_light",
+            "operation": "set_reading",
+            "effects": {
+              "devices.study_light": "reading",
+              "service.protected": true
+            },
+            "new_state_version": 121
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 6000,
+            "new_state_version": 122,
+            "patch": {
+              "study.reading_active": false
+            },
+            "source": "protected_request_expires"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 6500,
+            "task_id": "energy_light",
+            "agent_id": "EnergyAgent",
+            "state_version": 122,
+            "request_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:energy_light"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 6800,
+            "task_id": "energy_light",
+            "agent_id": "EnergyAgent",
+            "request_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:energy_light",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 6800,
+            "task_id": "energy_light",
+            "proposal_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:energy_light:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 6800,
+            "task_id": "energy_light",
+            "proposal_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:energy_light:0",
+            "scheduled_start_ms": 6900,
+            "duration_ms": 500,
+            "power_kw": 0.0
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 6900,
+            "agent_id": "EnergyAgent",
+            "task_id": "energy_light",
+            "proposal_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:energy_light:0",
+            "target": "study_light",
+            "operation": "off",
+            "duration_ms": 500,
+            "power_kw": 0.0,
+            "based_on_state_version": 122,
+            "requires": [
+              {
+                "path": "study.reading_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {},
+            "completion_effects": {
+              "devices.study_light": "off",
+              "service.lower": true
+            },
+            "state_version_at_start": 122
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 7400,
+            "agent_id": "EnergyAgent",
+            "task_id": "energy_light",
+            "proposal_id": "REV-C1-LIGHT-SAFE:IndependentMultiAgent:energy_light:0",
+            "target": "study_light",
+            "operation": "off",
+            "effects": {
+              "devices.study_light": "off",
+              "service.lower": true
+            },
+            "new_state_version": 123
+          }
+        ],
+        "final_state": {
+          "study": {
+            "occupied": true,
+            "reading_active": false
+          },
+          "devices": {
+            "study_light": "off"
+          },
+          "service": {
+            "protected": true,
+            "lower": true
+          }
+        },
+        "final_state_version": 123
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C1-BLINDS-CONFLICT",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "privacy_close": true,
+          "daylight_open": false
+        },
+        "completion_latency_ms": {
+          "privacy_close": 900,
+          "daylight_open": null
+        },
+        "resolution_correct": true,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C1-BLINDS-CONFLICT",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "privacy_close",
+            "agent_id": "PrivacyAgent",
+            "state_version": 130,
+            "request_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:privacy_close"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "privacy_close",
+            "agent_id": "PrivacyAgent",
+            "request_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:privacy_close",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "privacy_close",
+            "proposal_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:privacy_close:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "privacy_close",
+            "proposal_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:privacy_close:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 500,
+            "power_kw": 0.01
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "PrivacyAgent",
+            "task_id": "privacy_close",
+            "proposal_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:privacy_close:0",
+            "target": "bedroom_blinds",
+            "operation": "close",
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "based_on_state_version": 130,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {},
+            "completion_effects": {
+              "devices.bedroom_blinds": "closed",
+              "service.protected": true
+            },
+            "state_version_at_start": 130
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 900,
+            "agent_id": "PrivacyAgent",
+            "task_id": "privacy_close",
+            "proposal_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:privacy_close:0",
+            "target": "bedroom_blinds",
+            "operation": "close",
+            "effects": {
+              "devices.bedroom_blinds": "closed",
+              "service.protected": true
+            },
+            "new_state_version": 131
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 1200,
+            "task_id": "daylight_open",
+            "agent_id": "DaylightAgent",
+            "state_version": 131,
+            "request_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:daylight_open"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 1500,
+            "task_id": "daylight_open",
+            "agent_id": "DaylightAgent",
+            "request_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:daylight_open",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 1500,
+            "task_id": "daylight_open",
+            "proposal_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:daylight_open:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 1500,
+            "task_id": "daylight_open",
+            "proposal_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:daylight_open:0",
+            "scheduled_start_ms": 1600,
+            "duration_ms": 500,
+            "power_kw": 0.01
+          },
+          {
+            "type": "action_rejected",
+            "timestamp_ms": 1600,
+            "task_id": "daylight_open",
+            "agent_id": "DaylightAgent",
+            "proposal_id": "REV-C1-BLINDS-CONFLICT:IndependentMultiAgent:daylight_open:0",
+            "reason": "unsafe_precondition",
+            "failed_requirements": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "state_version": 131
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 6000,
+            "new_state_version": 132,
+            "patch": {
+              "bedroom.privacy_required": false
+            },
+            "source": "protected_request_expires"
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": true,
+            "privacy_required": false,
+            "daylight_requested": true
+          },
+          "devices": {
+            "bedroom_blinds": "closed"
+          },
+          "service": {
+            "protected": true,
+            "lower": false
+          }
+        },
+        "final_state_version": 132
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C1-BLINDS-SAFE",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "privacy_close": true,
+          "daylight_open": true
+        },
+        "completion_latency_ms": {
+          "privacy_close": 900,
+          "daylight_open": 900
+        },
+        "resolution_correct": true,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C1-BLINDS-SAFE",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "privacy_close",
+            "agent_id": "PrivacyAgent",
+            "state_version": 130,
+            "request_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:privacy_close"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "privacy_close",
+            "agent_id": "PrivacyAgent",
+            "request_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:privacy_close",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "privacy_close",
+            "proposal_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:privacy_close:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "privacy_close",
+            "proposal_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:privacy_close:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 500,
+            "power_kw": 0.01
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "PrivacyAgent",
+            "task_id": "privacy_close",
+            "proposal_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:privacy_close:0",
+            "target": "bedroom_blinds",
+            "operation": "close",
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "based_on_state_version": 130,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {},
+            "completion_effects": {
+              "devices.bedroom_blinds": "closed",
+              "service.protected": true
+            },
+            "state_version_at_start": 130
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 900,
+            "agent_id": "PrivacyAgent",
+            "task_id": "privacy_close",
+            "proposal_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:privacy_close:0",
+            "target": "bedroom_blinds",
+            "operation": "close",
+            "effects": {
+              "devices.bedroom_blinds": "closed",
+              "service.protected": true
+            },
+            "new_state_version": 131
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 6000,
+            "new_state_version": 132,
+            "patch": {
+              "bedroom.privacy_required": false
+            },
+            "source": "protected_request_expires"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 6500,
+            "task_id": "daylight_open",
+            "agent_id": "DaylightAgent",
+            "state_version": 132,
+            "request_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:daylight_open"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 6800,
+            "task_id": "daylight_open",
+            "agent_id": "DaylightAgent",
+            "request_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:daylight_open",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 6800,
+            "task_id": "daylight_open",
+            "proposal_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:daylight_open:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 6800,
+            "task_id": "daylight_open",
+            "proposal_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:daylight_open:0",
+            "scheduled_start_ms": 6900,
+            "duration_ms": 500,
+            "power_kw": 0.01
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 6900,
+            "agent_id": "DaylightAgent",
+            "task_id": "daylight_open",
+            "proposal_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:daylight_open:0",
+            "target": "bedroom_blinds",
+            "operation": "open",
+            "duration_ms": 500,
+            "power_kw": 0.01,
+            "based_on_state_version": 132,
+            "requires": [
+              {
+                "path": "bedroom.privacy_required",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {},
+            "completion_effects": {
+              "devices.bedroom_blinds": "open",
+              "service.lower": true
+            },
+            "state_version_at_start": 132
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 7400,
+            "agent_id": "DaylightAgent",
+            "task_id": "daylight_open",
+            "proposal_id": "REV-C1-BLINDS-SAFE:IndependentMultiAgent:daylight_open:0",
+            "target": "bedroom_blinds",
+            "operation": "open",
+            "effects": {
+              "devices.bedroom_blinds": "open",
+              "service.lower": true
+            },
+            "new_state_version": 133
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": true,
+            "privacy_required": false,
+            "daylight_requested": true
+          },
+          "devices": {
+            "bedroom_blinds": "open"
+          },
+          "service": {
+            "protected": true,
+            "lower": true
+          }
+        },
+        "final_state_version": 133
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-CLEAN-NOEVENT",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "completion_latency_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-CLEAN-NOEVENT",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_clean"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_occupancy"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "request_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_clean",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_clean:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_clean:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.2
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "request_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_occupancy",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_occupancy:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_occupancy:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 117,
+            "patch": {
+              "devices.bedroom_robot": "running"
+            },
+            "source": "action_started",
+            "task_id": "bedroom_clean"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "duration_ms": 3000,
+            "power_kw": 0.2,
+            "based_on_state_version": 116,
+            "requires": [
+              {
+                "path": "bedroom.occupied",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.bedroom_robot": "running"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 116,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-NOEVENT:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "new_state_version": 119
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": false,
+            "clean": false
+          },
+          "devices": {
+            "bedroom_robot": "idle",
+            "occupancy_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 0
+          }
+        },
+        "final_state_version": 119
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-CLEAN-PRESTART",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "bedroom_clean": false,
+          "bedroom_occupancy": true
+        },
+        "completion_latency_ms": {
+          "bedroom_clean": null,
+          "bedroom_occupancy": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": false,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-CLEAN-PRESTART",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_clean"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_occupancy"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 200,
+            "new_state_version": 117,
+            "patch": {
+              "bedroom.occupied": true
+            },
+            "source": "resident_enters"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "request_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_clean",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_clean:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_clean:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.2
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "request_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_occupancy",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_occupancy:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_occupancy:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "action_rejected",
+            "timestamp_ms": 400,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "proposal_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_clean:0",
+            "reason": "stale_state",
+            "failed_requirements": [
+              {
+                "path": "bedroom.occupied",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "state_version": 117
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 116,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-PRESTART:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 118
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 5000,
+            "new_state_version": 119,
+            "patch": {
+              "bedroom.occupied": false
+            },
+            "source": "resident_leaves"
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": false,
+            "clean": false
+          },
+          "devices": {
+            "bedroom_robot": "idle",
+            "occupancy_sensor": "idle"
+          },
+          "service": {
+            "work_completed": false,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 0
+          }
+        },
+        "final_state_version": 119
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-CLEAN-INFLIGHT",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 2400,
+        "invalidated_actions": 1
+      },
+      "score": {
+        "action_completed": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "completion_latency_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 1,
+        "harm_duration_ms": 2400,
+        "work_process_valid_completed": false,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-CLEAN-INFLIGHT",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_clean"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_occupancy"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "request_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_clean",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_clean:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_clean:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.2
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "request_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_occupancy",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_occupancy:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_occupancy:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 117,
+            "patch": {
+              "devices.bedroom_robot": "running"
+            },
+            "source": "action_started",
+            "task_id": "bedroom_clean"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "duration_ms": 3000,
+            "power_kw": 0.2,
+            "based_on_state_version": 116,
+            "requires": [
+              {
+                "path": "bedroom.occupied",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.bedroom_robot": "running"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 116,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 118
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 1000,
+            "new_state_version": 119,
+            "patch": {
+              "bedroom.occupied": true
+            },
+            "source": "resident_enters",
+            "constraint_violation_started": true
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-INFLIGHT:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "new_state_version": 120,
+            "constraint_violation_resolved": true
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 5000,
+            "new_state_version": 121,
+            "patch": {
+              "bedroom.occupied": false
+            },
+            "source": "resident_leaves"
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": false,
+            "clean": false
+          },
+          "devices": {
+            "bedroom_robot": "idle",
+            "occupancy_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 0
+          }
+        },
+        "final_state_version": 121
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-CLEAN-POSTCOMPLETE",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "completion_latency_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-CLEAN-POSTCOMPLETE",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_clean"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_occupancy"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "request_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_clean",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_clean:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_clean:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.2
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "request_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_occupancy",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_occupancy:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_occupancy:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 117,
+            "patch": {
+              "devices.bedroom_robot": "running"
+            },
+            "source": "action_started",
+            "task_id": "bedroom_clean"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "duration_ms": 3000,
+            "power_kw": 0.2,
+            "based_on_state_version": 116,
+            "requires": [
+              {
+                "path": "bedroom.occupied",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.bedroom_robot": "running"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 116,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-POSTCOMPLETE:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "new_state_version": 119
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 4000,
+            "new_state_version": 120,
+            "patch": {
+              "bedroom.occupied": true
+            },
+            "source": "resident_enters"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 5000,
+            "new_state_version": 121,
+            "patch": {
+              "bedroom.occupied": false
+            },
+            "source": "resident_leaves"
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": false,
+            "clean": false
+          },
+          "devices": {
+            "bedroom_robot": "idle",
+            "occupancy_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 0
+          }
+        },
+        "final_state_version": 121
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-CLEAN-UNRELATED",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "completion_latency_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-CLEAN-UNRELATED",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_clean"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "state_version": 116,
+            "request_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_occupancy"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "request_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_clean",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_clean:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_clean:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.2
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "request_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_occupancy",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_occupancy:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_occupancy:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 117,
+            "patch": {
+              "devices.bedroom_robot": "running"
+            },
+            "source": "action_started",
+            "task_id": "bedroom_clean"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "duration_ms": 3000,
+            "power_kw": 0.2,
+            "based_on_state_version": 116,
+            "requires": [
+              {
+                "path": "bedroom.occupied",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.bedroom_robot": "running"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 116,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 118
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 1000,
+            "new_state_version": 119,
+            "patch": {
+              "diagnostic.heartbeat": 1
+            },
+            "source": "heartbeat"
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "REV-C4-CLEAN-UNRELATED:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "new_state_version": 120
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": false,
+            "clean": false
+          },
+          "devices": {
+            "bedroom_robot": "idle",
+            "occupancy_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 1
+          }
+        },
+        "final_state_version": 120
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-RAIN-NOEVENT",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "water_garden": true,
+          "observe_rain": true
+        },
+        "completion_latency_ms": {
+          "water_garden": 3400,
+          "observe_rain": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-RAIN-NOEVENT",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:water_garden"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:observe_rain"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "request_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:water_garden",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:water_garden:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:water_garden:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.1
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "request_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:observe_rain",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:observe_rain:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:observe_rain:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 118,
+            "patch": {
+              "devices.irrigation": "on"
+            },
+            "source": "action_started",
+            "task_id": "water_garden"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "IrrigationAgent",
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:water_garden:0",
+            "target": "irrigation",
+            "operation": "water",
+            "duration_ms": 3000,
+            "power_kw": 0.1,
+            "based_on_state_version": 117,
+            "requires": [
+              {
+                "path": "weather.raining",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.irrigation": "on"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.irrigation": "off"
+            },
+            "state_version_at_start": 118
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 117,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 119
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "IrrigationAgent",
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-NOEVENT:IndependentMultiAgent:water_garden:0",
+            "target": "irrigation",
+            "operation": "water",
+            "effects": {
+              "service.work_completed": true,
+              "devices.irrigation": "off"
+            },
+            "new_state_version": 120
+          }
+        ],
+        "final_state": {
+          "garden": {
+            "soil_moisture_pct": 20
+          },
+          "weather": {
+            "raining": false
+          },
+          "devices": {
+            "irrigation": "off",
+            "weather_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 0
+          }
+        },
+        "final_state_version": 120
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-RAIN-PRESTART",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "water_garden": false,
+          "observe_rain": true
+        },
+        "completion_latency_ms": {
+          "water_garden": null,
+          "observe_rain": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": false,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-RAIN-PRESTART",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:water_garden"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:observe_rain"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 200,
+            "new_state_version": 118,
+            "patch": {
+              "weather.raining": true
+            },
+            "source": "rain_begins"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "request_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:water_garden",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:water_garden:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:water_garden:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.1
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "request_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:observe_rain",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:observe_rain:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:observe_rain:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "action_rejected",
+            "timestamp_ms": 400,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "proposal_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:water_garden:0",
+            "reason": "stale_state",
+            "failed_requirements": [
+              {
+                "path": "weather.raining",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "state_version": 118
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 117,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-PRESTART:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 119
+          }
+        ],
+        "final_state": {
+          "garden": {
+            "soil_moisture_pct": 20
+          },
+          "weather": {
+            "raining": true
+          },
+          "devices": {
+            "irrigation": "off",
+            "weather_sensor": "idle"
+          },
+          "service": {
+            "work_completed": false,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 0
+          }
+        },
+        "final_state_version": 119
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-RAIN-INFLIGHT",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 2400,
+        "invalidated_actions": 1
+      },
+      "score": {
+        "action_completed": {
+          "water_garden": true,
+          "observe_rain": true
+        },
+        "completion_latency_ms": {
+          "water_garden": 3400,
+          "observe_rain": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 1,
+        "harm_duration_ms": 2400,
+        "work_process_valid_completed": false,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-RAIN-INFLIGHT",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:water_garden"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:observe_rain"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "request_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:water_garden",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:water_garden:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:water_garden:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.1
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "request_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:observe_rain",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:observe_rain:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:observe_rain:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 118,
+            "patch": {
+              "devices.irrigation": "on"
+            },
+            "source": "action_started",
+            "task_id": "water_garden"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "IrrigationAgent",
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:water_garden:0",
+            "target": "irrigation",
+            "operation": "water",
+            "duration_ms": 3000,
+            "power_kw": 0.1,
+            "based_on_state_version": 117,
+            "requires": [
+              {
+                "path": "weather.raining",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.irrigation": "on"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.irrigation": "off"
+            },
+            "state_version_at_start": 118
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 117,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 119
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 1000,
+            "new_state_version": 120,
+            "patch": {
+              "weather.raining": true
+            },
+            "source": "rain_begins",
+            "constraint_violation_started": true
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "IrrigationAgent",
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-INFLIGHT:IndependentMultiAgent:water_garden:0",
+            "target": "irrigation",
+            "operation": "water",
+            "effects": {
+              "service.work_completed": true,
+              "devices.irrigation": "off"
+            },
+            "new_state_version": 121,
+            "constraint_violation_resolved": true
+          }
+        ],
+        "final_state": {
+          "garden": {
+            "soil_moisture_pct": 20
+          },
+          "weather": {
+            "raining": true
+          },
+          "devices": {
+            "irrigation": "off",
+            "weather_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 0
+          }
+        },
+        "final_state_version": 121
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-RAIN-POSTCOMPLETE",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "water_garden": true,
+          "observe_rain": true
+        },
+        "completion_latency_ms": {
+          "water_garden": 3400,
+          "observe_rain": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-RAIN-POSTCOMPLETE",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:water_garden"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:observe_rain"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "request_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:water_garden",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:water_garden:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:water_garden:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.1
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "request_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:observe_rain",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:observe_rain:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:observe_rain:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 118,
+            "patch": {
+              "devices.irrigation": "on"
+            },
+            "source": "action_started",
+            "task_id": "water_garden"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "IrrigationAgent",
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:water_garden:0",
+            "target": "irrigation",
+            "operation": "water",
+            "duration_ms": 3000,
+            "power_kw": 0.1,
+            "based_on_state_version": 117,
+            "requires": [
+              {
+                "path": "weather.raining",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.irrigation": "on"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.irrigation": "off"
+            },
+            "state_version_at_start": 118
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 117,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 119
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "IrrigationAgent",
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-POSTCOMPLETE:IndependentMultiAgent:water_garden:0",
+            "target": "irrigation",
+            "operation": "water",
+            "effects": {
+              "service.work_completed": true,
+              "devices.irrigation": "off"
+            },
+            "new_state_version": 120
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 4000,
+            "new_state_version": 121,
+            "patch": {
+              "weather.raining": true
+            },
+            "source": "rain_begins"
+          }
+        ],
+        "final_state": {
+          "garden": {
+            "soil_moisture_pct": 20
+          },
+          "weather": {
+            "raining": true
+          },
+          "devices": {
+            "irrigation": "off",
+            "weather_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 0
+          }
+        },
+        "final_state_version": 121
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    },
+    {
+      "episode_id": "REV-C4-RAIN-UNRELATED",
+      "independent_audit": {
+        "state_replay": "passed",
+        "completion_recount": "passed",
+        "harm_integral_ms": 0,
+        "invalidated_actions": 0
+      },
+      "score": {
+        "action_completed": {
+          "water_garden": true,
+          "observe_rain": true
+        },
+        "completion_latency_ms": {
+          "water_garden": 3400,
+          "observe_rain": 500
+        },
+        "resolution_correct": null,
+        "in_flight_invalidations": 0,
+        "harm_duration_ms": 0,
+        "work_process_valid_completed": true,
+        "recovery_completed": null,
+        "recovery_status": "not implemented / not measured"
+      },
+      "trace": {
+        "episode_id": "REV-C4-RAIN-UNRELATED",
+        "policy": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:water_garden"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "state_version": 117,
+            "request_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:observe_rain"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "agent_id": "IrrigationAgent",
+            "request_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:water_garden",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:water_garden:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:water_garden:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.1
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "agent_id": "WeatherAgent",
+            "request_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:observe_rain",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:observe_rain:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:observe_rain:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 118,
+            "patch": {
+              "devices.irrigation": "on"
+            },
+            "source": "action_started",
+            "task_id": "water_garden"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "IrrigationAgent",
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:water_garden:0",
+            "target": "irrigation",
+            "operation": "water",
+            "duration_ms": 3000,
+            "power_kw": 0.1,
+            "based_on_state_version": 117,
+            "requires": [
+              {
+                "path": "weather.raining",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.irrigation": "on"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.irrigation": "off"
+            },
+            "state_version_at_start": 118
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 117,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "WeatherAgent",
+            "task_id": "observe_rain",
+            "proposal_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:observe_rain:0",
+            "target": "weather_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 119
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 1000,
+            "new_state_version": 120,
+            "patch": {
+              "diagnostic.heartbeat": 1
+            },
+            "source": "heartbeat"
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "IrrigationAgent",
+            "task_id": "water_garden",
+            "proposal_id": "REV-C4-RAIN-UNRELATED:IndependentMultiAgent:water_garden:0",
+            "target": "irrigation",
+            "operation": "water",
+            "effects": {
+              "service.work_completed": true,
+              "devices.irrigation": "off"
+            },
+            "new_state_version": 121
+          }
+        ],
+        "final_state": {
+          "garden": {
+            "soil_moisture_pct": 20
+          },
+          "weather": {
+            "raining": false
+          },
+          "devices": {
+            "irrigation": "off",
+            "weather_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 1
+          }
+        },
+        "final_state_version": 121
+      },
+      "runner": "shared run_event_simulation + FixedProposals(300ms), no API",
+      "verification": "passed expected semantics; inflight cases intentionally expose missing cancellation"
+    }
+  ]
+}

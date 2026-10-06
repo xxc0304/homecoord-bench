@@ -1,0 +1,683 @@
+{
+  "status": "locked_before_new_model_calls",
+  "model": "deepseek-flash",
+  "reasoning_effort": "none",
+  "max_attempts": 1,
+  "timeout_seconds": 45,
+  "output_tokens_per_task": 1200,
+  "policy": "DeadlineAwareCoordinator",
+  "repetitions": 2,
+  "development_conditions": 12,
+  "development_structures": 6,
+  "max_api_requests": 224,
+  "calls_by_arm": {
+    "central_batch": 32,
+    "functional_local": 96,
+    "functional_pooled": 96
+  },
+  "max_policy_runs": 72,
+  "test_episodes_run": 0,
+  "candidate_sha256": {
+    "HC-ARCH-01.json": "6A03F4D17FC726FD39C169AF2C3833E1BF4099D26DC8F2DA314DABFCB1AED27F",
+    "HC-ARCH-02.json": "F90B42A21ECAE097E5EE6925451CA068F03D54105618E138EF88E56A5709B981",
+    "HC-ARCH-03.json": "A772F81E966C22CC00445A5CA32ECBB883E63525614CE5DAE93DF680DB8FCB50",
+    "HC-ARCH-04.json": "3AA1532B47971064AB0868706A794D0BD8DAB113DFDD77A91A63D08684C86BEB",
+    "HC-ARCH-05.json": "C7948E96A233F7F750D51ED0702B6BAECF509ABA86D4A96C35DC76C1B69F38B0",
+    "HC-ARCH-06.json": "4464DFE8518E062609B97E3CAEFED45122301EDD5EBE1EE8C84BC0B76BD86A45",
+    "HC-ARCH-07.json": "CA265E5E8DF0C91D3D055ADFF062B269EB98E5AF85C32048CB2C373801FB9528",
+    "HC-ARCH-08.json": "16565F0DD6A670F7DCDF15C0AAA359AA3078E4AE4D3A7D54A25A6A010A2F54FB",
+    "HC-ARCH-09.json": "ED42D9D6E6EDC996A5A49F4F4871B7AC826AA6E336F35B92C3C8CA552F1828B8",
+    "HC-ARCH-10.json": "AE8AD7B910797F805F2D11530DC5159F7B2852E9C060ED24BBCA3B0E3E03FDF7",
+    "HC-ARCH-11.json": "07F1E22DAF9E90ABC0009E4483234941C962E48362ED1F4DF6BB8102A72FE58F",
+    "HC-ARCH-12.json": "EFAE967784022EF455DC4099CD10A17F8C61EAFD4392A045D7E254EA523373D8"
+  },
+  "units": [
+    {
+      "unit_id": "U01-R1-central_batch",
+      "filename": "HC-ARCH-01.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U01-R1-functional_local",
+      "filename": "HC-ARCH-01.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U01-R1-functional_pooled",
+      "filename": "HC-ARCH-01.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U01-R2-functional_local",
+      "filename": "HC-ARCH-01.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U01-R2-functional_pooled",
+      "filename": "HC-ARCH-01.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U01-R2-central_batch",
+      "filename": "HC-ARCH-01.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U02-R1-functional_local",
+      "filename": "HC-ARCH-02.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U02-R1-functional_pooled",
+      "filename": "HC-ARCH-02.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U02-R1-central_batch",
+      "filename": "HC-ARCH-02.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U02-R2-functional_pooled",
+      "filename": "HC-ARCH-02.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U02-R2-central_batch",
+      "filename": "HC-ARCH-02.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U02-R2-functional_local",
+      "filename": "HC-ARCH-02.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U03-R1-functional_pooled",
+      "filename": "HC-ARCH-03.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U03-R1-central_batch",
+      "filename": "HC-ARCH-03.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U03-R1-functional_local",
+      "filename": "HC-ARCH-03.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U03-R2-central_batch",
+      "filename": "HC-ARCH-03.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U03-R2-functional_local",
+      "filename": "HC-ARCH-03.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U03-R2-functional_pooled",
+      "filename": "HC-ARCH-03.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U04-R1-central_batch",
+      "filename": "HC-ARCH-04.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U04-R1-functional_local",
+      "filename": "HC-ARCH-04.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U04-R1-functional_pooled",
+      "filename": "HC-ARCH-04.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U04-R2-functional_local",
+      "filename": "HC-ARCH-04.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U04-R2-functional_pooled",
+      "filename": "HC-ARCH-04.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U04-R2-central_batch",
+      "filename": "HC-ARCH-04.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U05-R1-functional_local",
+      "filename": "HC-ARCH-05.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U05-R1-functional_pooled",
+      "filename": "HC-ARCH-05.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U05-R1-central_batch",
+      "filename": "HC-ARCH-05.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 2
+    },
+    {
+      "unit_id": "U05-R2-functional_pooled",
+      "filename": "HC-ARCH-05.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U05-R2-central_batch",
+      "filename": "HC-ARCH-05.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 2
+    },
+    {
+      "unit_id": "U05-R2-functional_local",
+      "filename": "HC-ARCH-05.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U06-R1-functional_pooled",
+      "filename": "HC-ARCH-06.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U06-R1-central_batch",
+      "filename": "HC-ARCH-06.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 2
+    },
+    {
+      "unit_id": "U06-R1-functional_local",
+      "filename": "HC-ARCH-06.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U06-R2-central_batch",
+      "filename": "HC-ARCH-06.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 2
+    },
+    {
+      "unit_id": "U06-R2-functional_local",
+      "filename": "HC-ARCH-06.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U06-R2-functional_pooled",
+      "filename": "HC-ARCH-06.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U07-R1-central_batch",
+      "filename": "HC-ARCH-07.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 2
+    },
+    {
+      "unit_id": "U07-R1-functional_local",
+      "filename": "HC-ARCH-07.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U07-R1-functional_pooled",
+      "filename": "HC-ARCH-07.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U07-R2-functional_local",
+      "filename": "HC-ARCH-07.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U07-R2-functional_pooled",
+      "filename": "HC-ARCH-07.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U07-R2-central_batch",
+      "filename": "HC-ARCH-07.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 2
+    },
+    {
+      "unit_id": "U08-R1-functional_local",
+      "filename": "HC-ARCH-08.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U08-R1-functional_pooled",
+      "filename": "HC-ARCH-08.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U08-R1-central_batch",
+      "filename": "HC-ARCH-08.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 2
+    },
+    {
+      "unit_id": "U08-R2-functional_pooled",
+      "filename": "HC-ARCH-08.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U08-R2-central_batch",
+      "filename": "HC-ARCH-08.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 2
+    },
+    {
+      "unit_id": "U08-R2-functional_local",
+      "filename": "HC-ARCH-08.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 4
+    },
+    {
+      "unit_id": "U09-R1-functional_pooled",
+      "filename": "HC-ARCH-09.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U09-R1-central_batch",
+      "filename": "HC-ARCH-09.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U09-R1-functional_local",
+      "filename": "HC-ARCH-09.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U09-R2-central_batch",
+      "filename": "HC-ARCH-09.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U09-R2-functional_local",
+      "filename": "HC-ARCH-09.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U09-R2-functional_pooled",
+      "filename": "HC-ARCH-09.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U10-R1-central_batch",
+      "filename": "HC-ARCH-10.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U10-R1-functional_local",
+      "filename": "HC-ARCH-10.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U10-R1-functional_pooled",
+      "filename": "HC-ARCH-10.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U10-R2-functional_local",
+      "filename": "HC-ARCH-10.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U10-R2-functional_pooled",
+      "filename": "HC-ARCH-10.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 3
+    },
+    {
+      "unit_id": "U10-R2-central_batch",
+      "filename": "HC-ARCH-10.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U11-R1-functional_local",
+      "filename": "HC-ARCH-11.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U11-R1-functional_pooled",
+      "filename": "HC-ARCH-11.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U11-R1-central_batch",
+      "filename": "HC-ARCH-11.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U11-R2-functional_pooled",
+      "filename": "HC-ARCH-11.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U11-R2-central_batch",
+      "filename": "HC-ARCH-11.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U11-R2-functional_local",
+      "filename": "HC-ARCH-11.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U12-R1-functional_pooled",
+      "filename": "HC-ARCH-12.json",
+      "arm": "functional_pooled",
+      "repetition": 1,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U12-R1-central_batch",
+      "filename": "HC-ARCH-12.json",
+      "arm": "central_batch",
+      "repetition": 1,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U12-R1-functional_local",
+      "filename": "HC-ARCH-12.json",
+      "arm": "functional_local",
+      "repetition": 1,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U12-R2-central_batch",
+      "filename": "HC-ARCH-12.json",
+      "arm": "central_batch",
+      "repetition": 2,
+      "max_calls": 1
+    },
+    {
+      "unit_id": "U12-R2-functional_local",
+      "filename": "HC-ARCH-12.json",
+      "arm": "functional_local",
+      "repetition": 2,
+      "max_calls": 5
+    },
+    {
+      "unit_id": "U12-R2-functional_pooled",
+      "filename": "HC-ARCH-12.json",
+      "arm": "functional_pooled",
+      "repetition": 2,
+      "max_calls": 5
+    }
+  ],
+  "prereg_sha256": "32D6BCB3FB3CF592C0D329EDAC643AB0A37168C9A3F2FF7FFD34394977D19CEA",
+  "source_split_manifest_sha256": "7B2A38B6397E45EA40C85BA8E87007DB9C750CCE3D64CD9B4CBF97926354016A",
+  "implementation_sha256": {
+    "analyze_variant_sweep.py": "163FF7BF1A5DBA561DE2387AFCF1C24E313597850D2B35B585C91CE3AE3BB9E6",
+    "annotate_synthetic_calibration.py": "49FF51440CA8B921448D71EDBB952DBE63C2A159D3753F2F65239843814FF780",
+    "audit_baseline_coverage.py": "8005CC08FD50C94B846741E535FE974BF6ED9E122797AFE15E709A3CE0A74A21",
+    "audit_c2_observational_compatibility.py": "85933A53C1067EF18A519849CA74E6A46EE7ACDF0B6F9FF778FFDB49D9438E88",
+    "audit_c3_non_nested_provenance.py": "89DE716E61212C0BB9742710305490A078D992AEB33D869BB1AA4DB860F2E609",
+    "audit_c3_online_information_contract.py": "B72B7BE18C9EA20EA7939779547E7AD5B3BBA4CE49B1220BD4B3A166368826F1",
+    "audit_c3_parallel_model_pilot.py": "763AAFC39BD2CA49F6B024B5D2939E5ACCCC8159EBB5564F2C4C50FD733CFCE8",
+    "audit_candidate_tradeoffs.py": "30EF813192A7329C1A0BF8CA3DC017A07E9426C54104EF03B15B54A160DA0620",
+    "audit_data_source_matrix.py": "5CC65F68C3D640D784792FF7A40C6485A8B5F1999D0B1BF643B9CA700CFFB52D",
+    "audit_deadline_feasibility.py": "F4F89387AAFF75946210E65E0CCB800314F8D949E90978FDBB43F42328243B8D",
+    "audit_event_episode_validity.py": "09F01740780CB939DF25DA21444936F0FDAD0B7BA40EFA8AFBEEEA5167849755",
+    "audit_event_grounding.py": "ABB3E43A7E43253B0F3B2A7503EC94103A1BAF6C273855C2A874162C48DA6DC9",
+    "audit_evidence_readiness.py": "8B089D665271994B79BA5086F6BFECCA66E5D1F9779C00607CFB98995CD07347",
+    "audit_external_goal_credit.py": "13386B0ECA2E116C59DE01D9F541054E797B6AEBD3923C01490EEEDCC894F006",
+    "audit_paired_task_batch_v1.py": "27944525FBE69E4EA0870448988EBEC21E91A28FD63EC9387400CE8B075DB752",
+    "audit_refit_coactivity_subset.py": "8A204962368733F542A94DC289FAFE2C0C84566F172CEAB617E3C8BB9330FB74",
+    "audit_representative_revision_drafts.py": "857AACACD00BA06A008DC076D969FC0F9EEF8300689EDE10B43A85B59D46D61E",
+    "audit_simulator_adapter_trace.py": "F435F6DA4C9EB9D88E75F425F0146D21D42EDB2FD53D8E05F90EEEBF22CDC51A",
+    "benchmark_local_rule_runtime.py": "218E4F4BE8788C9E9F52C8DBC0F5F6D9DF01E42887238EBBC9FCD094C933BEB7",
+    "build_main_experiment_matrix_20260930.py": "2C1F7E6CCB87B8D48BE3359EDC08CA2D01218E7B4B7254B70FA324D488E44736",
+    "build_phase_a_review_docx.py": "92820E447A83292EA02D31C7D81EADD1C2B18207B9AD9FC5C1F55CF0EA6CD3E3",
+    "build_task_family_split_20260930.py": "9722FD68A9FEAF264591C55E460C607EECCDF51F974B2998655B9DC59DCC4465",
+    "evaluate.py": "F5E3A58DF2623EBF6D22BC6DA9D404B0622DA65F7BACA0543470F702E2071BDF",
+    "export_c2_trace_packet.py": "501AC5D57495AF5AF3257C3E374F3551952DB34F5FF606722BF5D25475411F8B",
+    "export_refit_coactivity_review_rows.py": "81E9ACE9A87B82AE02AAC26341AC683AD13BA1639BB9CBE23B60808073E6D770",
+    "extract_public_dormitory_trace.py": "A8B5F7895629AF7B42000149B9AA9D852C7798BDB5D36BB680981771BC5CDD70",
+    "extract_refit_coactivity_windows.py": "BA3F3ED128757A1BF87933DBEEF54EB3EC056B7AA24F0271BC0E5AC534E43144",
+    "extract_refit_triple_coactivity_bouts.py": "A11A924E6D6C1FC9F711950ACC35B3EB25C1ADBEA97AE28D27672C5E31BEE3A9",
+    "extract_refit_triple_coactivity_full_trace.py": "44E4F015EC6A044F640B536CAD82D865ABECE3FC9FD79BAEBA1894102C1DCC3D",
+    "generate_provenance_pilot.py": "C6C17B72C8C57D3D2347DBE8E541F62106A914DA66C3A8F7795CF5D9F17784D7",
+    "inspect_power_trace_csv.py": "644CE2E6D0762AB55F85972296C82D005A3228456635E9AFE5832CB3F1C4A7D3",
+    "make_c3_normalized_capacity_batch.py": "C8D1488A62195244D71ABD525F6C97EBD73A6176B4D4F7E59D1FB68C9648F6E6",
+    "make_c3_review_candidates.py": "7B3E5C91AF1FA3B3B5AE43F12689C2AEDA9F3B8E4A698ED983223EF5E2D3F9CF",
+    "make_hc_m06_physical_trace_fixture.py": "ED50B8CEA99366E541652B6597C17F4B199428F4FE8478B8E4038BFD1EC097CE",
+    "make_paired_task_batch_v1.py": "9A5775FBC368C3F905F1898E9085F24B43D81F0CEE7716377E2965193B2F3D72",
+    "make_representative_revision_drafts.py": "17E05EB1945F43773ACA360E445739C1DE4A5123F48598F6957F982CB619B845",
+    "prepare_core_candidates_20260930.py": "A72E329493CCD051031C71D8CF894503582B293D71289965DC46A5E2746BBBA6",
+    "probe_agent_caused_inflight_invalidation.py": "34763527E8E40375706987C2CB32CE6EEA2D91841DF1748EFC96C1A6558B4778",
+    "probe_architecture_comparison_20261001.py": "1A62C03BBB91D0AD5B2F035F8F307C06F9A0F071565E35922F7CC49B4D50933B",
+    "probe_blind_capacity_pair_20260926.py": "E86035816B6CE2B4598DEFE7E5561791015FD26C6555DFF59B6E48185CB3C47B",
+    "probe_c2_heat_rate_sensitivity.py": "529EC6E1B5FD87AE3E8BB444E779CA43996E27262EB5133679754360827C8E1C",
+    "probe_c2_recorded_model_physics.py": "F1B9712C541C6CA116955ABBC8F78D69C7983050C5F81736BF671EF1FEED71BB",
+    "probe_c3_action_choice_20260930.py": "3C151C7A809D24988A5E287CAC32E2AFC6A40F75A7EB7E9881ABC7D2C282CA3B",
+    "probe_c3_blinded_live_pilot.py": "C81F533886F9699C4897924252404466B869B7A510686CB8C0CA84DF7FEFD045",
+    "probe_c3_compute_clock_20260930.py": "BF125FC64A9D8C574C0D668CC9DC35BE62BDE1074C27437383C18E55ADF7FEA6",
+    "probe_c3_deadline_slack_sensitivity.py": "C7B24B7E2119341B4FC7280C305089850C9024D656B2130DCAEE34257702A8FF",
+    "probe_c3_evening_chores_control.py": "BA911C1FCA519DBA01EC676456A5DBCA959E685BE78FCA4A8C3F7B47E0BD1C2E",
+    "probe_c3_future_pair.py": "20A094D6879850CFDB8A69AA51BC637F5A32F52683F89BBE6294150B18CCB0AF",
+    "probe_c3_gate_retry_baseline.py": "FB189C68336F97D3FFB960E957DCF7786DF766CAFDFF3DE3DA62853F9A7B888F",
+    "probe_c3_hold_window_sweep.py": "F898A1DB928BF3DC7B6004CCB713862C5D1C88DAC1F0507AFE661052F8279D4C",
+    "probe_c3_information_baselines_20260930.py": "A17DB075A699E7B5B10A9859688B1F895528E2D24E580CCB7A6868FDBC5D860E",
+    "probe_c3_information_boundary.py": "9CB6D5CA51D8ECB5345CE9F9B3192CA1AC2BFEECCC4ED5EE2CADB851842D60E6",
+    "probe_c3_kitchen_anonymous_replication_20260930.py": "DC06868AB1EE266D3D34D4C2B76DFCCC7F59A8D9DE9E9DF4C3A2E21DEA16B3D4",
+    "probe_c3_laundry_real_model_20260930.py": "B43B2FAE970EED90DAFC1D1A613C3E7E935CE749F8F215FEB656B146483B2D63",
+    "probe_c3_multimode_20260930.py": "8CC21C925E5C36C21EB03369A1685671C3E211E06FDDCAAB80F968DDF7B3C432",
+    "probe_c3_multimode_replication_20260930.py": "14F3FF1898844CF2804FD153733D1BA7AF8BC91D1683EEF3FA7E858EE64F8CB0",
+    "probe_c3_non_nested_templates.py": "87BB845D243F69DEDC42215EC266229136ACFCAFE9D9EC0BB2DB57F97B6A20D6",
+    "probe_c3_normalized_capacity.py": "A61A91C84EC985FC6CBA20EA352F0EAE9B29F35CB0FDACEE1F201A309311833A",
+    "probe_c3_ordinary_compute_20260930.py": "AEC01F7FF5257F36440215C1075D843CDFB2DB0271A16CD3CE865C0DD9D970F2",
+    "probe_c3_parallel_model_pilot.py": "A0193F9FE09611013D55D982852E6DB06D4F26BA9659BA5919F7E77843443157",
+    "probe_c3_power_envelope_sensitivity.py": "EE43093B46297B4853BDFAD00F90342E27555801D0B9CBE6AE39D858321B4D2E",
+    "probe_c3_prospective_candidates_20260930.py": "29DCAA512F8882C9044DF2C3F2B3647EFCD7475411A088DE305BD010DDC5337E",
+    "probe_c3_prospective_model_20260930.py": "E89368FAA9E8A3ABAB8DF3CEE92F8A37D8291706598D97FB99C1AF9AB52D2031",
+    "probe_c3_release_state_20260930.py": "3FC6F274F236DF7A01B55F094F0A34311FC2BE1826FE5EB792D5B3163EE910D8",
+    "probe_c3_robust_reserve_baseline.py": "5AA000FD00F346148588971DFFD0648E17912AD78A491C1735FFCF4100CA7089",
+    "probe_c3_runtime_repeat_20260930.py": "E8B58BE281AFA30C5C4568119E8F6A68E96EB238047DFBF4F9B8300DFCD14C2F",
+    "probe_c3_scale_release_20260930.py": "8196D3D76D97F6ED46F576F1778649D0670ECACAA17740E45680DC9E18EE9E97",
+    "probe_c3_staggered_release.py": "DFE929FA6C810A64DE5058074EB55B60AA3162A084512D652E9DA2809D1C72B9",
+    "probe_c3_structural_generalization.py": "FC897C72F455460607E8C73639179BD732F1F6C1C2F4D1C7D50B3A0621DE7357",
+    "probe_c3_task_response_contract_20260930.py": "2B4F6D39E5BCFC9755AB1B83DEB27AAA0B496369627B93604B283BB7F921D131",
+    "probe_c3_three_load.py": "26D0286B06BBCB85FCA39D92C4D90384BAEC207E2C251A96FDC4C6D4C1ABEB4A",
+    "probe_c3_three_load_model.py": "73E205B56059FE8749A88EC145C6B2BE42B0DAF70C23D8CEA74FAD935225A438",
+    "probe_c3_uncertain_arrival_grid.py": "672928642970036490ADF9BCF82903EC0A7E96A48D8F679A735276C615FF0CEA",
+    "probe_c3_visible_request_update_20260930.py": "C8D98987E279823AC14F3A2A6006E16BD6691EDD7584C2BBCC31929FD2A13CE4",
+    "probe_c4_agent_message.py": "4BFF3A46477ACC100668DCD6DEBF523BAEB6DD2074919EEDC98D255755F57A00",
+    "probe_c4_phase_recovery.py": "1B0CA98A9D578FBA05A7ACD3F95C123CCC0EB882721AB498D176474116CC9D07",
+    "probe_c4_recorded_proposals.py": "6F70B19EFF7A580F742A7041C96ED6930EE2B7C5E0109AA72BB8E0501590EC2B",
+    "probe_c4_timing_boundary_20260927.py": "F7A3F3CDCF2D6A40B575FA089A8DB43BD3E57DF0C901AAF65D230799D3E2EACC",
+    "probe_capacity_deadline.py": "0C3C10FC01234731AEBB74F01E3D2A545251AD18FFE1F5C58A98A706CEE22ABB",
+    "probe_central_batch_20260930.py": "242413CDAF7E629940BAE918703F2AC4FC966DF1870CF9C48B17740A351FDBEA",
+    "probe_coordination_activation_boundary.py": "C493CA4F7CBAF8EA4AF272F6AF05F8F18D2F47178B1944702C235330385FB2B3",
+    "probe_core_paired_baselines_20260930.py": "B257AB36372FE7E4EBBD711EE1558833B018B92E295CAADA4D65CD2DCEC3342B",
+    "probe_development_model_20260930.py": "C503A48401F8701217363FA16B046AF82FE434EC7F0D02A834B75FE35CDD014C",
+    "probe_dynamic_repair.py": "FBE8F042F9E41300828C3D258787045ED7DE78308391C05C9AA9ECB5C5C877DA",
+    "probe_ev_water_deadline_boundary.py": "28FFEA88678E44E3A55C099EC4203E14D12AC8D6E10D9DEF1457EAB3B1215C1B",
+    "probe_ev_water_event_gate.py": "4DDCBF4123A71A7E94A12A02FCBC3FE0C1C3AC1E04E3DEAC0E520536870B76BD",
+    "probe_ev_water_information_boundary.py": "84EA224BB57EF65B6DAA7798A349011D3B91AD51C0B26068D179026B096EEC5A",
+    "probe_event_deadline_sensitivity.py": "D05B0773BBA2A847CAC54389C9399A29F71E38FA413745CAFB5BAFCF00834D65",
+    "probe_execution_uncertainty.py": "5804139DA268B58D85D5FBCA1BC6B74C2ECAB2311A0360A8DDC97BDD9A8416D0",
+    "probe_information_boundary_20260926.py": "8CA588278FCBEDBE575613778FCE8E0A7F1588C0308A263E076888F7EC02694F",
+    "probe_next_core_candidates_20260930.py": "88EEEF09D1294A9A5DEE9E7D0A27A5A4A5082EF2B0E5C4B037CF1FD9DBA515DF",
+    "probe_paired_task_batch_v1.py": "6AAD876E02296D4B325269413D962C43FDFC829A5C01044E0BD1E2E95DAEEAA9",
+    "probe_persistent_state.py": "C02C076F893660BBF394A01D6464C8591ECD0F653F558F93389EC2A9768BC0C3",
+    "probe_physical_capacity_v2.py": "E2C359B717638F465278B6D0A07CFAA59081F033714D21A80FBE6A8B700379AA",
+    "probe_proposal_order_sensitivity.py": "CB7D5A30ED67501ABC0E1380D9162FB27DCD7F855A1022CD3160C70D9AC32D44",
+    "probe_recorded_online_policies_v1.py": "AAB06DC7157220A4697A8F969DADF466D1A99C7E0CED6A5B74B1D0B4D0C00C88",
+    "probe_representative_revision_matrix.py": "14FAC0C87EA5D2A41CE35C4D1ACC7D27FEAE609C28543C038889D78921118F0C",
+    "probe_shared_safety_gate.py": "319DEA8CB83ACC8F14C979B7BE0E292061709CBED4BD5CE00A8FC70CBDBC3C59",
+    "probe_ventilation_heating_model_error.py": "D0F3A590C1970A1D3F666FCA8F58683AF01872332AC5D24FED66EA9E6E8EB5D6",
+    "probe_ventilation_heating_tradeoff.py": "E4B50A2071DD81F64E27A76EF85F1CE5040B3526C078297333C5571330717355",
+    "replay_coordination_value_causal_20260926.py": "B7B2F287258BA669DCF2CC01697EDEBDB352F17AD3B581A6FD0562287F33D454",
+    "replay_cross_task_recorded_proposals.py": "5983FBB159BF5DFC2EF39FFB826F36E7124D9BE2B0F3220CFA7B55164CCE6E5A",
+    "review_candidates.py": "1AEA17C023E08C0E2D8D363AC563223659D7A9257874ECC235B26616106AD51B",
+    "run_calibration_sweep.py": "4B508F6632A759B32754421DAD92D303DE5095A35C4A7B4F391AD0F3CF248DC3",
+    "run_candidate_dry_run.py": "574688AEADB6BDA3BEEBD301CE6DC9E6A63B2E1EF9884EBC54E128852466C913",
+    "run_capacity_deadline_matrix.py": "E1C3CDF084695766A56E4EEC3DD3313DF5502B8FE6DFD3D2733F819A76BC714D",
+    "run_closed_loop.py": "16FDAF371958F1C5A403C1348157BEEEF66E0C5E8D88D07FF1402B3FB4E89406",
+    "run_conflict_family_sweep.py": "FEAD7DD8DDD07F841F3AF3C9A44CE7AE05471BE41F395324AEA2930926B6425B",
+    "run_coordination_value_pilot.py": "8B162BF35668E4F29D621E92F7578E902934D5EB11184E5E349C32CFEC474285",
+    "run_counterfactual_replay.py": "73F0EC8ED5E4714B6F0521210A2A85731EE6B9A0947D48533BE969952AA7F182",
+    "run_event_pilot_suite.py": "E6EC60DBD2B94E955E0669F0D5A0C6A30B1829883383E35711155802CCECF405",
+    "run_event_simulation_matrix.py": "34998FAF4D76DD4EB3BAE004C3FF9BE90818420DBA541AE3F4FB01F4AD0023FC",
+    "run_feasibility_pilot.py": "AACCBAD250D4B52B55CFD2C548619E11DB3318335344CBE41EE42C019A3E6BFA",
+    "run_online_deadline_baselines.py": "23C474C83B424E91D2E97170C562D77C07A21B44B6B93E7C6319560A278A54F2",
+    "run_protocol_pilot.py": "851D3760CF7000F25D2E62B68061549E62A86F48AA1A86EB9CAEA8448BCF9570",
+    "run_recorded_event_replay.py": "BFAE545766B56283DD58885A8BF111FB300BC81DCF054F8EA3A7F7DBFBDBFB52",
+    "run_scripted_baselines.py": "4744B22085D398EA0E408B89C7A2724747338F46EBE7C850B89FA0C3119F65CD",
+    "run_targeted_repetitions.py": "2DCB3010F6879CB81D154DB342144E2FC40393D72D866B8DE821E3ADA1C15E91",
+    "run_variant_sweep.py": "69E59677860AF52A6D553BCDDDA44828A6172A5AEDB59F929FB2E9A6F49DEEF7",
+    "score_physical_traces.py": "FA6D21B15B924F9E3E402F1C70C7D6DCA689E7E3ECB0043E1C805C7F99D2D8BE",
+    "runtime\\__init__.py": "FED60D27E5CCF324EBCE2927DA384020008C27E1C7AF66D30FDE6078BE2B5382",
+    "runtime\\architecture_comparison.py": "5F9D804F6372ADCAA32D83C194E9BD7FB7B7E1D8178BF656E72E7B473A504C1E",
+    "runtime\\calibration.py": "25F7A4DDCB330B617761FDEA4DBA0E9DAF08A9CA0C6DD3570BB330F3F0BA7CC0",
+    "runtime\\central_batch.py": "F605E19CB9856FB42B1746F16C58B5F1023D431182A884086CFA1CBBC9E2C3B6",
+    "runtime\\deepseek_client.py": "83F60C371B3AF4777755AD38013606865D312DB245C1E7CD7712EE44B6EAD5A1",
+    "runtime\\dry_run.py": "B99AA1783A00B3414286702EBAC41D20D2F899A3D873F0E05372520108F9FBD6",
+    "runtime\\episode_validation.py": "F0DB011B2EC27492ACB66E4B0585E6DFB7F3002F8F7D7EEB754F8E92187F7530",
+    "runtime\\event_log.py": "EE943A3DF6677EB4033303A329C2B379ECE5BD141FDB5CFC2AA6363998FC58C2",
+    "runtime\\event_simulator.py": "27D4630846E1B52F8C06DF52E821A38BE07D00B1C12B509753466EB38E9988DA",
+    "runtime\\execution.py": "C8A1F51909209FA4CFA7DC06ED0A04A2FDE54E27F4102E46B26215A9C681E3E2",
+    "runtime\\information_contract.py": "B2C66BA466F90F55F03FA3FF8231DD09933D1AF7D496FB8B31000D9BB0137FF1",
+    "runtime\\openai_client.py": "0FD3EF1B28F9E6B14F2AED4EBCA5401DC73B701382B1C5596DCFEFA4765C5ED1",
+    "runtime\\physical_trace.py": "44C58B03FF4B28DC395A9113CE7FE90B9BE187177117885B2ACEDFA1A7220ECC",
+    "runtime\\protocol.py": "31B173B4047E477956067C902C6A1BCCCEA172D76BF72653141E27CE67A85D08",
+    "runtime\\replay_client.py": "075D5D1C2B38B13E553303A9778F69F7F0CEEDEFDC6E871D273633FDDBD9A853",
+    "runtime\\scheduling_oracle.py": "0A0790DA45CFEA3EC8B4CA30F33071C43F0E8999850C0F2A6C9A006D40F0A1B1",
+    "runtime\\task_response_metrics.py": "EB5F88D46983E90DA3A1FF9D0A9E8F8AED6DC9088D24FB68FCED5D3EA8E9914F",
+    "runtime\\tool_contract.py": "D93B2C81D6E5FB213FD10B6C07147943B6149D1A385C2B03528AF331E467C9F9",
+    "runtime\\variants.py": "81667BACB0632721DA2ED4BB0D1D328621F5D934A19B7A08D8CB2BA11FD3FDDD"
+  }
+}

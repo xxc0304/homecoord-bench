@@ -1,0 +1,5516 @@
+{
+  "episode": {
+    "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+    "task_family": "completion_dependency",
+    "source_type": "manual_template",
+    "generator_version": "0.3.0",
+    "review_status": "author_revised_not_independently_reviewed",
+    "episode_release_at_ms": 0,
+    "home": {
+      "resources": {
+        "max_power_kw": 3
+      }
+    },
+    "initial_state": {
+      "version": 112,
+      "values": {
+        "laundry": {
+          "washed": false,
+          "dry": false,
+          "wash_authorized": true
+        },
+        "devices": {
+          "washer": "off",
+          "dryer": "off",
+          "dishwasher": "off"
+        },
+        "service": {
+          "wash_completed": false,
+          "dry_completed": false,
+          "dishes_completed": false
+        }
+      }
+    },
+    "agents": [
+      {
+        "agent_id": "WasherAgent",
+        "role": "washing",
+        "tools": [
+          "start_washer"
+        ],
+        "observable_state": [
+          "laundry.wash_authorized",
+          "laundry.washed"
+        ],
+        "writable_resources": [
+          "devices.washer"
+        ]
+      },
+      {
+        "agent_id": "DryerAgent",
+        "role": "drying",
+        "tools": [
+          "start_dryer"
+        ],
+        "observable_state": [
+          "laundry.dry",
+          "laundry.wash_authorized",
+          "laundry.washed"
+        ],
+        "writable_resources": [
+          "devices.dryer"
+        ]
+      },
+      {
+        "agent_id": "DishesAgent",
+        "role": "dishes",
+        "tools": [
+          "start_dishwasher"
+        ],
+        "observable_state": [
+          "devices.dishwasher"
+        ],
+        "writable_resources": [
+          "devices.dishwasher"
+        ]
+      }
+    ],
+    "task_stream": [
+      {
+        "task_id": "wash",
+        "agent_id": "WasherAgent",
+        "release_at_ms": 0,
+        "goal": "wash the laundry",
+        "priority": 80,
+        "required_action": {
+          "target": "washer",
+          "operation": "wash"
+        },
+        "action_template": {
+          "target": "washer",
+          "operation": "wash",
+          "parameters": {},
+          "duration_ms": 4000,
+          "power_kw": 1.5,
+          "requires": [
+            {
+              "path": "laundry.wash_authorized",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "completion_deadline_ms": 15000
+      },
+      {
+        "task_id": "dry",
+        "agent_id": "DryerAgent",
+        "release_at_ms": 100,
+        "goal": "dry the laundry",
+        "priority": 70,
+        "required_action": {
+          "target": "dryer",
+          "operation": "dry"
+        },
+        "action_template": {
+          "target": "dryer",
+          "operation": "dry",
+          "parameters": {},
+          "duration_ms": 4000,
+          "power_kw": 2.0,
+          "requires": [
+            {
+              "path": "laundry.washed",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "depends_on": [
+          "wash"
+        ],
+        "completion_deadline_ms": 15000
+      },
+      {
+        "task_id": "dishes",
+        "agent_id": "DishesAgent",
+        "release_at_ms": 0,
+        "priority": 60,
+        "completion_deadline_ms": 15000,
+        "goal": "complete an independent dishes service",
+        "required_action": {
+          "target": "dishwasher",
+          "operation": "wash_dishes"
+        },
+        "action_template": {
+          "target": "dishwasher",
+          "operation": "wash_dishes",
+          "parameters": {},
+          "requires": [],
+          "duration_ms": 8000,
+          "power_kw": 1.5
+        }
+      }
+    ],
+    "exogenous_events": [],
+    "latency_profile": {
+      "unit": "ms"
+    },
+    "goals": [
+      {
+        "path": "service.wash_completed",
+        "op": "eq",
+        "value": true
+      },
+      {
+        "path": "service.dry_completed",
+        "op": "eq",
+        "value": true
+      }
+    ],
+    "constraints": [
+      {
+        "when": [
+          {
+            "path": "devices.dryer",
+            "op": "eq",
+            "value": "running"
+          }
+        ],
+        "must": [
+          {
+            "path": "laundry.washed",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "conflict_rules": [
+      {
+        "type": "C3",
+        "capacity": 3
+      }
+    ],
+    "action_grounding": [
+      {
+        "agent_id": "WasherAgent",
+        "task_id": "wash",
+        "operation": "wash",
+        "target": "washer",
+        "grounded_operation": "wash",
+        "duration_ms": 4000,
+        "power_kw": 1.5,
+        "start_effects": {
+          "devices.washer": "running"
+        },
+        "completion_effects": {
+          "devices.washer": "off",
+          "laundry.washed": true,
+          "service.wash_completed": true
+        }
+      },
+      {
+        "agent_id": "DryerAgent",
+        "task_id": "dry",
+        "operation": "dry",
+        "target": "dryer",
+        "grounded_operation": "dry",
+        "duration_ms": 4000,
+        "power_kw": 2.0,
+        "start_effects": {
+          "devices.dryer": "running"
+        },
+        "completion_effects": {
+          "devices.dryer": "off",
+          "laundry.dry": true,
+          "service.dry_completed": true
+        }
+      },
+      {
+        "agent_id": "DishesAgent",
+        "task_id": "dishes",
+        "target": "dishwasher",
+        "operation": "wash_dishes",
+        "grounded_operation": "wash_dishes",
+        "duration_ms": 8000,
+        "power_kw": 1.5,
+        "start_effects": {
+          "devices.dishwasher": "running"
+        },
+        "completion_effects": {
+          "devices.dishwasher": "off",
+          "service.dishes_completed": true
+        }
+      }
+    ],
+    "calibration": {
+      "status": "abstract_author_service_contract",
+      "physical_parameters_verified": false
+    },
+    "base_episode_id": "HC-M12",
+    "tool_contract_version": "strict-v1",
+    "simulation": {
+      "command_latency_ms": 100
+    },
+    "tool_catalog": [
+      {
+        "agent_id": "WasherAgent",
+        "tool_name": "start_washer",
+        "description": "wash the laundry",
+        "target": "washer",
+        "operation": "wash",
+        "parameters": [],
+        "preconditions": [
+          {
+            "path": "laundry.wash_authorized",
+            "op": "eq",
+            "value": true
+          }
+        ],
+        "returns": {
+          "status": [
+            "accepted",
+            "rejected"
+          ],
+          "observed_state": "object"
+        }
+      },
+      {
+        "agent_id": "DryerAgent",
+        "tool_name": "start_dryer",
+        "description": "dry the laundry",
+        "target": "dryer",
+        "operation": "dry",
+        "parameters": [],
+        "preconditions": [
+          {
+            "path": "laundry.washed",
+            "op": "eq",
+            "value": true
+          }
+        ],
+        "returns": {
+          "status": [
+            "accepted",
+            "rejected"
+          ],
+          "observed_state": "object"
+        }
+      },
+      {
+        "agent_id": "DishesAgent",
+        "tool_name": "start_dishwasher",
+        "description": "complete an independent dishes service",
+        "target": "dishwasher",
+        "operation": "wash_dishes",
+        "parameters": [],
+        "preconditions": [],
+        "returns": {
+          "status": [
+            "accepted",
+            "rejected"
+          ],
+          "observed_state": "object"
+        }
+      }
+    ],
+    "task_card": {
+      "request_vs_execution": "Dry request can be released before wash completes; its valid conditional proposal waits.",
+      "dependency_receipt": "Only successful, non-withdrawn wash action_completed; state patches are insufficient.",
+      "sources": "HC-M12 problem structure; all times/powers synthetic, no physical laundry claim",
+      "review": "author-only; human independent review missing",
+      "condition": "CAPACITY_TIGHT",
+      "split": "development",
+      "controls": "EARLY/LATE change dry release only; CAPACITY_TIGHT/SAFE change capacity only",
+      "not_claimed": "LLM advantage, multi-agent necessity, or independent sample per policy"
+    }
+  },
+  "reviewer_acceptance": null,
+  "runs": [
+    {
+      "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+      "policy": "IndependentMultiAgent",
+      "arrival_order_index": null,
+      "evidence_type": "scripted_deterministic_reproduction_not_model_trial",
+      "calls": [
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ]
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "goal": "wash the laundry",
+              "priority": 80,
+              "required_action": {
+                "target": "washer",
+                "operation": "wash"
+              },
+              "action_template": {
+                "target": "washer",
+                "operation": "wash",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 1.5,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "description": "wash the laundry",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash:0",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        },
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "devices": {
+                "dishwasher": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DishesAgent",
+              "role": "dishes",
+              "tools": [
+                "start_dishwasher"
+              ],
+              "observable_state": [
+                "devices.dishwasher"
+              ],
+              "writable_resources": [
+                "devices.dishwasher"
+              ]
+            },
+            "task": {
+              "task_id": "dishes",
+              "agent_id": "DishesAgent",
+              "release_at_ms": 0,
+              "priority": 60,
+              "completion_deadline_ms": 15000,
+              "goal": "complete an independent dishes service",
+              "required_action": {
+                "target": "dishwasher",
+                "operation": "wash_dishes"
+              },
+              "action_template": {
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": {},
+                "requires": [],
+                "duration_ms": 8000,
+                "power_kw": 1.5
+              }
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dishwasher"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DishesAgent",
+                "tool_name": "start_dishwasher",
+                "description": "complete an independent dishes service",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes:0",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [],
+                "estimated_duration_ms": 8000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        },
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dry",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ]
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "goal": "dry the laundry",
+              "priority": 70,
+              "required_action": {
+                "target": "dryer",
+                "operation": "dry"
+              },
+              "action_template": {
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 2.0,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "depends_on": [
+                "wash"
+              ],
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "description": "dry the laundry",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dry:0",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 2.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        }
+      ],
+      "trace": {
+        "trace_id": "DEP-LAUNDRY-CAPACITY_TIGHT.IndependentMultiAgent.event_sim",
+        "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+        "policy": "IndependentMultiAgent",
+        "proposal_architecture": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "dishes",
+            "agent_id": "DishesAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 100,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dry"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 4000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "agent_id": "DishesAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 8000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dry",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "dependency_waiting",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 113,
+            "patch": {
+              "devices.washer": "running"
+            },
+            "source": "action_started",
+            "task_id": "wash"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "duration_ms": 4000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.wash_authorized",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.washer": "running"
+            },
+            "completion_effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "state_version_at_start": 113
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 114,
+            "patch": {
+              "devices.dishwasher": "running"
+            },
+            "source": "action_started",
+            "task_id": "dishes"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "DishesAgent",
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes:0",
+            "target": "dishwasher",
+            "operation": "wash_dishes",
+            "duration_ms": 8000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [],
+            "start_effects": {
+              "devices.dishwasher": "running"
+            },
+            "completion_effects": {
+              "devices.dishwasher": "off",
+              "service.dishes_completed": true
+            },
+            "state_version_at_start": 114
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 4400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "new_state_version": 115
+          },
+          {
+            "type": "dependency_ready",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dry:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dry:0",
+            "scheduled_start_ms": 4500,
+            "duration_ms": 4000,
+            "power_kw": 2.0
+          },
+          {
+            "type": "action_rejected",
+            "timestamp_ms": 4500,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dry:0",
+            "reason": "shared_gate_capacity",
+            "state_version": 115
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 8400,
+            "agent_id": "DishesAgent",
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes:0",
+            "target": "dishwasher",
+            "operation": "wash_dishes",
+            "effects": {
+              "devices.dishwasher": "off",
+              "service.dishes_completed": true
+            },
+            "new_state_version": 116
+          }
+        ],
+        "final_state": {
+          "laundry": {
+            "washed": true,
+            "dry": false,
+            "wash_authorized": true
+          },
+          "devices": {
+            "washer": "off",
+            "dryer": "off",
+            "dishwasher": "off"
+          },
+          "service": {
+            "wash_completed": true,
+            "dry_completed": false,
+            "dishes_completed": true
+          }
+        },
+        "final_state_version": 116,
+        "agent_requests": [
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ]
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "goal": "wash the laundry",
+              "priority": 80,
+              "required_action": {
+                "target": "washer",
+                "operation": "wash"
+              },
+              "action_template": {
+                "target": "washer",
+                "operation": "wash",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 1.5,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "description": "wash the laundry",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "devices": {
+                "dishwasher": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DishesAgent",
+              "role": "dishes",
+              "tools": [
+                "start_dishwasher"
+              ],
+              "observable_state": [
+                "devices.dishwasher"
+              ],
+              "writable_resources": [
+                "devices.dishwasher"
+              ]
+            },
+            "task": {
+              "task_id": "dishes",
+              "agent_id": "DishesAgent",
+              "release_at_ms": 0,
+              "priority": 60,
+              "completion_deadline_ms": 15000,
+              "goal": "complete an independent dishes service",
+              "required_action": {
+                "target": "dishwasher",
+                "operation": "wash_dishes"
+              },
+              "action_template": {
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": {},
+                "requires": [],
+                "duration_ms": 8000,
+                "power_kw": 1.5
+              }
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dishwasher"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DishesAgent",
+                "tool_name": "start_dishwasher",
+                "description": "complete an independent dishes service",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dry",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ]
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "goal": "dry the laundry",
+              "priority": 70,
+              "required_action": {
+                "target": "dryer",
+                "operation": "dry"
+              },
+              "action_template": {
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 2.0,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "depends_on": [
+                "wash"
+              ],
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "description": "dry the laundry",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 21
+      },
+      "reported_result": {
+        "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": false,
+        "process_valid_success": false,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 4400,
+        "task_completion_time_ms": null,
+        "task_action_finish_time_ms": {
+          "wash": 4400,
+          "dry": null,
+          "dishes": 8400
+        },
+        "task_deadline_met": {
+          "wash": true,
+          "dry": false,
+          "dishes": true
+        },
+        "all_deadlines_met": false,
+        "timely_process_valid_success": false,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "wash": true,
+          "dry": false,
+          "dishes": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 3,
+        "task_service_rate": 0.6666666666666666,
+        "policy": "IndependentMultiAgent",
+        "proposal_architecture": "IndependentMultiAgent",
+        "proposal_count": 3,
+        "accepted_action_count": 2,
+        "rejected_action_count": 1,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "wash": 300,
+          "dishes": 300,
+          "dry": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 1,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 4400,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "wash": true,
+          "dry": false,
+          "dishes": true
+        },
+        "task_correct_action_completed": {
+          "wash": true,
+          "dry": false,
+          "dishes": true
+        },
+        "task_start_wait_ms": {
+          "wash": 400,
+          "dry": null,
+          "dishes": 400
+        },
+        "task_completion_latency_ms": {
+          "wash": 4400,
+          "dry": null,
+          "dishes": 8400
+        },
+        "task_completion_tardiness_ms": {
+          "wash": 0,
+          "dry": null,
+          "dishes": 0
+        },
+        "task_unstarted_count": 1,
+        "task_incomplete_count": 1,
+        "max_observed_task_start_wait_ms": 400,
+        "task_start_within_1s": {
+          "wash": true,
+          "dry": false,
+          "dishes": true
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0,
+        "dependency_version": "v3-actual-completion-dag",
+        "dependency_completed_receipts": [
+          "dishes",
+          "wash"
+        ],
+        "dependency_waiting_task_ids": [],
+        "dependency_blocked_task_ids": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4400
+        }
+      },
+      "independent_event_recount": {
+        "mechanical_check": "passed_not_reviewer_acceptance",
+        "recomputed": {
+          "task_correct_action_started": {
+            "wash": true,
+            "dry": false,
+            "dishes": true
+          },
+          "task_correct_action_completed": {
+            "wash": true,
+            "dry": false,
+            "dishes": true
+          },
+          "task_start_wait_ms": {
+            "wash": 400,
+            "dry": null,
+            "dishes": 400
+          },
+          "task_completion_latency_ms": {
+            "wash": 4400,
+            "dry": null,
+            "dishes": 8400
+          },
+          "task_completion_tardiness_ms": {
+            "wash": 0,
+            "dry": null,
+            "dishes": 0
+          },
+          "state_constraint_violation_duration_ms": 0
+        },
+        "actual_execution_intervals": [
+          {
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:wash:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 400,
+            "end_ms": 4400,
+            "resource_units_or_kw": 1.5
+          },
+          {
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:IndependentMultiAgent:dishes:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 400,
+            "end_ms": 8400,
+            "resource_units_or_kw": 1.5
+          }
+        ],
+        "completion_receipts_ms": {
+          "wash": 4400,
+          "dishes": 8400
+        }
+      },
+      "dependency_metrics": {
+        "completed": {
+          "wash": true,
+          "dry": false,
+          "dishes": true
+        },
+        "completion_latency_ms": {
+          "wash": 4400,
+          "dry": null,
+          "dishes": 8400
+        },
+        "completion_tardiness_ms": {
+          "wash": 0,
+          "dry": null,
+          "dishes": 0
+        },
+        "request_released_at_ms": {
+          "wash": 0,
+          "dry": 100,
+          "dishes": 0
+        },
+        "predecessor_completion_receipts_ms": {
+          "wash": 4400,
+          "dishes": 8400
+        },
+        "dry_started_without_wash_receipt": 0,
+        "waiting_tasks": [],
+        "blocked_tasks": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4400
+        },
+        "lifecycle": {
+          "action_completed": {
+            "wash": true,
+            "dry": false,
+            "dishes": true
+          },
+          "resolution_correct": {},
+          "recovery_completed": {},
+          "completion_latency_ms": {
+            "wash": 4400,
+            "dry": null,
+            "dishes": 8400
+          },
+          "completion_tardiness_ms": {
+            "wash": 0,
+            "dry": null,
+            "dishes": 0
+          },
+          "harm_duration_ms": 0,
+          "zero_harm": true,
+          "stop_latency_ms": {},
+          "stop_confirmed_count": 0,
+          "stop_ack_too_late_count": 0,
+          "restart_count": 0,
+          "active_reservations_at_end": 0
+        }
+      },
+      "historical_comparison": "matches_historical_saved_fields_not_new_sample"
+    },
+    {
+      "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+      "policy": "ConstraintCoordinator",
+      "arrival_order_index": null,
+      "evidence_type": "scripted_deterministic_reproduction_not_model_trial",
+      "calls": [
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ]
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "goal": "wash the laundry",
+              "priority": 80,
+              "required_action": {
+                "target": "washer",
+                "operation": "wash"
+              },
+              "action_template": {
+                "target": "washer",
+                "operation": "wash",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 1.5,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "description": "wash the laundry",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash:0",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        },
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "devices": {
+                "dishwasher": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DishesAgent",
+              "role": "dishes",
+              "tools": [
+                "start_dishwasher"
+              ],
+              "observable_state": [
+                "devices.dishwasher"
+              ],
+              "writable_resources": [
+                "devices.dishwasher"
+              ]
+            },
+            "task": {
+              "task_id": "dishes",
+              "agent_id": "DishesAgent",
+              "release_at_ms": 0,
+              "priority": 60,
+              "completion_deadline_ms": 15000,
+              "goal": "complete an independent dishes service",
+              "required_action": {
+                "target": "dishwasher",
+                "operation": "wash_dishes"
+              },
+              "action_template": {
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": {},
+                "requires": [],
+                "duration_ms": 8000,
+                "power_kw": 1.5
+              }
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dishwasher"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DishesAgent",
+                "tool_name": "start_dishwasher",
+                "description": "complete an independent dishes service",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes:0",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [],
+                "estimated_duration_ms": 8000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        },
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ]
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "goal": "dry the laundry",
+              "priority": 70,
+              "required_action": {
+                "target": "dryer",
+                "operation": "dry"
+              },
+              "action_template": {
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 2.0,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "depends_on": [
+                "wash"
+              ],
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "description": "dry the laundry",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry:0",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 2.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        }
+      ],
+      "trace": {
+        "trace_id": "DEP-LAUNDRY-CAPACITY_TIGHT.ConstraintCoordinator.event_sim",
+        "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+        "policy": "ConstraintCoordinator",
+        "proposal_architecture": "ConstraintCoordinator",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "dishes",
+            "agent_id": "DishesAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 100,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 4000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "agent_id": "DishesAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 8000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "dependency_waiting",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 113,
+            "patch": {
+              "devices.washer": "running"
+            },
+            "source": "action_started",
+            "task_id": "wash"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "duration_ms": 4000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.wash_authorized",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.washer": "running"
+            },
+            "completion_effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "state_version_at_start": 113
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 114,
+            "patch": {
+              "devices.dishwasher": "running"
+            },
+            "source": "action_started",
+            "task_id": "dishes"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "DishesAgent",
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes:0",
+            "target": "dishwasher",
+            "operation": "wash_dishes",
+            "duration_ms": 8000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [],
+            "start_effects": {
+              "devices.dishwasher": "running"
+            },
+            "completion_effects": {
+              "devices.dishwasher": "off",
+              "service.dishes_completed": true
+            },
+            "state_version_at_start": 114
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 4400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "new_state_version": 115
+          },
+          {
+            "type": "dependency_ready",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry:0",
+            "decision": "defer",
+            "defer_until_ms": 8400,
+            "reason": "resource_capacity"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry:0",
+            "scheduled_start_ms": 8400,
+            "duration_ms": 4000,
+            "power_kw": 2.0
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 8400,
+            "agent_id": "DishesAgent",
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes:0",
+            "target": "dishwasher",
+            "operation": "wash_dishes",
+            "effects": {
+              "devices.dishwasher": "off",
+              "service.dishes_completed": true
+            },
+            "new_state_version": 116
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 8400,
+            "new_state_version": 117,
+            "patch": {
+              "devices.dryer": "running"
+            },
+            "source": "action_started",
+            "task_id": "dry"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 8400,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "duration_ms": 4000,
+            "power_kw": 2.0,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.washed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.dryer": "running"
+            },
+            "completion_effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 12400,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "new_state_version": 118
+          }
+        ],
+        "final_state": {
+          "laundry": {
+            "washed": true,
+            "dry": true,
+            "wash_authorized": true
+          },
+          "devices": {
+            "washer": "off",
+            "dryer": "off",
+            "dishwasher": "off"
+          },
+          "service": {
+            "wash_completed": true,
+            "dry_completed": true,
+            "dishes_completed": true
+          }
+        },
+        "final_state_version": 118,
+        "agent_requests": [
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ]
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "goal": "wash the laundry",
+              "priority": 80,
+              "required_action": {
+                "target": "washer",
+                "operation": "wash"
+              },
+              "action_template": {
+                "target": "washer",
+                "operation": "wash",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 1.5,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "description": "wash the laundry",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "devices": {
+                "dishwasher": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DishesAgent",
+              "role": "dishes",
+              "tools": [
+                "start_dishwasher"
+              ],
+              "observable_state": [
+                "devices.dishwasher"
+              ],
+              "writable_resources": [
+                "devices.dishwasher"
+              ]
+            },
+            "task": {
+              "task_id": "dishes",
+              "agent_id": "DishesAgent",
+              "release_at_ms": 0,
+              "priority": 60,
+              "completion_deadline_ms": 15000,
+              "goal": "complete an independent dishes service",
+              "required_action": {
+                "target": "dishwasher",
+                "operation": "wash_dishes"
+              },
+              "action_template": {
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": {},
+                "requires": [],
+                "duration_ms": 8000,
+                "power_kw": 1.5
+              }
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dishwasher"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DishesAgent",
+                "tool_name": "start_dishwasher",
+                "description": "complete an independent dishes service",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ]
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "goal": "dry the laundry",
+              "priority": 70,
+              "required_action": {
+                "target": "dryer",
+                "operation": "dry"
+              },
+              "action_template": {
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 2.0,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "depends_on": [
+                "wash"
+              ],
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "description": "dry the laundry",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 23
+      },
+      "reported_result": {
+        "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 4400,
+        "task_completion_time_ms": 12400,
+        "task_action_finish_time_ms": {
+          "wash": 4400,
+          "dry": 12400,
+          "dishes": 8400
+        },
+        "task_deadline_met": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "all_deadlines_met": true,
+        "timely_process_valid_success": true,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "served_task_count": 3,
+        "serviceable_task_count": 3,
+        "task_service_rate": 1.0,
+        "policy": "ConstraintCoordinator",
+        "proposal_architecture": "ConstraintCoordinator",
+        "proposal_count": 3,
+        "accepted_action_count": 3,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "wash": 300,
+          "dishes": 300,
+          "dry": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 4400,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "task_correct_action_completed": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "task_start_wait_ms": {
+          "wash": 400,
+          "dry": 8300,
+          "dishes": 400
+        },
+        "task_completion_latency_ms": {
+          "wash": 4400,
+          "dry": 12300,
+          "dishes": 8400
+        },
+        "task_completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 0,
+          "dishes": 0
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 8300,
+        "task_start_within_1s": {
+          "wash": true,
+          "dry": false,
+          "dishes": true
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0,
+        "dependency_version": "v3-actual-completion-dag",
+        "dependency_completed_receipts": [
+          "dishes",
+          "dry",
+          "wash"
+        ],
+        "dependency_waiting_task_ids": [],
+        "dependency_blocked_task_ids": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4400
+        }
+      },
+      "independent_event_recount": {
+        "mechanical_check": "passed_not_reviewer_acceptance",
+        "recomputed": {
+          "task_correct_action_started": {
+            "wash": true,
+            "dry": true,
+            "dishes": true
+          },
+          "task_correct_action_completed": {
+            "wash": true,
+            "dry": true,
+            "dishes": true
+          },
+          "task_start_wait_ms": {
+            "wash": 400,
+            "dry": 8300,
+            "dishes": 400
+          },
+          "task_completion_latency_ms": {
+            "wash": 4400,
+            "dry": 12300,
+            "dishes": 8400
+          },
+          "task_completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 0,
+            "dishes": 0
+          },
+          "state_constraint_violation_duration_ms": 0
+        },
+        "actual_execution_intervals": [
+          {
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:wash:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 400,
+            "end_ms": 4400,
+            "resource_units_or_kw": 1.5
+          },
+          {
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dishes:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 400,
+            "end_ms": 8400,
+            "resource_units_or_kw": 1.5
+          },
+          {
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:ConstraintCoordinator:dry:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 8400,
+            "end_ms": 12400,
+            "resource_units_or_kw": 2.0
+          }
+        ],
+        "completion_receipts_ms": {
+          "wash": 4400,
+          "dishes": 8400,
+          "dry": 12400
+        }
+      },
+      "dependency_metrics": {
+        "completed": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "completion_latency_ms": {
+          "wash": 4400,
+          "dry": 12300,
+          "dishes": 8400
+        },
+        "completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 0,
+          "dishes": 0
+        },
+        "request_released_at_ms": {
+          "wash": 0,
+          "dry": 100,
+          "dishes": 0
+        },
+        "predecessor_completion_receipts_ms": {
+          "wash": 4400,
+          "dishes": 8400,
+          "dry": 12400
+        },
+        "dry_started_without_wash_receipt": 0,
+        "waiting_tasks": [],
+        "blocked_tasks": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4400
+        },
+        "lifecycle": {
+          "action_completed": {
+            "wash": true,
+            "dry": true,
+            "dishes": true
+          },
+          "resolution_correct": {},
+          "recovery_completed": {},
+          "completion_latency_ms": {
+            "wash": 4400,
+            "dry": 12300,
+            "dishes": 8400
+          },
+          "completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 0,
+            "dishes": 0
+          },
+          "harm_duration_ms": 0,
+          "zero_harm": true,
+          "stop_latency_ms": {},
+          "stop_confirmed_count": 0,
+          "stop_ack_too_late_count": 0,
+          "restart_count": 0,
+          "active_reservations_at_end": 0
+        }
+      },
+      "historical_comparison": "matches_historical_saved_fields_not_new_sample"
+    },
+    {
+      "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+      "policy": "DeadlineAwareCoordinator",
+      "arrival_order_index": null,
+      "evidence_type": "scripted_deterministic_reproduction_not_model_trial",
+      "calls": [
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ]
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "goal": "wash the laundry",
+              "priority": 80,
+              "required_action": {
+                "target": "washer",
+                "operation": "wash"
+              },
+              "action_template": {
+                "target": "washer",
+                "operation": "wash",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 1.5,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "description": "wash the laundry",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash:0",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        },
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "devices": {
+                "dishwasher": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DishesAgent",
+              "role": "dishes",
+              "tools": [
+                "start_dishwasher"
+              ],
+              "observable_state": [
+                "devices.dishwasher"
+              ],
+              "writable_resources": [
+                "devices.dishwasher"
+              ]
+            },
+            "task": {
+              "task_id": "dishes",
+              "agent_id": "DishesAgent",
+              "release_at_ms": 0,
+              "priority": 60,
+              "completion_deadline_ms": 15000,
+              "goal": "complete an independent dishes service",
+              "required_action": {
+                "target": "dishwasher",
+                "operation": "wash_dishes"
+              },
+              "action_template": {
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": {},
+                "requires": [],
+                "duration_ms": 8000,
+                "power_kw": 1.5
+              }
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dishwasher"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DishesAgent",
+                "tool_name": "start_dishwasher",
+                "description": "complete an independent dishes service",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes:0",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [],
+                "estimated_duration_ms": 8000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        },
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ]
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "goal": "dry the laundry",
+              "priority": 70,
+              "required_action": {
+                "target": "dryer",
+                "operation": "dry"
+              },
+              "action_template": {
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 2.0,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "depends_on": [
+                "wash"
+              ],
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "description": "dry the laundry",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry:0",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 2.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        }
+      ],
+      "trace": {
+        "trace_id": "DEP-LAUNDRY-CAPACITY_TIGHT.DeadlineAwareCoordinator.event_sim",
+        "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+        "policy": "DeadlineAwareCoordinator",
+        "proposal_architecture": "DeadlineAwareCoordinator",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "dishes",
+            "agent_id": "DishesAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 100,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "agent_id": "DishesAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 400,
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 400,
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash:0",
+            "scheduled_start_ms": 500,
+            "duration_ms": 4000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "dependency_waiting",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 400,
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 400,
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes:0",
+            "scheduled_start_ms": 500,
+            "duration_ms": 8000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 500,
+            "new_state_version": 113,
+            "patch": {
+              "devices.washer": "running"
+            },
+            "source": "action_started",
+            "task_id": "wash"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 500,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "duration_ms": 4000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.wash_authorized",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.washer": "running"
+            },
+            "completion_effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "state_version_at_start": 113
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 500,
+            "new_state_version": 114,
+            "patch": {
+              "devices.dishwasher": "running"
+            },
+            "source": "action_started",
+            "task_id": "dishes"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 500,
+            "agent_id": "DishesAgent",
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes:0",
+            "target": "dishwasher",
+            "operation": "wash_dishes",
+            "duration_ms": 8000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [],
+            "start_effects": {
+              "devices.dishwasher": "running"
+            },
+            "completion_effects": {
+              "devices.dishwasher": "off",
+              "service.dishes_completed": true
+            },
+            "state_version_at_start": 114
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 4500,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "new_state_version": 115
+          },
+          {
+            "type": "dependency_ready",
+            "timestamp_ms": 4500,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 4500,
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry:0",
+            "decision": "defer",
+            "defer_until_ms": 8500,
+            "reason": "resource_capacity"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 4500,
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry:0",
+            "scheduled_start_ms": 8500,
+            "duration_ms": 4000,
+            "power_kw": 2.0
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 8500,
+            "agent_id": "DishesAgent",
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes:0",
+            "target": "dishwasher",
+            "operation": "wash_dishes",
+            "effects": {
+              "devices.dishwasher": "off",
+              "service.dishes_completed": true
+            },
+            "new_state_version": 116
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 8500,
+            "new_state_version": 117,
+            "patch": {
+              "devices.dryer": "running"
+            },
+            "source": "action_started",
+            "task_id": "dry"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 8500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "duration_ms": 4000,
+            "power_kw": 2.0,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.washed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.dryer": "running"
+            },
+            "completion_effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 12500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "new_state_version": 118
+          }
+        ],
+        "final_state": {
+          "laundry": {
+            "washed": true,
+            "dry": true,
+            "wash_authorized": true
+          },
+          "devices": {
+            "washer": "off",
+            "dryer": "off",
+            "dishwasher": "off"
+          },
+          "service": {
+            "wash_completed": true,
+            "dry_completed": true,
+            "dishes_completed": true
+          }
+        },
+        "final_state_version": 118,
+        "agent_requests": [
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ]
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "goal": "wash the laundry",
+              "priority": 80,
+              "required_action": {
+                "target": "washer",
+                "operation": "wash"
+              },
+              "action_template": {
+                "target": "washer",
+                "operation": "wash",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 1.5,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "description": "wash the laundry",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "devices": {
+                "dishwasher": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DishesAgent",
+              "role": "dishes",
+              "tools": [
+                "start_dishwasher"
+              ],
+              "observable_state": [
+                "devices.dishwasher"
+              ],
+              "writable_resources": [
+                "devices.dishwasher"
+              ]
+            },
+            "task": {
+              "task_id": "dishes",
+              "agent_id": "DishesAgent",
+              "release_at_ms": 0,
+              "priority": 60,
+              "completion_deadline_ms": 15000,
+              "goal": "complete an independent dishes service",
+              "required_action": {
+                "target": "dishwasher",
+                "operation": "wash_dishes"
+              },
+              "action_template": {
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": {},
+                "requires": [],
+                "duration_ms": 8000,
+                "power_kw": 1.5
+              }
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dishwasher"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DishesAgent",
+                "tool_name": "start_dishwasher",
+                "description": "complete an independent dishes service",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ]
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "goal": "dry the laundry",
+              "priority": 70,
+              "required_action": {
+                "target": "dryer",
+                "operation": "dry"
+              },
+              "action_template": {
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 2.0,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "depends_on": [
+                "wash"
+              ],
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "description": "dry the laundry",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 23
+      },
+      "reported_result": {
+        "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 4500,
+        "task_completion_time_ms": 12500,
+        "task_action_finish_time_ms": {
+          "wash": 4500,
+          "dry": 12500,
+          "dishes": 8500
+        },
+        "task_deadline_met": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "all_deadlines_met": true,
+        "timely_process_valid_success": true,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "served_task_count": 3,
+        "serviceable_task_count": 3,
+        "task_service_rate": 1.0,
+        "policy": "DeadlineAwareCoordinator",
+        "proposal_architecture": "DeadlineAwareCoordinator",
+        "proposal_count": 3,
+        "accepted_action_count": 3,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "wash": 300,
+          "dishes": 300,
+          "dry": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 500,
+        "first_goal_progress_latency_ms": 4500,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "task_correct_action_completed": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "task_start_wait_ms": {
+          "wash": 500,
+          "dry": 8400,
+          "dishes": 500
+        },
+        "task_completion_latency_ms": {
+          "wash": 4500,
+          "dry": 12400,
+          "dishes": 8500
+        },
+        "task_completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 0,
+          "dishes": 0
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 8400,
+        "task_start_within_1s": {
+          "wash": true,
+          "dry": false,
+          "dishes": true
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0,
+        "dependency_version": "v3-actual-completion-dag",
+        "dependency_completed_receipts": [
+          "dishes",
+          "dry",
+          "wash"
+        ],
+        "dependency_waiting_task_ids": [],
+        "dependency_blocked_task_ids": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4500
+        }
+      },
+      "independent_event_recount": {
+        "mechanical_check": "passed_not_reviewer_acceptance",
+        "recomputed": {
+          "task_correct_action_started": {
+            "wash": true,
+            "dry": true,
+            "dishes": true
+          },
+          "task_correct_action_completed": {
+            "wash": true,
+            "dry": true,
+            "dishes": true
+          },
+          "task_start_wait_ms": {
+            "wash": 500,
+            "dry": 8400,
+            "dishes": 500
+          },
+          "task_completion_latency_ms": {
+            "wash": 4500,
+            "dry": 12400,
+            "dishes": 8500
+          },
+          "task_completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 0,
+            "dishes": 0
+          },
+          "state_constraint_violation_duration_ms": 0
+        },
+        "actual_execution_intervals": [
+          {
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:wash:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 500,
+            "end_ms": 4500,
+            "resource_units_or_kw": 1.5
+          },
+          {
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dishes:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 500,
+            "end_ms": 8500,
+            "resource_units_or_kw": 1.5
+          },
+          {
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:DeadlineAwareCoordinator:dry:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 8500,
+            "end_ms": 12500,
+            "resource_units_or_kw": 2.0
+          }
+        ],
+        "completion_receipts_ms": {
+          "wash": 4500,
+          "dishes": 8500,
+          "dry": 12500
+        }
+      },
+      "dependency_metrics": {
+        "completed": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "completion_latency_ms": {
+          "wash": 4500,
+          "dry": 12400,
+          "dishes": 8500
+        },
+        "completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 0,
+          "dishes": 0
+        },
+        "request_released_at_ms": {
+          "wash": 0,
+          "dry": 100,
+          "dishes": 0
+        },
+        "predecessor_completion_receipts_ms": {
+          "wash": 4500,
+          "dishes": 8500,
+          "dry": 12500
+        },
+        "dry_started_without_wash_receipt": 0,
+        "waiting_tasks": [],
+        "blocked_tasks": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4500
+        },
+        "lifecycle": {
+          "action_completed": {
+            "wash": true,
+            "dry": true,
+            "dishes": true
+          },
+          "resolution_correct": {},
+          "recovery_completed": {},
+          "completion_latency_ms": {
+            "wash": 4500,
+            "dry": 12400,
+            "dishes": 8500
+          },
+          "completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 0,
+            "dishes": 0
+          },
+          "harm_duration_ms": 0,
+          "zero_harm": true,
+          "stop_latency_ms": {},
+          "stop_confirmed_count": 0,
+          "stop_ack_too_late_count": 0,
+          "restart_count": 0,
+          "active_reservations_at_end": 0
+        }
+      },
+      "historical_comparison": "matches_historical_saved_fields_not_new_sample"
+    },
+    {
+      "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+      "policy": "GateRetryRule",
+      "arrival_order_index": null,
+      "evidence_type": "scripted_deterministic_reproduction_not_model_trial",
+      "calls": [
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ]
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "goal": "wash the laundry",
+              "priority": 80,
+              "required_action": {
+                "target": "washer",
+                "operation": "wash"
+              },
+              "action_template": {
+                "target": "washer",
+                "operation": "wash",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 1.5,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "description": "wash the laundry",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash:0",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        },
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "devices": {
+                "dishwasher": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DishesAgent",
+              "role": "dishes",
+              "tools": [
+                "start_dishwasher"
+              ],
+              "observable_state": [
+                "devices.dishwasher"
+              ],
+              "writable_resources": [
+                "devices.dishwasher"
+              ]
+            },
+            "task": {
+              "task_id": "dishes",
+              "agent_id": "DishesAgent",
+              "release_at_ms": 0,
+              "priority": 60,
+              "completion_deadline_ms": 15000,
+              "goal": "complete an independent dishes service",
+              "required_action": {
+                "target": "dishwasher",
+                "operation": "wash_dishes"
+              },
+              "action_template": {
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": {},
+                "requires": [],
+                "duration_ms": 8000,
+                "power_kw": 1.5
+              }
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dishwasher"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DishesAgent",
+                "tool_name": "start_dishwasher",
+                "description": "complete an independent dishes service",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes:0",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [],
+                "estimated_duration_ms": 8000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        },
+        {
+          "request": {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ]
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "goal": "dry the laundry",
+              "priority": 70,
+              "required_action": {
+                "target": "dryer",
+                "operation": "dry"
+              },
+              "action_template": {
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 2.0,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "depends_on": [
+                "wash"
+              ],
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "description": "dry the laundry",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry:0",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 2.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          },
+          "logical_latency_ms": 300
+        }
+      ],
+      "trace": {
+        "trace_id": "DEP-LAUNDRY-CAPACITY_TIGHT.GateRetryRule.event_sim",
+        "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+        "policy": "GateRetryRule",
+        "proposal_architecture": "GateRetryRule",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "dishes",
+            "agent_id": "DishesAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 100,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "state_version": 112,
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 4000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "agent_id": "DishesAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 8000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "dependency_waiting",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 113,
+            "patch": {
+              "devices.washer": "running"
+            },
+            "source": "action_started",
+            "task_id": "wash"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "duration_ms": 4000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.wash_authorized",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.washer": "running"
+            },
+            "completion_effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "state_version_at_start": 113
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 114,
+            "patch": {
+              "devices.dishwasher": "running"
+            },
+            "source": "action_started",
+            "task_id": "dishes"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "DishesAgent",
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes:0",
+            "target": "dishwasher",
+            "operation": "wash_dishes",
+            "duration_ms": 8000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [],
+            "start_effects": {
+              "devices.dishwasher": "running"
+            },
+            "completion_effects": {
+              "devices.dishwasher": "off",
+              "service.dishes_completed": true
+            },
+            "state_version_at_start": 114
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 4400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "new_state_version": 115
+          },
+          {
+            "type": "dependency_ready",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry:0",
+            "scheduled_start_ms": 4500,
+            "duration_ms": 4000,
+            "power_kw": 2.0
+          },
+          {
+            "type": "action_rejected",
+            "timestamp_ms": 4500,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry:0",
+            "reason": "shared_gate_capacity",
+            "state_version": 115
+          },
+          {
+            "type": "retry_queued",
+            "timestamp_ms": 4500,
+            "task_id": "dry",
+            "reason": "shared_gate_capacity"
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 8400,
+            "agent_id": "DishesAgent",
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes:0",
+            "target": "dishwasher",
+            "operation": "wash_dishes",
+            "effects": {
+              "devices.dishwasher": "off",
+              "service.dishes_completed": true
+            },
+            "new_state_version": 116
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 8400,
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry:0",
+            "scheduled_start_ms": 8500,
+            "duration_ms": 4000,
+            "power_kw": 2.0
+          },
+          {
+            "type": "retry_scheduled",
+            "timestamp_ms": 8400,
+            "task_id": "dry",
+            "start_at_ms": 8500,
+            "reason": null
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 8500,
+            "new_state_version": 117,
+            "patch": {
+              "devices.dryer": "running"
+            },
+            "source": "action_started",
+            "task_id": "dry"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 8500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "duration_ms": 4000,
+            "power_kw": 2.0,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.washed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.dryer": "running"
+            },
+            "completion_effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 12500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "new_state_version": 118
+          }
+        ],
+        "final_state": {
+          "laundry": {
+            "washed": true,
+            "dry": true,
+            "wash_authorized": true
+          },
+          "devices": {
+            "washer": "off",
+            "dryer": "off",
+            "dishwasher": "off"
+          },
+          "service": {
+            "wash_completed": true,
+            "dry_completed": true,
+            "dishes_completed": true
+          }
+        },
+        "final_state_version": 118,
+        "agent_requests": [
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ]
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "goal": "wash the laundry",
+              "priority": 80,
+              "required_action": {
+                "target": "washer",
+                "operation": "wash"
+              },
+              "action_template": {
+                "target": "washer",
+                "operation": "wash",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 1.5,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "description": "wash the laundry",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "devices": {
+                "dishwasher": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DishesAgent",
+              "role": "dishes",
+              "tools": [
+                "start_dishwasher"
+              ],
+              "observable_state": [
+                "devices.dishwasher"
+              ],
+              "writable_resources": [
+                "devices.dishwasher"
+              ]
+            },
+            "task": {
+              "task_id": "dishes",
+              "agent_id": "DishesAgent",
+              "release_at_ms": 0,
+              "priority": 60,
+              "completion_deadline_ms": 15000,
+              "goal": "complete an independent dishes service",
+              "required_action": {
+                "target": "dishwasher",
+                "operation": "wash_dishes"
+              },
+              "action_template": {
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": {},
+                "requires": [],
+                "duration_ms": 8000,
+                "power_kw": 1.5
+              }
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dishwasher"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DishesAgent",
+                "tool_name": "start_dishwasher",
+                "description": "complete an independent dishes service",
+                "target": "dishwasher",
+                "operation": "wash_dishes",
+                "parameters": [],
+                "preconditions": [],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry",
+            "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ]
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "goal": "dry the laundry",
+              "priority": 70,
+              "required_action": {
+                "target": "dryer",
+                "operation": "dry"
+              },
+              "action_template": {
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": {},
+                "duration_ms": 4000,
+                "power_kw": 2.0,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              },
+              "depends_on": [
+                "wash"
+              ],
+              "completion_deadline_ms": 15000
+            },
+            "goals": [
+              {
+                "path": "service.wash_completed",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "service.dry_completed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "constraints": [
+              {
+                "when": [
+                  {
+                    "path": "devices.dryer",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ],
+                "must": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "description": "dry the laundry",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "returns": {
+                  "status": [
+                    "accepted",
+                    "rejected"
+                  ],
+                  "observed_state": "object"
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 27
+      },
+      "reported_result": {
+        "episode_id": "DEP-LAUNDRY-CAPACITY_TIGHT",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 4400,
+        "task_completion_time_ms": 12500,
+        "task_action_finish_time_ms": {
+          "wash": 4400,
+          "dry": 12500,
+          "dishes": 8400
+        },
+        "task_deadline_met": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "all_deadlines_met": true,
+        "timely_process_valid_success": true,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "served_task_count": 3,
+        "serviceable_task_count": 3,
+        "task_service_rate": 1.0,
+        "policy": "GateRetryRule",
+        "proposal_architecture": "GateRetryRule",
+        "proposal_count": 3,
+        "accepted_action_count": 3,
+        "rejected_action_count": 1,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "wash": 300,
+          "dishes": 300,
+          "dry": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 1,
+        "retry_queued_count": 1,
+        "retry_scheduled_count": 1,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 4400,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "task_correct_action_completed": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "task_start_wait_ms": {
+          "wash": 400,
+          "dry": 8400,
+          "dishes": 400
+        },
+        "task_completion_latency_ms": {
+          "wash": 4400,
+          "dry": 12400,
+          "dishes": 8400
+        },
+        "task_completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 0,
+          "dishes": 0
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 8400,
+        "task_start_within_1s": {
+          "wash": true,
+          "dry": false,
+          "dishes": true
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0,
+        "dependency_version": "v3-actual-completion-dag",
+        "dependency_completed_receipts": [
+          "dishes",
+          "dry",
+          "wash"
+        ],
+        "dependency_waiting_task_ids": [],
+        "dependency_blocked_task_ids": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4400
+        }
+      },
+      "independent_event_recount": {
+        "mechanical_check": "passed_not_reviewer_acceptance",
+        "recomputed": {
+          "task_correct_action_started": {
+            "wash": true,
+            "dry": true,
+            "dishes": true
+          },
+          "task_correct_action_completed": {
+            "wash": true,
+            "dry": true,
+            "dishes": true
+          },
+          "task_start_wait_ms": {
+            "wash": 400,
+            "dry": 8400,
+            "dishes": 400
+          },
+          "task_completion_latency_ms": {
+            "wash": 4400,
+            "dry": 12400,
+            "dishes": 8400
+          },
+          "task_completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 0,
+            "dishes": 0
+          },
+          "state_constraint_violation_duration_ms": 0
+        },
+        "actual_execution_intervals": [
+          {
+            "task_id": "wash",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:wash:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 400,
+            "end_ms": 4400,
+            "resource_units_or_kw": 1.5
+          },
+          {
+            "task_id": "dishes",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dishes:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 400,
+            "end_ms": 8400,
+            "resource_units_or_kw": 1.5
+          },
+          {
+            "task_id": "dry",
+            "proposal_id": "DEP-LAUNDRY-CAPACITY_TIGHT:GateRetryRule:dry:0",
+            "request_identity_scope": "task_id, single workflow; not physical batch_id",
+            "start_ms": 8500,
+            "end_ms": 12500,
+            "resource_units_or_kw": 2.0
+          }
+        ],
+        "completion_receipts_ms": {
+          "wash": 4400,
+          "dishes": 8400,
+          "dry": 12500
+        }
+      },
+      "dependency_metrics": {
+        "completed": {
+          "wash": true,
+          "dry": true,
+          "dishes": true
+        },
+        "completion_latency_ms": {
+          "wash": 4400,
+          "dry": 12400,
+          "dishes": 8400
+        },
+        "completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 0,
+          "dishes": 0
+        },
+        "request_released_at_ms": {
+          "wash": 0,
+          "dry": 100,
+          "dishes": 0
+        },
+        "predecessor_completion_receipts_ms": {
+          "wash": 4400,
+          "dishes": 8400,
+          "dry": 12500
+        },
+        "dry_started_without_wash_receipt": 0,
+        "waiting_tasks": [],
+        "blocked_tasks": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4400
+        },
+        "lifecycle": {
+          "action_completed": {
+            "wash": true,
+            "dry": true,
+            "dishes": true
+          },
+          "resolution_correct": {},
+          "recovery_completed": {},
+          "completion_latency_ms": {
+            "wash": 4400,
+            "dry": 12400,
+            "dishes": 8400
+          },
+          "completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 0,
+            "dishes": 0
+          },
+          "harm_duration_ms": 0,
+          "zero_harm": true,
+          "stop_latency_ms": {},
+          "stop_confirmed_count": 0,
+          "stop_ack_too_late_count": 0,
+          "restart_count": 0,
+          "active_reservations_at_end": 0
+        }
+      },
+      "historical_comparison": "matches_historical_saved_fields_not_new_sample"
+    }
+  ]
+}

@@ -1,0 +1,285 @@
+{
+  "episode_id": "REV-C1-LIGHT-SAFE",
+  "task_family": "direct_device_conflict",
+  "source_type": "manual_template",
+  "generator_version": "0.3.0",
+  "review_status": "author_revised_not_independently_reviewed",
+  "episode_release_at_ms": 0,
+  "home": {
+    "resources": {
+      "max_power_kw": 8.0
+    }
+  },
+  "initial_state": {
+    "version": 120,
+    "values": {
+      "study": {
+        "occupied": true,
+        "reading_active": true
+      },
+      "devices": {
+        "study_light": "reading"
+      },
+      "service": {
+        "protected": false,
+        "lower": false
+      }
+    }
+  },
+  "agents": [
+    {
+      "agent_id": "ReadingAgent",
+      "role": "reading",
+      "tools": [
+        "set_light"
+      ],
+      "observable_state": [
+        "devices.study_light",
+        "study.reading_active"
+      ],
+      "writable_resources": [
+        "devices.study_light"
+      ]
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "role": "energy",
+      "tools": [
+        "set_light"
+      ],
+      "observable_state": [
+        "devices.study_light",
+        "study.occupied",
+        "study.reading_active"
+      ],
+      "writable_resources": [
+        "devices.study_light"
+      ]
+    }
+  ],
+  "task_stream": [
+    {
+      "task_id": "reading_light",
+      "agent_id": "ReadingAgent",
+      "release_at_ms": 0,
+      "goal": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+      "priority": 100,
+      "required_action": {
+        "target": "study_light",
+        "operation": "set_reading"
+      },
+      "action_template": {
+        "target": "study_light",
+        "operation": "set_reading",
+        "parameters": {
+          "lux": 500
+        },
+        "duration_ms": 500,
+        "power_kw": 0.02,
+        "requires": [
+          {
+            "path": "study.reading_active",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      },
+      "completion_deadline_ms": 1100
+    },
+    {
+      "task_id": "energy_light",
+      "agent_id": "EnergyAgent",
+      "release_at_ms": 6500,
+      "goal": "Execute the lower-priority request only when the protected request is inactive; otherwise reject it.",
+      "priority": 20,
+      "required_action": {
+        "target": "study_light",
+        "operation": "off"
+      },
+      "action_template": {
+        "target": "study_light",
+        "operation": "off",
+        "parameters": {},
+        "duration_ms": 500,
+        "power_kw": 0.0,
+        "requires": [
+          {
+            "path": "study.reading_active",
+            "op": "eq",
+            "value": false
+          }
+        ]
+      },
+      "completion_deadline_ms": 8000
+    }
+  ],
+  "exogenous_events": [
+    {
+      "at_ms": 6000,
+      "event": "protected_request_expires",
+      "patch": {
+        "study.reading_active": false
+      }
+    }
+  ],
+  "latency_profile": {
+    "unit": "ms"
+  },
+  "goals": [
+    {
+      "path": "service.protected",
+      "op": "eq",
+      "value": true
+    }
+  ],
+  "constraints": [
+    {
+      "when": [
+        {
+          "path": "study.reading_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "must": [
+        {
+          "path": "devices.study_light",
+          "op": "neq",
+          "value": "off"
+        }
+      ]
+    }
+  ],
+  "conflict_rules": [
+    {
+      "type": "C1",
+      "a": {
+        "target": "study_light",
+        "operation": "set_reading"
+      },
+      "b": {
+        "target": "study_light",
+        "operation": "off"
+      },
+      "min_overlap_ms": 1
+    }
+  ],
+  "action_grounding": [
+    {
+      "agent_id": "ReadingAgent",
+      "task_id": "reading_light",
+      "operation": "set_reading",
+      "target": "study_light",
+      "grounded_operation": "set_reading",
+      "duration_ms": 500,
+      "power_kw": 0.02,
+      "start_effects": {},
+      "completion_effects": {
+        "devices.study_light": "reading",
+        "service.protected": true
+      }
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "task_id": "energy_light",
+      "operation": "off",
+      "target": "study_light",
+      "grounded_operation": "off",
+      "duration_ms": 500,
+      "power_kw": 0.0,
+      "start_effects": {},
+      "completion_effects": {
+        "devices.study_light": "off",
+        "service.lower": true
+      }
+    }
+  ],
+  "calibration": {
+    "status": "abstract_action_contract",
+    "physical_parameters_verified": false,
+    "source": "author-defined synthetic duration, command and proposal latency"
+  },
+  "base_episode_id": "HC-M02",
+  "tool_contract_version": "strict-v1",
+  "variant": {
+    "structure": "C1-LIGHT",
+    "condition": "SAFE",
+    "split": "development"
+  },
+  "simulation": {
+    "command_latency_ms": 100
+  },
+  "task_card": {
+    "information": "observable_state is identical across paired conditions",
+    "tools": "strict-v1 tool_catalog; exact permitted target/operation/parameters",
+    "resources": "capacity nonbinding; not a C3 task",
+    "parameter_source": "abstract author contract, not device measurements",
+    "success": "completed service, disposition and process harm are separate",
+    "limitations": [
+      "not independently reviewed",
+      "not physical validation",
+      "fixed proposals use evaluation hints; no model evidence"
+    ],
+    "request": "Priority protects a state until time 6000, not merely during a command.",
+    "lifecycle": "reject the invalid lower request; do not mark rejection as its action service",
+    "matching_factor": "lower task release_at_ms only",
+    "resolution_contract": {
+      "lower_task_id": "energy_light",
+      "expected": "completed"
+    }
+  },
+  "tool_catalog": [
+    {
+      "agent_id": "ReadingAgent",
+      "tool_name": "set_light",
+      "description": "Acknowledge and maintain the protected device state; this is not physical environment control.",
+      "target": "study_light",
+      "operation": "set_reading",
+      "parameters": [
+        {
+          "name": "lux",
+          "type": "number",
+          "minimum": 300,
+          "maximum": 800,
+          "required": true
+        }
+      ],
+      "preconditions": [
+        {
+          "path": "study.reading_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "returns": {
+        "status": [
+          "accepted",
+          "rejected"
+        ],
+        "observed_state": "object"
+      }
+    },
+    {
+      "agent_id": "EnergyAgent",
+      "tool_name": "set_light",
+      "description": "Execute the lower-priority request only when the protected request is inactive; otherwise reject it.",
+      "target": "study_light",
+      "operation": "off",
+      "parameters": [],
+      "preconditions": [
+        {
+          "path": "study.reading_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "returns": {
+        "status": [
+          "accepted",
+          "rejected"
+        ],
+        "observed_state": "object"
+      }
+    }
+  ]
+}

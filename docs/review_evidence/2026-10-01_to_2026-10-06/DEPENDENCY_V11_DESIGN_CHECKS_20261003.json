@@ -1,0 +1,113 @@
+{
+  "configurations": 13,
+  "errors": [],
+  "certificate_checks": [
+    {
+      "configuration": "EARLY",
+      "valid": true,
+      "peak_units": 2.0
+    },
+    {
+      "configuration": "LATE",
+      "valid": true,
+      "peak_units": 2.0
+    },
+    {
+      "configuration": "FEASIBLE_8500",
+      "valid": true,
+      "peak_units": 2.0
+    },
+    {
+      "configuration": "RESTART_RESTORE",
+      "valid": true,
+      "peak_units": 2.0
+    },
+    {
+      "configuration": "FORGED_STATE",
+      "valid": true,
+      "peak_units": 2.0
+    },
+    {
+      "configuration": "STALE_NATURAL_RACE",
+      "valid": true,
+      "peak_units": 2.0
+    },
+    {
+      "configuration": "CAPACITY_TIGHT",
+      "valid": true,
+      "peak_units": 3.0
+    },
+    {
+      "configuration": "CAPACITY_SAFE",
+      "valid": true,
+      "peak_units": 3.5
+    }
+  ],
+  "paired_differences": [
+    {
+      "left": "CANCEL_NO_RESTORE",
+      "right": "CANCEL_RESTORE",
+      "differences": []
+    },
+    {
+      "left": "RESTART_NO_RESTORE",
+      "right": "RESTART_RESTORE",
+      "differences": []
+    },
+    {
+      "left": "EARLY",
+      "right": "LATE",
+      "differences": [
+        {
+          "path": ".task_stream[1].release_at_ms",
+          "left": 100,
+          "right": 5000
+        }
+      ]
+    },
+    {
+      "left": "EARLY",
+      "right": "INVALID_PROPOSAL",
+      "differences": [
+        {
+          "path": ".evaluation_class",
+          "left": "synthetic_contract",
+          "right": "invalid_proposal_diagnostic"
+        }
+      ]
+    },
+    {
+      "left": "INFEASIBLE_8000",
+      "right": "FEASIBLE_8500",
+      "differences": [
+        {
+          "path": ".evaluation_class",
+          "left": "infeasible_pressure",
+          "right": "synthetic_contract"
+        },
+        {
+          "path": ".task_stream[1].completion_deadline_ms",
+          "left": 8000,
+          "right": 8500
+        }
+      ]
+    },
+    {
+      "left": "CAPACITY_TIGHT",
+      "right": "CAPACITY_SAFE",
+      "differences": [
+        {
+          "path": ".conflict_rules[0].capacity",
+          "left": 3,
+          "right": 6
+        },
+        {
+          "path": ".home.resources.max_power_kw",
+          "left": 3,
+          "right": 6
+        }
+      ]
+    }
+  ],
+  "design_verdict": "接受"
+}

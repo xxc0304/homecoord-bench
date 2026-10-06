@@ -1,0 +1,2393 @@
+{
+  "status": "author_family_separated_synthesis_not_new_implementation_or_claim_review",
+  "date": "2026-10-05",
+  "research_question": "multi_agent_conflict_service_latency_tradeoffs",
+  "reviews": {
+    "F1": {
+      "report_path": "docs/review_evidence/2026-10-01_to_2026-10-06/F1_AGGREGATION_V1_REVIEW_20261004.md",
+      "report_sha256": "bf46ca6d3aef97c0d74bb4983abaa7cc883ed28153a76cdb774cfa0bb203f8e6",
+      "report_source_sha256": "84d7523b2a9798926c3056697dbb252e5836661a8f92fabef2d5d8156e121f4a",
+      "audit_path": "docs/review_evidence/2026-10-01_to_2026-10-06/F1_AGGREGATION_V1_AUDIT_20261004.json",
+      "audit_sha256": "71717076fbbe60598824c81092103164488d4ed24e138d3b7a473ad7545c636e",
+      "audit_source_sha256": "71717076fbbe60598824c81092103164488d4ed24e138d3b7a473ad7545c636e"
+    },
+    "F2": {
+      "report_path": "docs/review_evidence/2026-10-01_to_2026-10-06/F2_AGGREGATION_V1_REVIEW_20261005.md",
+      "report_sha256": "3926406b246f7327a80966cdde5cd72600d4c85a6cd5f460f62fdb392d6e3f82",
+      "report_source_sha256": "0a9c26dd1b8aa17f2f561ef388378a0cd05d9e6bffdc1bc16d3724e7659cd222",
+      "audit_path": "docs/review_evidence/2026-10-01_to_2026-10-06/F2_AGGREGATION_V1_AUDIT_20261005.json",
+      "audit_sha256": "1a485aa7a6c6a4d523809f22327b6a19c0ef380338031d5ff51d6a1d77d7b4a6",
+      "audit_source_sha256": "1a485aa7a6c6a4d523809f22327b6a19c0ef380338031d5ff51d6a1d77d7b4a6"
+    },
+    "F3": {
+      "report_path": "docs/review_evidence/2026-10-01_to_2026-10-06/F3_AGGREGATION_V1_REVIEW_20261004.md",
+      "report_sha256": "000349546f88f46807a7919306f70e82dbe26ade64fe81276e5c0f1505dc659f",
+      "report_source_sha256": "bce1aa76bb80d10c7e58eb99b982ff553030d6ed55580fb3347f6369fc7ac6fc",
+      "audit_path": "docs/review_evidence/2026-10-01_to_2026-10-06/F3_AGGREGATION_V1_AUDIT_20261004.json",
+      "audit_sha256": "486e309c9468de47cc1d373f55a5109d8cdeb0ba15386f364f4119fd425cccfb",
+      "audit_source_sha256": "486e309c9468de47cc1d373f55a5109d8cdeb0ba15386f364f4119fd425cccfb"
+    }
+  },
+  "protected_sha256": {
+    "homecoord_bench/task_revision/f1_aggregation_v1.py": "4ef1d2eacc1a444a100c6d4280a9e26e0fcba146ff4ce255dc947421d7fe04a1",
+    "homecoord_bench/tests/test_f1_aggregation_v1.py": "5471fd35c5267db3fb63e304e2e584474860cb7f73cacee2ae6bb61d8d5a2f8f",
+    "docs/F1_AGGREGATION_V1_REVIEW_PACKET_2026-10-04.md": "5877456e92d51df437aa9d8abb90bfd58a9ad00b17249f6507937a278efb6a29",
+    "docs/f1_statistical_contract_v2_20261004/freeze_20261004.json": "027e0feaea38167306acd58cb7329cb27bc8dac2e9081478034d07f5050ca795",
+    "docs/f1_aggregation_v1_20261004/author_verification.json": "f0ebf5bf949ca3ee8b2cdffe4d3be8de8dc64d32684368e9119a07c7659e2952",
+    "docs/f1_aggregation_v1_20261004/D-F1-01-competition-base.json": "0fe23bd5ad45f1a14def7d8a1c02467496cea3b196e951ceae7df0df1604770d",
+    "docs/f1_aggregation_v1_20261004/D-F1-01-competition-loose.json": "f3d05f4fde175931e3b0e3938b8a60a7c43212a7cc0d475928d3a1c91fdcacec",
+    "docs/f1_aggregation_v1_20261004/D-F1-01-no_competition-base.json": "f0b51b26d3cf844ba4cb95fea059e5ea954ce4fa7dae6bb5b9e2e44208b6a088",
+    "docs/f1_aggregation_v1_20261004/D-F1-01-no_competition-loose.json": "02149a31c95b00a2c3dd86c419b7113647c33aeebe57a3e637dc4e384435a800",
+    "docs/f1_aggregation_v1_20261004/D-F1-02-competition-base.json": "18447e5b9929fde40aeb4b844ecb294d2db2958e641cdb008d2cf296f23a46f3",
+    "docs/f1_aggregation_v1_20261004/D-F1-02-competition-loose.json": "12331257efe428336676ed2f5c2db9b3130162bfff30eb1d5785066406698f29",
+    "docs/f1_aggregation_v1_20261004/D-F1-02-no_competition-base.json": "3eecda1e92fd63546ce7c71b68074d026ee9c9a5c1e6faa066c9b6730176e260",
+    "docs/f1_aggregation_v1_20261004/D-F1-02-no_competition-loose.json": "89785f7ff12142161550cfd79b007a99d9ae30d9935f20e630fe0940e1db820e",
+    "docs/f1_aggregation_v1_20261004/four_cells.json": "10113a069ebcda1db7c159531b7efe7e650cec81b8d17ad005e1af5cb3e9ea70",
+    "docs/f1_aggregation_v1_20261004/manifest.json": "f7302242aaea59ebc4a303f55bc8a51934ba0d8d8518ee2e22a66e91182b1fb3",
+    "docs/f1_aggregation_v1_20261004/pairs_capacity.json": "7b61dea3732767c5d01c1f70016e4d0fefb6ef0a01fcb74eaa58bb87778010d7",
+    "docs/f1_aggregation_v1_20261004/pairs_deadline.json": "abcc3e4b0c77ef3af2f2d11873e7bde57fd99aa74683efad17cdbb309c03c209",
+    "docs/f1_aggregation_v1_20261004/pairs_policy.json": "5ae948985e21b806f42bdac6209f115d67fdb29637746da3c0f13636dea9c3a2",
+    "docs/f1_aggregation_v1_20261004/pairs_return_order.json": "39f5a127d8b6a575f54bb978165396cacc7c5781b3f3da83ab1644f8697570c7",
+    "docs/f1_aggregation_v1_20261004/summary.json": "57886c5b6188ebaa3b6d42659e1a445fc578b43b0d6d3d250bbc92b6953f6800",
+    "docs/F1_AGGREGATION_V1_ACCEPTANCE_2026-10-04.json": "f73abd0f2e63da3a83391b61fdd94b9aa0fb7a911a48ef99fe9ff311472d14ec",
+    "homecoord_bench/task_revision/f2_aggregation_v1.py": "ae155a9bff9721863de5ccf8f566c0d51f1fdba8e7154b374216c8c4c4e8019b",
+    "homecoord_bench/tests/test_f2_aggregation_v1.py": "0ecf4148ecf2bbd6a1211af7adb2cd4bfa277833849c3c512c97bd5c426e60bb",
+    "docs/F2_AGGREGATION_V1_REVIEW_PACKET_2026-10-04.md": "c4d40f4485ace6b56f7bcab557e11da2e46e07c1827d55046f3b51f7f8396ca8",
+    "docs/f2_statistical_contract_v1_20261004/freeze_20261004.json": "78d627277b11978ef7b69faf836a051f4c3b85ba8d8d998dcf4601ddcf3d748f",
+    "docs/f2_aggregation_v1_20261004/author_verification.json": "f9d0a0d9d558b5fc4385207e6b8b5dfc1f5cbe908caae25eb5bf797a438850bd",
+    "docs/f2_aggregation_v1_20261004/F2R1-D-F2-01-competition-late.json": "c41cf2d1bb760ca39c3268ff060d4a484277e4fedbe50fbeb5c22058cf617d37",
+    "docs/f2_aggregation_v1_20261004/F2R1-D-F2-01-competition-simultaneous.json": "d31845c23dc5b1343961acf0d8c876535c2d5d7bc820a24bed6a368df681f1c7",
+    "docs/f2_aggregation_v1_20261004/F2R1-D-F2-01-no_competition-late.json": "2216d763c54f329d10d5a759d46945b55bdc476805c8f2a905ddc617d62556de",
+    "docs/f2_aggregation_v1_20261004/F2R1-D-F2-01-no_competition-simultaneous.json": "0dca9600fb31555ec2f2afcc38af8daa160d2cc4fb97ae62182b2d196709c25b",
+    "docs/f2_aggregation_v1_20261004/F2R1-D-F2-02-competition-late.json": "f3648a8a1fe0547d35c0e05743d51464933c4887f66e041f704c1304ebe9901a",
+    "docs/f2_aggregation_v1_20261004/F2R1-D-F2-02-competition-simultaneous.json": "97f864d33d4e88484a41a8a7f85c9355c8f0b2f5904076ffe37985bafafdf552",
+    "docs/f2_aggregation_v1_20261004/F2R1-D-F2-02-no_competition-late.json": "c574c70443c57e5b151f4fa0e09d22eaa40a1f8a69287e70a8ad14980987f084",
+    "docs/f2_aggregation_v1_20261004/F2R1-D-F2-02-no_competition-simultaneous.json": "0cdcca8445122ace5d7714cfb0f2230162a831828426270023ed62378168dd8a",
+    "docs/f2_aggregation_v1_20261004/four_cells.json": "9f188a4a58fa5d1da1290488056ba7f86bd52fc5343ff96e0aa20680087634f4",
+    "docs/f2_aggregation_v1_20261004/information_diagnostics.json": "2f884409d9aef7fc04dfbad056ce59205eb712296e8a8a81de174f43051f50fc",
+    "docs/f2_aggregation_v1_20261004/manifest.json": "58dd4d060a45bdd3f8256fa594fcc3eb5506854b06f7e45e4de231d8665d19e3",
+    "docs/f2_aggregation_v1_20261004/pairs_capacity.json": "a8c00d378a86857f4df900b683aff1b586612b06678bb0c20e74665db2f17a7e",
+    "docs/f2_aggregation_v1_20261004/pairs_policy.json": "d4275acf9cd7cf0b3209f03982c63f2d0a3a2af75f4681a83d0d188b88d431f4",
+    "docs/f2_aggregation_v1_20261004/pairs_release.json": "b6d64796584a7aa1cd433237072daa883846170337e4ee7273f8cbd5605ac660",
+    "docs/f2_aggregation_v1_20261004/pairs_strong_rule.json": "960f3879ec3a1965343da753f8658b3eb993ba1f76fa918b038363df17ef8c06",
+    "docs/f2_aggregation_v1_20261004/summary.json": "43715a0506c1095066bd3d90044d1f738094175be01a231350d9902cc73748ac",
+    "docs/F2_AGGREGATION_V1_ACCEPTANCE_2026-10-05.json": "b64c16c79e0b8d4a988900c9a1be24a9c5aeee7584fe235201cbc4009aaa9c69",
+    "homecoord_bench/task_revision/f3_aggregation_v1.py": "9a9e7769022e8802e8df74a185e4f6ce384bf1b1841005e4efbe340585959e35",
+    "homecoord_bench/tests/test_f3_aggregation_v1.py": "8d6380a87b3068ff8de83f216fc25760588ddb8523044dcfe63ee5eeb515099e",
+    "docs/F3_AGGREGATION_V1_REVIEW_PACKET_2026-10-04.md": "e25f81804427db4d3e19d4bba72371e4c9bcf2a551ce12e1fd6a79cf27cfcc95",
+    "docs/aggregation_contract_v2_20261003/freeze_20261004.json": "5e250c83e0ade7dc449580e1294f8efec500c5d5de528924a3515b7193f1a1b1",
+    "docs/f3_aggregation_v1_20261004/D-F3-01-competition-base.json": "d8ffd5947728a71736ef343af2495f3e08914b2090814b7c4d0a8506afbc40ba",
+    "docs/f3_aggregation_v1_20261004/D-F3-01-competition-loose.json": "f2e5967f568ebd4bc50ec647b3e503230eed505624ae012b1f4cf7dde13a7014",
+    "docs/f3_aggregation_v1_20261004/D-F3-01-no_competition-base.json": "558c9bbe685333e88294a5414c1fce08f5468c6a757f8369eab6463203bebf00",
+    "docs/f3_aggregation_v1_20261004/D-F3-01-no_competition-loose.json": "80a31b0e6853cafe274347584db3ea7a2f585392202f09cb5c30f2559a877c7c",
+    "docs/f3_aggregation_v1_20261004/D-F3-02-competition-base.json": "1bae0cd014c3e3a13ba9fd095efef5cbb306451e89809073c758770a4db4c9ed",
+    "docs/f3_aggregation_v1_20261004/D-F3-02-competition-loose.json": "d233a8c879c6aadead6c4fd16f6ae92dbe810b7034b5ea2827430b63f96f16af",
+    "docs/f3_aggregation_v1_20261004/D-F3-02-no_competition-base.json": "dfb07dd6fb658d3df4726a0c2d9e097d1408b404fe407c74e6398aa6694a1068",
+    "docs/f3_aggregation_v1_20261004/D-F3-02-no_competition-loose.json": "65435cd2b741f35cc86499ba18192c4c1391e0cf225ce0720a60d525e08ecb1c",
+    "docs/f3_aggregation_v1_20261004/manifest.json": "74c5f22a4baa38fa7e80895717f89098289459df53be3f82bfb78e313429466b",
+    "docs/f3_aggregation_v1_20261004/summary.json": "601030079679bb219758358fb7f4e541e4a04913f96083935220c2bf39338eaf",
+    "docs/F3_AGGREGATION_V1_ACCEPTANCE_2026-10-04.json": "01bdbc33a5e1fe2282809b9083aacd211b6a71751ed62057185416e825d0e6eb",
+    "homecoord_bench/runtime/event_simulator.py": "27d4630846e1b52f8c06df52e821a38be07d00b1c12b509753466eb38e9988da",
+    "homecoord_bench/task_revision/fixtures/f2_v7/manifest.json": "72fb856244894bc55b599bac5e59756346b2bff934fad713c76ba10b1272c824",
+    "homecoord_bench/task_revision/fixtures/f2_v7/inputs.json": "e9ca4cb020835cad3ce143c42d1210ac926b341bf6e1c944b28ec81d9ed434e2",
+    "homecoord_bench/task_revision/fixtures/f2_v7/feasibility.json": "1b0f45a2accafe40dacb71292eae220d039cc25a016e4a697aee508f98bf7442",
+    "homecoord_bench/task_revision/fixtures/f2_v7/index.json": "0cdc45d47640745d2132d38562bab140d3cac7106b3a42c13ea09c71b8142daa",
+    "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-01-competition-late.json": "86e9f777700cb8f2a929eb03d32a93b985276557b07ea6bf1d70c48cbec69531",
+    "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-01-competition-simultaneous.json": "dc013fa818283828812edf492fc6635ce08bd7a893a29974f7061e0c932aacfe",
+    "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-01-no_competition-late.json": "7f09eceefc960923f961959536e5c0cee7f8a99e64b2c687a369f870114d077d",
+    "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-01-no_competition-simultaneous.json": "3b531dfd43ce9c98e68f4aa0b1255f9d80121de1bb7464a6d8e7b057bca8b6ac",
+    "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-02-competition-late.json": "e63a4f805f89c4e8a0fff28685fca38bcefe8f718b7e27dc2f6d733f5787b24b",
+    "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-02-competition-simultaneous.json": "d5fa5988b2d7fd7a3d44a42a62016ee1190261af9f067c1e49b1d42f04866b23",
+    "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-02-no_competition-late.json": "2d61623daeb20fc6c9e175a07a572ac266addab70efb390f9f1e87726f39444b",
+    "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-02-no_competition-simultaneous.json": "feee759cb8eefcda4ba27a4e02dc2a30cd3d11ed9569852d6e11602f7c3cee2e",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-01-competition-late-different_arrival.json": "ce4cff4895ec98c1bf6ad9f49e4d3ff8b51ed95c56e23c5e461e67b28d5910b9",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-01-competition-late-different_request.json": "dac60d2d0890e43343987d189507d0baeed44ba8d65706d60c062df7ba7d8aef",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-01-competition-late-no_future_request.json": "24b913eb3434caa39d315a4af448bcc74a1f0aef16c27327a1783f6926be651c",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-01-no_competition-late-different_arrival.json": "e5d689458f6a6ca84910ba68b78281187971c93f6bcd6a3f8462f0029affdbc8",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-01-no_competition-late-different_request.json": "cf0cea5d1b12ac496df6f4705c618774ec61ad67c944aef3ab95eb287e6dec52",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-01-no_competition-late-no_future_request.json": "31a3e18329b5ed0d977ec44a555a283e7d4b310d023bd6d28bd1410b4c6c674d",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-02-competition-late-different_arrival.json": "0c21e0f63c08ce09163069c83d6113531b13d5b70070296a8e85a73610edfcc6",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-02-competition-late-different_request.json": "051330f22b929ac5503e92b214e7dc983d61e6534a1df66fe08bbca937ad13bb",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-02-competition-late-no_future_request.json": "011546777471314c18cdae851a52c085211b6f40de7f6b1f2cf8a13d23928bb5",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-02-no_competition-late-different_arrival.json": "bb17ddb23f8bf9b1a6bb9452ec1b6876a5cab23727db88420a86d0d2117a27ed",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-02-no_competition-late-different_request.json": "0ffcb0cd06ee43b4a608bf7dc66d2bd34f782aa3241da8ca79cc735a663070d7",
+    "homecoord_bench/task_revision/fixtures/f2_v7/diagnostics/F2R1-D-F2-02-no_competition-late-no_future_request.json": "30f75771776ae6d89ac10140c3022d0dacaec68a6071b5cdcae36c8c178c2536",
+    "homecoord_bench/task_revision/f2_information.py": "43416905f2b73005b728ae66fa97054cc94b9915b73ff5511ff59dedb246c2e3",
+    "homecoord_bench/task_revision/f2_revision.py": "ef6e3b6d788e858b1d250dcca6c809799a956398489e794a4dc23c109309a334",
+    "homecoord_bench/task_revision/event_simulator_v7.py": "b2881534417383f013fd210b4b47ac296e99622d4759e5e0dcb84172b70f2a18",
+    "homecoord_bench/runtime/protocol.py": "31b173b4047e477956067c902c6a1bcccea172d76bf72653141e27ce67a85d08",
+    "homecoord_bench/runtime/execution.py": "c8a1f51909209fa4cfa7dc06ed0a04a2fde54e27f4102e46b26215a9c681e3e2",
+    "homecoord_bench/runtime/episode_validation.py": "f0db011b2ec27492acb66e4b0585e6dfb7f3002f8f7d7eeb754f8e92187f7530",
+    "homecoord_bench/runtime/tool_contract.py": "d93b2c81d6e5fb213fd10b6c07147943b6149d1a385c2b03528af331e467c9f9",
+    "homecoord_bench/runtime/task_response_metrics.py": "eb5f88d46983e90da3a1ff9d0a9e8f8aed6dc9088d24fb68fced5d3ea8e9914f",
+    "homecoord_bench/runtime/dry_run.py": "b99aa1783a00b3414286702ebac41d20d2f899a3d873f0e05372520108f9fbd6",
+    "homecoord_bench/evaluate.py": "f5e3a58df2623ebf6d22bc6da9d404b0622da65f7baca0543470f702e2071bdf",
+    "homecoord_bench/task_revision/review_packet.py": "c3b522250e9785b7eb2cf8a258f5503f87dcf13ce7c4188a04a60c25fe4956b7",
+    "homecoord_bench/revision_drafts/20260930_task_family_split/development/D-F2-01-competition-late.json": "bb22f9c53f017a837f54721be4067772b48b30e3f85a7c0795053d112cdf376c",
+    "homecoord_bench/revision_drafts/20260930_task_family_split/development/D-F2-01-competition-simultaneous.json": "f00d5438f199cb11e0ea6cfb3560e532d668c3b85fd19f525ac4043d1dc84d84",
+    "homecoord_bench/revision_drafts/20260930_task_family_split/development/D-F2-01-no_competition-late.json": "12ecadb2663edc6c814869895a3f68bc015f4c0bda827cd39581db742a322904",
+    "homecoord_bench/revision_drafts/20260930_task_family_split/development/D-F2-01-no_competition-simultaneous.json": "059d39c822a658b09e5706cd84a47492f649cb6ba2c9f7b69117806f87f28c8e",
+    "homecoord_bench/revision_drafts/20260930_task_family_split/development/D-F2-02-competition-late.json": "1fbd332f51ad99fed1012b5983e022bd784ff90299d9cd5638bc91eeb98f30c7",
+    "homecoord_bench/revision_drafts/20260930_task_family_split/development/D-F2-02-competition-simultaneous.json": "78033cf3d5c00a7253e5cf78bf11bd54ebe36e22b54796fce4ca154e33f29c78",
+    "homecoord_bench/revision_drafts/20260930_task_family_split/development/D-F2-02-no_competition-late.json": "79b49e9d3c5413e4bbd1f5fde6ecbbe01f52189d706dc2577078d6295bfc171c",
+    "homecoord_bench/revision_drafts/20260930_task_family_split/development/D-F2-02-no_competition-simultaneous.json": "a91c1be2de17e8be49222f6efb220cdaa979f9d160d406745794e5717f47b358",
+    "docs/f1_findings_20261004/evidence.json": "cd26b7de485d60629d936c5a210bc94efc2bcf71376075364dd6b318ceec0a33",
+    "docs/f2_findings_20261005/evidence.json": "109961777bf501781ef0540408f1c1edd7ebe21d709402451c9102a440e85c0e",
+    "docs/F1_FINDINGS_2026-10-04.md": "e9f71290a15d5aef989f87257639a5ad5182a68d7c21dc00704174dca321d729",
+    "docs/F2_FINDINGS_2026-10-05.md": "226678a7863deac28d5378926d92044a7c626fbb7527a25f3561a098afb5da92",
+    "docs/F3_FINDINGS_2026-10-04.md": "8341722da20c788cd73f54f93a8db606a694aa2bfec37b9b04c6b16425bac015",
+    "docs/RESEARCH_SCOPE_AND_EVIDENCE_2026-10-04.md": "69863520231592d50935a5007d5dc21e9193eb6464818789b1f29ae675169a48"
+  },
+  "historical_F3_acceptance_path_encoding_issue": {
+    "historical_record_preserved": true,
+    "canonical_report_path": "docs/review_evidence/2026-10-01_to_2026-10-06/F3_AGGREGATION_V1_REVIEW_20261004.md",
+    "canonical_report_source_sha256": "bce1aa76bb80d10c7e58eb99b982ff553030d6ed55580fb3347f6369fc7ac6fc",
+    "canonical_report_published_sha256": "000349546f88f46807a7919306f70e82dbe26ade64fe81276e5c0f1505dc659f",
+    "canonical_report_hash_matches_historical_record": true
+  },
+  "family_scopes": {
+    "F1": {
+      "runs": 72,
+      "pairs": 168,
+      "four_cells": 18
+    },
+    "F2": {
+      "main_runs": 32,
+      "pairs": 72,
+      "four_cells": 8,
+      "prefix_diagnostics": 48
+    },
+    "F3": {
+      "main_runs": 192,
+      "diagnostic_runs": 32,
+      "pairs": 424,
+      "four_cells": 24
+    }
+  },
+  "global_vs_individual_examples": {
+    "F1": {
+      "control": {
+        "slot_id": "D-F1-02-competition-base|GateRetryRule|order2",
+        "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+        "source_pointer": "/runs/6",
+        "metrics": {
+          "service_rate": 1.0,
+          "timely_service_rate": 0.8,
+          "executed_capacity_violation_duration_ms": 0,
+          "excess_resource_unit_ms": 0,
+          "whole_house_completion_ms": 1141100,
+          "coordination_accept_count": 5,
+          "coordination_defer_count": 0,
+          "coordination_reject_count": 0,
+          "action_rejected_count": 2,
+          "retry_queued_count": 2,
+          "retry_scheduled_count": 2,
+          "reservation_count": 7,
+          "actual_start_count": 5
+        },
+        "tasks": {
+          "water": {
+            "release_ms": 0,
+            "deadline_ms": 360000,
+            "proposal_return_ms": 1600,
+            "start_ms": 421100,
+            "completion_ms": 661100,
+            "started": true,
+            "completed": true,
+            "timely": false,
+            "logical_proposal_return_ms": 1600,
+            "proposal_to_start_ms": 419500,
+            "task_start_wait_ms": 421100,
+            "execution_ms": 240000,
+            "completion_latency_ms": 661100,
+            "tardiness_ms": 301100,
+            "event_indices": {
+              "release": 0,
+              "return": 25,
+              "start": 37,
+              "completion": 38
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "laundry": {
+            "release_ms": 0,
+            "deadline_ms": 1800000,
+            "proposal_return_ms": 800,
+            "start_ms": 900,
+            "completion_ms": 720900,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 800,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 900,
+            "execution_ms": 720000,
+            "completion_latency_ms": 720900,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 1,
+              "return": 5,
+              "start": 9,
+              "completion": 41
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "dishes": {
+            "release_ms": 0,
+            "deadline_ms": 1080000,
+            "proposal_return_ms": 1000,
+            "start_ms": 1100,
+            "completion_ms": 421100,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 1000,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 1100,
+            "execution_ms": 420000,
+            "completion_latency_ms": 421100,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 2,
+              "return": 10,
+              "start": 14,
+              "completion": 35
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "meal": {
+            "release_ms": 0,
+            "deadline_ms": 720000,
+            "proposal_return_ms": 1200,
+            "start_ms": 1300,
+            "completion_ms": 181300,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 1200,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 1300,
+            "execution_ms": 180000,
+            "completion_latency_ms": 181300,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 3,
+              "return": 15,
+              "start": 19,
+              "completion": 30
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "cleaning": {
+            "release_ms": 0,
+            "deadline_ms": 1500000,
+            "proposal_return_ms": 1400,
+            "start_ms": 661100,
+            "completion_ms": 1141100,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 1400,
+            "proposal_to_start_ms": 659700,
+            "task_start_wait_ms": 661100,
+            "execution_ms": 480000,
+            "completion_latency_ms": 1141100,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 4,
+              "return": 20,
+              "start": 40,
+              "completion": 42
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          }
+        }
+      },
+      "candidate": {
+        "slot_id": "D-F1-02-competition-base|ConstraintCoordinator|order2",
+        "source_path": "docs/implementation_review_20261001/traces/D-F1-02-competition-base.json",
+        "source_pointer": "/runs/7",
+        "metrics": {
+          "service_rate": 1.0,
+          "timely_service_rate": 0.8,
+          "executed_capacity_violation_duration_ms": 0,
+          "excess_resource_unit_ms": 0,
+          "whole_house_completion_ms": 901300,
+          "coordination_accept_count": 3,
+          "coordination_defer_count": 2,
+          "coordination_reject_count": 0,
+          "action_rejected_count": 0,
+          "retry_queued_count": 0,
+          "retry_scheduled_count": 0,
+          "reservation_count": 5,
+          "actual_start_count": 5
+        },
+        "tasks": {
+          "water": {
+            "release_ms": 0,
+            "deadline_ms": 360000,
+            "proposal_return_ms": 1600,
+            "start_ms": 661300,
+            "completion_ms": 901300,
+            "started": true,
+            "completed": true,
+            "timely": false,
+            "logical_proposal_return_ms": 1600,
+            "proposal_to_start_ms": 659700,
+            "task_start_wait_ms": 661300,
+            "execution_ms": 240000,
+            "completion_latency_ms": 901300,
+            "tardiness_ms": 541300,
+            "event_indices": {
+              "release": 0,
+              "return": 23,
+              "start": 32,
+              "completion": 34
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "laundry": {
+            "release_ms": 0,
+            "deadline_ms": 1800000,
+            "proposal_return_ms": 800,
+            "start_ms": 900,
+            "completion_ms": 720900,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 800,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 900,
+            "execution_ms": 720000,
+            "completion_latency_ms": 720900,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 1,
+              "return": 5,
+              "start": 9,
+              "completion": 33
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "dishes": {
+            "release_ms": 0,
+            "deadline_ms": 1080000,
+            "proposal_return_ms": 1000,
+            "start_ms": 1100,
+            "completion_ms": 421100,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 1000,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 1100,
+            "execution_ms": 420000,
+            "completion_latency_ms": 421100,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 2,
+              "return": 10,
+              "start": 14,
+              "completion": 29
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "meal": {
+            "release_ms": 0,
+            "deadline_ms": 720000,
+            "proposal_return_ms": 1200,
+            "start_ms": 1300,
+            "completion_ms": 181300,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 1200,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 1300,
+            "execution_ms": 180000,
+            "completion_latency_ms": 181300,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 3,
+              "return": 15,
+              "start": 19,
+              "completion": 26
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "cleaning": {
+            "release_ms": 0,
+            "deadline_ms": 1500000,
+            "proposal_return_ms": 1400,
+            "start_ms": 181300,
+            "completion_ms": 661300,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 1400,
+            "proposal_to_start_ms": 179900,
+            "task_start_wait_ms": 181300,
+            "execution_ms": 480000,
+            "completion_latency_ms": 661300,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 4,
+              "return": 20,
+              "start": 28,
+              "completion": 30
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          }
+        }
+      }
+    },
+    "F2": {
+      "simultaneous": {
+        "slot_id": "F2R1-D-F2-02-competition-simultaneous|DeadlineAwareCoordinator",
+        "episode_id": "F2R1-D-F2-02-competition-simultaneous",
+        "policy": "DeadlineAwareCoordinator",
+        "source_path": "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-02-competition-simultaneous.json",
+        "source_pointer": "/runs/2",
+        "denominators": {
+          "required": 4,
+          "completed": 4,
+          "timely": 4
+        },
+        "subsets": {
+          "early": {
+            "required_task_ids": [
+              "meal",
+              "laundry",
+              "cleaning"
+            ],
+            "denominators": {
+              "required": 3,
+              "completed": 3,
+              "timely": 3
+            },
+            "service_rate": 1.0,
+            "timely_service_rate": 1.0
+          },
+          "water": {
+            "required_task_ids": [
+              "water"
+            ],
+            "denominators": {
+              "required": 1,
+              "completed": 1,
+              "timely": 1
+            },
+            "service_rate": 1.0,
+            "timely_service_rate": 1.0
+          }
+        },
+        "tasks": {
+          "meal": {
+            "release_ms": 0,
+            "deadline_ms": 840000,
+            "proposal_return_ms": 300,
+            "start_ms": 400,
+            "completion_ms": 180400,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 300,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 400,
+            "execution_ms": 180000,
+            "completion_latency_ms": 180400,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 0,
+              "return": 4,
+              "start": 19,
+              "completion": 20
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "laundry": {
+            "release_ms": 0,
+            "deadline_ms": 1200000,
+            "proposal_return_ms": 300,
+            "start_ms": 240400,
+            "completion_ms": 840400,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 300,
+            "proposal_to_start_ms": 240100,
+            "task_start_wait_ms": 240400,
+            "execution_ms": 600000,
+            "completion_latency_ms": 840400,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 1,
+              "return": 5,
+              "start": 25,
+              "completion": 27
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "cleaning": {
+            "release_ms": 0,
+            "deadline_ms": 1080000,
+            "proposal_return_ms": 300,
+            "start_ms": 180400,
+            "completion_ms": 540400,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 300,
+            "proposal_to_start_ms": 180100,
+            "task_start_wait_ms": 180400,
+            "execution_ms": 360000,
+            "completion_latency_ms": 540400,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 2,
+              "return": 6,
+              "start": 22,
+              "completion": 26
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "water": {
+            "release_ms": 0,
+            "deadline_ms": 300000,
+            "proposal_return_ms": 300,
+            "start_ms": 400,
+            "completion_ms": 240400,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 300,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 400,
+            "execution_ms": 240000,
+            "completion_latency_ms": 240400,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 3,
+              "return": 7,
+              "start": 17,
+              "completion": 23
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          }
+        },
+        "metrics": {
+          "service_rate": 1.0,
+          "timely_service_rate": 1.0,
+          "executed_capacity_violation_duration_ms": 0,
+          "excess_resource_unit_ms": 0,
+          "whole_house_completion_ms": 840400,
+          "coordination_defer_count": 2,
+          "action_rejected_count": 0,
+          "retry_queued_count": 0,
+          "retry_scheduled_count": 0
+        },
+        "arrival_background": null
+      },
+      "late": {
+        "slot_id": "F2R1-D-F2-02-competition-late|DeadlineAwareCoordinator",
+        "episode_id": "F2R1-D-F2-02-competition-late",
+        "policy": "DeadlineAwareCoordinator",
+        "source_path": "homecoord_bench/task_revision/fixtures/f2_v7/runs/F2R1-D-F2-02-competition-late.json",
+        "source_pointer": "/runs/2",
+        "denominators": {
+          "required": 4,
+          "completed": 4,
+          "timely": 3
+        },
+        "subsets": {
+          "early": {
+            "required_task_ids": [
+              "meal",
+              "laundry",
+              "cleaning"
+            ],
+            "denominators": {
+              "required": 3,
+              "completed": 3,
+              "timely": 3
+            },
+            "service_rate": 1.0,
+            "timely_service_rate": 1.0
+          },
+          "water": {
+            "required_task_ids": [
+              "water"
+            ],
+            "denominators": {
+              "required": 1,
+              "completed": 1,
+              "timely": 0
+            },
+            "service_rate": 1.0,
+            "timely_service_rate": 0.0
+          }
+        },
+        "tasks": {
+          "meal": {
+            "release_ms": 0,
+            "deadline_ms": 840000,
+            "proposal_return_ms": 300,
+            "start_ms": 400,
+            "completion_ms": 180400,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 300,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 400,
+            "execution_ms": 180000,
+            "completion_latency_ms": 180400,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 0,
+              "return": 3,
+              "start": 13,
+              "completion": 21
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "laundry": {
+            "release_ms": 0,
+            "deadline_ms": 1200000,
+            "proposal_return_ms": 300,
+            "start_ms": 400,
+            "completion_ms": 600400,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 300,
+            "proposal_to_start_ms": 100,
+            "task_start_wait_ms": 400,
+            "execution_ms": 600000,
+            "completion_latency_ms": 600400,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 1,
+              "return": 4,
+              "start": 15,
+              "completion": 27
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "cleaning": {
+            "release_ms": 0,
+            "deadline_ms": 1080000,
+            "proposal_return_ms": 300,
+            "start_ms": 180400,
+            "completion_ms": 540400,
+            "started": true,
+            "completed": true,
+            "timely": true,
+            "logical_proposal_return_ms": 300,
+            "proposal_to_start_ms": 180100,
+            "task_start_wait_ms": 180400,
+            "execution_ms": 360000,
+            "completion_latency_ms": 540400,
+            "tardiness_ms": 0,
+            "event_indices": {
+              "release": 2,
+              "return": 5,
+              "start": 23,
+              "completion": 24
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          },
+          "water": {
+            "release_ms": 120000,
+            "deadline_ms": 420000,
+            "proposal_return_ms": 120300,
+            "start_ms": 540400,
+            "completion_ms": 780400,
+            "started": true,
+            "completed": true,
+            "timely": false,
+            "logical_proposal_return_ms": 300,
+            "proposal_to_start_ms": 420100,
+            "task_start_wait_ms": 420400,
+            "execution_ms": 240000,
+            "completion_latency_ms": 660400,
+            "tardiness_ms": 360400,
+            "event_indices": {
+              "release": 17,
+              "return": 18,
+              "start": 26,
+              "completion": 28
+            },
+            "null_reasons": {
+              "start": null,
+              "completion": null
+            },
+            "coordination_compute_ms": null,
+            "API_wallclock_ms": null,
+            "unobserved_reason": "not_instrumented"
+          }
+        },
+        "metrics": {
+          "service_rate": 1.0,
+          "timely_service_rate": 0.75,
+          "executed_capacity_violation_duration_ms": 0,
+          "excess_resource_unit_ms": 0,
+          "whole_house_completion_ms": 780400,
+          "coordination_defer_count": 2,
+          "action_rejected_count": 0,
+          "retry_queued_count": 0,
+          "retry_scheduled_count": 0
+        },
+        "arrival_background": {
+          "release_ms": 120000,
+          "interpretation": "descriptive_resource_background_not_causal_or_unavoidable",
+          "early_history": [
+            {
+              "task_id": "meal",
+              "start_ms": 400,
+              "end_ms": 180400,
+              "started_before_L": true,
+              "event_indices": {
+                "release": 0,
+                "return": 3,
+                "start": 13,
+                "completion": 21
+              }
+            },
+            {
+              "task_id": "laundry",
+              "start_ms": 400,
+              "end_ms": 600400,
+              "started_before_L": true,
+              "event_indices": {
+                "release": 1,
+                "return": 4,
+                "start": 15,
+                "completion": 27
+              }
+            },
+            {
+              "task_id": "cleaning",
+              "start_ms": 180400,
+              "end_ms": 540400,
+              "started_before_L": false,
+              "event_indices": {
+                "release": 2,
+                "return": 5,
+                "start": 23,
+                "completion": 24
+              }
+            }
+          ],
+          "crossing_actual_intervals": [
+            {
+              "task_id": "meal",
+              "proposal_id": "F2-public-home:DeadlineAwareCoordinator:meal:0",
+              "start_event_index": 13,
+              "completion_event_index": 21,
+              "start_ms": 400,
+              "end_ms": 180400,
+              "units": 2,
+              "operation": "prepare",
+              "remaining_ms": 60400
+            },
+            {
+              "task_id": "laundry",
+              "proposal_id": "F2-public-home:DeadlineAwareCoordinator:laundry:0",
+              "start_event_index": 15,
+              "completion_event_index": 27,
+              "start_ms": 400,
+              "end_ms": 600400,
+              "units": 1,
+              "operation": "prepare",
+              "remaining_ms": 480400
+            }
+          ],
+          "physical_units_crossing_L": 3,
+          "capacity_units": 3,
+          "water_required_units": 1,
+          "future_reservations_created_before_L": [
+            {
+              "task_id": "cleaning",
+              "proposal_id": "F2-public-home:DeadlineAwareCoordinator:cleaning:0",
+              "reservation_event_index": 9,
+              "reserved_ms": 300,
+              "planned_start_ms": 180400,
+              "scheduled_disposition_event_index": 23,
+              "scheduled_disposition": "action_started",
+              "actual_start_ms": 180400,
+              "actual_start_event_index": 23,
+              "counts_as_physical_load_at_L": false
+            }
+          ],
+          "first_water_events": {
+            "task_released": {
+              "event_index": 17,
+              "timestamp_ms": 120000
+            },
+            "proposal_returned": {
+              "event_index": 18,
+              "timestamp_ms": 120300
+            },
+            "action_started": {
+              "event_index": 26,
+              "timestamp_ms": 540400
+            },
+            "action_completed": {
+              "event_index": 28,
+              "timestamp_ms": 780400
+            },
+            "action_rejected": null,
+            "retry_queued": null,
+            "retry_scheduled": null
+          }
+        }
+      }
+    },
+    "F3": [
+      {
+        "world": "D-F3-01-competition-base",
+        "control_low_resource": {
+          "identity": {
+            "canonical_slot_id": "F3|v8|F3R1-D-F3-01-competition-base-selectable|ConstraintCoordinator|low_resource|primary",
+            "family": "C3-F3",
+            "source_version": "v8",
+            "source_path": "homecoord_bench/task_revision/fixtures/f3_v8/runs/F3R1-D-F3-01-competition-base-selectable.json",
+            "source_row_pointer": "/runs/1",
+            "source_sha256": "2ec0d1a0601917a6ad91a62e2b72756d4ff2c0b561cd53c057fb7272444defad",
+            "base_world_id": "D-F3-01-competition-base",
+            "config_id": "F3R1-D-F3-01-competition-base-selectable",
+            "policy": "ConstraintCoordinator",
+            "selector": "low_resource",
+            "diagnostic_id": null,
+            "role": "primary",
+            "capability_kind": "selectable",
+            "authorized_modes_by_task": {
+              "laundry": [
+                "eco",
+                "fast"
+              ],
+              "water": [
+                "prepare"
+              ],
+              "meal": [
+                "prepare"
+              ]
+            },
+            "requests": [
+              {
+                "task_id": "laundry",
+                "release_at_ms": 0,
+                "deadline_ms": 960000
+              },
+              {
+                "task_id": "water",
+                "release_at_ms": 0,
+                "deadline_ms": 420000
+              },
+              {
+                "task_id": "meal",
+                "release_at_ms": 0,
+                "deadline_ms": 1080000
+              }
+            ],
+            "return_order_id": "declared_v8_provider_latency_contract",
+            "observation_end_contract": "v8_queue_drained_no_cross_horizon_pool",
+            "cost_unit": "synthetic_resource_unit_ms",
+            "metric_eligibility": "all_declared_required_services"
+          },
+          "required_ids": [
+            "laundry",
+            "water",
+            "meal"
+          ],
+          "started": {
+            "laundry": {
+              "at_ms": 400,
+              "event_index": 16
+            },
+            "water": {
+              "at_ms": 400,
+              "event_index": 18
+            },
+            "meal": {
+              "at_ms": 240400,
+              "event_index": 21
+            }
+          },
+          "completed": {
+            "water": {
+              "at_ms": 240400,
+              "event_index": 19
+            },
+            "laundry": {
+              "at_ms": 540400,
+              "event_index": 22
+            },
+            "meal": {
+              "at_ms": 600400,
+              "event_index": 23
+            }
+          },
+          "on_time_ids": [
+            "laundry",
+            "meal",
+            "water"
+          ],
+          "coverage": {
+            "required": 3,
+            "started": 3,
+            "completed": 3,
+            "on_time": 3
+          },
+          "rates": {
+            "service_completion_rate": {
+              "value": 1.0,
+              "status": "ok",
+              "required": 3,
+              "completed": 3,
+              "on_time": 3,
+              "started": 3
+            },
+            "timely_service_rate": {
+              "value": 1.0,
+              "status": "ok",
+              "required": 3,
+              "completed": 3,
+              "on_time": 3,
+              "started": 3
+            },
+            "timely_among_completed": {
+              "value": 1.0,
+              "status": "ok",
+              "required": 3,
+              "completed": 3,
+              "on_time": 3,
+              "started": 3
+            }
+          },
+          "tasks": {
+            "laundry": {
+              "wait_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 540400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "water": {
+              "wait_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 240400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "meal": {
+              "wait_ms": {
+                "value": 240400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 600400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            }
+          },
+          "actual_modes": {
+            "laundry": "eco",
+            "water": "prepare",
+            "meal": "prepare"
+          },
+          "resource_intervals": [
+            {
+              "task_id": "water",
+              "operation": "prepare",
+              "start_event_index": 18,
+              "end_event_index": 19,
+              "start_ms": 400,
+              "end_ms": 240400,
+              "units": 2
+            },
+            {
+              "task_id": "laundry",
+              "operation": "eco",
+              "start_event_index": 16,
+              "end_event_index": 22,
+              "start_ms": 400,
+              "end_ms": 540400,
+              "units": 1
+            },
+            {
+              "task_id": "meal",
+              "operation": "prepare",
+              "start_event_index": 21,
+              "end_event_index": 23,
+              "start_ms": 240400,
+              "end_ms": 600400,
+              "units": 1
+            }
+          ],
+          "cost": {
+            "value": 1380000,
+            "status": "ok",
+            "required": 3,
+            "started": 3,
+            "completed": 3,
+            "on_time": 3
+          },
+          "all_service_completion_ms": {
+            "value": 600400,
+            "status": "ok",
+            "required": 3,
+            "started": 3,
+            "completed": 3,
+            "on_time": 3
+          }
+        },
+        "candidate_short_duration": {
+          "identity": {
+            "canonical_slot_id": "F3|v8|F3R1-D-F3-01-competition-base-selectable|ConstraintCoordinator|short_duration|primary",
+            "family": "C3-F3",
+            "source_version": "v8",
+            "source_path": "homecoord_bench/task_revision/fixtures/f3_v8/runs/F3R1-D-F3-01-competition-base-selectable.json",
+            "source_row_pointer": "/runs/5",
+            "source_sha256": "2ec0d1a0601917a6ad91a62e2b72756d4ff2c0b561cd53c057fb7272444defad",
+            "base_world_id": "D-F3-01-competition-base",
+            "config_id": "F3R1-D-F3-01-competition-base-selectable",
+            "policy": "ConstraintCoordinator",
+            "selector": "short_duration",
+            "diagnostic_id": null,
+            "role": "primary",
+            "capability_kind": "selectable",
+            "authorized_modes_by_task": {
+              "laundry": [
+                "eco",
+                "fast"
+              ],
+              "water": [
+                "prepare"
+              ],
+              "meal": [
+                "prepare"
+              ]
+            },
+            "requests": [
+              {
+                "task_id": "laundry",
+                "release_at_ms": 0,
+                "deadline_ms": 960000
+              },
+              {
+                "task_id": "water",
+                "release_at_ms": 0,
+                "deadline_ms": 420000
+              },
+              {
+                "task_id": "meal",
+                "release_at_ms": 0,
+                "deadline_ms": 1080000
+              }
+            ],
+            "return_order_id": "declared_v8_provider_latency_contract",
+            "observation_end_contract": "v8_queue_drained_no_cross_horizon_pool",
+            "cost_unit": "synthetic_resource_unit_ms",
+            "metric_eligibility": "all_declared_required_services"
+          },
+          "required_ids": [
+            "laundry",
+            "water",
+            "meal"
+          ],
+          "started": {
+            "laundry": {
+              "at_ms": 400,
+              "event_index": 16
+            },
+            "meal": {
+              "at_ms": 400,
+              "event_index": 18
+            },
+            "water": {
+              "at_ms": 240400,
+              "event_index": 21
+            }
+          },
+          "completed": {
+            "laundry": {
+              "at_ms": 240400,
+              "event_index": 19
+            },
+            "meal": {
+              "at_ms": 360400,
+              "event_index": 22
+            },
+            "water": {
+              "at_ms": 480400,
+              "event_index": 23
+            }
+          },
+          "on_time_ids": [
+            "laundry",
+            "meal"
+          ],
+          "coverage": {
+            "required": 3,
+            "started": 3,
+            "completed": 3,
+            "on_time": 2
+          },
+          "rates": {
+            "service_completion_rate": {
+              "value": 1.0,
+              "status": "ok",
+              "required": 3,
+              "completed": 3,
+              "on_time": 2,
+              "started": 3
+            },
+            "timely_service_rate": {
+              "value": 0.6666666666666666,
+              "status": "ok",
+              "required": 3,
+              "completed": 3,
+              "on_time": 2,
+              "started": 3
+            },
+            "timely_among_completed": {
+              "value": 0.6666666666666666,
+              "status": "ok",
+              "required": 3,
+              "completed": 3,
+              "on_time": 2,
+              "started": 3
+            }
+          },
+          "tasks": {
+            "laundry": {
+              "wait_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 240400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "water": {
+              "wait_ms": {
+                "value": 240400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 480400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 60400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "meal": {
+              "wait_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 360400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            }
+          },
+          "actual_modes": {
+            "laundry": "fast",
+            "meal": "prepare",
+            "water": "prepare"
+          },
+          "resource_intervals": [
+            {
+              "task_id": "laundry",
+              "operation": "fast",
+              "start_event_index": 16,
+              "end_event_index": 19,
+              "start_ms": 400,
+              "end_ms": 240400,
+              "units": 2
+            },
+            {
+              "task_id": "meal",
+              "operation": "prepare",
+              "start_event_index": 18,
+              "end_event_index": 22,
+              "start_ms": 400,
+              "end_ms": 360400,
+              "units": 1
+            },
+            {
+              "task_id": "water",
+              "operation": "prepare",
+              "start_event_index": 21,
+              "end_event_index": 23,
+              "start_ms": 240400,
+              "end_ms": 480400,
+              "units": 2
+            }
+          ],
+          "cost": {
+            "value": 1320000,
+            "status": "ok",
+            "required": 3,
+            "started": 3,
+            "completed": 3,
+            "on_time": 2
+          },
+          "all_service_completion_ms": {
+            "value": 480400,
+            "status": "ok",
+            "required": 3,
+            "started": 3,
+            "completed": 3,
+            "on_time": 2
+          }
+        }
+      },
+      {
+        "world": "D-F3-02-competition-base",
+        "control_low_resource": {
+          "identity": {
+            "canonical_slot_id": "F3|v8|F3R1-D-F3-02-competition-base-selectable|ConstraintCoordinator|low_resource|primary",
+            "family": "C3-F3",
+            "source_version": "v8",
+            "source_path": "homecoord_bench/task_revision/fixtures/f3_v8/runs/F3R1-D-F3-02-competition-base-selectable.json",
+            "source_row_pointer": "/runs/1",
+            "source_sha256": "a30c73c033212af54d8c1d11f936c84087adcddeb59b9e287282b50e9e27fad6",
+            "base_world_id": "D-F3-02-competition-base",
+            "config_id": "F3R1-D-F3-02-competition-base-selectable",
+            "policy": "ConstraintCoordinator",
+            "selector": "low_resource",
+            "diagnostic_id": null,
+            "role": "primary",
+            "capability_kind": "selectable",
+            "authorized_modes_by_task": {
+              "drying": [
+                "eco",
+                "fast"
+              ],
+              "dishes": [
+                "eco",
+                "fast"
+              ],
+              "water": [
+                "prepare"
+              ],
+              "meal": [
+                "prepare"
+              ],
+              "cleaning": [
+                "prepare"
+              ]
+            },
+            "requests": [
+              {
+                "task_id": "drying",
+                "release_at_ms": 0,
+                "deadline_ms": 1500000
+              },
+              {
+                "task_id": "dishes",
+                "release_at_ms": 0,
+                "deadline_ms": 1440000
+              },
+              {
+                "task_id": "water",
+                "release_at_ms": 0,
+                "deadline_ms": 420000
+              },
+              {
+                "task_id": "meal",
+                "release_at_ms": 0,
+                "deadline_ms": 960000
+              },
+              {
+                "task_id": "cleaning",
+                "release_at_ms": 0,
+                "deadline_ms": 720000
+              }
+            ],
+            "return_order_id": "declared_v8_provider_latency_contract",
+            "observation_end_contract": "v8_queue_drained_no_cross_horizon_pool",
+            "cost_unit": "synthetic_resource_unit_ms",
+            "metric_eligibility": "all_declared_required_services"
+          },
+          "required_ids": [
+            "drying",
+            "dishes",
+            "water",
+            "meal",
+            "cleaning"
+          ],
+          "started": {
+            "drying": {
+              "at_ms": 400,
+              "event_index": 26
+            },
+            "dishes": {
+              "at_ms": 400,
+              "event_index": 28
+            },
+            "water": {
+              "at_ms": 400,
+              "event_index": 30
+            },
+            "meal": {
+              "at_ms": 240400,
+              "event_index": 33
+            },
+            "cleaning": {
+              "at_ms": 240400,
+              "event_index": 35
+            }
+          },
+          "completed": {
+            "water": {
+              "at_ms": 240400,
+              "event_index": 31
+            },
+            "cleaning": {
+              "at_ms": 420400,
+              "event_index": 36
+            },
+            "meal": {
+              "at_ms": 540400,
+              "event_index": 37
+            },
+            "dishes": {
+              "at_ms": 600400,
+              "event_index": 38
+            },
+            "drying": {
+              "at_ms": 720400,
+              "event_index": 39
+            }
+          },
+          "on_time_ids": [
+            "cleaning",
+            "dishes",
+            "drying",
+            "meal",
+            "water"
+          ],
+          "coverage": {
+            "required": 5,
+            "started": 5,
+            "completed": 5,
+            "on_time": 5
+          },
+          "rates": {
+            "service_completion_rate": {
+              "value": 1.0,
+              "status": "ok",
+              "required": 5,
+              "completed": 5,
+              "on_time": 5,
+              "started": 5
+            },
+            "timely_service_rate": {
+              "value": 1.0,
+              "status": "ok",
+              "required": 5,
+              "completed": 5,
+              "on_time": 5,
+              "started": 5
+            },
+            "timely_among_completed": {
+              "value": 1.0,
+              "status": "ok",
+              "required": 5,
+              "completed": 5,
+              "on_time": 5,
+              "started": 5
+            }
+          },
+          "tasks": {
+            "drying": {
+              "wait_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 720400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "dishes": {
+              "wait_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 600400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "water": {
+              "wait_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 240400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "meal": {
+              "wait_ms": {
+                "value": 240400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 540400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "cleaning": {
+              "wait_ms": {
+                "value": 240400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 420400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            }
+          },
+          "actual_modes": {
+            "drying": "eco",
+            "dishes": "eco",
+            "water": "prepare",
+            "meal": "prepare",
+            "cleaning": "prepare"
+          },
+          "resource_intervals": [
+            {
+              "task_id": "water",
+              "operation": "prepare",
+              "start_event_index": 30,
+              "end_event_index": 31,
+              "start_ms": 400,
+              "end_ms": 240400,
+              "units": 2
+            },
+            {
+              "task_id": "cleaning",
+              "operation": "prepare",
+              "start_event_index": 35,
+              "end_event_index": 36,
+              "start_ms": 240400,
+              "end_ms": 420400,
+              "units": 1
+            },
+            {
+              "task_id": "meal",
+              "operation": "prepare",
+              "start_event_index": 33,
+              "end_event_index": 37,
+              "start_ms": 240400,
+              "end_ms": 540400,
+              "units": 1
+            },
+            {
+              "task_id": "dishes",
+              "operation": "eco",
+              "start_event_index": 28,
+              "end_event_index": 38,
+              "start_ms": 400,
+              "end_ms": 600400,
+              "units": 1
+            },
+            {
+              "task_id": "drying",
+              "operation": "eco",
+              "start_event_index": 26,
+              "end_event_index": 39,
+              "start_ms": 400,
+              "end_ms": 720400,
+              "units": 1
+            }
+          ],
+          "cost": {
+            "value": 2280000,
+            "status": "ok",
+            "required": 5,
+            "started": 5,
+            "completed": 5,
+            "on_time": 5
+          },
+          "all_service_completion_ms": {
+            "value": 720400,
+            "status": "ok",
+            "required": 5,
+            "started": 5,
+            "completed": 5,
+            "on_time": 5
+          }
+        },
+        "candidate_short_duration": {
+          "identity": {
+            "canonical_slot_id": "F3|v8|F3R1-D-F3-02-competition-base-selectable|ConstraintCoordinator|short_duration|primary",
+            "family": "C3-F3",
+            "source_version": "v8",
+            "source_path": "homecoord_bench/task_revision/fixtures/f3_v8/runs/F3R1-D-F3-02-competition-base-selectable.json",
+            "source_row_pointer": "/runs/5",
+            "source_sha256": "a30c73c033212af54d8c1d11f936c84087adcddeb59b9e287282b50e9e27fad6",
+            "base_world_id": "D-F3-02-competition-base",
+            "config_id": "F3R1-D-F3-02-competition-base-selectable",
+            "policy": "ConstraintCoordinator",
+            "selector": "short_duration",
+            "diagnostic_id": null,
+            "role": "primary",
+            "capability_kind": "selectable",
+            "authorized_modes_by_task": {
+              "drying": [
+                "eco",
+                "fast"
+              ],
+              "dishes": [
+                "eco",
+                "fast"
+              ],
+              "water": [
+                "prepare"
+              ],
+              "meal": [
+                "prepare"
+              ],
+              "cleaning": [
+                "prepare"
+              ]
+            },
+            "requests": [
+              {
+                "task_id": "drying",
+                "release_at_ms": 0,
+                "deadline_ms": 1500000
+              },
+              {
+                "task_id": "dishes",
+                "release_at_ms": 0,
+                "deadline_ms": 1440000
+              },
+              {
+                "task_id": "water",
+                "release_at_ms": 0,
+                "deadline_ms": 420000
+              },
+              {
+                "task_id": "meal",
+                "release_at_ms": 0,
+                "deadline_ms": 960000
+              },
+              {
+                "task_id": "cleaning",
+                "release_at_ms": 0,
+                "deadline_ms": 720000
+              }
+            ],
+            "return_order_id": "declared_v8_provider_latency_contract",
+            "observation_end_contract": "v8_queue_drained_no_cross_horizon_pool",
+            "cost_unit": "synthetic_resource_unit_ms",
+            "metric_eligibility": "all_declared_required_services"
+          },
+          "required_ids": [
+            "drying",
+            "dishes",
+            "water",
+            "meal",
+            "cleaning"
+          ],
+          "started": {
+            "drying": {
+              "at_ms": 400,
+              "event_index": 26
+            },
+            "meal": {
+              "at_ms": 400,
+              "event_index": 28
+            },
+            "dishes": {
+              "at_ms": 300400,
+              "event_index": 32
+            },
+            "water": {
+              "at_ms": 300400,
+              "event_index": 34
+            },
+            "cleaning": {
+              "at_ms": 540400,
+              "event_index": 37
+            }
+          },
+          "completed": {
+            "drying": {
+              "at_ms": 300400,
+              "event_index": 29
+            },
+            "meal": {
+              "at_ms": 300400,
+              "event_index": 30
+            },
+            "water": {
+              "at_ms": 540400,
+              "event_index": 35
+            },
+            "dishes": {
+              "at_ms": 660400,
+              "event_index": 38
+            },
+            "cleaning": {
+              "at_ms": 720400,
+              "event_index": 39
+            }
+          },
+          "on_time_ids": [
+            "dishes",
+            "drying",
+            "meal"
+          ],
+          "coverage": {
+            "required": 5,
+            "started": 5,
+            "completed": 5,
+            "on_time": 3
+          },
+          "rates": {
+            "service_completion_rate": {
+              "value": 1.0,
+              "status": "ok",
+              "required": 5,
+              "completed": 5,
+              "on_time": 3,
+              "started": 5
+            },
+            "timely_service_rate": {
+              "value": 0.6,
+              "status": "ok",
+              "required": 5,
+              "completed": 5,
+              "on_time": 3,
+              "started": 5
+            },
+            "timely_among_completed": {
+              "value": 0.6,
+              "status": "ok",
+              "required": 5,
+              "completed": 5,
+              "on_time": 3,
+              "started": 5
+            }
+          },
+          "tasks": {
+            "drying": {
+              "wait_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 300400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "dishes": {
+              "wait_ms": {
+                "value": 300400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 660400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "water": {
+              "wait_ms": {
+                "value": 300400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 540400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 120400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "meal": {
+              "wait_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 300400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 0,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            },
+            "cleaning": {
+              "wait_ms": {
+                "value": 540400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "latency_ms": {
+                "value": 720400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              },
+              "tardiness_ms": {
+                "value": 400,
+                "status": "ok",
+                "required": 1,
+                "started": 1,
+                "completed": 1
+              }
+            }
+          },
+          "actual_modes": {
+            "drying": "fast",
+            "meal": "prepare",
+            "dishes": "fast",
+            "water": "prepare",
+            "cleaning": "prepare"
+          },
+          "resource_intervals": [
+            {
+              "task_id": "drying",
+              "operation": "fast",
+              "start_event_index": 26,
+              "end_event_index": 29,
+              "start_ms": 400,
+              "end_ms": 300400,
+              "units": 3
+            },
+            {
+              "task_id": "meal",
+              "operation": "prepare",
+              "start_event_index": 28,
+              "end_event_index": 30,
+              "start_ms": 400,
+              "end_ms": 300400,
+              "units": 1
+            },
+            {
+              "task_id": "water",
+              "operation": "prepare",
+              "start_event_index": 34,
+              "end_event_index": 35,
+              "start_ms": 300400,
+              "end_ms": 540400,
+              "units": 2
+            },
+            {
+              "task_id": "dishes",
+              "operation": "fast",
+              "start_event_index": 32,
+              "end_event_index": 38,
+              "start_ms": 300400,
+              "end_ms": 660400,
+              "units": 2
+            },
+            {
+              "task_id": "cleaning",
+              "operation": "prepare",
+              "start_event_index": 37,
+              "end_event_index": 39,
+              "start_ms": 540400,
+              "end_ms": 720400,
+              "units": 1
+            }
+          ],
+          "cost": {
+            "value": 2580000,
+            "status": "ok",
+            "required": 5,
+            "started": 5,
+            "completed": 5,
+            "on_time": 3
+          },
+          "all_service_completion_ms": {
+            "value": 720400,
+            "status": "ok",
+            "required": 5,
+            "started": 5,
+            "completed": 5,
+            "on_time": 3
+          }
+        }
+      }
+    ]
+  },
+  "negative_controls": {
+    "F1_adequate_all_timely_runs": 36,
+    "F1_adequate_identical_gate_constraint_pairs": 12,
+    "F1_deadline_pairs_same_actual_time": 36,
+    "F2_adequate_all_timely_runs": 16,
+    "F2_adequate_release_water_invariant_pairs": 8,
+    "F2_tight_clock_only_pairs": 4,
+    "F3_adequate_all_timely_primary_runs": 96
+  },
+  "F3_predefined_summary": {
+    "status": "author_implementation_pending_review",
+    "scope": "F3_v8_only",
+    "adapter_acceptance": null,
+    "equal_world_factorial_summary": {
+      "timely_service_rate": {
+        "S": {
+          "value": 0.18333333333333335,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "M": {
+          "value": -0.04999999999999999,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "I": {
+          "value": -0.041666666666666685,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "T": {
+          "value": 0.09166666666666667,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        }
+      },
+      "service_completion_rate": {
+        "S": {
+          "value": 0.18333333333333335,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "M": {
+          "value": -0.04999999999999999,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "I": {
+          "value": 0.04999999999999999,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "T": {
+          "value": 0.18333333333333335,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        }
+      },
+      "all_service_completion_ms": {
+        "S": {
+          "value": null,
+          "status": "not_completed",
+          "valid_worlds": 4,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "M": {
+          "value": null,
+          "status": "not_completed",
+          "valid_worlds": 4,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "I": {
+          "value": null,
+          "status": "not_completed",
+          "valid_worlds": 4,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "T": {
+          "value": null,
+          "status": "not_completed",
+          "valid_worlds": 4,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        }
+      },
+      "cost": {
+        "S": {
+          "value": 210000.0,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "M": {
+          "value": -135000.0,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "I": {
+          "value": 255000.0,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        },
+        "T": {
+          "value": 330000.0,
+          "status": "ok",
+          "valid_worlds": 8,
+          "required_worlds": 8,
+          "weight_per_world": 0.125
+        }
+      }
+    },
+    "predefined_primary_four_cell_rate_summary": {
+      "Y00": {
+        "service_completion_rate": {
+          "pooled_request_rate": {
+            "value": 0.8125,
+            "status": "ok",
+            "numerator": 26,
+            "denominator": 32
+          },
+          "equal_world_mean_rate": {
+            "value": 0.8166666666666667,
+            "status": "ok",
+            "required_worlds": 8,
+            "weight_per_world": 0.125
+          }
+        },
+        "timely_service_rate": {
+          "pooled_request_rate": {
+            "value": 0.8125,
+            "status": "ok",
+            "numerator": 26,
+            "denominator": 32
+          },
+          "equal_world_mean_rate": {
+            "value": 0.8166666666666667,
+            "status": "ok",
+            "required_worlds": 8,
+            "weight_per_world": 0.125
+          }
+        }
+      },
+      "Y10": {
+        "service_completion_rate": {
+          "pooled_request_rate": {
+            "value": 1.0,
+            "status": "ok",
+            "numerator": 32,
+            "denominator": 32
+          },
+          "equal_world_mean_rate": {
+            "value": 1.0,
+            "status": "ok",
+            "required_worlds": 8,
+            "weight_per_world": 0.125
+          }
+        },
+        "timely_service_rate": {
+          "pooled_request_rate": {
+            "value": 1.0,
+            "status": "ok",
+            "numerator": 32,
+            "denominator": 32
+          },
+          "equal_world_mean_rate": {
+            "value": 1.0,
+            "status": "ok",
+            "required_worlds": 8,
+            "weight_per_world": 0.125
+          }
+        }
+      },
+      "Y01": {
+        "service_completion_rate": {
+          "pooled_request_rate": {
+            "value": 0.75,
+            "status": "ok",
+            "numerator": 24,
+            "denominator": 32
+          },
+          "equal_world_mean_rate": {
+            "value": 0.7666666666666666,
+            "status": "ok",
+            "required_worlds": 8,
+            "weight_per_world": 0.125
+          }
+        },
+        "timely_service_rate": {
+          "pooled_request_rate": {
+            "value": 0.75,
+            "status": "ok",
+            "numerator": 24,
+            "denominator": 32
+          },
+          "equal_world_mean_rate": {
+            "value": 0.7666666666666666,
+            "status": "ok",
+            "required_worlds": 8,
+            "weight_per_world": 0.125
+          }
+        }
+      },
+      "Y11": {
+        "service_completion_rate": {
+          "pooled_request_rate": {
+            "value": 1.0,
+            "status": "ok",
+            "numerator": 32,
+            "denominator": 32
+          },
+          "equal_world_mean_rate": {
+            "value": 1.0,
+            "status": "ok",
+            "required_worlds": 8,
+            "weight_per_world": 0.125
+          }
+        },
+        "timely_service_rate": {
+          "pooled_request_rate": {
+            "value": 0.90625,
+            "status": "ok",
+            "numerator": 29,
+            "denominator": 32
+          },
+          "equal_world_mean_rate": {
+            "value": 0.9083333333333333,
+            "status": "ok",
+            "required_worlds": 8,
+            "weight_per_world": 0.125
+          }
+        }
+      }
+    },
+    "diagnostics_in_primary_denominator": false,
+    "api_calls": 0,
+    "holdout_runs": 0,
+    "rankings": null
+  },
+  "pooled_cross_family_scores_created": false,
+  "rankings_created": false,
+  "new_simulator_runs": 0,
+  "api_calls": 0,
+  "holdout_read": false,
+  "claims_independently_accepted": false
+}

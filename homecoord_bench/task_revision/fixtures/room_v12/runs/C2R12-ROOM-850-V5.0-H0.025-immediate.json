@@ -1,0 +1,463 @@
+{
+  "result": {
+    "episode_id": "C2R12-ROOM-850-V5.0-H0.025-immediate",
+    "trace_id": "event_simulator.projected",
+    "final_goal_success": true,
+    "process_valid_success": true,
+    "constraint_violation_count": 0,
+    "precondition_violation_count": 0,
+    "conflict_counts": {
+      "C1": 0,
+      "C2": 0,
+      "C3": 0,
+      "C4": 0
+    },
+    "stale_action_count": 0,
+    "first_effective_action_latency_ms": 2000,
+    "task_completion_time_ms": 162000,
+    "task_action_finish_time_ms": {
+      "bedroom_air": null,
+      "bedroom_heat": 1500
+    },
+    "task_deadline_met": {
+      "bedroom_air": false,
+      "bedroom_heat": true
+    },
+    "all_deadlines_met": false,
+    "timely_process_valid_success": false,
+    "coordination_decision_latency_ms": null,
+    "task_service": {
+      "bedroom_air": false,
+      "bedroom_heat": true
+    },
+    "served_task_count": 1,
+    "serviceable_task_count": 2,
+    "task_service_rate": 0.5,
+    "policy": "ConstraintCoordinator",
+    "proposal_architecture": "ConstraintCoordinator",
+    "proposal_count": 2,
+    "accepted_action_count": 1,
+    "rejected_action_count": 0,
+    "completion_constraint_violation_count": 0,
+    "state_constraint_violation_episode_count": 0,
+    "state_constraint_violation_duration_ms": 0,
+    "precondition_violations_at_start": 0,
+    "stale_at_action_start_count": 0,
+    "unsafe_precondition_rejection_count": 0,
+    "in_flight_precondition_invalidated_action_count": 0,
+    "in_flight_precondition_invalidations": [],
+    "in_flight_precondition_invalidation_source_counts": {
+      "exogenous_update": 0,
+      "action_started": 0,
+      "action_completed": 0
+    },
+    "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+    "unsafe_state_onset_during_action_count": 0,
+    "unsafe_state_onsets_during_action": [],
+    "model_latency_by_task_ms": {
+      "bedroom_air": 300,
+      "bedroom_heat": 300
+    },
+    "coordination_delay_ms": 0,
+    "coordination_compute_measurements": [],
+    "coordination_compute_profile": null,
+    "shared_safety_gate": true,
+    "shared_safety_gate_rejection_count": 0,
+    "retry_queued_count": 0,
+    "retry_scheduled_count": 0,
+    "first_action_start_latency_ms": 500,
+    "first_goal_progress_latency_ms": 2000,
+    "physical_completion_semantics": "final effects apply on action_completed",
+    "api_calls_concurrent": false,
+    "task_response_metric_version": "own-release-0.1",
+    "task_correct_action_started": {
+      "bedroom_air": false,
+      "bedroom_heat": true
+    },
+    "task_correct_action_completed": {
+      "bedroom_air": false,
+      "bedroom_heat": true
+    },
+    "task_start_wait_ms": {
+      "bedroom_air": null,
+      "bedroom_heat": 400
+    },
+    "task_completion_latency_ms": {
+      "bedroom_air": null,
+      "bedroom_heat": 1400
+    },
+    "task_completion_tardiness_ms": {
+      "bedroom_air": null,
+      "bedroom_heat": 0
+    },
+    "task_unstarted_count": 1,
+    "task_incomplete_count": 1,
+    "max_observed_task_start_wait_ms": 400,
+    "task_start_within_1s": {
+      "bedroom_air": false,
+      "bedroom_heat": true
+    },
+    "environment": {
+      "source_kind": "synthetic_environment",
+      "calibration_status": "uncalibrated_synthetic",
+      "common_horizon_ms": 900000,
+      "deadline_ms": 360000,
+      "first_joint_goal_observed_ms": 162000,
+      "joint_goal_by_deadline": true,
+      "completion_tardiness_ms": 0,
+      "deadline_state_and_integrals": {
+        "at_ms": 360000,
+        "temperature_c": 21,
+        "co2_ppm": 850,
+        "window_closed": true,
+        "totals": {
+          "heater_energy_wh": 88.88888888889413,
+          "open_window_heater_wh": 0.0,
+          "ventilation_temperature_loss_c": 0.0,
+          "temperature_shortfall_c_s": 326.0000000000178,
+          "co2_excess_ppm_s": 0.0
+        }
+      },
+      "horizon_integrals": {
+        "heater_energy_wh": 88.88888888889413,
+        "open_window_heater_wh": 0.0,
+        "ventilation_temperature_loss_c": 0.0,
+        "temperature_shortfall_c_s": 326.0000000000178,
+        "co2_excess_ppm_s": 0.0
+      },
+      "maximum_observation_gap_ms": 1000,
+      "command_service_is_not_environment_service": true
+    },
+    "command_completion_is_not_physical_goal_completion": true,
+    "physical_goal_by_deadline": true,
+    "task_admission_legal": {
+      "bedroom_air": true,
+      "bedroom_heat": true
+    },
+    "task_correct_disposition": {
+      "bedroom_air": true,
+      "bedroom_heat": true
+    },
+    "task_disposition": {
+      "bedroom_air": "satisfied_without_actuation",
+      "bedroom_heat": "command_completed"
+    },
+    "task_disposition_latency_ms": {
+      "bedroom_air": 300,
+      "bedroom_heat": 1400
+    },
+    "task_disposition_deadline_met": {
+      "bedroom_air": true,
+      "bedroom_heat": true
+    }
+  },
+  "calls": [
+    {
+      "request": {
+        "request_id": "HC-M06:ConstraintCoordinator:bedroom_air",
+        "episode_id": "HC-M06",
+        "base_episode_id": "HC-M06",
+        "architecture": "ConstraintCoordinator",
+        "current_time_ms": 0,
+        "state_version": 106,
+        "state": {
+          "bedroom": {
+            "temperature_c": 17,
+            "co2_ppm": 850
+          },
+          "devices": {
+            "window": "closed",
+            "heater": "off"
+          }
+        },
+        "agent": {
+          "agent_id": "AirQualityAgent",
+          "role": "air_quality",
+          "tools": [
+            "set_window"
+          ],
+          "observable_state": [
+            "bedroom.temperature_c",
+            "bedroom.co2_ppm",
+            "devices.window",
+            "devices.heater"
+          ],
+          "writable_resources": [
+            "devices.window"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": []
+        },
+        "task": {
+          "task_id": "bedroom_air",
+          "agent_id": "AirQualityAgent",
+          "release_at_ms": 0,
+          "completion_deadline_ms": 360000,
+          "priority": 60,
+          "goal": "Ensure requested air quality: if currently satisfied, keep window closed without an opening command; otherwise ventilate and use trusted closure.",
+          "demand_rule": {
+            "path": "bedroom.co2_ppm",
+            "threshold_ppm": 900,
+            "satisfied_action": "keep_window_closed",
+            "unsatisfied_action": "ventilate_then_trusted_close"
+          }
+        },
+        "goals": [],
+        "constraints": [],
+        "allowed_tools": [
+          "set_window"
+        ],
+        "available_actions": [
+          {
+            "agent_id": "AirQualityAgent",
+            "tool_name": "set_window",
+            "target": "window",
+            "operation": "open",
+            "parameters": [],
+            "preconditions": [
+              {
+                "path": "bedroom.co2_ppm",
+                "op": "gt",
+                "value": 900
+              }
+            ],
+            "cost_contract": {
+              "duration_ms": 2000,
+              "resource_units": 0
+            }
+          }
+        ],
+        "pending_proposals": []
+      },
+      "decision": {
+        "response_type": "defer",
+        "actions": [],
+        "accepted_proposal_ids": [],
+        "rejected_proposal_ids": [],
+        "defer_until_ms": null,
+        "reason_code": "no_applicable_action"
+      }
+    },
+    {
+      "request": {
+        "request_id": "HC-M06:ConstraintCoordinator:bedroom_heat",
+        "episode_id": "HC-M06",
+        "base_episode_id": "HC-M06",
+        "architecture": "ConstraintCoordinator",
+        "current_time_ms": 100,
+        "state_version": 107,
+        "state": {
+          "bedroom": {
+            "temperature_c": 17.0,
+            "co2_ppm": 850
+          },
+          "devices": {
+            "window": "closed",
+            "heater": "off"
+          }
+        },
+        "agent": {
+          "agent_id": "HeatingAgent",
+          "role": "heating",
+          "tools": [
+            "set_heater"
+          ],
+          "observable_state": [
+            "bedroom.temperature_c",
+            "bedroom.co2_ppm",
+            "devices.window",
+            "devices.heater"
+          ],
+          "writable_resources": [
+            "devices.heater"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": []
+        },
+        "task": {
+          "task_id": "bedroom_heat",
+          "agent_id": "HeatingAgent",
+          "release_at_ms": 100,
+          "completion_deadline_ms": 360000,
+          "priority": 80,
+          "goal": "Issue the authorized heating command; environmental temperature service is scored separately."
+        },
+        "goals": [],
+        "constraints": [],
+        "allowed_tools": [
+          "set_heater"
+        ],
+        "available_actions": [
+          {
+            "agent_id": "HeatingAgent",
+            "tool_name": "set_heater",
+            "target": "heater",
+            "operation": "heat_high",
+            "parameters": [],
+            "preconditions": [],
+            "cost_contract": {
+              "duration_ms": 1000,
+              "resource_units": 0
+            }
+          }
+        ],
+        "pending_proposals": []
+      },
+      "decision": {
+        "response_type": "action_proposal",
+        "actions": [
+          {
+            "proposal_id": "HC-M06:ConstraintCoordinator:bedroom_heat:0",
+            "target": "heater",
+            "operation": "heat_high",
+            "parameters": [],
+            "based_on_state_version": 107,
+            "requires": [],
+            "estimated_duration_ms": 1000,
+            "estimated_power_kw": 0
+          }
+        ],
+        "accepted_proposal_ids": [],
+        "rejected_proposal_ids": [],
+        "defer_until_ms": null,
+        "reason_code": "goal_progress"
+      }
+    }
+  ],
+  "audit": {
+    "status": "author_recount_not_acceptance",
+    "request_recount": {
+      "task_admission_legal": {
+        "bedroom_air": true,
+        "bedroom_heat": true
+      },
+      "task_correct_disposition": {
+        "bedroom_air": true,
+        "bedroom_heat": true
+      },
+      "task_disposition": {
+        "bedroom_air": "satisfied_without_actuation",
+        "bedroom_heat": "command_completed"
+      },
+      "task_disposition_latency_ms": {
+        "bedroom_air": 300,
+        "bedroom_heat": 1400
+      },
+      "task_disposition_deadline_met": {
+        "bedroom_air": true,
+        "bedroom_heat": true
+      }
+    },
+    "physical_recount": {
+      "actuator_replay": "passed",
+      "thermal_and_CO2_endpoints": "passed",
+      "unit_and_heat_balance": "passed",
+      "deadline_and_horizon_integrals": "passed",
+      "interval_count": 905
+    },
+    "skipped_without_command": [
+      "bedroom_air"
+    ],
+    "first_environment_goal_not_sustained_goal": true
+  },
+  "trace_encoding": "zlib+base64+utf8-json",
+  "trace_sha256": "b93b7737709708f086073386d1c6f7bf96feb2a58d5095434602aee82648488b",
+  "trace_zlib_base64": "eNrtnV1vHUeSpv+KoGtbOPkVmam9ahgL9F40BjMXe9NoEDR5LBFNkWqSstfb6P++dfghZobrrS5FpT1R2PDNTFPUYfKNPBH5sPQk//n24e784nh2dfn2/dsf/H85//1//cd//OX7kg7f/+/07vD9nw/vDj59f/Xp0/Hy6vzh+O6H25v76e9c3Tz8cHt7d3l1c/5we/fu+PPx5uHs/urT2+/eHj9f3d9efsNrTn/n8+311cWvp8+fe/nTJ9zdfr69P78+O7+7+Hj1cLx4+HJ3XPj8xwXdv33/13++ffj18+kzH87v/352d7w+nt8fL6fPeLj6dLx/OP/0+ezT9HmH754+4XHRPx4v725vP52dX51e6vzD6Xt7/IM/Xd3955fz66uHX/90+uD0h9MrPBzPfj7e3V/d3rx97w703du74z++TC/99Ff+/MP3fznQ+9l1vm+/0L+++7rUpxf98vnyKZx+pe4wrfXm+MvZb750npZz++Xu4vElfr15+Hh8uLo4O978fHV3e/Ppab2fzx8uPr59/8+X7/Hdw/HT5+Pd+SnOs4vpVfK76eVf/vDi1p99/vzp7fupdv9qFric5eMKf5vmx+P5Qx/nn6ePXN18gFlmSZaPX2ZtmAGGWf6wML9u7bvj9BdvZgINB+n2lG3F795eT2ncXPz6+tXvjvefp793PHte9OXxp2O3Z1++0v1U0vufro6XZ79cPXy8/fJwdj69V6cPTrF+0/d1N22uUyneXny5uzt9i9OHzz7cTjm1X+Lm8vaXs4vr29M+bFbzFMrN7emLC77yv/leF7dUhFuqKtpSUfgeFb4fV+yop0qdvSy9zfvi5WVPn3B5vLi6n6vp8rf0NZJvW/n7w/R3v37J0yovjp+7/vK87unbOd79/M1Jb1nW/cXH4+WX6+l9MH21u4fHr5ZOX+3yy91TVs/d+HAasL8c787+/ss06dZu5IQ2sjv8YRv5OdzH728m28cl4s36u6Q+LeXD8WH6a6ePHE/94vbx+3raH6cPnn28+vDx7b8rw/TNn6bn2dO3Nzv4rqZNNR1h/vY4GqcCH3/6aTr4TB/657++m94Unz5fHx9f//Xj01b9+erieP/ueXHv3x5vzn+8fmyO/Xw9m9b5+KqPBf2GwwfaFO4P2xTLK8Tb1v/R2/a5RHNHJN07d+WGmk05rK2Ux3spDqqU82njdgp4kWnQIkOO9et/ZeN6I14vDVov+Wa9tHG9Ca93FM6UNt+t+4HwegcRw9SnmvXGjevNeL2DjqOu279+43oLXK8fdOpw3f7duNyKlztoHrpu+24djge83kHT0bfbt2xtZw4fOHwYtOB2/5at/czhqeYHTTXfbuCytaE5POH8oAnn2y1ctnY0h0ecHzTiQreH/YATKVrwoBkXuj28db14xvlBMy50W3jrevGM84NmXGh3cN68YDzkwqAhF9sdnPPWBeMxFwaNudju4Ly1qXk858KgORfbLZy3NjWP51wYNOdit4e3NjWP51wYNOdSt4e3rhePuTBozKVuC29dL55yYdCUS+0Opq1NzeMpFwZNudTuYNqcMB5zYdCYo3YH0+amhudcGDTnqN3CtLmp4TkXB8056vbw5qaG51wcNOeo28MDfjiF1jtozOVuC29dL55ycdCUy+0OTlubWsBTLg6acrndwWlrUwt4zMVBYy63Ozht/vkqnnNx0Jwr7RZOW5tawHMuDppzpdvDW5tawHMuDppzpdvDW9eLx1wcNOZKt4W3rhdPuTRoytV2B8fNTQ1PuTRoytV2B8c84JkGWvCgMVfbHRy3bomI51waNOdqu4Xj1qYW8ZxLQ+ZcOT2Laxa8talFPOdSGrTgbg9vXS8ec4kGrbfbwlvXi6dcyoPW2+7gsPm5J55yqYxZcPdgLmxuanjMpTpowe0ODpubGp5zdBi04HYLh817GM85coMW3O1hP+BZOFqwH7Pg7ulc2LpePOYoDFpvt4W3rhdPORo05bpnc5vXi4ccDRpy3aM5v7WnJTzlaNCU6x7Nbf7XPQmPORo05rpHc35rT0t4zNGgMdc9m/Ob9zAeczRozHUP5zb3YDzl8qAp1z2b27xePOTyoCHXPZrzA/79FFrvoBnXPZlzW3sa4SGXBw257smc2/wv1PCUy4OmXPdkzm3taYTHXB405rpHc25rTyM85vKgMdc9m3Nb14unXB405bpHc5vXi4dcHjTkuidzm9eLZ1weNOO6B3OHzT0ND7kyaMh1D+YOm3sannJl0JTrHswdRvyzW7TgQWOuezJ32NrTMh5zZdCY6x7NbV0uHnJl0JDrHsxtXS4ecWXQiOsey21dLh5wZdCAax/Klc3/WibjCVcGTbj2oVzZ/CQ84xFXBo249qFc2e4R4BlXBs249qlc2fzDk4xnXB0042q3h7euF4+4OmjE1W4LDxA10HoHTbhKA/MteMDVQQOufSZXytaeVvCIq0NGXO2eyZXN6kPBQ66mQQtud/Bmk6DgMVdp0ILbLVy29rSCx1zNgxbc7eGt68VTrpYx63XdFt66Xjzkah203jAyXzjj/OEwaL3tBt4sEpSKF+wGLbjdwJkG+H1owX7MgttHcmWzSFAdXnAYtOB2C+etPa16vOBBY853e3jregNe76Ap57stvHW9Ea930JALbmS+Ca930IxrH8mVzR5BJbzgQUOufSRXaHNPy3jBg6Zc+0iubPYIKh5zbtCYa5/JFdrc0/CYc4PGXOz28AgtHC140JiL3R7evGA85tygMRfL0ITxmHODxlz7VK5sNgncAQ86N2jQtY/lStqeMR51btCoa5/Llc0ugTvgYecGDbv2yVxJYfOK8bRzg6Yddft484LxtHODph1123jzgvG084OmHdHQhPG084OmXftwrmz2CRy+BsX7QeOufTpX4ubWhu9B8X7QvGsfz5XNRoHDF6F4P2jgtU/oStzc2vBNKN4PGni528ebF4znnR8077rHdNsXjMedHzTuusd02xeMp50fNO26x3Rhe2vD484PGnfdc7qwvbXheRcGzbvuQV3YvivwwAuDBl73qC6EEZdSoRUPGnjdw7rtC8bzLgyad93Tuu0LxuNuyH0o/tA/rdu+YDzthlyIclpwu4k3ywUOX4nih1yJclpxu4n99rvg8LwbcifKacXtLt6sFzh8KYofcinKtOLuiZ3fvo/xwBtyK8ppxd0+3rxgPO+G3IpyWnC3jTcvGI+7IbeinBZcRiaMr0XxQ65FmRbcPbTb7Bg4fDGKH3IxymnF7SZ2m1sbvhnFx0Hzrnts57bfc4kHXhw08LoHd5s1A4fvRvFx0MDrHt25zQvG8y4Omnfds7vtC8bjLg4ad92zu+0LxtMuDpp23bO7w/bWhsddGjTuuod3h+2tDc+7NGjedU/vNtsRDl+Q4tOggdc9vttsGzh8Q4pPgwZe9/xu83rxuEuDxl33+G7zevGwS4OGXffwbvN68ahLg0Zd++gubzYOHL4hxadBs659dJc3KwcOX5Hi06Bh1z66y3V7X8PTLg2adu2zu1y39zU87WjQtKNuH2+GJXxLiqdB0466fTziNnW04EHDLnfbePOC8ayjQbOufXaXt//SBXxRiqdB0659dpe3//MafFWKp0Hzrn12l7c/Ncd3pXgaNPHah3d5+0+M8WUpngZNvNLt4+2/eAFPPBo08Uq3jzcvGA88GjTwSreNNy8Yz7s8aN61D+/ygBXjeZcHzbv24V3erCA4fGWKz4MGXvvwLm/+7QsO35ni86CJ1z69y5slBIcvTfFDLk3xm3/yg29J8UNuSRmwQjzRhlyLMmCFeIINuQhlwArxxBpy9cmAFeIRNeSykwErxDNpyO0mA1aIZ9CQ60y2rxDfX+KH3F8yYIV4xgy5sGTACvFMKTpmCr6WxBcdMwXfROKLjpmCrx7xRcdMwXeN+KJjpuDLRXzRMVPwbSK+6pgp+P4QX3XMFHxjiK86Zgq+I8RXHTMFXwriq46Zgm8B8VXHTMHXfviqY6bgez581TFT8M0evuqYKfguD191zBR8e0c46Jgp+LqOcNAxU/D9HOGgY6bgCznCQcdMwTdwhIOOmYLv3AgHHTMF37IRDjpmCr5XIxx0zBR8kUY46Jgp+OaMcNAxU/BVGcHpmCn4bozgVMwUjy/DCM7rWCGeKS7oWCGeKS7qWCGeKS7pWCGeKY50rBDPFJd1rBDPFFd0rBDPFFd1rBDPFH/QsUI8U7yOmYJvnAhex0zBN0wEr2Om4BslgtcxU/ANEsHrmCn4yojgdcwUfEdE8DpmCr4UIngdMwVfAhG8jpmCL30IQcdMwZc8hKBjpuBLHULQMVPwLQ4h6Jgp+NqGEHTMFHxPQwg6Zgq+lyEEHTMF38MQgo6Zgu9dCEHHTMH3LISgY6bgixVC1DFT8E0KIeqYKfjqhBB1zBR8VUKIOmYKvhohRB0zBV+FEKKOmYKvPghRx0zBdx2EqGOm4MsNQtQxU/BtBiHqmCn49oKQdMwUfFtBSDpmCr6dICQdMwXfRhCSjpmC7x8IScdMwTcOhKRjpuA7BkLSMVPwnQIh6Zgp+A6BkHTMFHxnQEg6Zgq+IyCQjpmC7wQIpGOm4EsAAumYKdj6D6RjpmDLP5COmYKt/kA6Zgq2+APpmCnY2g+kY6ZgSz+QjpmCtfxAOmYK9vBD1jFTsHcfso6Zgj37kHXMFOzVh6xjpmCPPujw6D326IMOj95jjz7o8Og99uiDDo/eY48+6PDoPfbogw6P3mOPPujw6D326IMOj95jjz7o8Og99uiDDo/eY48+6PDoPfbogw6P3mOPPujw6D326IMOj95jjz7o8Og99uiDDo/eY48+6PDoPfbogw6P3mOPPujw6D326IMOj95jjz7o8Og99uiDDo/eY48+6PDoPfbogw6P3mOPPujw6D326IMOj95jjz7q8Og99uijDo/eY48+6vDoPfboow6P3mOPPurw6D326KMOj95jjz7q8Og99uijDo/eY48+6vDoPfboow6P3mOPPurw6D326KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPurw6AP26KMOjz5gjz7q8OgD9uijDo8+YI8+6vDoA/boow6PPmCPPunw6AP26JMOjz5gjz7p8OgD9uiTDo8+YI8+6fDoA/bokw6PPmCPPunw6AP26JMOjz5gjz7p8OgD9uiTDo8+YI8+6fDoA/bokw6PPmKPPunw6CP26JMOjz5ijz7p8Ogj9uiTDo8+Yo8+6fDoI/bokw6PPmKPPunw6CP26JMOjz5ijz7p8Ogj9uiTDo8+Yo8+6fDoI/bokw6PPmKPPunw6CP26JMO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Fx0ePWGPvujw6Al79EWHR0/Yoy86PHrCHn3R4dET9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77o8Ogz9uiLDo8+Y4++6PDoM/boiw6PPmOPvujw6DP26IsOjz5jj77q8Ogz9uirDo8+Y4++6vDoM/boqw6PPmOPvurw6DP26KsOjz5jj77q8Ogz9uirDo8+Y4++6vDoM/boqw6PPmOPvurw6DP26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCPvurw6Av26KsOj75gj77q8OgL9uirDo++YI++6vDoC/boqw6PvmCP/qkNaVhiXViijqmCTfppiTrGClbppz/QMVewSz8tUcdgwTL9tEQdkwXb9NMSdYwWrNNPS9QxW7BPPy1Rx3DBQv20RB3TpS5MFx1KfakL00WHU18PC9Pld5bq//bd25+ubs6vn75w8xKn/3fmVbq//d3by+PPVxfH+9Mn/3J1c3n7y7TIi+vb++PltKqPx+kl76aPHG/Of7yePjQl0n41/m2ef5i+m7O74z++TOFMr/nXf759/h9nV5fTy/z5h+//cqD3P9ze3D/cnV/dPPxwe3t3Ob3ew+3d++dln51f3U1f+vj56v728tj+vemjP57fH8/m/+j87uLj1cPx4vS9Th+f/RrTp118ubs7LfJUwMfanfY4/17o+WPLaZ4ccFGatz/99JjkY1ynz33K7fH7+dPV3X9+Ob++evj1Tx+etsbd7fXpG5piOfvH05+c9t/t7fUp4Lf3x4ez5y817YTbH++Pdz+favWyHf4KdtRvt9PX1b97fr3XDzyvfPoCv9xdPTy+/N3xaU8/LoL9xenzPtxOe+Tnq/urH68eV/z+7fXtxfn1qQBfCzP/559vr68ufj17/bTTV/jblNbD+f3fH6sw/d+nrPodsxzi8fp42jvnDy9Fv7j99Pl6eife3pxdHs8vr69unvZDeH5O+vnu6vbucWmnf7V0+n6mF/6fN/dTfG+eN/Xx8s30pd88V+X9m6uf3jxvr+tf39yf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",
+  "readable_non_environment_events": [
+    {
+      "type": "task_released",
+      "timestamp_ms": 0,
+      "task_id": "bedroom_air",
+      "agent_id": "AirQualityAgent",
+      "state_version": 106,
+      "request_id": "HC-M06:ConstraintCoordinator:bedroom_air"
+    },
+    {
+      "type": "task_released",
+      "timestamp_ms": 100,
+      "task_id": "bedroom_heat",
+      "agent_id": "HeatingAgent",
+      "state_version": 107,
+      "request_id": "HC-M06:ConstraintCoordinator:bedroom_heat"
+    },
+    {
+      "type": "proposal_returned",
+      "timestamp_ms": 300,
+      "task_id": "bedroom_air",
+      "agent_id": "AirQualityAgent",
+      "request_id": "HC-M06:ConstraintCoordinator:bedroom_air",
+      "latency_ms": 300,
+      "response_type": "defer"
+    },
+    {
+      "type": "request_satisfied_without_actuation",
+      "timestamp_ms": 300,
+      "task_id": "bedroom_air",
+      "reason": "current_air_goal_satisfied_window_closed"
+    },
+    {
+      "type": "agent_no_action",
+      "timestamp_ms": 300,
+      "task_id": "bedroom_air",
+      "response_type": "defer"
+    },
+    {
+      "type": "proposal_returned",
+      "timestamp_ms": 400,
+      "task_id": "bedroom_heat",
+      "agent_id": "HeatingAgent",
+      "request_id": "HC-M06:ConstraintCoordinator:bedroom_heat",
+      "latency_ms": 300,
+      "response_type": "action_proposal"
+    },
+    {
+      "type": "coordination_decision",
+      "timestamp_ms": 400,
+      "task_id": "bedroom_heat",
+      "proposal_id": "HC-M06:ConstraintCoordinator:bedroom_heat:0",
+      "decision": "accept"
+    },
+    {
+      "type": "action_reserved",
+      "timestamp_ms": 400,
+      "task_id": "bedroom_heat",
+      "proposal_id": "HC-M06:ConstraintCoordinator:bedroom_heat:0",
+      "scheduled_start_ms": 500,
+      "duration_ms": 1000,
+      "power_kw": 0
+    },
+    {
+      "type": "action_started",
+      "timestamp_ms": 500,
+      "agent_id": "HeatingAgent",
+      "task_id": "bedroom_heat",
+      "proposal_id": "HC-M06:ConstraintCoordinator:bedroom_heat:0",
+      "target": "heater",
+      "operation": "heat_high",
+      "duration_ms": 1000,
+      "power_kw": 0,
+      "based_on_state_version": 107,
+      "requires": [],
+      "start_effects": {},
+      "completion_effects": {
+        "devices.heater": "enabled"
+      },
+      "state_version_at_start": 110
+    },
+    {
+      "type": "action_completed",
+      "timestamp_ms": 1500,
+      "agent_id": "HeatingAgent",
+      "task_id": "bedroom_heat",
+      "proposal_id": "HC-M06:ConstraintCoordinator:bedroom_heat:0",
+      "target": "heater",
+      "operation": "heat_high",
+      "effects": {
+        "devices.heater": "enabled"
+      },
+      "new_state_version": 113
+    }
+  ]
+}

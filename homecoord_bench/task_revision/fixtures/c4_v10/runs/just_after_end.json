@@ -1,0 +1,2716 @@
+{
+  "runs": [
+    {
+      "policy": "IndependentMultiAgent",
+      "trace": {
+        "trace_id": "C4R2-CLEAN-just_after_end.IndependentMultiAgent.event_sim",
+        "episode_id": "C4R2-CLEAN-just_after_end",
+        "policy": "IndependentMultiAgent",
+        "proposal_architecture": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "state_version": 116,
+            "request_id": "HC-M16:IndependentMultiAgent:bedroom_clean"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "state_version": 116,
+            "request_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "request_id": "HC-M16:IndependentMultiAgent:bedroom_clean",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_clean:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_clean:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.2
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "request_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 117,
+            "patch": {
+              "devices.bedroom_robot": "running"
+            },
+            "source": "action_started",
+            "task_id": "bedroom_clean"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "duration_ms": 3000,
+            "power_kw": 0.2,
+            "based_on_state_version": 116,
+            "requires": [
+              {
+                "path": "bedroom.occupied",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.bedroom_robot": "running"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 116,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "new_state_version": 119
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 3401,
+            "new_state_version": 120,
+            "patch": {
+              "bedroom.occupied": true
+            },
+            "source": "validity_lost"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 5000,
+            "new_state_version": 121,
+            "patch": {
+              "bedroom.occupied": false
+            },
+            "source": "validity_restored"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 10000,
+            "new_state_version": 122,
+            "patch": {
+              "diagnostic.heartbeat": 2
+            },
+            "source": "observation_end"
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": false,
+            "clean": false
+          },
+          "devices": {
+            "bedroom_robot": "idle",
+            "occupancy_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 2
+          }
+        },
+        "final_state_version": 122,
+        "agent_requests": [
+          {
+            "request_id": "HC-M16:IndependentMultiAgent:bedroom_clean",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 10000,
+              "priority": 70,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 3000,
+                  "resource_units": 0.2
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 2000,
+              "priority": 90,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "cost_contract": {
+                  "duration_ms": 100,
+                  "resource_units": 0.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 16
+      },
+      "result": {
+        "episode_id": "C4R2-CLEAN-just_after_end",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 500,
+        "task_completion_time_ms": 3400,
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "task_deadline_met": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "all_deadlines_met": true,
+        "timely_process_valid_success": true,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "policy": "IndependentMultiAgent",
+        "proposal_architecture": "IndependentMultiAgent",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "bedroom_clean": 300,
+          "bedroom_occupancy": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 500,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_correct_action_completed": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_start_wait_ms": {
+          "bedroom_clean": 400,
+          "bedroom_occupancy": 400
+        },
+        "task_completion_latency_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "task_completion_tardiness_ms": {
+          "bedroom_clean": 0,
+          "bedroom_occupancy": 0
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 400,
+        "task_start_within_1s": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0
+      },
+      "calls": [
+        {
+          "request": {
+            "request_id": "HC-M16:IndependentMultiAgent:bedroom_clean",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 10000,
+              "priority": 70,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 3000,
+                  "resource_units": 0.2
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_clean:0",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 3000,
+                "estimated_power_kw": 0.2
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        },
+        {
+          "request": {
+            "request_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 2000,
+              "priority": 90,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "cost_contract": {
+                  "duration_ms": 100,
+                  "resource_units": 0.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy:0",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [],
+                "estimated_duration_ms": 100,
+                "estimated_power_kw": 0.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        }
+      ],
+      "audit": {
+        "status": "author_recount_not_acceptance",
+        "actual_event_stages": [
+          {
+            "event_index": 13,
+            "timestamp_ms": 3401,
+            "actual_stage": "after_service_completion",
+            "nominal_window": "LATE"
+          }
+        ],
+        "service_recount": {
+          "task_correct_action_completed": {
+            "bedroom_clean": true,
+            "bedroom_occupancy": true
+          },
+          "task_start_wait_ms": {
+            "bedroom_clean": 400,
+            "bedroom_occupancy": 400
+          },
+          "task_completion_latency_ms": {
+            "bedroom_clean": 3400,
+            "bedroom_occupancy": 500
+          },
+          "task_completion_tardiness_ms": {
+            "bedroom_clean": 0,
+            "bedroom_occupancy": 0
+          },
+          "task_deadline_met": {
+            "bedroom_clean": true,
+            "bedroom_occupancy": true
+          }
+        },
+        "request_disposition": {
+          "bedroom_clean": "completed",
+          "bedroom_occupancy": "completed"
+        },
+        "valid_withdrawal_by_task": {},
+        "physical_completions_after_invalidation": [],
+        "physical_completions_after_withdrawal": [],
+        "response_records": [],
+        "harm_duration_ms": 0,
+        "zero_harm": true,
+        "execution_intervals": [
+          {
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_occupancy:0",
+            "start_ms": 400,
+            "end_ms": 500,
+            "units": 0.0
+          },
+          {
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:IndependentMultiAgent:bedroom_clean:0",
+            "start_ms": 400,
+            "end_ms": 3400,
+            "units": 0.2
+          }
+        ],
+        "attribution": "trusted local interlock; reference delay is synthetic, not empirical inevitability or LLM error"
+      }
+    },
+    {
+      "policy": "ConstraintCoordinator",
+      "trace": {
+        "trace_id": "C4R2-CLEAN-just_after_end.ConstraintCoordinator.event_sim",
+        "episode_id": "C4R2-CLEAN-just_after_end",
+        "policy": "ConstraintCoordinator",
+        "proposal_architecture": "ConstraintCoordinator",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "state_version": 116,
+            "request_id": "HC-M16:ConstraintCoordinator:bedroom_clean"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "state_version": 116,
+            "request_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "request_id": "HC-M16:ConstraintCoordinator:bedroom_clean",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_clean:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_clean:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.2
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "request_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 117,
+            "patch": {
+              "devices.bedroom_robot": "running"
+            },
+            "source": "action_started",
+            "task_id": "bedroom_clean"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "duration_ms": 3000,
+            "power_kw": 0.2,
+            "based_on_state_version": 116,
+            "requires": [
+              {
+                "path": "bedroom.occupied",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.bedroom_robot": "running"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 116,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "new_state_version": 119
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 3401,
+            "new_state_version": 120,
+            "patch": {
+              "bedroom.occupied": true
+            },
+            "source": "validity_lost"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 5000,
+            "new_state_version": 121,
+            "patch": {
+              "bedroom.occupied": false
+            },
+            "source": "validity_restored"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 10000,
+            "new_state_version": 122,
+            "patch": {
+              "diagnostic.heartbeat": 2
+            },
+            "source": "observation_end"
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": false,
+            "clean": false
+          },
+          "devices": {
+            "bedroom_robot": "idle",
+            "occupancy_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 2
+          }
+        },
+        "final_state_version": 122,
+        "agent_requests": [
+          {
+            "request_id": "HC-M16:ConstraintCoordinator:bedroom_clean",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 10000,
+              "priority": 70,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 3000,
+                  "resource_units": 0.2
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 2000,
+              "priority": 90,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "cost_contract": {
+                  "duration_ms": 100,
+                  "resource_units": 0.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 16
+      },
+      "result": {
+        "episode_id": "C4R2-CLEAN-just_after_end",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 500,
+        "task_completion_time_ms": 3400,
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "task_deadline_met": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "all_deadlines_met": true,
+        "timely_process_valid_success": true,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "policy": "ConstraintCoordinator",
+        "proposal_architecture": "ConstraintCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "bedroom_clean": 300,
+          "bedroom_occupancy": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 500,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_correct_action_completed": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_start_wait_ms": {
+          "bedroom_clean": 400,
+          "bedroom_occupancy": 400
+        },
+        "task_completion_latency_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "task_completion_tardiness_ms": {
+          "bedroom_clean": 0,
+          "bedroom_occupancy": 0
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 400,
+        "task_start_within_1s": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0
+      },
+      "calls": [
+        {
+          "request": {
+            "request_id": "HC-M16:ConstraintCoordinator:bedroom_clean",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 10000,
+              "priority": 70,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 3000,
+                  "resource_units": 0.2
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_clean:0",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 3000,
+                "estimated_power_kw": 0.2
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        },
+        {
+          "request": {
+            "request_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 2000,
+              "priority": 90,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "cost_contract": {
+                  "duration_ms": 100,
+                  "resource_units": 0.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy:0",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [],
+                "estimated_duration_ms": 100,
+                "estimated_power_kw": 0.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        }
+      ],
+      "audit": {
+        "status": "author_recount_not_acceptance",
+        "actual_event_stages": [
+          {
+            "event_index": 13,
+            "timestamp_ms": 3401,
+            "actual_stage": "after_service_completion",
+            "nominal_window": "LATE"
+          }
+        ],
+        "service_recount": {
+          "task_correct_action_completed": {
+            "bedroom_clean": true,
+            "bedroom_occupancy": true
+          },
+          "task_start_wait_ms": {
+            "bedroom_clean": 400,
+            "bedroom_occupancy": 400
+          },
+          "task_completion_latency_ms": {
+            "bedroom_clean": 3400,
+            "bedroom_occupancy": 500
+          },
+          "task_completion_tardiness_ms": {
+            "bedroom_clean": 0,
+            "bedroom_occupancy": 0
+          },
+          "task_deadline_met": {
+            "bedroom_clean": true,
+            "bedroom_occupancy": true
+          }
+        },
+        "request_disposition": {
+          "bedroom_clean": "completed",
+          "bedroom_occupancy": "completed"
+        },
+        "valid_withdrawal_by_task": {},
+        "physical_completions_after_invalidation": [],
+        "physical_completions_after_withdrawal": [],
+        "response_records": [],
+        "harm_duration_ms": 0,
+        "zero_harm": true,
+        "execution_intervals": [
+          {
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_occupancy:0",
+            "start_ms": 400,
+            "end_ms": 500,
+            "units": 0.0
+          },
+          {
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:ConstraintCoordinator:bedroom_clean:0",
+            "start_ms": 400,
+            "end_ms": 3400,
+            "units": 0.2
+          }
+        ],
+        "attribution": "trusted local interlock; reference delay is synthetic, not empirical inevitability or LLM error"
+      }
+    },
+    {
+      "policy": "DeadlineAwareCoordinator",
+      "trace": {
+        "trace_id": "C4R2-CLEAN-just_after_end.DeadlineAwareCoordinator.event_sim",
+        "episode_id": "C4R2-CLEAN-just_after_end",
+        "policy": "DeadlineAwareCoordinator",
+        "proposal_architecture": "DeadlineAwareCoordinator",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "state_version": 116,
+            "request_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "state_version": 116,
+            "request_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "request_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "request_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.2
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 116,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 116
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 117,
+            "patch": {
+              "devices.bedroom_robot": "running"
+            },
+            "source": "action_started",
+            "task_id": "bedroom_clean"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "duration_ms": 3000,
+            "power_kw": 0.2,
+            "based_on_state_version": 116,
+            "requires": [
+              {
+                "path": "bedroom.occupied",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.bedroom_robot": "running"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "new_state_version": 119
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 3401,
+            "new_state_version": 120,
+            "patch": {
+              "bedroom.occupied": true
+            },
+            "source": "validity_lost"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 5000,
+            "new_state_version": 121,
+            "patch": {
+              "bedroom.occupied": false
+            },
+            "source": "validity_restored"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 10000,
+            "new_state_version": 122,
+            "patch": {
+              "diagnostic.heartbeat": 2
+            },
+            "source": "observation_end"
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": false,
+            "clean": false
+          },
+          "devices": {
+            "bedroom_robot": "idle",
+            "occupancy_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 2
+          }
+        },
+        "final_state_version": 122,
+        "agent_requests": [
+          {
+            "request_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 10000,
+              "priority": 70,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 3000,
+                  "resource_units": 0.2
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 2000,
+              "priority": 90,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "cost_contract": {
+                  "duration_ms": 100,
+                  "resource_units": 0.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 16
+      },
+      "result": {
+        "episode_id": "C4R2-CLEAN-just_after_end",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 500,
+        "task_completion_time_ms": 3400,
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "task_deadline_met": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "all_deadlines_met": true,
+        "timely_process_valid_success": true,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "policy": "DeadlineAwareCoordinator",
+        "proposal_architecture": "DeadlineAwareCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "bedroom_clean": 300,
+          "bedroom_occupancy": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 500,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_correct_action_completed": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_start_wait_ms": {
+          "bedroom_clean": 400,
+          "bedroom_occupancy": 400
+        },
+        "task_completion_latency_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "task_completion_tardiness_ms": {
+          "bedroom_clean": 0,
+          "bedroom_occupancy": 0
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 400,
+        "task_start_within_1s": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0
+      },
+      "calls": [
+        {
+          "request": {
+            "request_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 10000,
+              "priority": 70,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 3000,
+                  "resource_units": 0.2
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean:0",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 3000,
+                "estimated_power_kw": 0.2
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        },
+        {
+          "request": {
+            "request_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 2000,
+              "priority": 90,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "cost_contract": {
+                  "duration_ms": 100,
+                  "resource_units": 0.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy:0",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [],
+                "estimated_duration_ms": 100,
+                "estimated_power_kw": 0.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        }
+      ],
+      "audit": {
+        "status": "author_recount_not_acceptance",
+        "actual_event_stages": [
+          {
+            "event_index": 13,
+            "timestamp_ms": 3401,
+            "actual_stage": "after_service_completion",
+            "nominal_window": "LATE"
+          }
+        ],
+        "service_recount": {
+          "task_correct_action_completed": {
+            "bedroom_clean": true,
+            "bedroom_occupancy": true
+          },
+          "task_start_wait_ms": {
+            "bedroom_clean": 400,
+            "bedroom_occupancy": 400
+          },
+          "task_completion_latency_ms": {
+            "bedroom_clean": 3400,
+            "bedroom_occupancy": 500
+          },
+          "task_completion_tardiness_ms": {
+            "bedroom_clean": 0,
+            "bedroom_occupancy": 0
+          },
+          "task_deadline_met": {
+            "bedroom_clean": true,
+            "bedroom_occupancy": true
+          }
+        },
+        "request_disposition": {
+          "bedroom_clean": "completed",
+          "bedroom_occupancy": "completed"
+        },
+        "valid_withdrawal_by_task": {},
+        "physical_completions_after_invalidation": [],
+        "physical_completions_after_withdrawal": [],
+        "response_records": [],
+        "harm_duration_ms": 0,
+        "zero_harm": true,
+        "execution_intervals": [
+          {
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_occupancy:0",
+            "start_ms": 400,
+            "end_ms": 500,
+            "units": 0.0
+          },
+          {
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:DeadlineAwareCoordinator:bedroom_clean:0",
+            "start_ms": 400,
+            "end_ms": 3400,
+            "units": 0.2
+          }
+        ],
+        "attribution": "trusted local interlock; reference delay is synthetic, not empirical inevitability or LLM error"
+      }
+    },
+    {
+      "policy": "GateRetryRule",
+      "trace": {
+        "trace_id": "C4R2-CLEAN-just_after_end.GateRetryRule.event_sim",
+        "episode_id": "C4R2-CLEAN-just_after_end",
+        "policy": "GateRetryRule",
+        "proposal_architecture": "GateRetryRule",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "state_version": 116,
+            "request_id": "HC-M16:GateRetryRule:bedroom_clean"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "state_version": 116,
+            "request_id": "HC-M16:GateRetryRule:bedroom_occupancy"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "agent_id": "BedroomCleaningAgent",
+            "request_id": "HC-M16:GateRetryRule:bedroom_clean",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_clean:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_clean:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 3000,
+            "power_kw": 0.2
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "agent_id": "BedroomCareAgent",
+            "request_id": "HC-M16:GateRetryRule:bedroom_occupancy",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_occupancy:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_occupancy:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 100,
+            "power_kw": 0.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 117,
+            "patch": {
+              "devices.bedroom_robot": "running"
+            },
+            "source": "action_started",
+            "task_id": "bedroom_clean"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "duration_ms": 3000,
+            "power_kw": 0.2,
+            "based_on_state_version": 116,
+            "requires": [
+              {
+                "path": "bedroom.occupied",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "start_effects": {
+              "devices.bedroom_robot": "running"
+            },
+            "completion_effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "based_on_state_version": 116,
+            "requires": [],
+            "start_effects": {},
+            "completion_effects": {
+              "service.monitor_completed": true
+            },
+            "state_version_at_start": 117
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 500,
+            "agent_id": "BedroomCareAgent",
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_occupancy:0",
+            "target": "occupancy_sensor",
+            "operation": "observe",
+            "effects": {
+              "service.monitor_completed": true
+            },
+            "new_state_version": 118
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 3400,
+            "agent_id": "BedroomCleaningAgent",
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_clean:0",
+            "target": "bedroom_robot",
+            "operation": "clean",
+            "effects": {
+              "service.work_completed": true,
+              "devices.bedroom_robot": "idle"
+            },
+            "new_state_version": 119
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 3401,
+            "new_state_version": 120,
+            "patch": {
+              "bedroom.occupied": true
+            },
+            "source": "validity_lost"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 5000,
+            "new_state_version": 121,
+            "patch": {
+              "bedroom.occupied": false
+            },
+            "source": "validity_restored"
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 10000,
+            "new_state_version": 122,
+            "patch": {
+              "diagnostic.heartbeat": 2
+            },
+            "source": "observation_end"
+          }
+        ],
+        "final_state": {
+          "bedroom": {
+            "occupied": false,
+            "clean": false
+          },
+          "devices": {
+            "bedroom_robot": "idle",
+            "occupancy_sensor": "idle"
+          },
+          "service": {
+            "work_completed": true,
+            "monitor_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 2
+          }
+        },
+        "final_state_version": 122,
+        "agent_requests": [
+          {
+            "request_id": "HC-M16:GateRetryRule:bedroom_clean",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 10000,
+              "priority": 70,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 3000,
+                  "resource_units": 0.2
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "HC-M16:GateRetryRule:bedroom_occupancy",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 2000,
+              "priority": 90,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "cost_contract": {
+                  "duration_ms": 100,
+                  "resource_units": 0.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 16
+      },
+      "result": {
+        "episode_id": "C4R2-CLEAN-just_after_end",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 500,
+        "task_completion_time_ms": 3400,
+        "task_action_finish_time_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "task_deadline_met": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "all_deadlines_met": true,
+        "timely_process_valid_success": true,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "policy": "GateRetryRule",
+        "proposal_architecture": "GateRetryRule",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "bedroom_clean": 300,
+          "bedroom_occupancy": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 500,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_correct_action_completed": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "task_start_wait_ms": {
+          "bedroom_clean": 400,
+          "bedroom_occupancy": 400
+        },
+        "task_completion_latency_ms": {
+          "bedroom_clean": 3400,
+          "bedroom_occupancy": 500
+        },
+        "task_completion_tardiness_ms": {
+          "bedroom_clean": 0,
+          "bedroom_occupancy": 0
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 400,
+        "task_start_within_1s": {
+          "bedroom_clean": true,
+          "bedroom_occupancy": true
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0
+      },
+      "calls": [
+        {
+          "request": {
+            "request_id": "HC-M16:GateRetryRule:bedroom_clean",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "bedroom_robot": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCleaningAgent",
+              "role": "cleaning",
+              "tools": [
+                "start_robot"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.bedroom_robot"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_clean",
+              "agent_id": "BedroomCleaningAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 10000,
+              "priority": 70,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_robot"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCleaningAgent",
+                "tool_name": "start_robot",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 3000,
+                  "resource_units": 0.2
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M16:GateRetryRule:bedroom_clean:0",
+                "target": "bedroom_robot",
+                "operation": "clean",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [
+                  {
+                    "path": "bedroom.occupied",
+                    "op": "eq",
+                    "value": false,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 3000,
+                "estimated_power_kw": 0.2
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        },
+        {
+          "request": {
+            "request_id": "HC-M16:GateRetryRule:bedroom_occupancy",
+            "episode_id": "HC-M16",
+            "base_episode_id": "HC-M16",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 116,
+            "state": {
+              "bedroom": {
+                "occupied": false
+              },
+              "devices": {
+                "occupancy_sensor": "idle"
+              }
+            },
+            "agent": {
+              "agent_id": "BedroomCareAgent",
+              "role": "care",
+              "tools": [
+                "observe_occupancy"
+              ],
+              "observable_state": [
+                "bedroom.occupied"
+              ],
+              "writable_resources": [
+                "devices.occupancy_sensor"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "bedroom_occupancy",
+              "agent_id": "BedroomCareAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 2000,
+              "priority": 90,
+              "goal": "Perform the declared service. Trusted local policy stops on invalidity; cleaning may restart from zero, irrigation cancellation is terminal for this request."
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "observe_occupancy"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "BedroomCareAgent",
+                "tool_name": "observe_occupancy",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "preconditions": [],
+                "cost_contract": {
+                  "duration_ms": 100,
+                  "resource_units": 0.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M16:GateRetryRule:bedroom_occupancy:0",
+                "target": "occupancy_sensor",
+                "operation": "observe",
+                "parameters": [],
+                "based_on_state_version": 116,
+                "requires": [],
+                "estimated_duration_ms": 100,
+                "estimated_power_kw": 0.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        }
+      ],
+      "audit": {
+        "status": "author_recount_not_acceptance",
+        "actual_event_stages": [
+          {
+            "event_index": 13,
+            "timestamp_ms": 3401,
+            "actual_stage": "after_service_completion",
+            "nominal_window": "LATE"
+          }
+        ],
+        "service_recount": {
+          "task_correct_action_completed": {
+            "bedroom_clean": true,
+            "bedroom_occupancy": true
+          },
+          "task_start_wait_ms": {
+            "bedroom_clean": 400,
+            "bedroom_occupancy": 400
+          },
+          "task_completion_latency_ms": {
+            "bedroom_clean": 3400,
+            "bedroom_occupancy": 500
+          },
+          "task_completion_tardiness_ms": {
+            "bedroom_clean": 0,
+            "bedroom_occupancy": 0
+          },
+          "task_deadline_met": {
+            "bedroom_clean": true,
+            "bedroom_occupancy": true
+          }
+        },
+        "request_disposition": {
+          "bedroom_clean": "completed",
+          "bedroom_occupancy": "completed"
+        },
+        "valid_withdrawal_by_task": {},
+        "physical_completions_after_invalidation": [],
+        "physical_completions_after_withdrawal": [],
+        "response_records": [],
+        "harm_duration_ms": 0,
+        "zero_harm": true,
+        "execution_intervals": [
+          {
+            "task_id": "bedroom_occupancy",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_occupancy:0",
+            "start_ms": 400,
+            "end_ms": 500,
+            "units": 0.0
+          },
+          {
+            "task_id": "bedroom_clean",
+            "proposal_id": "HC-M16:GateRetryRule:bedroom_clean:0",
+            "start_ms": 400,
+            "end_ms": 3400,
+            "units": 0.2
+          }
+        ],
+        "attribution": "trusted local interlock; reference delay is synthetic, not empirical inevitability or LLM error"
+      }
+    }
+  ]
+}

@@ -1,0 +1,2996 @@
+{
+  "runs": [
+    {
+      "policy": "IndependentMultiAgent",
+      "trace": {
+        "trace_id": "DEP11-INFEASIBLE_8000.IndependentMultiAgent.event_sim",
+        "episode_id": "DEP11-INFEASIBLE_8000",
+        "policy": "IndependentMultiAgent",
+        "proposal_architecture": "IndependentMultiAgent",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "state_version": 112,
+            "request_id": "HC-M12:IndependentMultiAgent:wash"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 100,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "state_version": 112,
+            "request_id": "HC-M12:IndependentMultiAgent:dry"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "request_id": "HC-M12:IndependentMultiAgent:wash",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "HC-M12:IndependentMultiAgent:wash:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "HC-M12:IndependentMultiAgent:wash:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 4000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "request_id": "HC-M12:IndependentMultiAgent:dry",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "dependency_waiting",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 113,
+            "patch": {
+              "devices.washer": "running"
+            },
+            "source": "action_started",
+            "task_id": "wash"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "HC-M12:IndependentMultiAgent:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "duration_ms": 4000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.wash_authorized",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.washer": "running"
+            },
+            "completion_effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "state_version_at_start": 113
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 4400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "HC-M12:IndependentMultiAgent:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "new_state_version": 114
+          },
+          {
+            "type": "dependency_ready",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "HC-M12:IndependentMultiAgent:dry:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "HC-M12:IndependentMultiAgent:dry:0",
+            "scheduled_start_ms": 4500,
+            "duration_ms": 4000,
+            "power_kw": 2.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 4500,
+            "new_state_version": 115,
+            "patch": {
+              "devices.dryer": "running"
+            },
+            "source": "action_started",
+            "task_id": "dry"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 4500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "HC-M12:IndependentMultiAgent:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "duration_ms": 4000,
+            "power_kw": 2.0,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.washed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.dryer": "running"
+            },
+            "completion_effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "state_version_at_start": 115
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 8500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "HC-M12:IndependentMultiAgent:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "new_state_version": 116
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 16000,
+            "new_state_version": 117,
+            "patch": {
+              "diagnostic.heartbeat": 1
+            },
+            "source": "observation_end"
+          }
+        ],
+        "final_state": {
+          "laundry": {
+            "washed": true,
+            "dry": true,
+            "wash_authorized": true
+          },
+          "devices": {
+            "washer": "off",
+            "dryer": "off"
+          },
+          "service": {
+            "wash_completed": true,
+            "dry_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 1
+          }
+        },
+        "final_state_version": 117,
+        "agent_requests": [
+          {
+            "request_id": "HC-M12:IndependentMultiAgent:wash",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 15000,
+              "priority": 80,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 1.5
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "HC-M12:IndependentMultiAgent:dry",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "completion_deadline_ms": 8000,
+              "priority": 70,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 2.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 17
+      },
+      "result": {
+        "episode_id": "DEP11-INFEASIBLE_8000",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 4400,
+        "task_completion_time_ms": 8500,
+        "task_action_finish_time_ms": {
+          "wash": 4400,
+          "dry": 8500
+        },
+        "task_deadline_met": {
+          "wash": true,
+          "dry": false
+        },
+        "all_deadlines_met": false,
+        "timely_process_valid_success": false,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "wash": true,
+          "dry": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "policy": "IndependentMultiAgent",
+        "proposal_architecture": "IndependentMultiAgent",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "wash": 300,
+          "dry": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 4400,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "wash": true,
+          "dry": true
+        },
+        "task_correct_action_completed": {
+          "wash": true,
+          "dry": true
+        },
+        "task_start_wait_ms": {
+          "wash": 400,
+          "dry": 4400
+        },
+        "task_completion_latency_ms": {
+          "wash": 4400,
+          "dry": 8400
+        },
+        "task_completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 500
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 4400,
+        "task_start_within_1s": {
+          "wash": true,
+          "dry": false
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0,
+        "dependency_version": "v3-actual-completion-dag",
+        "dependency_completed_receipts": [
+          "dry",
+          "wash"
+        ],
+        "dependency_waiting_task_ids": [],
+        "dependency_blocked_task_ids": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4400
+        }
+      },
+      "calls": [
+        {
+          "request": {
+            "request_id": "HC-M12:IndependentMultiAgent:wash",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 15000,
+              "priority": 80,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 1.5
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M12:IndependentMultiAgent:wash:0",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        },
+        {
+          "request": {
+            "request_id": "HC-M12:IndependentMultiAgent:dry",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "IndependentMultiAgent",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "completion_deadline_ms": 8000,
+              "priority": 70,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 2.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M12:IndependentMultiAgent:dry:0",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 2.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        }
+      ],
+      "audit": {
+        "status": "author_recount_not_acceptance",
+        "actual_event_stages": [
+          {
+            "actual_stage": "no_event"
+          }
+        ],
+        "service_recount": {
+          "task_correct_action_completed": {
+            "wash": true,
+            "dry": true
+          },
+          "task_start_wait_ms": {
+            "wash": 400,
+            "dry": 4400
+          },
+          "task_completion_latency_ms": {
+            "wash": 4400,
+            "dry": 8400
+          },
+          "task_completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 500
+          },
+          "task_deadline_met": {
+            "wash": true,
+            "dry": false
+          }
+        },
+        "request_disposition": {
+          "wash": "completed",
+          "dry": "completed"
+        },
+        "valid_withdrawal_by_task": {},
+        "trusted_dependency_receipts_ms": {
+          "wash": 4400,
+          "dry": 8500
+        },
+        "physical_completions_after_invalidation": [],
+        "physical_completions_after_withdrawal": [],
+        "response_records": [],
+        "harm_duration_ms": 0,
+        "zero_harm": true,
+        "execution_intervals": [
+          {
+            "task_id": "wash",
+            "proposal_id": "HC-M12:IndependentMultiAgent:wash:0",
+            "start_ms": 400,
+            "end_ms": 4400,
+            "units": 1.5
+          },
+          {
+            "task_id": "dry",
+            "proposal_id": "HC-M12:IndependentMultiAgent:dry:0",
+            "start_ms": 4500,
+            "end_ms": 8500,
+            "units": 2.0
+          }
+        ],
+        "attribution": "trusted local interlock; reference delay is synthetic, not empirical inevitability or LLM error"
+      }
+    },
+    {
+      "policy": "ConstraintCoordinator",
+      "trace": {
+        "trace_id": "DEP11-INFEASIBLE_8000.ConstraintCoordinator.event_sim",
+        "episode_id": "DEP11-INFEASIBLE_8000",
+        "policy": "ConstraintCoordinator",
+        "proposal_architecture": "ConstraintCoordinator",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "state_version": 112,
+            "request_id": "HC-M12:ConstraintCoordinator:wash"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 100,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "state_version": 112,
+            "request_id": "HC-M12:ConstraintCoordinator:dry"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "request_id": "HC-M12:ConstraintCoordinator:wash",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "HC-M12:ConstraintCoordinator:wash:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "HC-M12:ConstraintCoordinator:wash:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 4000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "request_id": "HC-M12:ConstraintCoordinator:dry",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "dependency_waiting",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 113,
+            "patch": {
+              "devices.washer": "running"
+            },
+            "source": "action_started",
+            "task_id": "wash"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "HC-M12:ConstraintCoordinator:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "duration_ms": 4000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.wash_authorized",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.washer": "running"
+            },
+            "completion_effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "state_version_at_start": 113
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 4400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "HC-M12:ConstraintCoordinator:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "new_state_version": 114
+          },
+          {
+            "type": "dependency_ready",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "HC-M12:ConstraintCoordinator:dry:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "HC-M12:ConstraintCoordinator:dry:0",
+            "scheduled_start_ms": 4500,
+            "duration_ms": 4000,
+            "power_kw": 2.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 4500,
+            "new_state_version": 115,
+            "patch": {
+              "devices.dryer": "running"
+            },
+            "source": "action_started",
+            "task_id": "dry"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 4500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "HC-M12:ConstraintCoordinator:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "duration_ms": 4000,
+            "power_kw": 2.0,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.washed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.dryer": "running"
+            },
+            "completion_effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "state_version_at_start": 115
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 8500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "HC-M12:ConstraintCoordinator:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "new_state_version": 116
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 16000,
+            "new_state_version": 117,
+            "patch": {
+              "diagnostic.heartbeat": 1
+            },
+            "source": "observation_end"
+          }
+        ],
+        "final_state": {
+          "laundry": {
+            "washed": true,
+            "dry": true,
+            "wash_authorized": true
+          },
+          "devices": {
+            "washer": "off",
+            "dryer": "off"
+          },
+          "service": {
+            "wash_completed": true,
+            "dry_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 1
+          }
+        },
+        "final_state_version": 117,
+        "agent_requests": [
+          {
+            "request_id": "HC-M12:ConstraintCoordinator:wash",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 15000,
+              "priority": 80,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 1.5
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "HC-M12:ConstraintCoordinator:dry",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "completion_deadline_ms": 8000,
+              "priority": 70,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 2.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 17
+      },
+      "result": {
+        "episode_id": "DEP11-INFEASIBLE_8000",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 4400,
+        "task_completion_time_ms": 8500,
+        "task_action_finish_time_ms": {
+          "wash": 4400,
+          "dry": 8500
+        },
+        "task_deadline_met": {
+          "wash": true,
+          "dry": false
+        },
+        "all_deadlines_met": false,
+        "timely_process_valid_success": false,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "wash": true,
+          "dry": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "policy": "ConstraintCoordinator",
+        "proposal_architecture": "ConstraintCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "wash": 300,
+          "dry": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 4400,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "wash": true,
+          "dry": true
+        },
+        "task_correct_action_completed": {
+          "wash": true,
+          "dry": true
+        },
+        "task_start_wait_ms": {
+          "wash": 400,
+          "dry": 4400
+        },
+        "task_completion_latency_ms": {
+          "wash": 4400,
+          "dry": 8400
+        },
+        "task_completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 500
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 4400,
+        "task_start_within_1s": {
+          "wash": true,
+          "dry": false
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0,
+        "dependency_version": "v3-actual-completion-dag",
+        "dependency_completed_receipts": [
+          "dry",
+          "wash"
+        ],
+        "dependency_waiting_task_ids": [],
+        "dependency_blocked_task_ids": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4400
+        }
+      },
+      "calls": [
+        {
+          "request": {
+            "request_id": "HC-M12:ConstraintCoordinator:wash",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 15000,
+              "priority": 80,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 1.5
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M12:ConstraintCoordinator:wash:0",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        },
+        {
+          "request": {
+            "request_id": "HC-M12:ConstraintCoordinator:dry",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "ConstraintCoordinator",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "completion_deadline_ms": 8000,
+              "priority": 70,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 2.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M12:ConstraintCoordinator:dry:0",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 2.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        }
+      ],
+      "audit": {
+        "status": "author_recount_not_acceptance",
+        "actual_event_stages": [
+          {
+            "actual_stage": "no_event"
+          }
+        ],
+        "service_recount": {
+          "task_correct_action_completed": {
+            "wash": true,
+            "dry": true
+          },
+          "task_start_wait_ms": {
+            "wash": 400,
+            "dry": 4400
+          },
+          "task_completion_latency_ms": {
+            "wash": 4400,
+            "dry": 8400
+          },
+          "task_completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 500
+          },
+          "task_deadline_met": {
+            "wash": true,
+            "dry": false
+          }
+        },
+        "request_disposition": {
+          "wash": "completed",
+          "dry": "completed"
+        },
+        "valid_withdrawal_by_task": {},
+        "trusted_dependency_receipts_ms": {
+          "wash": 4400,
+          "dry": 8500
+        },
+        "physical_completions_after_invalidation": [],
+        "physical_completions_after_withdrawal": [],
+        "response_records": [],
+        "harm_duration_ms": 0,
+        "zero_harm": true,
+        "execution_intervals": [
+          {
+            "task_id": "wash",
+            "proposal_id": "HC-M12:ConstraintCoordinator:wash:0",
+            "start_ms": 400,
+            "end_ms": 4400,
+            "units": 1.5
+          },
+          {
+            "task_id": "dry",
+            "proposal_id": "HC-M12:ConstraintCoordinator:dry:0",
+            "start_ms": 4500,
+            "end_ms": 8500,
+            "units": 2.0
+          }
+        ],
+        "attribution": "trusted local interlock; reference delay is synthetic, not empirical inevitability or LLM error"
+      }
+    },
+    {
+      "policy": "DeadlineAwareCoordinator",
+      "trace": {
+        "trace_id": "DEP11-INFEASIBLE_8000.DeadlineAwareCoordinator.event_sim",
+        "episode_id": "DEP11-INFEASIBLE_8000",
+        "policy": "DeadlineAwareCoordinator",
+        "proposal_architecture": "DeadlineAwareCoordinator",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "state_version": 112,
+            "request_id": "HC-M12:DeadlineAwareCoordinator:wash"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 100,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "state_version": 112,
+            "request_id": "HC-M12:DeadlineAwareCoordinator:dry"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "request_id": "HC-M12:DeadlineAwareCoordinator:wash",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "request_id": "HC-M12:DeadlineAwareCoordinator:dry",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "dependency_waiting",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 400,
+            "task_id": "wash",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:wash:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 400,
+            "task_id": "wash",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:wash:0",
+            "scheduled_start_ms": 500,
+            "duration_ms": 4000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 500,
+            "new_state_version": 113,
+            "patch": {
+              "devices.washer": "running"
+            },
+            "source": "action_started",
+            "task_id": "wash"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 500,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "duration_ms": 4000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.wash_authorized",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.washer": "running"
+            },
+            "completion_effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "state_version_at_start": 113
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 4500,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "new_state_version": 114
+          },
+          {
+            "type": "dependency_ready",
+            "timestamp_ms": 4500,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 4500,
+            "task_id": "dry",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:dry:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 4500,
+            "task_id": "dry",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:dry:0",
+            "scheduled_start_ms": 4600,
+            "duration_ms": 4000,
+            "power_kw": 2.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 4600,
+            "new_state_version": 115,
+            "patch": {
+              "devices.dryer": "running"
+            },
+            "source": "action_started",
+            "task_id": "dry"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 4600,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "duration_ms": 4000,
+            "power_kw": 2.0,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.washed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.dryer": "running"
+            },
+            "completion_effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "state_version_at_start": 115
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 8600,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "new_state_version": 116
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 16000,
+            "new_state_version": 117,
+            "patch": {
+              "diagnostic.heartbeat": 1
+            },
+            "source": "observation_end"
+          }
+        ],
+        "final_state": {
+          "laundry": {
+            "washed": true,
+            "dry": true,
+            "wash_authorized": true
+          },
+          "devices": {
+            "washer": "off",
+            "dryer": "off"
+          },
+          "service": {
+            "wash_completed": true,
+            "dry_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 1
+          }
+        },
+        "final_state_version": 117,
+        "agent_requests": [
+          {
+            "request_id": "HC-M12:DeadlineAwareCoordinator:wash",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 15000,
+              "priority": 80,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 1.5
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "HC-M12:DeadlineAwareCoordinator:dry",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "completion_deadline_ms": 8000,
+              "priority": 70,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 2.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 17
+      },
+      "result": {
+        "episode_id": "DEP11-INFEASIBLE_8000",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 4500,
+        "task_completion_time_ms": 8600,
+        "task_action_finish_time_ms": {
+          "wash": 4500,
+          "dry": 8600
+        },
+        "task_deadline_met": {
+          "wash": true,
+          "dry": false
+        },
+        "all_deadlines_met": false,
+        "timely_process_valid_success": false,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "wash": true,
+          "dry": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "policy": "DeadlineAwareCoordinator",
+        "proposal_architecture": "DeadlineAwareCoordinator",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "wash": 300,
+          "dry": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 500,
+        "first_goal_progress_latency_ms": 4500,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "wash": true,
+          "dry": true
+        },
+        "task_correct_action_completed": {
+          "wash": true,
+          "dry": true
+        },
+        "task_start_wait_ms": {
+          "wash": 500,
+          "dry": 4500
+        },
+        "task_completion_latency_ms": {
+          "wash": 4500,
+          "dry": 8500
+        },
+        "task_completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 600
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 4500,
+        "task_start_within_1s": {
+          "wash": true,
+          "dry": false
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0,
+        "dependency_version": "v3-actual-completion-dag",
+        "dependency_completed_receipts": [
+          "dry",
+          "wash"
+        ],
+        "dependency_waiting_task_ids": [],
+        "dependency_blocked_task_ids": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4500
+        }
+      },
+      "calls": [
+        {
+          "request": {
+            "request_id": "HC-M12:DeadlineAwareCoordinator:wash",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 15000,
+              "priority": 80,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 1.5
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M12:DeadlineAwareCoordinator:wash:0",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        },
+        {
+          "request": {
+            "request_id": "HC-M12:DeadlineAwareCoordinator:dry",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "DeadlineAwareCoordinator",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "completion_deadline_ms": 8000,
+              "priority": 70,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 2.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M12:DeadlineAwareCoordinator:dry:0",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 2.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        }
+      ],
+      "audit": {
+        "status": "author_recount_not_acceptance",
+        "actual_event_stages": [
+          {
+            "actual_stage": "no_event"
+          }
+        ],
+        "service_recount": {
+          "task_correct_action_completed": {
+            "wash": true,
+            "dry": true
+          },
+          "task_start_wait_ms": {
+            "wash": 500,
+            "dry": 4500
+          },
+          "task_completion_latency_ms": {
+            "wash": 4500,
+            "dry": 8500
+          },
+          "task_completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 600
+          },
+          "task_deadline_met": {
+            "wash": true,
+            "dry": false
+          }
+        },
+        "request_disposition": {
+          "wash": "completed",
+          "dry": "completed"
+        },
+        "valid_withdrawal_by_task": {},
+        "trusted_dependency_receipts_ms": {
+          "wash": 4500,
+          "dry": 8600
+        },
+        "physical_completions_after_invalidation": [],
+        "physical_completions_after_withdrawal": [],
+        "response_records": [],
+        "harm_duration_ms": 0,
+        "zero_harm": true,
+        "execution_intervals": [
+          {
+            "task_id": "wash",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:wash:0",
+            "start_ms": 500,
+            "end_ms": 4500,
+            "units": 1.5
+          },
+          {
+            "task_id": "dry",
+            "proposal_id": "HC-M12:DeadlineAwareCoordinator:dry:0",
+            "start_ms": 4600,
+            "end_ms": 8600,
+            "units": 2.0
+          }
+        ],
+        "attribution": "trusted local interlock; reference delay is synthetic, not empirical inevitability or LLM error"
+      }
+    },
+    {
+      "policy": "GateRetryRule",
+      "trace": {
+        "trace_id": "DEP11-INFEASIBLE_8000.GateRetryRule.event_sim",
+        "episode_id": "DEP11-INFEASIBLE_8000",
+        "policy": "GateRetryRule",
+        "proposal_architecture": "GateRetryRule",
+        "events": [
+          {
+            "type": "task_released",
+            "timestamp_ms": 0,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "state_version": 112,
+            "request_id": "HC-M12:GateRetryRule:wash"
+          },
+          {
+            "type": "task_released",
+            "timestamp_ms": 100,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "state_version": 112,
+            "request_id": "HC-M12:GateRetryRule:dry"
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "agent_id": "WasherAgent",
+            "request_id": "HC-M12:GateRetryRule:wash",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "HC-M12:GateRetryRule:wash:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 300,
+            "task_id": "wash",
+            "proposal_id": "HC-M12:GateRetryRule:wash:0",
+            "scheduled_start_ms": 400,
+            "duration_ms": 4000,
+            "power_kw": 1.5
+          },
+          {
+            "type": "proposal_returned",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "agent_id": "DryerAgent",
+            "request_id": "HC-M12:GateRetryRule:dry",
+            "latency_ms": 300,
+            "response_type": "action_proposal"
+          },
+          {
+            "type": "dependency_waiting",
+            "timestamp_ms": 400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 400,
+            "new_state_version": 113,
+            "patch": {
+              "devices.washer": "running"
+            },
+            "source": "action_started",
+            "task_id": "wash"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "HC-M12:GateRetryRule:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "duration_ms": 4000,
+            "power_kw": 1.5,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.wash_authorized",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.washer": "running"
+            },
+            "completion_effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "state_version_at_start": 113
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 4400,
+            "agent_id": "WasherAgent",
+            "task_id": "wash",
+            "proposal_id": "HC-M12:GateRetryRule:wash:0",
+            "target": "washer",
+            "operation": "wash",
+            "effects": {
+              "devices.washer": "off",
+              "laundry.washed": true,
+              "service.wash_completed": true
+            },
+            "new_state_version": 114
+          },
+          {
+            "type": "dependency_ready",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "predecessors": [
+              "wash"
+            ]
+          },
+          {
+            "type": "coordination_decision",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "HC-M12:GateRetryRule:dry:0",
+            "decision": "accept"
+          },
+          {
+            "type": "action_reserved",
+            "timestamp_ms": 4400,
+            "task_id": "dry",
+            "proposal_id": "HC-M12:GateRetryRule:dry:0",
+            "scheduled_start_ms": 4500,
+            "duration_ms": 4000,
+            "power_kw": 2.0
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 4500,
+            "new_state_version": 115,
+            "patch": {
+              "devices.dryer": "running"
+            },
+            "source": "action_started",
+            "task_id": "dry"
+          },
+          {
+            "type": "action_started",
+            "timestamp_ms": 4500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "HC-M12:GateRetryRule:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "duration_ms": 4000,
+            "power_kw": 2.0,
+            "based_on_state_version": 112,
+            "requires": [
+              {
+                "path": "laundry.washed",
+                "op": "eq",
+                "value": true
+              }
+            ],
+            "start_effects": {
+              "devices.dryer": "running"
+            },
+            "completion_effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "state_version_at_start": 115
+          },
+          {
+            "type": "action_completed",
+            "timestamp_ms": 8500,
+            "agent_id": "DryerAgent",
+            "task_id": "dry",
+            "proposal_id": "HC-M12:GateRetryRule:dry:0",
+            "target": "dryer",
+            "operation": "dry",
+            "effects": {
+              "devices.dryer": "off",
+              "laundry.dry": true,
+              "service.dry_completed": true
+            },
+            "new_state_version": 116
+          },
+          {
+            "type": "state_update",
+            "timestamp_ms": 16000,
+            "new_state_version": 117,
+            "patch": {
+              "diagnostic.heartbeat": 1
+            },
+            "source": "observation_end"
+          }
+        ],
+        "final_state": {
+          "laundry": {
+            "washed": true,
+            "dry": true,
+            "wash_authorized": true
+          },
+          "devices": {
+            "washer": "off",
+            "dryer": "off"
+          },
+          "service": {
+            "wash_completed": true,
+            "dry_completed": true
+          },
+          "diagnostic": {
+            "heartbeat": 1
+          }
+        },
+        "final_state_version": 117,
+        "agent_requests": [
+          {
+            "request_id": "HC-M12:GateRetryRule:wash",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 15000,
+              "priority": 80,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 1.5
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          {
+            "request_id": "HC-M12:GateRetryRule:dry",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "completion_deadline_ms": 8000,
+              "priority": 70,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 2.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          }
+        ],
+        "event_count": 17
+      },
+      "result": {
+        "episode_id": "DEP11-INFEASIBLE_8000",
+        "trace_id": "event_simulator.projected",
+        "final_goal_success": true,
+        "process_valid_success": true,
+        "constraint_violation_count": 0,
+        "precondition_violation_count": 0,
+        "conflict_counts": {
+          "C1": 0,
+          "C2": 0,
+          "C3": 0,
+          "C4": 0
+        },
+        "stale_action_count": 0,
+        "first_effective_action_latency_ms": 4400,
+        "task_completion_time_ms": 8500,
+        "task_action_finish_time_ms": {
+          "wash": 4400,
+          "dry": 8500
+        },
+        "task_deadline_met": {
+          "wash": true,
+          "dry": false
+        },
+        "all_deadlines_met": false,
+        "timely_process_valid_success": false,
+        "coordination_decision_latency_ms": null,
+        "task_service": {
+          "wash": true,
+          "dry": true
+        },
+        "served_task_count": 2,
+        "serviceable_task_count": 2,
+        "task_service_rate": 1.0,
+        "policy": "GateRetryRule",
+        "proposal_architecture": "GateRetryRule",
+        "proposal_count": 2,
+        "accepted_action_count": 2,
+        "rejected_action_count": 0,
+        "completion_constraint_violation_count": 0,
+        "state_constraint_violation_episode_count": 0,
+        "state_constraint_violation_duration_ms": 0,
+        "precondition_violations_at_start": 0,
+        "stale_at_action_start_count": 0,
+        "unsafe_precondition_rejection_count": 0,
+        "in_flight_precondition_invalidated_action_count": 0,
+        "in_flight_precondition_invalidations": [],
+        "in_flight_precondition_invalidation_source_counts": {
+          "exogenous_update": 0,
+          "action_started": 0,
+          "action_completed": 0
+        },
+        "cross_agent_in_flight_precondition_invalidated_action_count": 0,
+        "unsafe_state_onset_during_action_count": 0,
+        "unsafe_state_onsets_during_action": [],
+        "model_latency_by_task_ms": {
+          "wash": 300,
+          "dry": 300
+        },
+        "coordination_delay_ms": 0,
+        "coordination_compute_measurements": [],
+        "coordination_compute_profile": null,
+        "shared_safety_gate": true,
+        "shared_safety_gate_rejection_count": 0,
+        "retry_queued_count": 0,
+        "retry_scheduled_count": 0,
+        "first_action_start_latency_ms": 400,
+        "first_goal_progress_latency_ms": 4400,
+        "physical_completion_semantics": "final effects apply on action_completed",
+        "api_calls_concurrent": false,
+        "task_response_metric_version": "own-release-0.1",
+        "task_correct_action_started": {
+          "wash": true,
+          "dry": true
+        },
+        "task_correct_action_completed": {
+          "wash": true,
+          "dry": true
+        },
+        "task_start_wait_ms": {
+          "wash": 400,
+          "dry": 4400
+        },
+        "task_completion_latency_ms": {
+          "wash": 4400,
+          "dry": 8400
+        },
+        "task_completion_tardiness_ms": {
+          "wash": 0,
+          "dry": 500
+        },
+        "task_unstarted_count": 0,
+        "task_incomplete_count": 0,
+        "max_observed_task_start_wait_ms": 4400,
+        "task_start_within_1s": {
+          "wash": true,
+          "dry": false
+        },
+        "lifecycle_version": "v2-local-interlock",
+        "withdrawn_task_ids": [],
+        "waiting_recovery_task_ids": [],
+        "stop_requested_count": 0,
+        "stop_confirmed_count": 0,
+        "stop_ack_too_late_count": 0,
+        "restart_count": 0,
+        "active_reservations_at_end": 0,
+        "dependency_version": "v3-actual-completion-dag",
+        "dependency_completed_receipts": [
+          "dry",
+          "wash"
+        ],
+        "dependency_waiting_task_ids": [],
+        "dependency_blocked_task_ids": [],
+        "dependency_dispatch_ready_at_ms": {
+          "dry": 4400
+        }
+      },
+      "calls": [
+        {
+          "request": {
+            "request_id": "HC-M12:GateRetryRule:wash",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 0,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "washer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "WasherAgent",
+              "role": "washing",
+              "tools": [
+                "start_washer"
+              ],
+              "observable_state": [
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.washer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "wash",
+              "agent_id": "WasherAgent",
+              "release_at_ms": 0,
+              "completion_deadline_ms": 15000,
+              "priority": 80,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_washer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "WasherAgent",
+                "tool_name": "start_washer",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 1.5
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M12:GateRetryRule:wash:0",
+                "target": "washer",
+                "operation": "wash",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.wash_authorized",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 1.5
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        },
+        {
+          "request": {
+            "request_id": "HC-M12:GateRetryRule:dry",
+            "episode_id": "HC-M12",
+            "base_episode_id": "HC-M12",
+            "architecture": "GateRetryRule",
+            "current_time_ms": 100,
+            "state_version": 112,
+            "state": {
+              "laundry": {
+                "dry": false,
+                "wash_authorized": true,
+                "washed": false
+              },
+              "devices": {
+                "dryer": "off"
+              }
+            },
+            "agent": {
+              "agent_id": "DryerAgent",
+              "role": "drying",
+              "tools": [
+                "start_dryer"
+              ],
+              "observable_state": [
+                "laundry.dry",
+                "laundry.wash_authorized",
+                "laundry.washed"
+              ],
+              "writable_resources": [
+                "devices.dryer"
+              ],
+              "goal_visibility": "local",
+              "constraint_visibility": "local",
+              "policy_constraints": []
+            },
+            "task": {
+              "task_id": "dry",
+              "agent_id": "DryerAgent",
+              "release_at_ms": 100,
+              "completion_deadline_ms": 8000,
+              "priority": 70,
+              "goal": "Execute authorized service for the declared batch; trusted completion gates prerequisites.",
+              "batch_id": "batch_1"
+            },
+            "goals": [],
+            "constraints": [],
+            "allowed_tools": [
+              "start_dryer"
+            ],
+            "available_actions": [
+              {
+                "agent_id": "DryerAgent",
+                "tool_name": "start_dryer",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "preconditions": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "cost_contract": {
+                  "duration_ms": 4000,
+                  "resource_units": 2.0
+                }
+              }
+            ],
+            "pending_proposals": []
+          },
+          "decision": {
+            "response_type": "action_proposal",
+            "actions": [
+              {
+                "proposal_id": "HC-M12:GateRetryRule:dry:0",
+                "target": "dryer",
+                "operation": "dry",
+                "parameters": [],
+                "based_on_state_version": 112,
+                "requires": [
+                  {
+                    "path": "laundry.washed",
+                    "op": "eq",
+                    "value": true,
+                    "range_min": null,
+                    "range_max": null
+                  }
+                ],
+                "estimated_duration_ms": 4000,
+                "estimated_power_kw": 2.0
+              }
+            ],
+            "accepted_proposal_ids": [],
+            "rejected_proposal_ids": [],
+            "defer_until_ms": null,
+            "reason_code": "goal_progress"
+          }
+        }
+      ],
+      "audit": {
+        "status": "author_recount_not_acceptance",
+        "actual_event_stages": [
+          {
+            "actual_stage": "no_event"
+          }
+        ],
+        "service_recount": {
+          "task_correct_action_completed": {
+            "wash": true,
+            "dry": true
+          },
+          "task_start_wait_ms": {
+            "wash": 400,
+            "dry": 4400
+          },
+          "task_completion_latency_ms": {
+            "wash": 4400,
+            "dry": 8400
+          },
+          "task_completion_tardiness_ms": {
+            "wash": 0,
+            "dry": 500
+          },
+          "task_deadline_met": {
+            "wash": true,
+            "dry": false
+          }
+        },
+        "request_disposition": {
+          "wash": "completed",
+          "dry": "completed"
+        },
+        "valid_withdrawal_by_task": {},
+        "trusted_dependency_receipts_ms": {
+          "wash": 4400,
+          "dry": 8500
+        },
+        "physical_completions_after_invalidation": [],
+        "physical_completions_after_withdrawal": [],
+        "response_records": [],
+        "harm_duration_ms": 0,
+        "zero_harm": true,
+        "execution_intervals": [
+          {
+            "task_id": "wash",
+            "proposal_id": "HC-M12:GateRetryRule:wash:0",
+            "start_ms": 400,
+            "end_ms": 4400,
+            "units": 1.5
+          },
+          {
+            "task_id": "dry",
+            "proposal_id": "HC-M12:GateRetryRule:dry:0",
+            "start_ms": 4500,
+            "end_ms": 8500,
+            "units": 2.0
+          }
+        ],
+        "attribution": "trusted local interlock; reference delay is synthetic, not empirical inevitability or LLM error"
+      }
+    }
+  ]
+}

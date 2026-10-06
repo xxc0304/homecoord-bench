@@ -1,0 +1,184 @@
+{
+  "status": "draft_execution_and_statistics_addendum_not_frozen",
+  "date": "2026-10-05",
+  "static_plan_path": "docs/small_validation_plan_v1_20261005/plan.json",
+  "research_scope": "local_F2_late_parameter_sensitivity_not_arrival_phase_generalization",
+  "expected_scope": {
+    "configurations": 28,
+    "run_slots": 84,
+    "pairs": 72,
+    "policies": [
+      "GateRetryRule",
+      "ConstraintCoordinator",
+      "DeadlineAwareCoordinator"
+    ],
+    "baseline_slots": 12,
+    "perturbation_slots": 72
+  },
+  "fixed_populations": {
+    "main": [
+      "all_four_task_stream_requests"
+    ],
+    "early": "three_requests_released_at_zero",
+    "water": [
+      "water"
+    ],
+    "denominators": {
+      "main": 4,
+      "early": 3,
+      "water": 1
+    }
+  },
+  "primary_rates": [
+    "service_rate",
+    "timely_service_rate"
+  ],
+  "time_allowlist": [
+    "task_start_wait_ms",
+    "proposal_to_start_ms",
+    "execution_ms",
+    "completion_latency_ms",
+    "tardiness_ms"
+  ],
+  "process_allowlist": [
+    "executed_capacity_violation_duration_ms",
+    "excess_resource_unit_ms",
+    "coordination_defer_count",
+    "action_rejected_count",
+    "retry_queued_count",
+    "retry_scheduled_count"
+  ],
+  "paired_scalar_allowlist": [
+    "service_rate",
+    "timely_service_rate",
+    "executed_capacity_violation_duration_ms",
+    "excess_resource_unit_ms",
+    "coordination_defer_count",
+    "action_rejected_count",
+    "retry_queued_count",
+    "retry_scheduled_count",
+    "whole_house_completion_ms"
+  ],
+  "event_evidence_required": [
+    "per_task_R_P_S_F_and_original_event_indices",
+    "true_started_completed_receipt_identity_effects_duration",
+    "event_counts_reasons_unique_affected_tasks",
+    "physical_intervals_half_open",
+    "arrival_S_less_than_L_less_than_F",
+    "reservations_created_before_L_for_starts_after_L"
+  ],
+  "logical_clock": {
+    "proposal_return_offset_ms": 300,
+    "command_latency_levels_ms": [
+      0,
+      100,
+      500
+    ],
+    "minimum_initial_start": "S>=P+command_latency_ms",
+    "minimum_retry_start": "S>=matching_retry_reservation_creation_time+command_latency_ms",
+    "queue_order_at_equal_time": [
+      "state_update_or_completion",
+      "task_release",
+      "proposal_response",
+      "action_start"
+    ],
+    "same_priority_order": "stable_heap_insertion_order",
+    "capacity_before_start": "actual_active_load_after_earlier_equal_timestamp_events",
+    "no_requirement_that_wait_equals_command_delay": true,
+    "real_API_wallclock_ms": null,
+    "real_coordination_compute_ms": null
+  },
+  "metrics": {
+    "service_rate": "count_valid_service_receipts/E",
+    "timely_service_rate": "count_valid_service_receipts_with_F<=own_deadline/E",
+    "task_start_wait_ms": "S-R",
+    "proposal_to_start_ms": "S-P",
+    "execution_ms": "F-S",
+    "completion_latency_ms": "F-R",
+    "tardiness_ms": "max(0,F-own_deadline)",
+    "whole_house_completion_ms": "max(F)-episode_release_only_if_all_E_completed",
+    "executed_capacity_violation_duration_ms": "sum_positive_time_intervals_with_actual_load_over_capacity",
+    "excess_resource_unit_ms": "integral_of_max(actual_load-capacity,0)"
+  },
+  "missing_rules": {
+    "no_start": "S_and_start_wait_are_null_not_started",
+    "no_completion": "F_execution_completion_latency_tardiness_null_not_completed",
+    "zero_completions": "both_primary_rates_0_conditional_timely_null",
+    "time_pair_population": "same_two_arm_K_intersection_of_valid_completed_requests",
+    "subset_time_pair_population": "fixed_subset_intersect_same_K",
+    "empty_K": "retain_pair_metrics_null_no_common_completed_requests",
+    "missing_metric_on_K": "hard_error_not_remove_task",
+    "whole_house_pair": "both_arms_all_E_else_delta_null",
+    "missing_slot_or_file": "hard_error_no_reweight_or_invention"
+  },
+  "comparison": {
+    "direction": "right_minus_left",
+    "planned_pairs_only": true,
+    "primary_population": "fixed_E_not_K",
+    "conditional_timely_rate_in_pair_allowlist": false,
+    "own_completed_mean_in_pair_allowlist": false,
+    "cross_config_macro": false,
+    "cross_family_pooling": false,
+    "factorial_interactions": false,
+    "ranking": false,
+    "statistical_independence_claim": false
+  },
+  "baseline_equivalence": {
+    "baseline_slot_count": 12,
+    "historical_source": "f2_v7 runs by source_episode_id and exact policy",
+    "all_fresh_baselines_required": true,
+    "compare_exact": [
+      "calls_including_complete_request_and_decision",
+      "trace_agent_requests",
+      "trace_events_in_original_order_with_all_fields",
+      "trace_final_state",
+      "trace_final_state_version",
+      "trace_event_count",
+      "reviewed_event_derived_task_metrics_denominators_subsets_and_arrival_background"
+    ],
+    "trace_metadata_allowed_to_change": [
+      "trace_id",
+      "episode_id"
+    ],
+    "run_metadata_allowed_to_change": [
+      "evaluation_episode_id",
+      "new_config_slot_manifest_identifiers"
+    ],
+    "fields_never_masked": [
+      "task_id",
+      "request_id",
+      "proposal_id",
+      "agent_id",
+      "policy",
+      "timestamp_ms",
+      "deadline",
+      "state_version",
+      "requires",
+      "costs",
+      "effects"
+    ],
+    "public_identifier_normalization": "none_expected_F2_public_home_identical",
+    "baseline_mismatch": "block_entire_batch_do_not_rename_or_refresh_baseline"
+  },
+  "execution_scope": {
+    "input_identity_assignment": "private_episode_id=config_id_before_execution_record_final_materialized_hash",
+    "provider_contract": "unchanged_public_prepare_proposals_300ms_capture_all_calls",
+    "existing_runtime_policy_logic_changed": false,
+    "unstarted_reservations_replanned": false,
+    "offline_certificate_in_online_input": false,
+    "observation_end": "event_queue_drained_physical_cycles_closed_no_clipping_to_deadline",
+    "new_adapter_required": true,
+    "old_bundle_acceptance_reused": false
+  },
+  "design_limits": [
+    "only_late_positive_releases",
+    "release_ranges_30_60_90_sec_or_90_120_150_sec_are_local_not_phase_stratified",
+    "proposal_return_delay_not_varied",
+    "early_deadlines_or_service_modes_not_varied",
+    "IndependentMultiAgent_not_in_new_batch_old_failed_records_preserved",
+    "one_factor_at_a_time_not_joint_factor_effects"
+  ],
+  "freeze_gate": "external_limited_design_review_or_explicit_acceptance_before_freeze_and_execution",
+  "api_calls": 0,
+  "simulator_runs": 0
+}
