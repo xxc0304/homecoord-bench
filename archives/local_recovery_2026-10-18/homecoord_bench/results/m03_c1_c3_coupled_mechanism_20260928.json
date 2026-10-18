@@ -1,0 +1,2348 @@
+{
+  "status": "synthetic_unreviewed_coupled_mechanism_probe",
+  "api_calls": 0,
+  "factors": {
+    "energy_task_release_at_ms": {
+      "overlap": 200,
+      "nonoverlap": 6500
+    },
+    "managed_load_budget_kw": {
+      "tight": 4.0,
+      "loose": 5.4
+    }
+  },
+  "source_limitations": [
+    "HVAC comfort is a command/service window, not measured temperature.",
+    "EV power and managed capacity are synthetic assumptions.",
+    "DryRun proposal latency does not measure concurrent model or device time."
+  ],
+  "episodes": [
+    {
+      "episode_id": "HC-M03-OVERLAP-TIGHT",
+      "task_family": "direct_device_conflict",
+      "source_type": "controlled_combination_of_unreviewed_c1_c3_mechanism_pilots",
+      "generator_version": "provenance-pilot-0.1",
+      "review_status": "author_mechanism_pilot_not_benchmark",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 4.0,
+          "capacity_scope": "synthetic_managed_load_budget",
+          "task_power_bounds_kw": {
+            "comfort_cool": 1.4,
+            "peak_off": 0.0,
+            "charge_ev": 4.0
+          }
+        }
+      },
+      "initial_state": {
+        "version": 101,
+        "values": {
+          "living_room": {
+            "temperature_c": 29
+          },
+          "request": {
+            "comfort_active": true
+          },
+          "devices": {
+            "living_hvac": "off",
+            "ev_charger": "off"
+          },
+          "vehicle": {
+            "battery_pct": 20,
+            "battery_capacity_kwh": 60.0
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "ComfortAgent",
+          "role": "comfort",
+          "tools": [
+            "set_hvac"
+          ],
+          "observable_state": [
+            "living_room.temperature_c",
+            "request.comfort_active"
+          ],
+          "writable_resources": [
+            "devices.living_hvac"
+          ]
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "energy",
+          "tools": [
+            "set_hvac"
+          ],
+          "observable_state": [
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": []
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "role": "ev_charging",
+          "tools": [
+            "charge_ev",
+            "stop_ev"
+          ],
+          "observable_state": [
+            "vehicle.battery_pct",
+            "vehicle.battery_capacity_kwh"
+          ],
+          "writable_resources": [
+            "devices.ev_charger"
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "release_at_ms": 0,
+          "goal": "Set the living-room HVAC to cooling at a 24 C set point for the resident request.",
+          "priority": 100,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "cool",
+            "parameters": {
+              "temperature_c": 24
+            },
+            "duration_ms": 6000,
+            "power_kw": 1.4,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 6200
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 200,
+          "goal": "Switch the living-room HVAC off for a separate energy-saving request.",
+          "priority": 20,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.0,
+            "requires": []
+          },
+          "completion_deadline_ms": 10000
+        },
+        {
+          "task_id": "charge_ev",
+          "agent_id": "EVChargingAgent",
+          "release_at_ms": 0,
+          "goal": "Charge the 60 kWh EV battery from 20% to at least 50%.",
+          "priority": 100,
+          "required_action": {
+            "target": "ev_charger",
+            "operation": "charge"
+          },
+          "action_template": {
+            "target": "ev_charger",
+            "operation": "charge",
+            "parameters": {
+              "target_battery_pct": 50
+            },
+            "duration_ms": 18000000,
+            "power_kw": 4.0,
+            "requires": []
+          },
+          "completion_deadline_ms": 21600000
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "cooling_request_window_ends",
+          "new_state_version": 102,
+          "patch": {
+            "request.comfort_active": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "request.comfort_active",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "devices.living_hvac",
+          "op": "eq",
+          "value": "forced_off"
+        },
+        {
+          "path": "vehicle.battery_pct",
+          "op": "gte",
+          "value": 50
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "b": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "min_overlap_ms": 1
+        },
+        {
+          "type": "C3",
+          "capacity": 4.0
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "ComfortAgent",
+          "task_id": "comfort_cool",
+          "operation": "cool",
+          "target": "living_hvac",
+          "grounded_operation": "cool",
+          "start_effects": {
+            "devices.living_hvac": "cooling"
+          },
+          "completion_effects": {},
+          "effects": {
+            "devices.living_hvac": "cooling"
+          },
+          "duration_ms": 6000,
+          "power_kw": 1.4
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "peak_off",
+          "operation": "off",
+          "target": "living_hvac",
+          "grounded_operation": "off",
+          "start_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "completion_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "duration_ms": 500,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "task_id": "charge_ev",
+          "operation": "charge",
+          "target": "ev_charger",
+          "grounded_operation": "charge",
+          "start_effects": {
+            "devices.ev_charger": "charging"
+          },
+          "completion_effects": {
+            "devices.ev_charger": "complete",
+            "vehicle.battery_pct": 50
+          },
+          "effects": {
+            "devices.ev_charger": "charging",
+            "vehicle.battery_pct": 50
+          },
+          "duration_ms": 18000000,
+          "power_kw": 4.0
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "task_id": "charge_ev",
+          "operation": "off",
+          "target": "ev_charger",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.ev_charger": "off"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        }
+      ],
+      "calibration": {
+        "status": "synthetic_command_and_power_timing",
+        "physical_parameters_verified": false,
+        "excluded_claims": [
+          "real_household_power",
+          "real_temperature",
+          "real_latency"
+        ]
+      },
+      "base_episode_id": "HC-M03",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "overlap": "overlap",
+        "capacity": "tight",
+        "factors": [
+          "energy_task_release_at_ms",
+          "managed_load_budget_kw"
+        ]
+      },
+      "draft_notes": [
+        "Separate review-only candidate; the 2026-09-27 blind-review packet is unchanged.",
+        "The resident request ends after a synthetic 6 s window, not when a cooling command completes.",
+        "No room-temperature or real energy claim is scored.",
+        "EnergyAgent sees its own task and HVAC state, not the separate comfort request or global constraint.",
+        "Required-action service counts issued commands, not six seconds of delivered thermal comfort."
+      ],
+      "tool_catalog": [
+        {
+          "agent_id": "ComfortAgent",
+          "tool_name": "set_hvac",
+          "description": "Start cooling to the requested set point.",
+          "target": "living_hvac",
+          "operation": "cool",
+          "parameters": [
+            {
+              "name": "temperature_c",
+              "type": "number",
+              "minimum": 16,
+              "maximum": 30,
+              "required": true
+            }
+          ],
+          "preconditions": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "set_hvac",
+          "description": "Switch the living-room HVAC off for the energy-saving request.",
+          "target": "living_hvac",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "target": "ev_charger",
+          "operation": "charge",
+          "parameters": [
+            {
+              "name": "target_battery_pct",
+              "type": "number"
+            }
+          ],
+          "description": "Charge the EV to the requested battery percentage.",
+          "tool_name": "charge_ev"
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "target": "ev_charger",
+          "operation": "off",
+          "parameters": [],
+          "description": "Turn off vehicle charging.",
+          "tool_name": "stop_ev"
+        }
+      ],
+      "data_tier": "mechanism_only",
+      "provenance_manifest": "manifest.json",
+      "parameter_provenance": {
+        "setpoint_c": {
+          "value": 24,
+          "class": "task_request_not_measured_temperature"
+        },
+        "cooling_request_window_ms": {
+          "value": 6000,
+          "class": "synthetic_exogenous_event"
+        },
+        "energy_task_release_at_ms": {
+          "value": 200,
+          "class": "controlled_experimental_factor"
+        },
+        "managed_load_budget_kw": {
+          "value": 4.0,
+          "class": "controlled_experimental_factor"
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M03-OVERLAP-LOOSE",
+      "task_family": "direct_device_conflict",
+      "source_type": "controlled_combination_of_unreviewed_c1_c3_mechanism_pilots",
+      "generator_version": "provenance-pilot-0.1",
+      "review_status": "author_mechanism_pilot_not_benchmark",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 5.4,
+          "capacity_scope": "synthetic_managed_load_budget",
+          "task_power_bounds_kw": {
+            "comfort_cool": 1.4,
+            "peak_off": 0.0,
+            "charge_ev": 4.0
+          }
+        }
+      },
+      "initial_state": {
+        "version": 101,
+        "values": {
+          "living_room": {
+            "temperature_c": 29
+          },
+          "request": {
+            "comfort_active": true
+          },
+          "devices": {
+            "living_hvac": "off",
+            "ev_charger": "off"
+          },
+          "vehicle": {
+            "battery_pct": 20,
+            "battery_capacity_kwh": 60.0
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "ComfortAgent",
+          "role": "comfort",
+          "tools": [
+            "set_hvac"
+          ],
+          "observable_state": [
+            "living_room.temperature_c",
+            "request.comfort_active"
+          ],
+          "writable_resources": [
+            "devices.living_hvac"
+          ]
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "energy",
+          "tools": [
+            "set_hvac"
+          ],
+          "observable_state": [
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": []
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "role": "ev_charging",
+          "tools": [
+            "charge_ev",
+            "stop_ev"
+          ],
+          "observable_state": [
+            "vehicle.battery_pct",
+            "vehicle.battery_capacity_kwh"
+          ],
+          "writable_resources": [
+            "devices.ev_charger"
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "release_at_ms": 0,
+          "goal": "Set the living-room HVAC to cooling at a 24 C set point for the resident request.",
+          "priority": 100,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "cool",
+            "parameters": {
+              "temperature_c": 24
+            },
+            "duration_ms": 6000,
+            "power_kw": 1.4,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 6200
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 200,
+          "goal": "Switch the living-room HVAC off for a separate energy-saving request.",
+          "priority": 20,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.0,
+            "requires": []
+          },
+          "completion_deadline_ms": 10000
+        },
+        {
+          "task_id": "charge_ev",
+          "agent_id": "EVChargingAgent",
+          "release_at_ms": 0,
+          "goal": "Charge the 60 kWh EV battery from 20% to at least 50%.",
+          "priority": 100,
+          "required_action": {
+            "target": "ev_charger",
+            "operation": "charge"
+          },
+          "action_template": {
+            "target": "ev_charger",
+            "operation": "charge",
+            "parameters": {
+              "target_battery_pct": 50
+            },
+            "duration_ms": 18000000,
+            "power_kw": 4.0,
+            "requires": []
+          },
+          "completion_deadline_ms": 21600000
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "cooling_request_window_ends",
+          "new_state_version": 102,
+          "patch": {
+            "request.comfort_active": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "request.comfort_active",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "devices.living_hvac",
+          "op": "eq",
+          "value": "forced_off"
+        },
+        {
+          "path": "vehicle.battery_pct",
+          "op": "gte",
+          "value": 50
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "b": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "min_overlap_ms": 1
+        },
+        {
+          "type": "C3",
+          "capacity": 5.4
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "ComfortAgent",
+          "task_id": "comfort_cool",
+          "operation": "cool",
+          "target": "living_hvac",
+          "grounded_operation": "cool",
+          "start_effects": {
+            "devices.living_hvac": "cooling"
+          },
+          "completion_effects": {},
+          "effects": {
+            "devices.living_hvac": "cooling"
+          },
+          "duration_ms": 6000,
+          "power_kw": 1.4
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "peak_off",
+          "operation": "off",
+          "target": "living_hvac",
+          "grounded_operation": "off",
+          "start_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "completion_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "duration_ms": 500,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "task_id": "charge_ev",
+          "operation": "charge",
+          "target": "ev_charger",
+          "grounded_operation": "charge",
+          "start_effects": {
+            "devices.ev_charger": "charging"
+          },
+          "completion_effects": {
+            "devices.ev_charger": "complete",
+            "vehicle.battery_pct": 50
+          },
+          "effects": {
+            "devices.ev_charger": "charging",
+            "vehicle.battery_pct": 50
+          },
+          "duration_ms": 18000000,
+          "power_kw": 4.0
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "task_id": "charge_ev",
+          "operation": "off",
+          "target": "ev_charger",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.ev_charger": "off"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        }
+      ],
+      "calibration": {
+        "status": "synthetic_command_and_power_timing",
+        "physical_parameters_verified": false,
+        "excluded_claims": [
+          "real_household_power",
+          "real_temperature",
+          "real_latency"
+        ]
+      },
+      "base_episode_id": "HC-M03",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "overlap": "overlap",
+        "capacity": "loose",
+        "factors": [
+          "energy_task_release_at_ms",
+          "managed_load_budget_kw"
+        ]
+      },
+      "draft_notes": [
+        "Separate review-only candidate; the 2026-09-27 blind-review packet is unchanged.",
+        "The resident request ends after a synthetic 6 s window, not when a cooling command completes.",
+        "No room-temperature or real energy claim is scored.",
+        "EnergyAgent sees its own task and HVAC state, not the separate comfort request or global constraint.",
+        "Required-action service counts issued commands, not six seconds of delivered thermal comfort."
+      ],
+      "tool_catalog": [
+        {
+          "agent_id": "ComfortAgent",
+          "tool_name": "set_hvac",
+          "description": "Start cooling to the requested set point.",
+          "target": "living_hvac",
+          "operation": "cool",
+          "parameters": [
+            {
+              "name": "temperature_c",
+              "type": "number",
+              "minimum": 16,
+              "maximum": 30,
+              "required": true
+            }
+          ],
+          "preconditions": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "set_hvac",
+          "description": "Switch the living-room HVAC off for the energy-saving request.",
+          "target": "living_hvac",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "target": "ev_charger",
+          "operation": "charge",
+          "parameters": [
+            {
+              "name": "target_battery_pct",
+              "type": "number"
+            }
+          ],
+          "description": "Charge the EV to the requested battery percentage.",
+          "tool_name": "charge_ev"
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "target": "ev_charger",
+          "operation": "off",
+          "parameters": [],
+          "description": "Turn off vehicle charging.",
+          "tool_name": "stop_ev"
+        }
+      ],
+      "data_tier": "mechanism_only",
+      "provenance_manifest": "manifest.json",
+      "parameter_provenance": {
+        "setpoint_c": {
+          "value": 24,
+          "class": "task_request_not_measured_temperature"
+        },
+        "cooling_request_window_ms": {
+          "value": 6000,
+          "class": "synthetic_exogenous_event"
+        },
+        "energy_task_release_at_ms": {
+          "value": 200,
+          "class": "controlled_experimental_factor"
+        },
+        "managed_load_budget_kw": {
+          "value": 5.4,
+          "class": "controlled_experimental_factor"
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M03-NONOVERLAP-TIGHT",
+      "task_family": "direct_device_conflict",
+      "source_type": "controlled_combination_of_unreviewed_c1_c3_mechanism_pilots",
+      "generator_version": "provenance-pilot-0.1",
+      "review_status": "author_mechanism_pilot_not_benchmark",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 4.0,
+          "capacity_scope": "synthetic_managed_load_budget",
+          "task_power_bounds_kw": {
+            "comfort_cool": 1.4,
+            "peak_off": 0.0,
+            "charge_ev": 4.0
+          }
+        }
+      },
+      "initial_state": {
+        "version": 101,
+        "values": {
+          "living_room": {
+            "temperature_c": 29
+          },
+          "request": {
+            "comfort_active": true
+          },
+          "devices": {
+            "living_hvac": "off",
+            "ev_charger": "off"
+          },
+          "vehicle": {
+            "battery_pct": 20,
+            "battery_capacity_kwh": 60.0
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "ComfortAgent",
+          "role": "comfort",
+          "tools": [
+            "set_hvac"
+          ],
+          "observable_state": [
+            "living_room.temperature_c",
+            "request.comfort_active"
+          ],
+          "writable_resources": [
+            "devices.living_hvac"
+          ]
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "energy",
+          "tools": [
+            "set_hvac"
+          ],
+          "observable_state": [
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": []
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "role": "ev_charging",
+          "tools": [
+            "charge_ev",
+            "stop_ev"
+          ],
+          "observable_state": [
+            "vehicle.battery_pct",
+            "vehicle.battery_capacity_kwh"
+          ],
+          "writable_resources": [
+            "devices.ev_charger"
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "release_at_ms": 0,
+          "goal": "Set the living-room HVAC to cooling at a 24 C set point for the resident request.",
+          "priority": 100,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "cool",
+            "parameters": {
+              "temperature_c": 24
+            },
+            "duration_ms": 6000,
+            "power_kw": 1.4,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 6200
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 6500,
+          "goal": "Switch the living-room HVAC off for a separate energy-saving request.",
+          "priority": 20,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.0,
+            "requires": []
+          },
+          "completion_deadline_ms": 10000
+        },
+        {
+          "task_id": "charge_ev",
+          "agent_id": "EVChargingAgent",
+          "release_at_ms": 0,
+          "goal": "Charge the 60 kWh EV battery from 20% to at least 50%.",
+          "priority": 100,
+          "required_action": {
+            "target": "ev_charger",
+            "operation": "charge"
+          },
+          "action_template": {
+            "target": "ev_charger",
+            "operation": "charge",
+            "parameters": {
+              "target_battery_pct": 50
+            },
+            "duration_ms": 18000000,
+            "power_kw": 4.0,
+            "requires": []
+          },
+          "completion_deadline_ms": 21600000
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "cooling_request_window_ends",
+          "new_state_version": 102,
+          "patch": {
+            "request.comfort_active": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "request.comfort_active",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "devices.living_hvac",
+          "op": "eq",
+          "value": "forced_off"
+        },
+        {
+          "path": "vehicle.battery_pct",
+          "op": "gte",
+          "value": 50
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "b": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "min_overlap_ms": 1
+        },
+        {
+          "type": "C3",
+          "capacity": 4.0
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "ComfortAgent",
+          "task_id": "comfort_cool",
+          "operation": "cool",
+          "target": "living_hvac",
+          "grounded_operation": "cool",
+          "start_effects": {
+            "devices.living_hvac": "cooling"
+          },
+          "completion_effects": {},
+          "effects": {
+            "devices.living_hvac": "cooling"
+          },
+          "duration_ms": 6000,
+          "power_kw": 1.4
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "peak_off",
+          "operation": "off",
+          "target": "living_hvac",
+          "grounded_operation": "off",
+          "start_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "completion_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "duration_ms": 500,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "task_id": "charge_ev",
+          "operation": "charge",
+          "target": "ev_charger",
+          "grounded_operation": "charge",
+          "start_effects": {
+            "devices.ev_charger": "charging"
+          },
+          "completion_effects": {
+            "devices.ev_charger": "complete",
+            "vehicle.battery_pct": 50
+          },
+          "effects": {
+            "devices.ev_charger": "charging",
+            "vehicle.battery_pct": 50
+          },
+          "duration_ms": 18000000,
+          "power_kw": 4.0
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "task_id": "charge_ev",
+          "operation": "off",
+          "target": "ev_charger",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.ev_charger": "off"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        }
+      ],
+      "calibration": {
+        "status": "synthetic_command_and_power_timing",
+        "physical_parameters_verified": false,
+        "excluded_claims": [
+          "real_household_power",
+          "real_temperature",
+          "real_latency"
+        ]
+      },
+      "base_episode_id": "HC-M03",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "overlap": "nonoverlap",
+        "capacity": "tight",
+        "factors": [
+          "energy_task_release_at_ms",
+          "managed_load_budget_kw"
+        ]
+      },
+      "draft_notes": [
+        "Separate review-only candidate; the 2026-09-27 blind-review packet is unchanged.",
+        "The resident request ends after a synthetic 6 s window, not when a cooling command completes.",
+        "No room-temperature or real energy claim is scored.",
+        "EnergyAgent sees its own task and HVAC state, not the separate comfort request or global constraint.",
+        "Required-action service counts issued commands, not six seconds of delivered thermal comfort."
+      ],
+      "tool_catalog": [
+        {
+          "agent_id": "ComfortAgent",
+          "tool_name": "set_hvac",
+          "description": "Start cooling to the requested set point.",
+          "target": "living_hvac",
+          "operation": "cool",
+          "parameters": [
+            {
+              "name": "temperature_c",
+              "type": "number",
+              "minimum": 16,
+              "maximum": 30,
+              "required": true
+            }
+          ],
+          "preconditions": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "set_hvac",
+          "description": "Switch the living-room HVAC off for the energy-saving request.",
+          "target": "living_hvac",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "target": "ev_charger",
+          "operation": "charge",
+          "parameters": [
+            {
+              "name": "target_battery_pct",
+              "type": "number"
+            }
+          ],
+          "description": "Charge the EV to the requested battery percentage.",
+          "tool_name": "charge_ev"
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "target": "ev_charger",
+          "operation": "off",
+          "parameters": [],
+          "description": "Turn off vehicle charging.",
+          "tool_name": "stop_ev"
+        }
+      ],
+      "data_tier": "mechanism_only",
+      "provenance_manifest": "manifest.json",
+      "parameter_provenance": {
+        "setpoint_c": {
+          "value": 24,
+          "class": "task_request_not_measured_temperature"
+        },
+        "cooling_request_window_ms": {
+          "value": 6000,
+          "class": "synthetic_exogenous_event"
+        },
+        "energy_task_release_at_ms": {
+          "value": 6500,
+          "class": "controlled_experimental_factor"
+        },
+        "managed_load_budget_kw": {
+          "value": 4.0,
+          "class": "controlled_experimental_factor"
+        }
+      }
+    },
+    {
+      "episode_id": "HC-M03-NONOVERLAP-LOOSE",
+      "task_family": "direct_device_conflict",
+      "source_type": "controlled_combination_of_unreviewed_c1_c3_mechanism_pilots",
+      "generator_version": "provenance-pilot-0.1",
+      "review_status": "author_mechanism_pilot_not_benchmark",
+      "episode_release_at_ms": 0,
+      "home": {
+        "resources": {
+          "max_power_kw": 5.4,
+          "capacity_scope": "synthetic_managed_load_budget",
+          "task_power_bounds_kw": {
+            "comfort_cool": 1.4,
+            "peak_off": 0.0,
+            "charge_ev": 4.0
+          }
+        }
+      },
+      "initial_state": {
+        "version": 101,
+        "values": {
+          "living_room": {
+            "temperature_c": 29
+          },
+          "request": {
+            "comfort_active": true
+          },
+          "devices": {
+            "living_hvac": "off",
+            "ev_charger": "off"
+          },
+          "vehicle": {
+            "battery_pct": 20,
+            "battery_capacity_kwh": 60.0
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "ComfortAgent",
+          "role": "comfort",
+          "tools": [
+            "set_hvac"
+          ],
+          "observable_state": [
+            "living_room.temperature_c",
+            "request.comfort_active"
+          ],
+          "writable_resources": [
+            "devices.living_hvac"
+          ]
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "energy",
+          "tools": [
+            "set_hvac"
+          ],
+          "observable_state": [
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local",
+          "policy_constraints": []
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "role": "ev_charging",
+          "tools": [
+            "charge_ev",
+            "stop_ev"
+          ],
+          "observable_state": [
+            "vehicle.battery_pct",
+            "vehicle.battery_capacity_kwh"
+          ],
+          "writable_resources": [
+            "devices.ev_charger"
+          ]
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "comfort_cool",
+          "agent_id": "ComfortAgent",
+          "release_at_ms": 0,
+          "goal": "Set the living-room HVAC to cooling at a 24 C set point for the resident request.",
+          "priority": 100,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "cool",
+            "parameters": {
+              "temperature_c": 24
+            },
+            "duration_ms": 6000,
+            "power_kw": 1.4,
+            "requires": [
+              {
+                "path": "request.comfort_active",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "completion_deadline_ms": 6200
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 6500,
+          "goal": "Switch the living-room HVAC off for a separate energy-saving request.",
+          "priority": 20,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 500,
+            "power_kw": 0.0,
+            "requires": []
+          },
+          "completion_deadline_ms": 10000
+        },
+        {
+          "task_id": "charge_ev",
+          "agent_id": "EVChargingAgent",
+          "release_at_ms": 0,
+          "goal": "Charge the 60 kWh EV battery from 20% to at least 50%.",
+          "priority": 100,
+          "required_action": {
+            "target": "ev_charger",
+            "operation": "charge"
+          },
+          "action_template": {
+            "target": "ev_charger",
+            "operation": "charge",
+            "parameters": {
+              "target_battery_pct": 50
+            },
+            "duration_ms": 18000000,
+            "power_kw": 4.0,
+            "requires": []
+          },
+          "completion_deadline_ms": 21600000
+        }
+      ],
+      "exogenous_events": [
+        {
+          "at_ms": 6000,
+          "event": "cooling_request_window_ends",
+          "new_state_version": 102,
+          "patch": {
+            "request.comfort_active": false
+          }
+        }
+      ],
+      "latency_profile": {
+        "unit": "ms"
+      },
+      "goals": [
+        {
+          "path": "request.comfort_active",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "devices.living_hvac",
+          "op": "eq",
+          "value": "forced_off"
+        },
+        {
+          "path": "vehicle.battery_pct",
+          "op": "gte",
+          "value": 50
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "b": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "min_overlap_ms": 1
+        },
+        {
+          "type": "C3",
+          "capacity": 5.4
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "ComfortAgent",
+          "task_id": "comfort_cool",
+          "operation": "cool",
+          "target": "living_hvac",
+          "grounded_operation": "cool",
+          "start_effects": {
+            "devices.living_hvac": "cooling"
+          },
+          "completion_effects": {},
+          "effects": {
+            "devices.living_hvac": "cooling"
+          },
+          "duration_ms": 6000,
+          "power_kw": 1.4
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "peak_off",
+          "operation": "off",
+          "target": "living_hvac",
+          "grounded_operation": "off",
+          "start_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "completion_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "duration_ms": 500,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "task_id": "charge_ev",
+          "operation": "charge",
+          "target": "ev_charger",
+          "grounded_operation": "charge",
+          "start_effects": {
+            "devices.ev_charger": "charging"
+          },
+          "completion_effects": {
+            "devices.ev_charger": "complete",
+            "vehicle.battery_pct": 50
+          },
+          "effects": {
+            "devices.ev_charger": "charging",
+            "vehicle.battery_pct": 50
+          },
+          "duration_ms": 18000000,
+          "power_kw": 4.0
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "task_id": "charge_ev",
+          "operation": "off",
+          "target": "ev_charger",
+          "grounded_operation": "off",
+          "effects": {
+            "devices.ev_charger": "off"
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        }
+      ],
+      "calibration": {
+        "status": "synthetic_command_and_power_timing",
+        "physical_parameters_verified": false,
+        "excluded_claims": [
+          "real_household_power",
+          "real_temperature",
+          "real_latency"
+        ]
+      },
+      "base_episode_id": "HC-M03",
+      "tool_contract_version": "strict-v1",
+      "variant": {
+        "overlap": "nonoverlap",
+        "capacity": "loose",
+        "factors": [
+          "energy_task_release_at_ms",
+          "managed_load_budget_kw"
+        ]
+      },
+      "draft_notes": [
+        "Separate review-only candidate; the 2026-09-27 blind-review packet is unchanged.",
+        "The resident request ends after a synthetic 6 s window, not when a cooling command completes.",
+        "No room-temperature or real energy claim is scored.",
+        "EnergyAgent sees its own task and HVAC state, not the separate comfort request or global constraint.",
+        "Required-action service counts issued commands, not six seconds of delivered thermal comfort."
+      ],
+      "tool_catalog": [
+        {
+          "agent_id": "ComfortAgent",
+          "tool_name": "set_hvac",
+          "description": "Start cooling to the requested set point.",
+          "target": "living_hvac",
+          "operation": "cool",
+          "parameters": [
+            {
+              "name": "temperature_c",
+              "type": "number",
+              "minimum": 16,
+              "maximum": 30,
+              "required": true
+            }
+          ],
+          "preconditions": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "set_hvac",
+          "description": "Switch the living-room HVAC off for the energy-saving request.",
+          "target": "living_hvac",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [],
+          "returns": {
+            "status": [
+              "accepted",
+              "rejected"
+            ],
+            "observed_state": "object"
+          }
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "target": "ev_charger",
+          "operation": "charge",
+          "parameters": [
+            {
+              "name": "target_battery_pct",
+              "type": "number"
+            }
+          ],
+          "description": "Charge the EV to the requested battery percentage.",
+          "tool_name": "charge_ev"
+        },
+        {
+          "agent_id": "EVChargingAgent",
+          "target": "ev_charger",
+          "operation": "off",
+          "parameters": [],
+          "description": "Turn off vehicle charging.",
+          "tool_name": "stop_ev"
+        }
+      ],
+      "data_tier": "mechanism_only",
+      "provenance_manifest": "manifest.json",
+      "parameter_provenance": {
+        "setpoint_c": {
+          "value": 24,
+          "class": "task_request_not_measured_temperature"
+        },
+        "cooling_request_window_ms": {
+          "value": 6000,
+          "class": "synthetic_exogenous_event"
+        },
+        "energy_task_release_at_ms": {
+          "value": 6500,
+          "class": "controlled_experimental_factor"
+        },
+        "managed_load_budget_kw": {
+          "value": 5.4,
+          "class": "controlled_experimental_factor"
+        }
+      }
+    }
+  ],
+  "rows": [
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-OVERLAP-TIGHT",
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": false,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": false,
+        "charge_ev": false
+      },
+      "final_goal_success": false,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": false,
+        "charge_ev": false
+      },
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 2,
+      "action_rejections": [
+        "shared_gate_capacity",
+        "shared_gate_action_conflict"
+      ],
+      "action_start_order": [
+        "comfort_cool"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-OVERLAP-TIGHT",
+      "policy": "RuleCoordinator",
+      "process_valid_success": false,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": false
+      },
+      "final_goal_success": false,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": false
+      },
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 1,
+      "action_rejections": [
+        "shared_gate_capacity"
+      ],
+      "action_start_order": [
+        "comfort_cool",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-OVERLAP-TIGHT",
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-OVERLAP-TIGHT",
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-OVERLAP-TIGHT",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-OVERLAP-TIGHT",
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": false,
+        "charge_ev": true
+      },
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-OVERLAP-LOOSE",
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": false,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": false,
+        "charge_ev": true
+      },
+      "final_goal_success": false,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": false,
+        "charge_ev": true
+      },
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 1,
+      "action_rejections": [
+        "shared_gate_action_conflict"
+      ],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-OVERLAP-LOOSE",
+      "policy": "RuleCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-OVERLAP-LOOSE",
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-OVERLAP-LOOSE",
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-OVERLAP-LOOSE",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "overlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-OVERLAP-LOOSE",
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": false,
+        "charge_ev": true
+      },
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-TIGHT",
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": false,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": false
+      },
+      "final_goal_success": false,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": false
+      },
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 1,
+      "action_rejections": [
+        "shared_gate_capacity"
+      ],
+      "action_start_order": [
+        "comfort_cool",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-TIGHT",
+      "policy": "RuleCoordinator",
+      "process_valid_success": false,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": false
+      },
+      "final_goal_success": false,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": false
+      },
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 1,
+      "action_rejections": [
+        "shared_gate_capacity"
+      ],
+      "action_start_order": [
+        "comfort_cool",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-TIGHT",
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-TIGHT",
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-TIGHT",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "tight"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-TIGHT",
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": false,
+        "charge_ev": true
+      },
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-LOOSE",
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-LOOSE",
+      "policy": "RuleCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-LOOSE",
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-LOOSE",
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-LOOSE",
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "all_deadlines_met": true,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    },
+    {
+      "condition": {
+        "overlap": "nonoverlap",
+        "capacity": "loose"
+      },
+      "episode_id": "HC-M03-NONOVERLAP-LOOSE",
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "comfort_cool": true,
+        "peak_off": true,
+        "charge_ev": true
+      },
+      "final_goal_success": true,
+      "task_deadline_met": {
+        "comfort_cool": true,
+        "peak_off": false,
+        "charge_ev": true
+      },
+      "all_deadlines_met": false,
+      "first_action_start_latency_ms": 101,
+      "shared_safety_gate_rejection_count": 0,
+      "action_rejections": [],
+      "action_start_order": [
+        "comfort_cool",
+        "charge_ev",
+        "peak_off"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2543 @@
+{
+  "status": "synthetic_mechanism_only_not_benchmark",
+  "api_calls": 0,
+  "episodes": [
+    {
+      "episode_id": "HC-D03-ENERGY-200",
+      "base_episode_id": "HC-D03",
+      "episode_release_at_ms": 0,
+      "task_family": "return_message_direct_conflict",
+      "source_type": "synthetic_message_command_timing",
+      "data_tier": "mechanism_only",
+      "review_status": "author_mechanism_pilot_not_benchmark",
+      "home": {
+        "resources": {
+          "max_power_kw": 5.0
+        }
+      },
+      "initial_state": {
+        "version": 1,
+        "values": {
+          "messages": {
+            "return_reported": false
+          },
+          "request": {
+            "comfort_active": false,
+            "cooling_started": false
+          },
+          "devices": {
+            "living_hvac": "off"
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "OccupancyAgent",
+          "role": "report_return",
+          "tools": [
+            "do_report_return"
+          ],
+          "observable_state": [
+            "messages.return_reported",
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "messages.return_reported",
+            "request.comfort_active",
+            "devices.occupancy_channel"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "ComfortAgent",
+          "role": "cool_on_return",
+          "tools": [
+            "do_cool_on_return"
+          ],
+          "observable_state": [
+            "messages.return_reported",
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac",
+            "request.cooling_started",
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "peak_off",
+          "tools": [
+            "do_peak_off"
+          ],
+          "observable_state": [
+            "messages.return_reported",
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac",
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "report_return",
+          "agent_id": "OccupancyAgent",
+          "release_at_ms": 800,
+          "goal": "Publish the return observation.",
+          "priority": 50,
+          "required_action": {
+            "target": "occupancy_channel",
+            "operation": "report_home"
+          },
+          "action_template": {
+            "target": "occupancy_channel",
+            "operation": "report_home",
+            "parameters": {},
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "requires": []
+          }
+        },
+        {
+          "task_id": "cool_on_return",
+          "agent_id": "ComfortAgent",
+          "release_at_ms": 0,
+          "goal": "Issue cooling after the return report.",
+          "priority": 90,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "cool",
+            "parameters": {},
+            "duration_ms": 1200,
+            "power_kw": 1.4,
+            "requires": [
+              {
+                "path": "messages.return_reported",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "release_after_task_completion": "report_return",
+          "completion_deadline_ms": 3500
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 200,
+          "goal": "Issue the peak-window off command.",
+          "priority": 50,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 300,
+            "power_kw": 0.0,
+            "requires": []
+          }
+        }
+      ],
+      "tool_catalog": [
+        {
+          "agent_id": "OccupancyAgent",
+          "tool_name": "do_report_return",
+          "target": "occupancy_channel",
+          "operation": "report_home",
+          "parameters": [],
+          "preconditions": [],
+          "writable_path": "messages.return_reported",
+          "description": "Publish the return observation."
+        },
+        {
+          "agent_id": "ComfortAgent",
+          "tool_name": "do_cool_on_return",
+          "target": "living_hvac",
+          "operation": "cool",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "messages.return_reported",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "writable_path": "devices.living_hvac",
+          "description": "Issue cooling after the return report."
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "do_peak_off",
+          "target": "living_hvac",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [],
+          "writable_path": "devices.living_hvac",
+          "description": "Issue the peak-window off command."
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "OccupancyAgent",
+          "task_id": "report_return",
+          "target": "occupancy_channel",
+          "operation": "report_home",
+          "grounded_operation": "report_home",
+          "start_effects": {},
+          "completion_effects": {
+            "messages.return_reported": true,
+            "request.comfort_active": true
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "ComfortAgent",
+          "task_id": "cool_on_return",
+          "target": "living_hvac",
+          "operation": "cool",
+          "grounded_operation": "cool",
+          "start_effects": {
+            "devices.living_hvac": "cooling",
+            "request.cooling_started": true
+          },
+          "completion_effects": {},
+          "duration_ms": 1200,
+          "power_kw": 1.4
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "peak_off",
+          "target": "living_hvac",
+          "operation": "off",
+          "grounded_operation": "off",
+          "start_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "completion_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "duration_ms": 300,
+          "power_kw": 0.0
+        }
+      ],
+      "tool_contract_version": "strict-v1",
+      "simulation": {
+        "command_latency_ms": 100
+      },
+      "exogenous_events": [
+        {
+          "at_ms": 800,
+          "event": "resident_actual_return",
+          "patch": {
+            "resident.actual_home": true
+          }
+        },
+        {
+          "at_ms": 3000,
+          "event": "comfort_request_window_ends",
+          "patch": {
+            "request.comfort_active": false
+          }
+        }
+      ],
+      "goals": [
+        {
+          "path": "messages.return_reported",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "request.cooling_started",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "b": {
+            "target": "living_hvac",
+            "operation": "off"
+          }
+        }
+      ],
+      "variant": {
+        "energy_release_ms": 200,
+        "changed_factor": "energy_task_release_at_ms"
+      },
+      "calibration": {
+        "status": "synthetic_message_and_service_window",
+        "physical_parameters_verified": false,
+        "excluded_claims": [
+          "measured_thermal_comfort",
+          "real_message_latency"
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-D03-ENERGY-1150",
+      "base_episode_id": "HC-D03",
+      "episode_release_at_ms": 0,
+      "task_family": "return_message_direct_conflict",
+      "source_type": "synthetic_message_command_timing",
+      "data_tier": "mechanism_only",
+      "review_status": "author_mechanism_pilot_not_benchmark",
+      "home": {
+        "resources": {
+          "max_power_kw": 5.0
+        }
+      },
+      "initial_state": {
+        "version": 1,
+        "values": {
+          "messages": {
+            "return_reported": false
+          },
+          "request": {
+            "comfort_active": false,
+            "cooling_started": false
+          },
+          "devices": {
+            "living_hvac": "off"
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "OccupancyAgent",
+          "role": "report_return",
+          "tools": [
+            "do_report_return"
+          ],
+          "observable_state": [
+            "messages.return_reported",
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "messages.return_reported",
+            "request.comfort_active",
+            "devices.occupancy_channel"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "ComfortAgent",
+          "role": "cool_on_return",
+          "tools": [
+            "do_cool_on_return"
+          ],
+          "observable_state": [
+            "messages.return_reported",
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac",
+            "request.cooling_started",
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "peak_off",
+          "tools": [
+            "do_peak_off"
+          ],
+          "observable_state": [
+            "messages.return_reported",
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac",
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "report_return",
+          "agent_id": "OccupancyAgent",
+          "release_at_ms": 800,
+          "goal": "Publish the return observation.",
+          "priority": 50,
+          "required_action": {
+            "target": "occupancy_channel",
+            "operation": "report_home"
+          },
+          "action_template": {
+            "target": "occupancy_channel",
+            "operation": "report_home",
+            "parameters": {},
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "requires": []
+          }
+        },
+        {
+          "task_id": "cool_on_return",
+          "agent_id": "ComfortAgent",
+          "release_at_ms": 0,
+          "goal": "Issue cooling after the return report.",
+          "priority": 90,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "cool",
+            "parameters": {},
+            "duration_ms": 1200,
+            "power_kw": 1.4,
+            "requires": [
+              {
+                "path": "messages.return_reported",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "release_after_task_completion": "report_return",
+          "completion_deadline_ms": 3500
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 1150,
+          "goal": "Issue the peak-window off command.",
+          "priority": 50,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 300,
+            "power_kw": 0.0,
+            "requires": []
+          }
+        }
+      ],
+      "tool_catalog": [
+        {
+          "agent_id": "OccupancyAgent",
+          "tool_name": "do_report_return",
+          "target": "occupancy_channel",
+          "operation": "report_home",
+          "parameters": [],
+          "preconditions": [],
+          "writable_path": "messages.return_reported",
+          "description": "Publish the return observation."
+        },
+        {
+          "agent_id": "ComfortAgent",
+          "tool_name": "do_cool_on_return",
+          "target": "living_hvac",
+          "operation": "cool",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "messages.return_reported",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "writable_path": "devices.living_hvac",
+          "description": "Issue cooling after the return report."
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "do_peak_off",
+          "target": "living_hvac",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [],
+          "writable_path": "devices.living_hvac",
+          "description": "Issue the peak-window off command."
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "OccupancyAgent",
+          "task_id": "report_return",
+          "target": "occupancy_channel",
+          "operation": "report_home",
+          "grounded_operation": "report_home",
+          "start_effects": {},
+          "completion_effects": {
+            "messages.return_reported": true,
+            "request.comfort_active": true
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "ComfortAgent",
+          "task_id": "cool_on_return",
+          "target": "living_hvac",
+          "operation": "cool",
+          "grounded_operation": "cool",
+          "start_effects": {
+            "devices.living_hvac": "cooling",
+            "request.cooling_started": true
+          },
+          "completion_effects": {},
+          "duration_ms": 1200,
+          "power_kw": 1.4
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "peak_off",
+          "target": "living_hvac",
+          "operation": "off",
+          "grounded_operation": "off",
+          "start_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "completion_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "duration_ms": 300,
+          "power_kw": 0.0
+        }
+      ],
+      "tool_contract_version": "strict-v1",
+      "simulation": {
+        "command_latency_ms": 100
+      },
+      "exogenous_events": [
+        {
+          "at_ms": 800,
+          "event": "resident_actual_return",
+          "patch": {
+            "resident.actual_home": true
+          }
+        },
+        {
+          "at_ms": 3000,
+          "event": "comfort_request_window_ends",
+          "patch": {
+            "request.comfort_active": false
+          }
+        }
+      ],
+      "goals": [
+        {
+          "path": "messages.return_reported",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "request.cooling_started",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "b": {
+            "target": "living_hvac",
+            "operation": "off"
+          }
+        }
+      ],
+      "variant": {
+        "energy_release_ms": 1150,
+        "changed_factor": "energy_task_release_at_ms"
+      },
+      "calibration": {
+        "status": "synthetic_message_and_service_window",
+        "physical_parameters_verified": false,
+        "excluded_claims": [
+          "measured_thermal_comfort",
+          "real_message_latency"
+        ]
+      }
+    },
+    {
+      "episode_id": "HC-D03-ENERGY-3200",
+      "base_episode_id": "HC-D03",
+      "episode_release_at_ms": 0,
+      "task_family": "return_message_direct_conflict",
+      "source_type": "synthetic_message_command_timing",
+      "data_tier": "mechanism_only",
+      "review_status": "author_mechanism_pilot_not_benchmark",
+      "home": {
+        "resources": {
+          "max_power_kw": 5.0
+        }
+      },
+      "initial_state": {
+        "version": 1,
+        "values": {
+          "messages": {
+            "return_reported": false
+          },
+          "request": {
+            "comfort_active": false,
+            "cooling_started": false
+          },
+          "devices": {
+            "living_hvac": "off"
+          }
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "OccupancyAgent",
+          "role": "report_return",
+          "tools": [
+            "do_report_return"
+          ],
+          "observable_state": [
+            "messages.return_reported",
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "messages.return_reported",
+            "request.comfort_active",
+            "devices.occupancy_channel"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "ComfortAgent",
+          "role": "cool_on_return",
+          "tools": [
+            "do_cool_on_return"
+          ],
+          "observable_state": [
+            "messages.return_reported",
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac",
+            "request.cooling_started",
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "role": "peak_off",
+          "tools": [
+            "do_peak_off"
+          ],
+          "observable_state": [
+            "messages.return_reported",
+            "devices.living_hvac"
+          ],
+          "writable_resources": [
+            "devices.living_hvac",
+            "devices.living_hvac"
+          ],
+          "goal_visibility": "local",
+          "constraint_visibility": "local"
+        }
+      ],
+      "task_stream": [
+        {
+          "task_id": "report_return",
+          "agent_id": "OccupancyAgent",
+          "release_at_ms": 800,
+          "goal": "Publish the return observation.",
+          "priority": 50,
+          "required_action": {
+            "target": "occupancy_channel",
+            "operation": "report_home"
+          },
+          "action_template": {
+            "target": "occupancy_channel",
+            "operation": "report_home",
+            "parameters": {},
+            "duration_ms": 100,
+            "power_kw": 0.0,
+            "requires": []
+          }
+        },
+        {
+          "task_id": "cool_on_return",
+          "agent_id": "ComfortAgent",
+          "release_at_ms": 0,
+          "goal": "Issue cooling after the return report.",
+          "priority": 90,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "cool",
+            "parameters": {},
+            "duration_ms": 1200,
+            "power_kw": 1.4,
+            "requires": [
+              {
+                "path": "messages.return_reported",
+                "op": "eq",
+                "value": true
+              }
+            ]
+          },
+          "release_after_task_completion": "report_return",
+          "completion_deadline_ms": 3500
+        },
+        {
+          "task_id": "peak_off",
+          "agent_id": "EnergyAgent",
+          "release_at_ms": 3200,
+          "goal": "Issue the peak-window off command.",
+          "priority": 50,
+          "required_action": {
+            "target": "living_hvac",
+            "operation": "off"
+          },
+          "action_template": {
+            "target": "living_hvac",
+            "operation": "off",
+            "parameters": {},
+            "duration_ms": 300,
+            "power_kw": 0.0,
+            "requires": []
+          }
+        }
+      ],
+      "tool_catalog": [
+        {
+          "agent_id": "OccupancyAgent",
+          "tool_name": "do_report_return",
+          "target": "occupancy_channel",
+          "operation": "report_home",
+          "parameters": [],
+          "preconditions": [],
+          "writable_path": "messages.return_reported",
+          "description": "Publish the return observation."
+        },
+        {
+          "agent_id": "ComfortAgent",
+          "tool_name": "do_cool_on_return",
+          "target": "living_hvac",
+          "operation": "cool",
+          "parameters": [],
+          "preconditions": [
+            {
+              "path": "messages.return_reported",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "writable_path": "devices.living_hvac",
+          "description": "Issue cooling after the return report."
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "tool_name": "do_peak_off",
+          "target": "living_hvac",
+          "operation": "off",
+          "parameters": [],
+          "preconditions": [],
+          "writable_path": "devices.living_hvac",
+          "description": "Issue the peak-window off command."
+        }
+      ],
+      "action_grounding": [
+        {
+          "agent_id": "OccupancyAgent",
+          "task_id": "report_return",
+          "target": "occupancy_channel",
+          "operation": "report_home",
+          "grounded_operation": "report_home",
+          "start_effects": {},
+          "completion_effects": {
+            "messages.return_reported": true,
+            "request.comfort_active": true
+          },
+          "duration_ms": 100,
+          "power_kw": 0.0
+        },
+        {
+          "agent_id": "ComfortAgent",
+          "task_id": "cool_on_return",
+          "target": "living_hvac",
+          "operation": "cool",
+          "grounded_operation": "cool",
+          "start_effects": {
+            "devices.living_hvac": "cooling",
+            "request.cooling_started": true
+          },
+          "completion_effects": {},
+          "duration_ms": 1200,
+          "power_kw": 1.4
+        },
+        {
+          "agent_id": "EnergyAgent",
+          "task_id": "peak_off",
+          "target": "living_hvac",
+          "operation": "off",
+          "grounded_operation": "off",
+          "start_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "completion_effects": {
+            "devices.living_hvac": "forced_off"
+          },
+          "duration_ms": 300,
+          "power_kw": 0.0
+        }
+      ],
+      "tool_contract_version": "strict-v1",
+      "simulation": {
+        "command_latency_ms": 100
+      },
+      "exogenous_events": [
+        {
+          "at_ms": 800,
+          "event": "resident_actual_return",
+          "patch": {
+            "resident.actual_home": true
+          }
+        },
+        {
+          "at_ms": 3000,
+          "event": "comfort_request_window_ends",
+          "patch": {
+            "request.comfort_active": false
+          }
+        }
+      ],
+      "goals": [
+        {
+          "path": "messages.return_reported",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "constraints": [
+        {
+          "when": [
+            {
+              "path": "request.comfort_active",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "request.cooling_started",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "must": [
+            {
+              "path": "devices.living_hvac",
+              "op": "neq",
+              "value": "forced_off"
+            }
+          ]
+        }
+      ],
+      "conflict_rules": [
+        {
+          "type": "C1",
+          "a": {
+            "target": "living_hvac",
+            "operation": "cool"
+          },
+          "b": {
+            "target": "living_hvac",
+            "operation": "off"
+          }
+        }
+      ],
+      "variant": {
+        "energy_release_ms": 3200,
+        "changed_factor": "energy_task_release_at_ms"
+      },
+      "calibration": {
+        "status": "synthetic_message_and_service_window",
+        "physical_parameters_verified": false,
+        "excluded_claims": [
+          "measured_thermal_comfort",
+          "real_message_latency"
+        ]
+      }
+    }
+  ],
+  "rows": [
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 1,
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 1,
+      "policy": "RuleCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 1,
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 1,
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 1,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 1,
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 600,
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 600,
+      "policy": "RuleCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 600,
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 600,
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 600,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 200,
+      "report_latency_ms": 600,
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          301
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "peak_off",
+          200
+        ],
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 1,
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": false
+      },
+      "all_tasks_served": false,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          1150
+        ]
+      ],
+      "rejection_reasons": [
+        "shared_gate_action_conflict"
+      ]
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 1,
+      "policy": "RuleCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": false
+      },
+      "all_tasks_served": false,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          1150
+        ]
+      ],
+      "rejection_reasons": [
+        "constraint_violation"
+      ]
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 1,
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": false
+      },
+      "all_tasks_served": false,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          1150
+        ]
+      ],
+      "rejection_reasons": [
+        "constraint_violation"
+      ]
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 1,
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": false
+      },
+      "all_tasks_served": false,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          1150
+        ]
+      ],
+      "rejection_reasons": [
+        "constraint_violation"
+      ]
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 1,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": false
+      },
+      "all_tasks_served": false,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          1150
+        ]
+      ],
+      "rejection_reasons": [
+        "constraint_violation"
+      ]
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 1,
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": false
+      },
+      "all_tasks_served": false,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          1150
+        ]
+      ],
+      "rejection_reasons": [
+        "constraint_violation"
+      ]
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 600,
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          1251
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "peak_off",
+          1150
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 600,
+      "policy": "RuleCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          1251
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "peak_off",
+          1150
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 600,
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          1251
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "peak_off",
+          1150
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 600,
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          1500
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1800
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "peak_off",
+          1150
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 600,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          1251
+        ],
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "peak_off",
+          1150
+        ],
+        [
+          "cool_on_return",
+          1600
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 1150,
+      "report_latency_ms": 600,
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "peak_off",
+          1251
+        ],
+        [
+          "report_return",
+          1551
+        ],
+        [
+          "cool_on_return",
+          1752
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "peak_off",
+          1150
+        ],
+        [
+          "cool_on_return",
+          1651
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 1,
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 1,
+      "policy": "RuleCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 1,
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 1,
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 1,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 1,
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          901
+        ],
+        [
+          "cool_on_return",
+          1102
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1001
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 600,
+      "policy": "IndependentMultiAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 600,
+      "policy": "RuleCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 600,
+      "policy": "ConstraintCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 600,
+      "policy": "DeadlineAwareCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 600,
+      "policy": "CapacityAwareDeadlineCoordinator",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    },
+    {
+      "energy_release_ms": 3200,
+      "report_latency_ms": 600,
+      "policy": "CentralSingleAgent",
+      "process_valid_success": true,
+      "task_service": {
+        "report_return": true,
+        "cool_on_return": true,
+        "peak_off": true
+      },
+      "all_tasks_served": true,
+      "task_deadline_met": {
+        "cool_on_return": true
+      },
+      "unsafe_onsets": 0,
+      "action_start": [
+        [
+          "report_return",
+          1500
+        ],
+        [
+          "cool_on_return",
+          1701
+        ],
+        [
+          "peak_off",
+          3301
+        ]
+      ],
+      "task_release": [
+        [
+          "report_return",
+          800
+        ],
+        [
+          "cool_on_return",
+          1600
+        ],
+        [
+          "peak_off",
+          3200
+        ]
+      ],
+      "rejection_reasons": []
+    }
+  ]
+}

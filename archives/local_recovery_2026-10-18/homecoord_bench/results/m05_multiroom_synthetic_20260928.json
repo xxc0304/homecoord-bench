@@ -1,0 +1,497 @@
+{
+  "status": "independent_room_synthetic_mechanism_not_benchmark",
+  "api_calls": 0,
+  "room_profiles": {
+    "living": {
+      "agent": "LivingComfortAgent",
+      "initial_c": 29.0,
+      "target_c": 25.0,
+      "outdoor_c": 32.0,
+      "leak_per_s": 0.00012,
+      "cooling_c_per_s": 0.004,
+      "power_kw": 1.4,
+      "deadline_s": 1500
+    },
+    "bedroom": {
+      "agent": "BedroomComfortAgent",
+      "initial_c": 27.0,
+      "target_c": 24.0,
+      "outdoor_c": 31.0,
+      "leak_per_s": 8e-05,
+      "cooling_c_per_s": 0.003,
+      "power_kw": 1.1,
+      "deadline_s": 1700
+    }
+  },
+  "water_contract": {
+    "power_kw": 1.5,
+    "work_kws": 900,
+    "release_s": 0,
+    "deadline_s": 1200
+  },
+  "time_step_s": 1,
+  "excluded_claims": [
+    "calibrated room dynamics",
+    "actual home capacity",
+    "resident comfort feedback",
+    "independent homes"
+  ],
+  "rows": [
+    {
+      "capacity_kw": 2.5,
+      "bedroom_release_s": 0,
+      "policy": "release_order",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": 1179,
+        "bedroom": 1173
+      },
+      "room_on_time": {
+        "living": true,
+        "bedroom": true
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 25.0,
+        "bedroom": 24.0
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.0,
+        "bedroom": 0.0
+      },
+      "worst_room_target_deficit_c": 0.0,
+      "water_completed_s": 1929,
+      "water_on_time": false,
+      "room_running_s": {
+        "living": 1246,
+        "bedroom": 1271
+      },
+      "final_room_temperature_c": {
+        "living": 25.351,
+        "bedroom": 24.127
+      },
+      "peak_power_kw": 2.5
+    },
+    {
+      "capacity_kw": 2.5,
+      "bedroom_release_s": 0,
+      "policy": "earliest_deadline",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": null,
+        "bedroom": null
+      },
+      "room_on_time": {
+        "living": false,
+        "bedroom": false
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 26.082,
+        "bedroom": 24.35
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 1.082,
+        "bedroom": 0.35
+      },
+      "worst_room_target_deficit_c": 1.082,
+      "water_completed_s": 600,
+      "water_on_time": true,
+      "room_running_s": {
+        "living": 900,
+        "bedroom": 1100
+      },
+      "final_room_temperature_c": {
+        "living": 26.222,
+        "bedroom": 24.35
+      },
+      "peak_power_kw": 2.5
+    },
+    {
+      "capacity_kw": 2.5,
+      "bedroom_release_s": 0,
+      "policy": "largest_remaining_gap",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": null,
+        "bedroom": null
+      },
+      "room_on_time": {
+        "living": false,
+        "bedroom": false
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 25.397,
+        "bedroom": 24.175
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.397,
+        "bedroom": 0.175
+      },
+      "worst_room_target_deficit_c": 0.397,
+      "water_completed_s": 1806,
+      "water_on_time": false,
+      "room_running_s": {
+        "living": 1138,
+        "bedroom": 1206
+      },
+      "final_room_temperature_c": {
+        "living": 25.635,
+        "bedroom": 24.232
+      },
+      "peak_power_kw": 2.5
+    },
+    {
+      "capacity_kw": 2.5,
+      "bedroom_release_s": 300,
+      "policy": "release_order",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": 1179,
+        "bedroom": null
+      },
+      "room_on_time": {
+        "living": true,
+        "bedroom": false
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 25.0,
+        "bedroom": 24.871
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.0,
+        "bedroom": 0.871
+      },
+      "worst_room_target_deficit_c": 0.871,
+      "water_completed_s": 1846,
+      "water_on_time": false,
+      "room_running_s": {
+        "living": 1246,
+        "bedroom": 946
+      },
+      "final_room_temperature_c": {
+        "living": 25.284,
+        "bedroom": 24.942
+      },
+      "peak_power_kw": 2.5
+    },
+    {
+      "capacity_kw": 2.5,
+      "bedroom_release_s": 300,
+      "policy": "earliest_deadline",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": null,
+        "bedroom": null
+      },
+      "room_on_time": {
+        "living": false,
+        "bedroom": false
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 26.082,
+        "bedroom": 24.35
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 1.082,
+        "bedroom": 0.35
+      },
+      "worst_room_target_deficit_c": 1.082,
+      "water_completed_s": 600,
+      "water_on_time": true,
+      "room_running_s": {
+        "living": 900,
+        "bedroom": 1100
+      },
+      "final_room_temperature_c": {
+        "living": 26.222,
+        "bedroom": 24.35
+      },
+      "peak_power_kw": 2.5
+    },
+    {
+      "capacity_kw": 2.5,
+      "bedroom_release_s": 300,
+      "policy": "largest_remaining_gap",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": 1334,
+        "bedroom": null
+      },
+      "room_on_time": {
+        "living": true,
+        "bedroom": false
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 24.997,
+        "bedroom": 24.47
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.0,
+        "bedroom": 0.47
+      },
+      "worst_room_target_deficit_c": 0.47,
+      "water_completed_s": 1981,
+      "water_on_time": false,
+      "room_running_s": {
+        "living": 1246,
+        "bedroom": 1081
+      },
+      "final_room_temperature_c": {
+        "living": 25.39,
+        "bedroom": 24.615
+      },
+      "peak_power_kw": 2.5
+    },
+    {
+      "capacity_kw": 4.0,
+      "bedroom_release_s": 0,
+      "policy": "release_order",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": 1179,
+        "bedroom": 1173
+      },
+      "room_on_time": {
+        "living": true,
+        "bedroom": true
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 25.0,
+        "bedroom": 24.0
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.0,
+        "bedroom": 0.0
+      },
+      "worst_room_target_deficit_c": 0.0,
+      "water_completed_s": 600,
+      "water_on_time": true,
+      "room_running_s": {
+        "living": 1246,
+        "bedroom": 1271
+      },
+      "final_room_temperature_c": {
+        "living": 25.166,
+        "bedroom": 24.0
+      },
+      "peak_power_kw": 4.0
+    },
+    {
+      "capacity_kw": 4.0,
+      "bedroom_release_s": 0,
+      "policy": "earliest_deadline",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": 1179,
+        "bedroom": 1173
+      },
+      "room_on_time": {
+        "living": true,
+        "bedroom": true
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 25.0,
+        "bedroom": 24.0
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.0,
+        "bedroom": 0.0
+      },
+      "worst_room_target_deficit_c": 0.0,
+      "water_completed_s": 600,
+      "water_on_time": true,
+      "room_running_s": {
+        "living": 1246,
+        "bedroom": 1271
+      },
+      "final_room_temperature_c": {
+        "living": 25.166,
+        "bedroom": 24.0
+      },
+      "peak_power_kw": 4.0
+    },
+    {
+      "capacity_kw": 4.0,
+      "bedroom_release_s": 0,
+      "policy": "largest_remaining_gap",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": 1179,
+        "bedroom": 1173
+      },
+      "room_on_time": {
+        "living": true,
+        "bedroom": true
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 25.0,
+        "bedroom": 24.0
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.0,
+        "bedroom": 0.0
+      },
+      "worst_room_target_deficit_c": 0.0,
+      "water_completed_s": 600,
+      "water_on_time": true,
+      "room_running_s": {
+        "living": 1246,
+        "bedroom": 1271
+      },
+      "final_room_temperature_c": {
+        "living": 25.166,
+        "bedroom": 24.0
+      },
+      "peak_power_kw": 4.0
+    },
+    {
+      "capacity_kw": 4.0,
+      "bedroom_release_s": 300,
+      "policy": "release_order",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": 1179,
+        "bedroom": 1509
+      },
+      "room_on_time": {
+        "living": true,
+        "bedroom": true
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 25.0,
+        "bedroom": 24.0
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.0,
+        "bedroom": 0.0
+      },
+      "worst_room_target_deficit_c": 0.0,
+      "water_completed_s": 600,
+      "water_on_time": true,
+      "room_running_s": {
+        "living": 1246,
+        "bedroom": 1244
+      },
+      "final_room_temperature_c": {
+        "living": 25.166,
+        "bedroom": 24.0
+      },
+      "peak_power_kw": 4.0
+    },
+    {
+      "capacity_kw": 4.0,
+      "bedroom_release_s": 300,
+      "policy": "earliest_deadline",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": 1179,
+        "bedroom": 1509
+      },
+      "room_on_time": {
+        "living": true,
+        "bedroom": true
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 25.0,
+        "bedroom": 24.0
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.0,
+        "bedroom": 0.0
+      },
+      "worst_room_target_deficit_c": 0.0,
+      "water_completed_s": 600,
+      "water_on_time": true,
+      "room_running_s": {
+        "living": 1246,
+        "bedroom": 1244
+      },
+      "final_room_temperature_c": {
+        "living": 25.166,
+        "bedroom": 24.0
+      },
+      "peak_power_kw": 4.0
+    },
+    {
+      "capacity_kw": 4.0,
+      "bedroom_release_s": 300,
+      "policy": "largest_remaining_gap",
+      "agents": [
+        "LivingComfortAgent",
+        "BedroomComfortAgent",
+        "WaterAgent"
+      ],
+      "room_reached_target_s": {
+        "living": 1179,
+        "bedroom": 1509
+      },
+      "room_on_time": {
+        "living": true,
+        "bedroom": true
+      },
+      "room_temperature_at_deadline_c": {
+        "living": 25.0,
+        "bedroom": 24.0
+      },
+      "room_target_deficit_at_deadline_c": {
+        "living": 0.0,
+        "bedroom": 0.0
+      },
+      "worst_room_target_deficit_c": 0.0,
+      "water_completed_s": 600,
+      "water_on_time": true,
+      "room_running_s": {
+        "living": 1246,
+        "bedroom": 1244
+      },
+      "final_room_temperature_c": {
+        "living": 25.166,
+        "bedroom": 24.0
+      },
+      "peak_power_kw": 4.0
+    }
+  ]
+}

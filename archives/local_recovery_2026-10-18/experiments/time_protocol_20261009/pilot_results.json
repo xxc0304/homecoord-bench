@@ -1,0 +1,2753 @@
+{
+  "schema": "homecoord-hybrid-clock-engineering-pilot-v1",
+  "runs": [
+    {
+      "structure": "dependency",
+      "policy": "immediate",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        4000,
+        4000
+      ],
+      "scripted_latency_ms": [
+        300,
+        700
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 300,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 300
+        },
+        {
+          "type": "service_started",
+          "at_ms": 400,
+          "task_id": "A",
+          "duration_ms": 4000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 700,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 700
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 4400,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 4500,
+          "task_id": "B",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 8500,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 300,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 300,
+          "to_ms": 400,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 400,
+          "to_ms": 700,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 700,
+          "to_ms": 4400,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 4400,
+          "to_ms": 4500,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 4500,
+          "to_ms": 8500,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 4400,
+        "B": 8500
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 8500,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "dependency",
+      "policy": "immediate",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        4000,
+        4000
+      ],
+      "scripted_latency_ms": [
+        8000,
+        12000
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 8000,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 8000
+        },
+        {
+          "type": "service_started",
+          "at_ms": 8100,
+          "task_id": "A",
+          "duration_ms": 4000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 12000,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 12000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 12100,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 12200,
+          "task_id": "B",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 16200,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 8000,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8000,
+          "to_ms": 8100,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8100,
+          "to_ms": 12000,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12000,
+          "to_ms": 12100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12100,
+          "to_ms": 12200,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12200,
+          "to_ms": 16200,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 12100,
+        "B": 16200
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 16200,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "dependency",
+      "policy": "immediate",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        3600000,
+        1800000
+      ],
+      "scripted_latency_ms": [
+        300,
+        700
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 300,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 300
+        },
+        {
+          "type": "service_started",
+          "at_ms": 400,
+          "task_id": "A",
+          "duration_ms": 3600000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 700,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 700
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 3600400,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 3600500,
+          "task_id": "B",
+          "duration_ms": 1800000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 5400500,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 1800000,
+              "deadline_ms": 10000000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 300,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 300,
+          "to_ms": 400,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 400,
+          "to_ms": 700,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 700,
+          "to_ms": 3600400,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3600400,
+          "to_ms": 3600500,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3600500,
+          "to_ms": 5400500,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 3600400,
+        "B": 5400500
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 5400500,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "dependency",
+      "policy": "immediate",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        3600000,
+        1800000
+      ],
+      "scripted_latency_ms": [
+        8000,
+        12000
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 8000,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 8000
+        },
+        {
+          "type": "service_started",
+          "at_ms": 8100,
+          "task_id": "A",
+          "duration_ms": 3600000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 12000,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 12000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 3608100,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 3608200,
+          "task_id": "B",
+          "duration_ms": 1800000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 5408200,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 1800000,
+              "deadline_ms": 10000000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 8000,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8000,
+          "to_ms": 8100,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8100,
+          "to_ms": 12000,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12000,
+          "to_ms": 3608100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3608100,
+          "to_ms": 3608200,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3608200,
+          "to_ms": 5408200,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 3608100,
+        "B": 5408200
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 5408200,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "dependency",
+      "policy": "wait_released",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        4000,
+        4000
+      ],
+      "scripted_latency_ms": [
+        300,
+        700
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 300,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 300
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 700,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 700
+        },
+        {
+          "type": "service_started",
+          "at_ms": 800,
+          "task_id": "A",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 4800,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 4900,
+          "task_id": "B",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 8900,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 300,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 300,
+          "to_ms": 700,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 700,
+          "to_ms": 800,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 800,
+          "to_ms": 4800,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 4800,
+          "to_ms": 4900,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 4900,
+          "to_ms": 8900,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 4800,
+        "B": 8900
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 8900,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "dependency",
+      "policy": "wait_released",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        4000,
+        4000
+      ],
+      "scripted_latency_ms": [
+        8000,
+        12000
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 8000,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 8000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 12000,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 12000
+        },
+        {
+          "type": "service_started",
+          "at_ms": 12100,
+          "task_id": "A",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 16100,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 16200,
+          "task_id": "B",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 20200,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 8000,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8000,
+          "to_ms": 12000,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12000,
+          "to_ms": 12100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12100,
+          "to_ms": 16100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 16100,
+          "to_ms": 16200,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 16200,
+          "to_ms": 20200,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 16100,
+        "B": 20200
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 20200,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "dependency",
+      "policy": "wait_released",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        3600000,
+        1800000
+      ],
+      "scripted_latency_ms": [
+        300,
+        700
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 300,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 300
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 700,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 700
+        },
+        {
+          "type": "service_started",
+          "at_ms": 800,
+          "task_id": "A",
+          "duration_ms": 3600000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 3600800,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 3600900,
+          "task_id": "B",
+          "duration_ms": 1800000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 5400900,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 1800000,
+              "deadline_ms": 10000000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 300,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 300,
+          "to_ms": 700,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 700,
+          "to_ms": 800,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 800,
+          "to_ms": 3600800,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3600800,
+          "to_ms": 3600900,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3600900,
+          "to_ms": 5400900,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 3600800,
+        "B": 5400900
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 5400900,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "dependency",
+      "policy": "wait_released",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        3600000,
+        1800000
+      ],
+      "scripted_latency_ms": [
+        8000,
+        12000
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 8000,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 8000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 12000,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 12000
+        },
+        {
+          "type": "service_started",
+          "at_ms": 12100,
+          "task_id": "A",
+          "duration_ms": 3600000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 3612100,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 3612200,
+          "task_id": "B",
+          "duration_ms": 1800000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 5412200,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 1800000,
+              "deadline_ms": 10000000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 8000,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8000,
+          "to_ms": 12000,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12000,
+          "to_ms": 12100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12100,
+          "to_ms": 3612100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3612100,
+          "to_ms": 3612200,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3612200,
+          "to_ms": 5412200,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 3612100,
+        "B": 5412200
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 5412200,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "resource",
+      "policy": "immediate",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        4000,
+        4000
+      ],
+      "scripted_latency_ms": [
+        300,
+        700
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 300,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 300
+        },
+        {
+          "type": "service_started",
+          "at_ms": 400,
+          "task_id": "A",
+          "duration_ms": 4000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 700,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 700
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 4400,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 4500,
+          "task_id": "B",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 8500,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 180000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 300,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 300,
+          "to_ms": 400,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 400,
+          "to_ms": 700,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 700,
+          "to_ms": 4400,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 4400,
+          "to_ms": 4500,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 4500,
+          "to_ms": 8500,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 4400,
+        "B": 8500
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 8500,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "resource",
+      "policy": "immediate",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        4000,
+        4000
+      ],
+      "scripted_latency_ms": [
+        8000,
+        12000
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 8000,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 8000
+        },
+        {
+          "type": "service_started",
+          "at_ms": 8100,
+          "task_id": "A",
+          "duration_ms": 4000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 12000,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 12000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 12100,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 12200,
+          "task_id": "B",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 16200,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 180000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 8000,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8000,
+          "to_ms": 8100,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8100,
+          "to_ms": 12000,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12000,
+          "to_ms": 12100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12100,
+          "to_ms": 12200,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12200,
+          "to_ms": 16200,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 12100,
+        "B": 16200
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 16200,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "resource",
+      "policy": "immediate",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        3600000,
+        1800000
+      ],
+      "scripted_latency_ms": [
+        300,
+        700
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 300,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 300
+        },
+        {
+          "type": "service_started",
+          "at_ms": 400,
+          "task_id": "A",
+          "duration_ms": 3600000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 700,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 700
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 3600400,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 3600500,
+          "task_id": "B",
+          "duration_ms": 1800000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 5400500,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 1800000,
+              "deadline_ms": 180000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 300,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 300,
+          "to_ms": 400,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 400,
+          "to_ms": 700,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 700,
+          "to_ms": 3600400,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3600400,
+          "to_ms": 3600500,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3600500,
+          "to_ms": 5400500,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 3600400,
+        "B": 5400500
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": false
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 5400500,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "resource",
+      "policy": "immediate",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        3600000,
+        1800000
+      ],
+      "scripted_latency_ms": [
+        8000,
+        12000
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 8000,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 8000
+        },
+        {
+          "type": "service_started",
+          "at_ms": 8100,
+          "task_id": "A",
+          "duration_ms": 3600000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 12000,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 12000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 3608100,
+          "task_id": "A"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 3608200,
+          "task_id": "B",
+          "duration_ms": 1800000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 5408200,
+          "task_id": "B"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 1800000,
+              "deadline_ms": 180000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 8000,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8000,
+          "to_ms": 8100,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8100,
+          "to_ms": 12000,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12000,
+          "to_ms": 3608100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3608100,
+          "to_ms": 3608200,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 3608200,
+          "to_ms": 5408200,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "A": 3608100,
+        "B": 5408200
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": false
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 5408200,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "resource",
+      "policy": "wait_released",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        4000,
+        4000
+      ],
+      "scripted_latency_ms": [
+        300,
+        700
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 300,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 300
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 700,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 700
+        },
+        {
+          "type": "service_started",
+          "at_ms": 800,
+          "task_id": "B",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 4800,
+          "task_id": "B"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 4900,
+          "task_id": "A",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 8900,
+          "task_id": "A"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 180000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 300,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 300,
+          "to_ms": 700,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 700,
+          "to_ms": 800,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 800,
+          "to_ms": 4800,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 4800,
+          "to_ms": 4900,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 4900,
+          "to_ms": 8900,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "B": 4800,
+        "A": 8900
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 8900,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "resource",
+      "policy": "wait_released",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        4000,
+        4000
+      ],
+      "scripted_latency_ms": [
+        8000,
+        12000
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 8000,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 8000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 12000,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 12000
+        },
+        {
+          "type": "service_started",
+          "at_ms": 12100,
+          "task_id": "B",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 16100,
+          "task_id": "B"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 16200,
+          "task_id": "A",
+          "duration_ms": 4000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 20200,
+          "task_id": "A"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 4000,
+              "deadline_ms": 180000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 8000,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8000,
+          "to_ms": 12000,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12000,
+          "to_ms": 12100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12100,
+          "to_ms": 16100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 16100,
+          "to_ms": 16200,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 16200,
+          "to_ms": 20200,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "B": 16100,
+        "A": 20200
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": true
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 20200,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "resource",
+      "policy": "wait_released",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        3600000,
+        1800000
+      ],
+      "scripted_latency_ms": [
+        300,
+        700
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 300,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 300
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 700,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 700
+        },
+        {
+          "type": "service_started",
+          "at_ms": 800,
+          "task_id": "B",
+          "duration_ms": 1800000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 1800800,
+          "task_id": "B"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 1800900,
+          "task_id": "A",
+          "duration_ms": 3600000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 5400900,
+          "task_id": "A"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 1800000,
+              "deadline_ms": 180000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 300,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 300,
+          "to_ms": 700,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 700,
+          "to_ms": 800,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 800,
+          "to_ms": 1800800,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 1800800,
+          "to_ms": 1800900,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 1800900,
+          "to_ms": 5400900,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "B": 1800800,
+        "A": 5400900
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": false
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 5400900,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    },
+    {
+      "structure": "resource",
+      "policy": "wait_released",
+      "clock_mode": "hybrid",
+      "service_ms": [
+        3600000,
+        1800000
+      ],
+      "scripted_latency_ms": [
+        8000,
+        12000
+      ],
+      "trace": [
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "A",
+          "request_id": "request_A"
+        },
+        {
+          "type": "request_started",
+          "at_ms": 0,
+          "task_id": "B",
+          "request_id": "request_B"
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 8000,
+          "task_id": "A",
+          "scripted_wall_latency_ms": 8000
+        },
+        {
+          "type": "proposal_returned",
+          "at_ms": 12000,
+          "task_id": "B",
+          "scripted_wall_latency_ms": 12000
+        },
+        {
+          "type": "service_started",
+          "at_ms": 12100,
+          "task_id": "B",
+          "duration_ms": 1800000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 1812100,
+          "task_id": "B"
+        },
+        {
+          "type": "service_started",
+          "at_ms": 1812200,
+          "task_id": "A",
+          "duration_ms": 3600000
+        },
+        {
+          "type": "service_completed",
+          "at_ms": 5412200,
+          "task_id": "A"
+        }
+      ],
+      "requests": [
+        {
+          "request_id": "request_A",
+          "agent_id": "agent_A",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            }
+          ]
+        },
+        {
+          "request_id": "request_B",
+          "agent_id": "agent_B",
+          "now_ms": 0,
+          "state": {
+            "authorised": true,
+            "version": 0
+          },
+          "released_tasks": [
+            {
+              "task_id": "A",
+              "agent_id": "agent_A",
+              "release_ms": 0,
+              "service_ms": 3600000,
+              "deadline_ms": 10000000
+            },
+            {
+              "task_id": "B",
+              "agent_id": "agent_B",
+              "release_ms": 0,
+              "service_ms": 1800000,
+              "deadline_ms": 180000
+            }
+          ]
+        }
+      ],
+      "clock_log": [
+        {
+          "mode": "idle_jump",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 0
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 0,
+          "pending_requests": 1
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 0,
+          "to_ms": 8000,
+          "pending_requests": 2
+        },
+        {
+          "mode": "wall_elapsed",
+          "from_ms": 8000,
+          "to_ms": 12000,
+          "pending_requests": 1
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12000,
+          "to_ms": 12100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 12100,
+          "to_ms": 1812100,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 1812100,
+          "to_ms": 1812200,
+          "pending_requests": 0
+        },
+        {
+          "mode": "idle_jump",
+          "from_ms": 1812200,
+          "to_ms": 5412200,
+          "pending_requests": 0
+        }
+      ],
+      "completion_ms": {
+        "B": 1812100,
+        "A": 5412200
+      },
+      "rejected": [],
+      "on_time": {
+        "A": true,
+        "B": false
+      },
+      "model_request_count": 2,
+      "maximum_logical_requests_in_flight": 2,
+      "actual_api_requests": 0,
+      "simulated_end_ms": 5412200,
+      "evidence_scope": "synthetic engineering verification; no live LLM or calibrated physics",
+      "reference_semantics_equal": true
+    }
+  ],
+  "run_count": 16,
+  "logical_scripted_requests": 32,
+  "actual_api_requests": 0,
+  "api_cost_usd": 0,
+  "offline_execution_wall_seconds": 0.0013716998510062695,
+  "all_reference_semantics_equal": true,
+  "limitations": [
+    "not integrated into the latest live runner",
+    "model latencies and outputs are scripted",
+    "resource and duration fixtures are synthetic",
+    "no new benchmark findings or live concurrency evidence"
+  ]
+}

@@ -1,0 +1,2335 @@
+{
+  "status": "synthetic_device_contract_stress_only_not_benchmark",
+  "api_calls": 0,
+  "contract_semantics": {
+    "capacity_scope": "hypothetical managed-load budget",
+    "physical_interlock": "instantaneous hardware load shed; stop acknowledgement after 200 ms",
+    "energy_report": "agent receives actual capacity after specified delay",
+    "progress": "kW seconds of abstract work; low power conserves work rate",
+    "resume_loss": "0.4 kW seconds per interrupted cycle, assumed",
+    "selector": "EDF; fixed high, or conservative lowest mode; optional preemption",
+    "excluded_claims": [
+      "actual EV/dryer power modes",
+      "actual device pause safety",
+      "actual restart loss",
+      "real household deadlines"
+    ]
+  },
+  "rows": [
+    {
+      "structure": "M06",
+      "capability": "fixed",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 6.0,
+          "report_delay_ms": 0
+        }
+      ],
+      "mode_choice": false,
+      "capacity_safe": true,
+      "peak_power_kw": 6.0,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 7000,
+          "failed_after_trip": false,
+          "deadline_met": false,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "dryer": {
+          "finish_ms": 8000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0.0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 6.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 6.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 7000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 8000,
+          "type": "completed",
+          "job_id": "dryer"
+        }
+      ]
+    },
+    {
+      "structure": "M06",
+      "capability": "low_mode",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 6.0,
+          "report_delay_ms": 0
+        }
+      ],
+      "mode_choice": true,
+      "capacity_safe": true,
+      "peak_power_kw": 3.8,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 11000,
+          "failed_after_trip": false,
+          "deadline_met": false,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 8000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0.0
+        },
+        "dryer": {
+          "finish_ms": 8000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 6.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 6.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 8000,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 8000,
+          "type": "completed",
+          "job_id": "dryer"
+        },
+        {
+          "at_ms": 8000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 11000,
+          "type": "completed",
+          "job_id": "water"
+        }
+      ]
+    },
+    {
+      "structure": "M06",
+      "capability": "pause_resume",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 6.0,
+          "report_delay_ms": 0
+        }
+      ],
+      "mode_choice": false,
+      "capacity_safe": true,
+      "peak_power_kw": 6.0,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 7100,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        },
+        "dryer": {
+          "finish_ms": 8300,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 6.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 6.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "ev",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "voluntary_pause",
+          "job_id": "dryer",
+          "stop_ack_at_ms": 4200
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 7100,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 7100,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 8300,
+          "type": "completed",
+          "job_id": "dryer"
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 0,
+      "report_delay_ms": 0,
+      "selector": "fixed_high",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 0
+        }
+      ],
+      "mode_choice": false,
+      "capacity_safe": true,
+      "peak_power_kw": 4.0,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 7100,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        },
+        "dryer": {
+          "finish_ms": 11100,
+          "failed_after_trip": false,
+          "deadline_met": false,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0.0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "ev",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 7100,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 7100,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 11100,
+          "type": "completed",
+          "job_id": "dryer"
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 0,
+      "report_delay_ms": 0,
+      "selector": "low_mode",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 0
+        }
+      ],
+      "mode_choice": true,
+      "capacity_safe": true,
+      "peak_power_kw": 4.9,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 11200,
+          "failed_after_trip": false,
+          "deadline_met": false,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0.0
+        },
+        "dryer": {
+          "finish_ms": 8600,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "dryer",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "ev",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1200,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 8600,
+          "type": "completed",
+          "job_id": "dryer"
+        },
+        {
+          "at_ms": 11200,
+          "type": "completed",
+          "job_id": "ev"
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 0,
+      "report_delay_ms": 1000,
+      "selector": "fixed_high",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 1000
+        }
+      ],
+      "mode_choice": false,
+      "capacity_safe": true,
+      "peak_power_kw": 4.0,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 7100,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        },
+        "dryer": {
+          "finish_ms": 11100,
+          "failed_after_trip": false,
+          "deadline_met": false,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0.0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1000,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "ev",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 7100,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 7100,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 11100,
+          "type": "completed",
+          "job_id": "dryer"
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 0,
+      "report_delay_ms": 1000,
+      "selector": "low_mode",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 1000
+        }
+      ],
+      "mode_choice": true,
+      "capacity_safe": true,
+      "peak_power_kw": 4.9,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 11200,
+          "failed_after_trip": false,
+          "deadline_met": false,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0.0
+        },
+        "dryer": {
+          "finish_ms": 8600,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 1000,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "dryer",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "ev",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1200,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 8600,
+          "type": "completed",
+          "job_id": "dryer"
+        },
+        {
+          "at_ms": 11200,
+          "type": "completed",
+          "job_id": "ev"
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 1500,
+      "report_delay_ms": 0,
+      "selector": "fixed_high",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 8.0,
+          "report_delay_ms": 0
+        },
+        {
+          "at_ms": 1500,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 0
+        }
+      ],
+      "mode_choice": false,
+      "capacity_safe": true,
+      "peak_power_kw": 7.8,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 6600,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 1,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "dryer": {
+          "finish_ms": 9800,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "dryer",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1500,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 1500,
+          "type": "hardware_trip",
+          "job_id": "ev",
+          "stop_ack_at_ms": 1700
+        },
+        {
+          "at_ms": 1500,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 6600,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 6600,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 9800,
+          "type": "completed",
+          "job_id": "dryer"
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 1500,
+      "report_delay_ms": 0,
+      "selector": "low_mode",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 8.0,
+          "report_delay_ms": 0
+        },
+        {
+          "at_ms": 1500,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 0
+        }
+      ],
+      "mode_choice": true,
+      "capacity_safe": true,
+      "peak_power_kw": 6.9,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 10700,
+          "failed_after_trip": false,
+          "deadline_met": false,
+          "trip_count": 1,
+          "pause_count": 0,
+          "remaining_kws": 0.0
+        },
+        "dryer": {
+          "finish_ms": 8600,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 1,
+          "pause_count": 0,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1500,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 1500,
+          "type": "hardware_trip",
+          "job_id": "dryer",
+          "stop_ack_at_ms": 1700
+        },
+        {
+          "at_ms": 1500,
+          "type": "hardware_trip",
+          "job_id": "ev",
+          "stop_ack_at_ms": 1700
+        },
+        {
+          "at_ms": 1500,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 1700,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 8600,
+          "type": "completed",
+          "job_id": "dryer"
+        },
+        {
+          "at_ms": 10700,
+          "type": "completed",
+          "job_id": "ev"
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 1500,
+      "report_delay_ms": 1000,
+      "selector": "fixed_high",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 8.0,
+          "report_delay_ms": 0
+        },
+        {
+          "at_ms": 1500,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 1000
+        }
+      ],
+      "mode_choice": false,
+      "capacity_safe": true,
+      "peak_power_kw": 7.8,
+      "hardware_start_rejections": 2,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 6600,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 1,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "dryer": {
+          "finish_ms": 9800,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "dryer",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1500,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 1500,
+          "type": "hardware_trip",
+          "job_id": "ev",
+          "stop_ack_at_ms": 1700
+        },
+        {
+          "at_ms": 1500,
+          "type": "hardware_start_rejected",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1700,
+          "type": "hardware_start_rejected",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 2500,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 6600,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 6600,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 9800,
+          "type": "completed",
+          "job_id": "dryer"
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 1500,
+      "report_delay_ms": 1000,
+      "selector": "low_mode",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 8.0,
+          "report_delay_ms": 0
+        },
+        {
+          "at_ms": 1500,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 1000
+        }
+      ],
+      "mode_choice": true,
+      "capacity_safe": true,
+      "peak_power_kw": 6.9,
+      "hardware_start_rejections": 2,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 10700,
+          "failed_after_trip": false,
+          "deadline_met": false,
+          "trip_count": 1,
+          "pause_count": 0,
+          "remaining_kws": 0.0
+        },
+        "dryer": {
+          "finish_ms": 8600,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 1,
+          "pause_count": 0,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1500,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 1500,
+          "type": "hardware_trip",
+          "job_id": "dryer",
+          "stop_ack_at_ms": 1700
+        },
+        {
+          "at_ms": 1500,
+          "type": "hardware_trip",
+          "job_id": "ev",
+          "stop_ack_at_ms": 1700
+        },
+        {
+          "at_ms": 1700,
+          "type": "hardware_start_rejected",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 1700,
+          "type": "hardware_start_rejected",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1700,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 2500,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 8600,
+          "type": "completed",
+          "job_id": "dryer"
+        },
+        {
+          "at_ms": 10700,
+          "type": "completed",
+          "job_id": "ev"
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 9000,
+      "report_delay_ms": 0,
+      "selector": "fixed_high",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 8.0,
+          "report_delay_ms": 0
+        },
+        {
+          "at_ms": 9000,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 0
+        }
+      ],
+      "mode_choice": false,
+      "capacity_safe": true,
+      "peak_power_kw": 7.8,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "dryer": {
+          "finish_ms": 7200,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "dryer",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 7200,
+          "type": "completed",
+          "job_id": "dryer"
+        },
+        {
+          "at_ms": 9000,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 9000,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 9000,
+      "report_delay_ms": 0,
+      "selector": "low_mode",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 8.0,
+          "report_delay_ms": 0
+        },
+        {
+          "at_ms": 9000,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 0
+        }
+      ],
+      "mode_choice": true,
+      "capacity_safe": true,
+      "peak_power_kw": 6.9,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 8000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0.0
+        },
+        "dryer": {
+          "finish_ms": 8000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 8000,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 8000,
+          "type": "completed",
+          "job_id": "dryer"
+        },
+        {
+          "at_ms": 9000,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 9000,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 9000,
+      "report_delay_ms": 1000,
+      "selector": "fixed_high",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 8.0,
+          "report_delay_ms": 0
+        },
+        {
+          "at_ms": 9000,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 1000
+        }
+      ],
+      "mode_choice": false,
+      "capacity_safe": true,
+      "peak_power_kw": 7.8,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "dryer": {
+          "finish_ms": 7200,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 1,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "high"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 1000,
+          "type": "voluntary_pause",
+          "job_id": "dryer",
+          "stop_ack_at_ms": 1200
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 4000,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "high"
+        },
+        {
+          "at_ms": 7200,
+          "type": "completed",
+          "job_id": "dryer"
+        },
+        {
+          "at_ms": 9000,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 10000,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        }
+      ]
+    },
+    {
+      "structure": "D02",
+      "capacity_change_at_ms": 9000,
+      "report_delay_ms": 1000,
+      "selector": "low_mode",
+      "contract": [
+        {
+          "id": "ev",
+          "agent": "EVAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 4.0,
+            "low": 2.0
+          },
+          "work_kws": 16.0,
+          "deadline_ms": 8000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "water",
+          "agent": "WaterAgent",
+          "release_ms": 1000,
+          "modes_kw": {
+            "high": 3.8
+          },
+          "work_kws": 11.4,
+          "deadline_ms": 4600,
+          "interruptible": false,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        },
+        {
+          "id": "dryer",
+          "agent": "DryerAgent",
+          "release_ms": 0,
+          "modes_kw": {
+            "high": 2.2,
+            "low": 1.1
+          },
+          "work_kws": 8.8,
+          "deadline_ms": 10000,
+          "interruptible": true,
+          "stop_ack_ms": 200,
+          "resume_loss_kws": 0.4
+        }
+      ],
+      "capacity_events": [
+        {
+          "at_ms": 0,
+          "capacity_kw": 8.0,
+          "report_delay_ms": 0
+        },
+        {
+          "at_ms": 9000,
+          "capacity_kw": 5.0,
+          "report_delay_ms": 1000
+        }
+      ],
+      "mode_choice": true,
+      "capacity_safe": true,
+      "peak_power_kw": 6.9,
+      "hardware_start_rejections": 0,
+      "jobs": {
+        "water": {
+          "finish_ms": 4000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        },
+        "ev": {
+          "finish_ms": 8000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0.0
+        },
+        "dryer": {
+          "finish_ms": 8000,
+          "failed_after_trip": false,
+          "deadline_met": true,
+          "trip_count": 0,
+          "pause_count": 0,
+          "remaining_kws": 0
+        }
+      },
+      "events": [
+        {
+          "at_ms": 0,
+          "type": "physical_capacity_change",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "energy_agent_report",
+          "capacity_kw": 8.0
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "ev",
+          "mode": "low"
+        },
+        {
+          "at_ms": 0,
+          "type": "start_acknowledged",
+          "job_id": "dryer",
+          "mode": "low"
+        },
+        {
+          "at_ms": 1000,
+          "type": "start_acknowledged",
+          "job_id": "water",
+          "mode": "high"
+        },
+        {
+          "at_ms": 4000,
+          "type": "completed",
+          "job_id": "water"
+        },
+        {
+          "at_ms": 8000,
+          "type": "completed",
+          "job_id": "ev"
+        },
+        {
+          "at_ms": 8000,
+          "type": "completed",
+          "job_id": "dryer"
+        },
+        {
+          "at_ms": 9000,
+          "type": "physical_capacity_change",
+          "capacity_kw": 5.0
+        },
+        {
+          "at_ms": 10000,
+          "type": "energy_agent_report",
+          "capacity_kw": 5.0
+        }
+      ]
+    }
+  ]
+}

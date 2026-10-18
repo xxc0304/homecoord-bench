@@ -1,3 +1,9 @@
+## 2026-10-18 归档整理
+
+新增[项目交接说明](docs/PROJECT_HANDOFF_2026-10-18.md)与[本地历史材料补充归档](archives/local_recovery_2026-10-18/README.md)。保留此前发布版本，本次无新增实验或性能结论。新方法研究 [CoReTA](https://github.com/xxc0304/smart-home-multi-agent-research/tree/main/CoReTA) 单独整理。
+
+---
+
 # HomeCoord-Bench
 
 **当前成果与完整可复核材料入口：**[研究成果发布索引](docs/RESEARCH_EVIDENCE_RELEASE_2026-10-06.md)；当前命题与下一步见[研究路线](docs/RESEARCH_POSITION_AND_ROADMAP_2026-10-06.md)。下方为历史交接记录，旧建议和待办以这两个入口为准。
